@@ -1,0 +1,11 @@
+[vision_inference-3] [INFO] [1771741080.075313974] [inference_camera1]: Loading TensorRT engine from /home/lorenzo/autonomy-ws-25-26/computer_vision/cv_scripts/model.engine...
+[vision_inference-3] [INFO] [1771741080.297229005] [inference_camera1]: TensorRT engine loaded successfully!
+[vision_inference-3] [INFO] [1771741080.307353049] [inference_camera1]: Inference node for camera1 ready! (inference_interval=2, sim_image_rgb=False)
+[vision_inference-3] [INFO] [1771741080.308080973] [inference_camera1]: Subscribed to: /camera1/image_preprocessed
+[vision_inference-3] [INFO] [1771741080.308692216] [inference_camera1]: Publishing to: /camera1/detections, /camera1/detection_info
+[INFO] [global_planner_node-1]: process started with pid [68047]
+[vision_inference-3] [WARN] [1771741080.781754778] [inference_camera1]: Zero detections (conf>=0.3). Max raw score this frame: 0.0034. Try sim_image_rgb:=true (default for sim) or conf_threshold:=0.05.
+[vision_inference-3] [INFO] [1771741089.058916555] [inference_camera1]: Processed 30 frames | Inference FPS: 1.81 | Det: 0
+[vision_inference-3] [INFO] [1771741096.722619405] [inference_camera1]: Processed 60 frames | Inference FPS: 1.88 | Det: 1
+[vision_inference-3] [INFO] [1771741102.954298297] [inference_camera1]: Processed 90 frames | Inference FPS: 2.03 | Det: 1
+[vision_inference-3] [INFO] [1771741110.662613619] [inference_camera1]: Processed 120 frames | Inference FPS: 1.98 | Det: 1

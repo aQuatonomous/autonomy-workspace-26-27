@@ -1,0 +1,25 @@
+[v4l2_camera_node-1] [INFO] [1771741074.661027552] [v4l2_camera]: Driver: uvcvideo
+[v4l2_camera_node-1] [INFO] [1771741074.661185867] [v4l2_camera]: Version: 331668
+[v4l2_camera_node-1] [INFO] [1771741074.661197196] [v4l2_camera]: Device: Arducam B0495 (USB3 2.3MP)
+[v4l2_camera_node-1] [INFO] [1771741074.661203244] [v4l2_camera]: Location: usb-3610000.usb-1.2.3
+[v4l2_camera_node-1] [INFO] [1771741074.661208077] [v4l2_camera]: Capabilities:
+[v4l2_camera_node-1] [INFO] [1771741074.661212557] [v4l2_camera]:   Read/write: NO
+[v4l2_camera_node-1] [INFO] [1771741074.661217581] [v4l2_camera]:   Streaming: YES
+[v4l2_camera_node-1] [INFO] [1771741074.661229358] [v4l2_camera]: Current pixel format: YUYV @ 960x600
+[v4l2_camera_node-1] [INFO] [1771741074.661302579] [v4l2_camera]: Available pixel formats: 
+[v4l2_camera_node-1] [INFO] [1771741074.661309716] [v4l2_camera]:   YUYV - YUYV 4:2:2
+[v4l2_camera_node-1] [INFO] [1771741074.661314292] [v4l2_camera]: Available controls: 
+[v4l2_camera_node-1] [INFO] [1771741074.661326293] [v4l2_camera]:   Brightness (1) = 0
+[v4l2_camera_node-1] [INFO] [1771741074.661333398] [v4l2_camera]:   Contrast (1) = 10
+[v4l2_camera_node-1] [INFO] [1771741074.661339798] [v4l2_camera]:   Saturation (1) = 10
+[v4l2_camera_node-1] [INFO] [1771741074.661345590] [v4l2_camera]:   White Balance, Automatic (2) = 1
+[v4l2_camera_node-1] [INFO] [1771741074.661351543] [v4l2_camera]:   Gain (1) = 168
+[v4l2_camera_node-1] [INFO] [1771741074.661684782] [v4l2_camera]:   White Balance Temperature (1) = 4500 [inactive]
+[v4l2_camera_node-1] [ERROR] [1771741074.661707152] [v4l2_camera]: Failed getting value for control 10092545: Permission denied (13); returning 0!
+[v4l2_camera_node-1] [INFO] [1771741074.661715537] [v4l2_camera]:   Camera Controls (6) = 0
+[v4l2_camera_node-1] [INFO] [1771741074.661722129] [v4l2_camera]:   Auto Exposure (3) = 0
+[v4l2_camera_node-1] [INFO] [1771741074.662183730] [v4l2_camera]:   Exposure Time, Absolute (1) = 5 [inactive]
+[v4l2_camera_node-1] [WARN] [1771741074.664309448] [camera1.camera1_node]: Control type not currently supported: 6, for control: Camera Controls
+[v4l2_camera_node-1] [INFO] [1771741074.665417623] [v4l2_camera]: Starting camera
+[v4l2_camera_node-1] [INFO] [1771741074.674175364] [camera1.camera1_node]: using default calibration URL
+[v4l2_camera_node-1] [INFO] [1771741074.674327566] [camera1.camera1_node]: camera calibration URL: file:///home/lorenzo/.ros/camera_info/arducam_b0495_(usb3_2.3mp).yaml

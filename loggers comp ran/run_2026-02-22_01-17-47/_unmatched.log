@@ -1,0 +1,21 @@
+=== Task Test: Setting camera format (single camera: YUYV @ 960x600 @ 15fps) ===
+Setting cameras (single) to 960x600 YUYV @ 15 FPS...
+Camera 0: /dev/v4l/by-path/platform-3610000.usb-usb-0:1.2.3:1.0-video-index0
+Frame rate set to 15.000 fps
+  ✓ 960x600 @ 15 fps
+
+Verifying...
+=== Camera 0 ===
+	Width/Height      : 960/600
+	Pixel Format      : 'YUYV' (YUYV 4:2:2)
+Streaming Parameters Video Capture:
+	Capabilities     : timeperframe
+	Frames per second: 15.000 (15/1)
+	Read buffers     : 0
+
+Done! Configured 1 camera(s). Device list written to .camera_devices
+=== Sourcing ROS2 and workspaces ===
+=== Launching MAVROS (Pixhawk at /dev/ttyACM0:57600) ===
+[INFO] [launch]: All log files can be found below /home/lorenzo/.ros/log/2026-02-22-01-17-49-977011-aqua-desktop-67448
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [mavros_node-1]: process started with pid [67473]

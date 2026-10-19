@@ -1,0 +1,1 @@
+[INFO] [1771741078.444165172] [vision_lidar_fusion]: Vision-LiDAR fusion: bearing_threshold=0.15 rad. CV-driven: for each CV detection, closest LiDAR track in that direction gets class_id/class_name. Distance from camera not used for matching (available in topic for later).

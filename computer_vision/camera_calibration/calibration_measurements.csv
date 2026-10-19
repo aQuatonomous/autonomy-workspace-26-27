@@ -1,0 +1,7 @@
+image_path,measured_m,reference_m,right_half
+camera_calibration/WIN_20260214_15_46_18_Pro.jpg,2.9972,0.254,0
+camera_calibration/WIN_20260214_15_54_41_Pro.jpg,5.08,0.254,1
+camera_calibration/WIN_20260214_16_03_50_Pro.jpg,4.04,0.254,0
+camera_calibration/WIN_20260214_16_08_12_Pro.jpg,1.37,0.254,0
+camera_calibration/WIN_20260214_16_11_51_Pro.jpg,4.42,0.254,0
+camera_calibration/WIN_20260214_16_14_22_Pro.jpg,6.81,0.254,0

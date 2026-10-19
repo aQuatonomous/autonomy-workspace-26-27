@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+
+"""
+Entry point script for the map visualizer node.
+
+This wrapper exists so that the executable name used by ROS 2
+(`map_visualizer_node`) matches the Python module that implements
+the node (`web_server_map.map_visualizer_node:main`).
+"""
+
+from web_server_map.map_visualizer_node import main
+
+
+if __name__ == "__main__":
+    main()
+

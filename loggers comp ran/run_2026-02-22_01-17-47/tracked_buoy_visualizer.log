@@ -1,0 +1,3 @@
+[tracked_buoy_visualizer-6] [INFO] [1771741073.411085589] [tracked_buoy_visualizer]: Tracked buoy visualizer started (class_id/class_name from fusion)
+[tracked_buoy_visualizer-6] [INFO] [1771741073.411933105] [tracked_buoy_visualizer]: Marker: height=0.3m, radius=0.1m, lifetime=2.0s, text_labels=True
+=== Launching CV pipeline (Task Test: camera1, task:=2 for buoy detection, indicator_buoy off) ===

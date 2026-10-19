@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boat Map Visualization</title>
+    <link rel="stylesheet" href="/web/style.css">
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <h1>Boat Map Visualization</h1>
+            <div id="status">
+                <span id="connection-status" class="status-disconnected">Disconnected</span>
+                <span id="boat-info">Boat: N/A</span>
+                <span id="detection-count">Detections: 0</span>
+            </div>
+        </div>
+        
+        <div id="canvas-container">
+            <canvas id="map-canvas"></canvas>
+        </div>
+        
+        <div id="controls">
+            <div id="info-panel">
+                <h3>Information</h3>
+                <div id="boat-details">
+                    <p><strong>Boat Position:</strong></p>
+                    <p>East: <span id="boat-east">N/A</span> m</p>
+                    <p>North: <span id="boat-north">N/A</span> m</p>
+                    <p>Heading: <span id="boat-heading">N/A</span>°</p>
+                </div>
+                <div id="mouse-coords">
+                    <p><strong>Mouse Position:</strong></p>
+                    <p>East: <span id="mouse-east">N/A</span> m</p>
+                    <p>North: <span id="mouse-north">N/A</span> m</p>
+                </div>
+            </div>
+            
+            <div id="legend">
+                <h3>Legend</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #0066FF;"></div>
+                    <span>Boat</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #FF0000;"></div>
+                    <span>Red Buoy</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #00FF00;"></div>
+                    <span>Green Buoy</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #FFFF00;"></div>
+                    <span>Yellow Buoy</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #000000;"></div>
+                    <span>Black Buoy</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #CC0000;"></div>
+                    <span>Red Pole Buoy</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #00CC00;"></div>
+                    <span>Green Pole Buoy</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #666699;"></div>
+                    <span>Dock</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #FFD700;"></div>
+                    <span>Yellow Supply Drop</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #333333;"></div>
+                    <span>Black Supply Drop</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #CCCCCC;"></div>
+                    <span>Dock Number (1/2/3)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #808080;"></div>
+                    <span>Unknown</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/web/map.js"></script>
+</body>
+</html>

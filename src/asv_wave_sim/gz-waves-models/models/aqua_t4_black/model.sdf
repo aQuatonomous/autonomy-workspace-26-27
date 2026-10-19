@@ -1,0 +1,33 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name='aqua_t4_black'>
+    <static>false</static>
+    <plugin filename="gz-waves1-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics"/>
+    <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://aqua_t4_black/meshes/AQUA_T4_ASSY_WATER.STL</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.05 0.05 0.05 1</ambient>
+          <diffuse>0.1 0.1 0.1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name='collision'>
+        <geometry><box><size>1.5 0.5 0.4</size></box></geometry>
+      </collision>
+      <inertial>
+        <mass>100</mass>
+        <inertia>
+          <ixx>3.42</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>20.08</iyy><iyz>0</iyz>
+          <izz>20.83</izz>
+        </inertia>
+      </inertial>
+    </link>
+  </model>
+</sdf>

@@ -1,0 +1,914 @@
+[global_planner_node-1] [WARN] [1771741081.760313897] [global_planner_node]: Jetson.GPIO not available; pump control disabled
+[global_planner_node-1] [INFO] [1771741081.818786865] [global_planner_node]: global_planner_node started: task_id=0, hz=10.0, cmd_vel=/mavros/setpoint_velocity/cmd_vel_unstamped
+[global_planner_node-1] [INFO] [1771741082.138777948] [global_planner_node]: Start set from GPS: lat=27.560990 lon=-82.549894 (x=0, y=0 m)
+[global_planner_node-1] [INFO] [1771741082.140439954] [global_planner_node]: Heading received: 94.1 deg -> 0.071 rad
+[global_planner_node-1] [INFO] [1771741092.588210084] [global_planner_node]: [t=1771741092.6s] x=1.1 y=0.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=1
+[global_planner_node-1] [INFO] [1771741092.588911350] [global_planner_node]: [t=1771741092.6s] x=1.1 y=0.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741092.610902693] [global_planner_node]: [t=1771741092.6s] x=1.1 y=0.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=1
+[global_planner_node-1] [INFO] [1771741092.611565556] [global_planner_node]: [t=1771741092.6s] x=1.1 y=0.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741092.633282384] [global_planner_node]: [t=1771741092.6s] x=1.1 y=0.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=1
+[global_planner_node-1] [INFO] [1771741092.633966465] [global_planner_node]: [t=1771741092.6s] x=1.1 y=0.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741092.699470670] [global_planner_node]: [t=1771741092.7s] x=1.2 y=0.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=1
+[global_planner_node-1] [INFO] [1771741092.700412465] [global_planner_node]: [t=1771741092.7s] x=1.2 y=0.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741092.738303042] [global_planner_node]: [t=1771741092.7s] x=1.2 y=0.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=1
+[global_planner_node-1] [INFO] [1771741092.739009300] [global_planner_node]: [t=1771741092.7s] x=1.2 y=0.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741092.743086292] [global_planner_node]: [t=1771741092.7s] x=1.2 y=0.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=1
+[global_planner_node-1] [INFO] [1771741092.743759139] [global_planner_node]: [t=1771741092.7s] x=1.2 y=0.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741092.838857817] [global_planner_node]: [t=1771741092.8s] x=1.2 y=0.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=1
+[global_planner_node-1] [INFO] [1771741092.839571179] [global_planner_node]: [t=1771741092.8s] x=1.2 y=0.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741092.865673661] [global_planner_node]: [t=1771741092.9s] x=1.2 y=0.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=2
+[global_planner_node-1] [INFO] [1771741092.866414257] [global_planner_node]: [t=1771741092.9s] x=1.2 y=0.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741092.892496162] [global_planner_node]: [t=1771741092.9s] x=1.4 y=-0.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=3
+[global_planner_node-1] [INFO] [1771741092.895039253] [global_planner_node]: [t=1771741092.9s] x=1.4 y=-0.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741092.935226793] [global_planner_node]: [t=1771741092.9s] x=1.4 y=-0.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=3
+[global_planner_node-1] [INFO] [1771741092.937736346] [global_planner_node]: [t=1771741092.9s] x=1.4 y=-0.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.043795956] [global_planner_node]: [t=1771741093.0s] x=1.4 y=-0.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=3
+[global_planner_node-1] [INFO] [1771741093.046417229] [global_planner_node]: [t=1771741093.0s] x=1.4 y=-0.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.049206386] [global_planner_node]: [t=1771741093.0s] x=1.4 y=-0.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=3
+[global_planner_node-1] [INFO] [1771741093.050071023] [global_planner_node]: [t=1771741093.0s] x=1.4 y=-0.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.132678546] [global_planner_node]: [t=1771741093.1s] x=1.4 y=-0.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=3
+[global_planner_node-1] [INFO] [1771741093.135590079] [global_planner_node]: [t=1771741093.1s] x=1.4 y=-0.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.149951476] [global_planner_node]: [t=1771741093.1s] x=1.5 y=-0.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=3
+[global_planner_node-1] [INFO] [1771741093.150676392] [global_planner_node]: [t=1771741093.1s] x=1.5 y=-0.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.230994089] [global_planner_node]: [t=1771741093.2s] x=1.5 y=-0.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=3
+[global_planner_node-1] [INFO] [1771741093.232224032] [global_planner_node]: [t=1771741093.2s] x=1.5 y=-0.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.234844793] [global_planner_node]: [t=1771741093.2s] x=1.5 y=-0.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=3
+[global_planner_node-1] [INFO] [1771741093.235889474] [global_planner_node]: [t=1771741093.2s] x=1.5 y=-0.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.258196136] [global_planner_node]: [t=1771741093.3s] x=1.5 y=-0.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=3
+[global_planner_node-1] [INFO] [1771741093.259336728] [global_planner_node]: [t=1771741093.3s] x=1.5 y=-0.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.341260715] [global_planner_node]: [t=1771741093.3s] x=1.5 y=-0.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=3
+[global_planner_node-1] [INFO] [1771741093.341964989] [global_planner_node]: [t=1771741093.3s] x=1.5 y=-0.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.383718750] [global_planner_node]: [t=1771741093.4s] x=1.6 y=-0.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741093.384554041] [global_planner_node]: [t=1771741093.4s] x=1.6 y=-0.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.435601226] [global_planner_node]: [t=1771741093.4s] x=1.6 y=-0.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741093.436352287] [global_planner_node]: [t=1771741093.4s] x=1.6 y=-0.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.496144409] [global_planner_node]: [t=1771741093.5s] x=1.6 y=-0.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741093.496957970] [global_planner_node]: [t=1771741093.5s] x=1.6 y=-0.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.537690091] [global_planner_node]: [t=1771741093.5s] x=1.6 y=-0.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741093.540628091] [global_planner_node]: [t=1771741093.5s] x=1.6 y=-0.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.606648716] [global_planner_node]: [t=1771741093.6s] x=1.6 y=-0.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741093.607445476] [global_planner_node]: [t=1771741093.6s] x=1.6 y=-0.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.649434806] [global_planner_node]: [t=1771741093.6s] x=1.6 y=-0.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741093.650133191] [global_planner_node]: [t=1771741093.6s] x=1.6 y=-0.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.720986989] [global_planner_node]: [t=1771741093.7s] x=1.8 y=-1.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741093.722096827] [global_planner_node]: [t=1771741093.7s] x=1.8 y=-1.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.738914238] [global_planner_node]: [t=1771741093.7s] x=1.8 y=-1.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741093.740039853] [global_planner_node]: [t=1771741093.7s] x=1.8 y=-1.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.792575463] [global_planner_node]: [t=1771741093.8s] x=1.8 y=-1.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741093.793455621] [global_planner_node]: [t=1771741093.8s] x=1.8 y=-1.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.836765908] [global_planner_node]: [t=1771741093.8s] x=1.8 y=-1.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741093.839894865] [global_planner_node]: [t=1771741093.8s] x=1.8 y=-1.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.854763850] [global_planner_node]: [t=1771741093.9s] x=1.8 y=-1.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741093.855590340] [global_planner_node]: [t=1771741093.9s] x=1.8 y=-1.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.901072364] [global_planner_node]: [t=1771741093.9s] x=1.9 y=-1.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741093.901887398] [global_planner_node]: [t=1771741093.9s] x=1.9 y=-1.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.932845261] [global_planner_node]: [t=1771741093.9s] x=1.9 y=-1.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741093.933557728] [global_planner_node]: [t=1771741093.9s] x=1.9 y=-1.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741093.968992387] [global_planner_node]: [t=1771741094.0s] x=1.9 y=-1.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741093.969713206] [global_planner_node]: [t=1771741094.0s] x=1.9 y=-1.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.033102349] [global_planner_node]: [t=1771741094.0s] x=1.9 y=-1.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.033801150] [global_planner_node]: [t=1771741094.0s] x=1.9 y=-1.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.086811737] [global_planner_node]: [t=1771741094.1s] x=1.9 y=-1.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.087572975] [global_planner_node]: [t=1771741094.1s] x=1.9 y=-1.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.136503337] [global_planner_node]: [t=1771741094.1s] x=1.9 y=-1.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.141012039] [global_planner_node]: [t=1771741094.1s] x=1.9 y=-1.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.155100777] [global_planner_node]: [t=1771741094.2s] x=2.0 y=-1.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.155824476] [global_planner_node]: [t=1771741094.2s] x=2.0 y=-1.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.224546474] [global_planner_node]: [t=1771741094.2s] x=2.0 y=-1.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.225479532] [global_planner_node]: [t=1771741094.2s] x=2.0 y=-1.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.236799466] [global_planner_node]: [t=1771741094.2s] x=2.0 y=-1.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.237479546] [global_planner_node]: [t=1771741094.2s] x=2.0 y=-1.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.297946627] [global_planner_node]: [t=1771741094.3s] x=2.0 y=-1.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.298645268] [global_planner_node]: [t=1771741094.3s] x=2.0 y=-1.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.338482701] [global_planner_node]: [t=1771741094.3s] x=2.0 y=-1.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.341571943] [global_planner_node]: [t=1771741094.3s] x=2.0 y=-1.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.344967895] [global_planner_node]: [t=1771741094.3s] x=2.0 y=-1.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.345633958] [global_planner_node]: [t=1771741094.3s] x=2.0 y=-1.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.434368280] [global_planner_node]: [t=1771741094.4s] x=2.1 y=-1.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.435508744] [global_planner_node]: [t=1771741094.4s] x=2.1 y=-1.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.458285582] [global_planner_node]: [t=1771741094.5s] x=2.1 y=-1.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.460118640] [global_planner_node]: [t=1771741094.5s] x=2.1 y=-1.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.469490244] [global_planner_node]: [t=1771741094.5s] x=2.1 y=-1.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.471325766] [global_planner_node]: [t=1771741094.5s] x=2.1 y=-1.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.533830302] [global_planner_node]: [t=1771741094.5s] x=2.1 y=-1.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.534798818] [global_planner_node]: [t=1771741094.5s] x=2.1 y=-1.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.570422771] [global_planner_node]: [t=1771741094.6s] x=2.1 y=-1.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.571115331] [global_planner_node]: [t=1771741094.6s] x=2.1 y=-1.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.632399269] [global_planner_node]: [t=1771741094.6s] x=2.1 y=-1.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.633193149] [global_planner_node]: [t=1771741094.6s] x=2.1 y=-1.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.684809365] [global_planner_node]: [t=1771741094.7s] x=2.2 y=-1.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.685822461] [global_planner_node]: [t=1771741094.7s] x=2.2 y=-1.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.734941893] [global_planner_node]: [t=1771741094.7s] x=2.2 y=-1.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.736640637] [global_planner_node]: [t=1771741094.7s] x=2.2 y=-1.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.803406561] [global_planner_node]: [t=1771741094.8s] x=2.2 y=-1.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.804311873] [global_planner_node]: [t=1771741094.8s] x=2.2 y=-1.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.810186943] [global_planner_node]: [t=1771741094.8s] x=2.2 y=-1.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.812518980] [global_planner_node]: [t=1771741094.8s] x=2.2 y=-1.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.832535367] [global_planner_node]: [t=1771741094.8s] x=2.2 y=-1.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.833568880] [global_planner_node]: [t=1771741094.8s] x=2.2 y=-1.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.932707904] [global_planner_node]: [t=1771741094.9s] x=2.3 y=-1.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.933763338] [global_planner_node]: [t=1771741094.9s] x=2.3 y=-1.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.939230188] [global_planner_node]: [t=1771741094.9s] x=2.3 y=-1.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.942776614] [global_planner_node]: [t=1771741094.9s] x=2.3 y=-1.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741094.952893135] [global_planner_node]: [t=1771741095.0s] x=2.3 y=-1.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741094.954034688] [global_planner_node]: [t=1771741095.0s] x=2.3 y=-1.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.039578352] [global_planner_node]: [t=1771741095.0s] x=2.3 y=-1.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741095.041252646] [global_planner_node]: [t=1771741095.0s] x=2.3 y=-1.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.082889214] [global_planner_node]: [t=1771741095.1s] x=2.3 y=-1.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741095.083600880] [global_planner_node]: [t=1771741095.1s] x=2.3 y=-1.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.133277375] [global_planner_node]: [t=1771741095.1s] x=2.3 y=-1.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741095.134516662] [global_planner_node]: [t=1771741095.1s] x=2.3 y=-1.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.180972321] [global_planner_node]: [t=1771741095.2s] x=2.5 y=-1.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741095.181663730] [global_planner_node]: [t=1771741095.2s] x=2.5 y=-1.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.233812239] [global_planner_node]: [t=1771741095.2s] x=2.5 y=-1.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=4
+[global_planner_node-1] [INFO] [1771741095.236219769] [global_planner_node]: [t=1771741095.2s] x=2.5 y=-1.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.304782331] [global_planner_node]: [t=1771741095.3s] x=2.5 y=-1.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741095.320407880] [global_planner_node]: [t=1771741095.3s] x=2.5 y=-1.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.335808902] [global_planner_node]: [t=1771741095.3s] x=2.5 y=-1.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741095.336923701] [global_planner_node]: [t=1771741095.3s] x=2.5 y=-1.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.412851390] [global_planner_node]: [t=1771741095.4s] x=2.6 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741095.413857381] [global_planner_node]: [t=1771741095.4s] x=2.6 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.440012889] [global_planner_node]: [t=1771741095.4s] x=2.6 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741095.440727340] [global_planner_node]: [t=1771741095.4s] x=2.6 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.531691737] [global_planner_node]: [t=1771741095.5s] x=2.6 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741095.534701197] [global_planner_node]: [t=1771741095.5s] x=2.6 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.540004131] [global_planner_node]: [t=1771741095.5s] x=2.6 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741095.541133011] [global_planner_node]: [t=1771741095.5s] x=2.6 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.599168111] [global_planner_node]: [t=1771741095.6s] x=2.6 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741095.600101649] [global_planner_node]: [t=1771741095.6s] x=2.6 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.634880005] [global_planner_node]: [t=1771741095.6s] x=2.6 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741095.635603608] [global_planner_node]: [t=1771741095.6s] x=2.6 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.664230394] [global_planner_node]: [t=1771741095.7s] x=2.7 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741095.664965902] [global_planner_node]: [t=1771741095.7s] x=2.7 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.667075939] [global_planner_node]: [t=1771741095.7s] x=2.7 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741095.667721808] [global_planner_node]: [t=1771741095.7s] x=2.7 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.732406369] [global_planner_node]: [t=1771741095.7s] x=2.7 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741095.733393574] [global_planner_node]: [t=1771741095.7s] x=2.7 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.765940765] [global_planner_node]: [t=1771741095.8s] x=2.7 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741095.766643727] [global_planner_node]: [t=1771741095.8s] x=2.7 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.777422695] [global_planner_node]: [t=1771741095.8s] x=2.7 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741095.778592825] [global_planner_node]: [t=1771741095.8s] x=2.7 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.833510297] [global_planner_node]: [t=1771741095.8s] x=2.7 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741095.834465469] [global_planner_node]: [t=1771741095.8s] x=2.7 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.897004278] [global_planner_node]: [t=1771741095.9s] x=2.7 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741095.898214219] [global_planner_node]: [t=1771741095.9s] x=2.7 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.937663337] [global_planner_node]: [t=1771741095.9s] x=2.7 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741095.939588528] [global_planner_node]: [t=1771741095.9s] x=2.7 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741095.999251487] [global_planner_node]: [t=1771741096.0s] x=2.7 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741096.000580093] [global_planner_node]: [t=1771741096.0s] x=2.7 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.034174173] [global_planner_node]: [t=1771741096.0s] x=2.7 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741096.036104517] [global_planner_node]: [t=1771741096.0s] x=2.7 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.039435152] [global_planner_node]: [t=1771741096.0s] x=2.7 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741096.040705993] [global_planner_node]: [t=1771741096.0s] x=2.7 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.098998646] [global_planner_node]: [t=1771741096.1s] x=2.7 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=5
+[global_planner_node-1] [INFO] [1771741096.100059553] [global_planner_node]: [t=1771741096.1s] x=2.7 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.121155504] [global_planner_node]: [t=1771741096.1s] x=2.7 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.122083762] [global_planner_node]: [t=1771741096.1s] x=2.7 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.133927892] [global_planner_node]: [t=1771741096.1s] x=2.7 y=-2.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.134623973] [global_planner_node]: [t=1771741096.1s] x=2.7 y=-2.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.240465258] [global_planner_node]: [t=1771741096.2s] x=2.6 y=-2.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.241605179] [global_planner_node]: [t=1771741096.2s] x=2.6 y=-2.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.258917567] [global_planner_node]: [t=1771741096.3s] x=2.6 y=-2.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.259633841] [global_planner_node]: [t=1771741096.3s] x=2.6 y=-2.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.278193166] [global_planner_node]: [t=1771741096.3s] x=2.6 y=-2.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.278888959] [global_planner_node]: [t=1771741096.3s] x=2.6 y=-2.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.333694614] [global_planner_node]: [t=1771741096.3s] x=2.6 y=-2.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.334419977] [global_planner_node]: [t=1771741096.3s] x=2.6 y=-2.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.380991676] [global_planner_node]: [t=1771741096.4s] x=2.5 y=-2.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.381709902] [global_planner_node]: [t=1771741096.4s] x=2.5 y=-2.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.437756733] [global_planner_node]: [t=1771741096.4s] x=2.5 y=-2.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.438460943] [global_planner_node]: [t=1771741096.4s] x=2.5 y=-2.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.440230412] [global_planner_node]: [t=1771741096.4s] x=2.5 y=-2.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.440877785] [global_planner_node]: [t=1771741096.4s] x=2.5 y=-2.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.516517485] [global_planner_node]: [t=1771741096.5s] x=2.5 y=-2.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.517238080] [global_planner_node]: [t=1771741096.5s] x=2.5 y=-2.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.534089476] [global_planner_node]: [t=1771741096.5s] x=2.5 y=-2.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.534929887] [global_planner_node]: [t=1771741096.5s] x=2.5 y=-2.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.635525426] [global_planner_node]: [t=1771741096.6s] x=2.5 y=-2.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.636720518] [global_planner_node]: [t=1771741096.6s] x=2.5 y=-2.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.657963359] [global_planner_node]: [t=1771741096.7s] x=2.4 y=-2.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.658637327] [global_planner_node]: [t=1771741096.7s] x=2.4 y=-2.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.736076578] [global_planner_node]: [t=1771741096.7s] x=2.4 y=-2.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.736803445] [global_planner_node]: [t=1771741096.7s] x=2.4 y=-2.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.738991055] [global_planner_node]: [t=1771741096.7s] x=2.4 y=-2.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.740086076] [global_planner_node]: [t=1771741096.7s] x=2.4 y=-2.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.789198050] [global_planner_node]: [t=1771741096.8s] x=2.4 y=-2.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.789881074] [global_planner_node]: [t=1771741096.8s] x=2.4 y=-2.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.833977943] [global_planner_node]: [t=1771741096.8s] x=2.4 y=-2.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.834872406] [global_planner_node]: [t=1771741096.8s] x=2.4 y=-2.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.836760891] [global_planner_node]: [t=1771741096.8s] x=2.4 y=-2.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.837390983] [global_planner_node]: [t=1771741096.8s] x=2.4 y=-2.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.937689477] [global_planner_node]: [t=1771741096.9s] x=2.3 y=-2.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.938386486] [global_planner_node]: [t=1771741096.9s] x=2.3 y=-2.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741096.941450350] [global_planner_node]: [t=1771741096.9s] x=2.3 y=-2.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741096.942769771] [global_planner_node]: [t=1771741096.9s] x=2.3 y=-2.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.033327130] [global_planner_node]: [t=1771741097.0s] x=2.3 y=-2.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.034155733] [global_planner_node]: [t=1771741097.0s] x=2.3 y=-2.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.053099948] [global_planner_node]: [t=1771741097.1s] x=2.3 y=-2.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.056731691] [global_planner_node]: [t=1771741097.1s] x=2.3 y=-2.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.127863392] [global_planner_node]: [t=1771741097.1s] x=2.3 y=-2.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.128679450] [global_planner_node]: [t=1771741097.1s] x=2.3 y=-2.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.135449751] [global_planner_node]: [t=1771741097.1s] x=2.3 y=-2.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.138126836] [global_planner_node]: [t=1771741097.1s] x=2.3 y=-2.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.186624333] [global_planner_node]: [t=1771741097.2s] x=2.4 y=-2.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.187725211] [global_planner_node]: [t=1771741097.2s] x=2.4 y=-2.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.233205856] [global_planner_node]: [t=1771741097.2s] x=2.4 y=-2.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.233892401] [global_planner_node]: [t=1771741097.2s] x=2.4 y=-2.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.299940223] [global_planner_node]: [t=1771741097.3s] x=2.4 y=-2.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.300637680] [global_planner_node]: [t=1771741097.3s] x=2.4 y=-2.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.334894494] [global_planner_node]: [t=1771741097.3s] x=2.4 y=-2.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.336729088] [global_planner_node]: [t=1771741097.3s] x=2.4 y=-2.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.372260296] [global_planner_node]: [t=1771741097.4s] x=2.4 y=-2.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.374323929] [global_planner_node]: [t=1771741097.4s] x=2.4 y=-2.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.432705099] [global_planner_node]: [t=1771741097.4s] x=2.5 y=-2.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.437826068] [global_planner_node]: [t=1771741097.4s] x=2.5 y=-2.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.442223306] [global_planner_node]: [t=1771741097.4s] x=2.5 y=-2.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.443189230] [global_planner_node]: [t=1771741097.4s] x=2.5 y=-2.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.544122871] [global_planner_node]: [t=1771741097.5s] x=2.5 y=-2.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.546446267] [global_planner_node]: [t=1771741097.5s] x=2.5 y=-2.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.562924868] [global_planner_node]: [t=1771741097.6s] x=2.5 y=-2.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.565341519] [global_planner_node]: [t=1771741097.6s] x=2.5 y=-2.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.636568170] [global_planner_node]: [t=1771741097.6s] x=2.5 y=-2.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.637693273] [global_planner_node]: [t=1771741097.6s] x=2.5 y=-2.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.684476634] [global_planner_node]: [t=1771741097.7s] x=2.6 y=-2.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.686209301] [global_planner_node]: [t=1771741097.7s] x=2.6 y=-2.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.695700945] [global_planner_node]: [t=1771741097.7s] x=2.6 y=-2.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.697772067] [global_planner_node]: [t=1771741097.7s] x=2.6 y=-2.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.736772256] [global_planner_node]: [t=1771741097.7s] x=2.6 y=-2.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.738066651] [global_planner_node]: [t=1771741097.7s] x=2.6 y=-2.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.779023809] [global_planner_node]: [t=1771741097.8s] x=2.6 y=-2.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.780098157] [global_planner_node]: [t=1771741097.8s] x=2.6 y=-2.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.823807606] [global_planner_node]: [t=1771741097.8s] x=2.6 y=-2.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.824554474] [global_planner_node]: [t=1771741097.8s] x=2.6 y=-2.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.833486752] [global_planner_node]: [t=1771741097.8s] x=2.6 y=-2.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.834210547] [global_planner_node]: [t=1771741097.8s] x=2.6 y=-2.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.928763994] [global_planner_node]: [t=1771741097.9s] x=2.7 y=-3.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.929506414] [global_planner_node]: [t=1771741097.9s] x=2.7 y=-3.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741097.940027124] [global_planner_node]: [t=1771741097.9s] x=2.7 y=-3.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741097.940897073] [global_planner_node]: [t=1771741097.9s] x=2.7 y=-3.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.035687305] [global_planner_node]: [t=1771741098.0s] x=2.7 y=-3.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.036611434] [global_planner_node]: [t=1771741098.0s] x=2.7 y=-3.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.067654421] [global_planner_node]: [t=1771741098.1s] x=2.7 y=-3.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.068603640] [global_planner_node]: [t=1771741098.1s] x=2.7 y=-3.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.128328072] [global_planner_node]: [t=1771741098.1s] x=2.7 y=-3.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.129107647] [global_planner_node]: [t=1771741098.1s] x=2.7 y=-3.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.131639313] [global_planner_node]: [t=1771741098.1s] x=2.7 y=-3.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.132386246] [global_planner_node]: [t=1771741098.1s] x=2.7 y=-3.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.210096393] [global_planner_node]: [t=1771741098.2s] x=2.6 y=-3.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.212382378] [global_planner_node]: [t=1771741098.2s] x=2.6 y=-3.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.232914001] [global_planner_node]: [t=1771741098.2s] x=2.6 y=-3.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.233757292] [global_planner_node]: [t=1771741098.2s] x=2.6 y=-3.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.320070765] [global_planner_node]: [t=1771741098.3s] x=2.6 y=-3.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.320992558] [global_planner_node]: [t=1771741098.3s] x=2.6 y=-3.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.335265596] [global_planner_node]: [t=1771741098.3s] x=2.6 y=-3.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.336269923] [global_planner_node]: [t=1771741098.3s] x=2.6 y=-3.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.412852438] [global_planner_node]: [t=1771741098.4s] x=2.6 y=-3.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.413603275] [global_planner_node]: [t=1771741098.4s] x=2.6 y=-3.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.433936548] [global_planner_node]: [t=1771741098.4s] x=2.6 y=-3.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.434668183] [global_planner_node]: [t=1771741098.4s] x=2.6 y=-3.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.455979413] [global_planner_node]: [t=1771741098.5s] x=2.6 y=-3.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.456677606] [global_planner_node]: [t=1771741098.5s] x=2.6 y=-3.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.533120240] [global_planner_node]: [t=1771741098.5s] x=2.6 y=-3.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.533815553] [global_planner_node]: [t=1771741098.5s] x=2.6 y=-3.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.559664894] [global_planner_node]: [t=1771741098.6s] x=2.6 y=-3.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.561988770] [global_planner_node]: [t=1771741098.6s] x=2.6 y=-3.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.633941039] [global_planner_node]: [t=1771741098.6s] x=2.6 y=-3.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.634654434] [global_planner_node]: [t=1771741098.6s] x=2.6 y=-3.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.675422490] [global_planner_node]: [t=1771741098.7s] x=2.4 y=-3.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.676169359] [global_planner_node]: [t=1771741098.7s] x=2.4 y=-3.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.691261366] [global_planner_node]: [t=1771741098.7s] x=2.4 y=-3.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.691985801] [global_planner_node]: [t=1771741098.7s] x=2.4 y=-3.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.733711173] [global_planner_node]: [t=1771741098.7s] x=2.4 y=-3.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=6
+[global_planner_node-1] [INFO] [1771741098.734402646] [global_planner_node]: [t=1771741098.7s] x=2.4 y=-3.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.787856524] [global_planner_node]: [t=1771741098.8s] x=2.4 y=-3.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741098.788610049] [global_planner_node]: [t=1771741098.8s] x=2.4 y=-3.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.834553926] [global_planner_node]: [t=1771741098.8s] x=2.4 y=-3.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741098.835300570] [global_planner_node]: [t=1771741098.8s] x=2.4 y=-3.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.844427581] [global_planner_node]: [t=1771741098.8s] x=2.4 y=-3.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741098.845297883] [global_planner_node]: [t=1771741098.8s] x=2.4 y=-3.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.916170684] [global_planner_node]: [t=1771741098.9s] x=2.3 y=-4.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741098.917483961] [global_planner_node]: [t=1771741098.9s] x=2.3 y=-4.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.935987408] [global_planner_node]: [t=1771741098.9s] x=2.3 y=-4.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741098.937901239] [global_planner_node]: [t=1771741098.9s] x=2.3 y=-4.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741098.997707373] [global_planner_node]: [t=1771741099.0s] x=2.3 y=-4.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741098.998395325] [global_planner_node]: [t=1771741099.0s] x=2.3 y=-4.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.038310585] [global_planner_node]: [t=1771741099.0s] x=2.3 y=-4.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.040101303] [global_planner_node]: [t=1771741099.0s] x=2.3 y=-4.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.042974850] [global_planner_node]: [t=1771741099.0s] x=2.3 y=-4.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.044304255] [global_planner_node]: [t=1771741099.0s] x=2.3 y=-4.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.132017954] [global_planner_node]: [t=1771741099.1s] x=2.3 y=-4.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.133267802] [global_planner_node]: [t=1771741099.1s] x=2.3 y=-4.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.145143838] [global_planner_node]: [t=1771741099.1s] x=2.3 y=-4.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.146367317] [global_planner_node]: [t=1771741099.1s] x=2.3 y=-4.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.234812363] [global_planner_node]: [t=1771741099.2s] x=2.2 y=-4.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.235731883] [global_planner_node]: [t=1771741099.2s] x=2.2 y=-4.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.259473748] [global_planner_node]: [t=1771741099.3s] x=2.2 y=-4.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.260261003] [global_planner_node]: [t=1771741099.3s] x=2.2 y=-4.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.335838007] [global_planner_node]: [t=1771741099.3s] x=2.2 y=-4.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.338215454] [global_planner_node]: [t=1771741099.3s] x=2.2 y=-4.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.384661734] [global_planner_node]: [t=1771741099.4s] x=2.2 y=-4.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.385365848] [global_planner_node]: [t=1771741099.4s] x=2.2 y=-4.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.433830285] [global_planner_node]: [t=1771741099.4s] x=2.2 y=-4.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.434523262] [global_planner_node]: [t=1771741099.4s] x=2.2 y=-4.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.476470473] [global_planner_node]: [t=1771741099.5s] x=2.2 y=-4.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.477232415] [global_planner_node]: [t=1771741099.5s] x=2.2 y=-4.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.513857939] [global_planner_node]: [t=1771741099.5s] x=2.2 y=-4.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.516830788] [global_planner_node]: [t=1771741099.5s] x=2.2 y=-4.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.537587386] [global_planner_node]: [t=1771741099.5s] x=2.2 y=-4.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.538347024] [global_planner_node]: [t=1771741099.5s] x=2.2 y=-4.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.631533684] [global_planner_node]: [t=1771741099.6s] x=2.2 y=-4.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.645566320] [global_planner_node]: [t=1771741099.6s] x=2.2 y=-4.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.651899374] [global_planner_node]: [t=1771741099.7s] x=2.2 y=-4.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.653541026] [global_planner_node]: [t=1771741099.7s] x=2.2 y=-4.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.734217237] [global_planner_node]: [t=1771741099.7s] x=2.2 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.734902149] [global_planner_node]: [t=1771741099.7s] x=2.2 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.739399650] [global_planner_node]: [t=1771741099.7s] x=2.2 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.740342244] [global_planner_node]: [t=1771741099.7s] x=2.2 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.825687040] [global_planner_node]: [t=1771741099.8s] x=2.2 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.826461878] [global_planner_node]: [t=1771741099.8s] x=2.2 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.838342555] [global_planner_node]: [t=1771741099.8s] x=2.2 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.839107793] [global_planner_node]: [t=1771741099.8s] x=2.2 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.859589492] [global_planner_node]: [t=1771741099.9s] x=2.2 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.860297190] [global_planner_node]: [t=1771741099.9s] x=2.2 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.932775735] [global_planner_node]: [t=1771741099.9s] x=2.2 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.933473160] [global_planner_node]: [t=1771741099.9s] x=2.2 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.955221060] [global_planner_node]: [t=1771741100.0s] x=2.2 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.955950839] [global_planner_node]: [t=1771741100.0s] x=2.2 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741099.977206193] [global_planner_node]: [t=1771741100.0s] x=2.2 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741099.977904994] [global_planner_node]: [t=1771741100.0s] x=2.2 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.037124973] [global_planner_node]: [t=1771741100.0s] x=2.2 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741100.037820286] [global_planner_node]: [t=1771741100.0s] x=2.2 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.081200429] [global_planner_node]: [t=1771741100.1s] x=2.2 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741100.081883837] [global_planner_node]: [t=1771741100.1s] x=2.2 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.133274048] [global_planner_node]: [t=1771741100.1s] x=2.2 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741100.135488476] [global_planner_node]: [t=1771741100.1s] x=2.2 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.190851671] [global_planner_node]: [t=1771741100.2s] x=2.2 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741100.191593003] [global_planner_node]: [t=1771741100.2s] x=2.2 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.204343629] [global_planner_node]: [t=1771741100.2s] x=2.2 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741100.206168269] [global_planner_node]: [t=1771741100.2s] x=2.2 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.232714555] [global_planner_node]: [t=1771741100.2s] x=2.2 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741100.233402539] [global_planner_node]: [t=1771741100.2s] x=2.2 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.302480332] [global_planner_node]: [t=1771741100.3s] x=2.2 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=7
+[global_planner_node-1] [INFO] [1771741100.313150907] [global_planner_node]: [t=1771741100.3s] x=2.2 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.330385497] [global_planner_node]: [t=1771741100.3s] x=2.2 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=8
+[global_planner_node-1] [INFO] [1771741100.331074730] [global_planner_node]: [t=1771741100.3s] x=2.2 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.337344739] [global_planner_node]: [t=1771741100.3s] x=2.2 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=8
+[global_planner_node-1] [INFO] [1771741100.339176548] [global_planner_node]: [t=1771741100.3s] x=2.2 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.436577551] [global_planner_node]: [t=1771741100.4s] x=2.2 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=8
+[global_planner_node-1] [INFO] [1771741100.437725984] [global_planner_node]: [t=1771741100.4s] x=2.2 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.467502193] [global_planner_node]: [t=1771741100.5s] x=2.2 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=8
+[global_planner_node-1] [INFO] [1771741100.468267751] [global_planner_node]: [t=1771741100.5s] x=2.2 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.489973184] [global_planner_node]: [t=1771741100.5s] x=2.2 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=8
+[global_planner_node-1] [INFO] [1771741100.490657520] [global_planner_node]: [t=1771741100.5s] x=2.2 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.534875162] [global_planner_node]: [t=1771741100.5s] x=2.2 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=8
+[global_planner_node-1] [INFO] [1771741100.535550985] [global_planner_node]: [t=1771741100.5s] x=2.2 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.579685837] [global_planner_node]: [t=1771741100.6s] x=2.2 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=9
+[global_planner_node-1] [INFO] [1771741100.580374558] [global_planner_node]: [t=1771741100.6s] x=2.2 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.585694965] [global_planner_node]: [t=1771741100.6s] x=2.2 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=9
+[global_planner_node-1] [INFO] [1771741100.586348931] [global_planner_node]: [t=1771741100.6s] x=2.2 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.634210253] [global_planner_node]: [t=1771741100.6s] x=2.2 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=9
+[global_planner_node-1] [INFO] [1771741100.634926048] [global_planner_node]: [t=1771741100.6s] x=2.2 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.717323914] [global_planner_node]: [t=1771741100.7s] x=2.2 y=-5.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=9
+[global_planner_node-1] [INFO] [1771741100.718026652] [global_planner_node]: [t=1771741100.7s] x=2.2 y=-5.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.728335698] [global_planner_node]: [t=1771741100.7s] x=2.2 y=-5.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=10
+[global_planner_node-1] [INFO] [1771741100.728989440] [global_planner_node]: [t=1771741100.7s] x=2.2 y=-5.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.736088852] [global_planner_node]: [t=1771741100.7s] x=2.2 y=-5.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=10
+[global_planner_node-1] [INFO] [1771741100.737026710] [global_planner_node]: [t=1771741100.7s] x=2.2 y=-5.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.834755032] [global_planner_node]: [t=1771741100.8s] x=2.2 y=-5.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=10
+[global_planner_node-1] [INFO] [1771741100.835442505] [global_planner_node]: [t=1771741100.8s] x=2.2 y=-5.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.839223955] [global_planner_node]: [t=1771741100.8s] x=2.2 y=-5.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=10
+[global_planner_node-1] [INFO] [1771741100.840068910] [global_planner_node]: [t=1771741100.8s] x=2.2 y=-5.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.861692673] [global_planner_node]: [t=1771741100.9s] x=2.2 y=-5.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=10
+[global_planner_node-1] [INFO] [1771741100.862523484] [global_planner_node]: [t=1771741100.9s] x=2.2 y=-5.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.932760206] [global_planner_node]: [t=1771741100.9s] x=2.3 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=10
+[global_planner_node-1] [INFO] [1771741100.935567252] [global_planner_node]: [t=1771741100.9s] x=2.3 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741100.969541772] [global_planner_node]: [t=1771741101.0s] x=2.3 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=10
+[global_planner_node-1] [INFO] [1771741100.970262399] [global_planner_node]: [t=1771741101.0s] x=2.3 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.038889631] [global_planner_node]: [t=1771741101.0s] x=2.3 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=10
+[global_planner_node-1] [INFO] [1771741101.039618931] [global_planner_node]: [t=1771741101.0s] x=2.3 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.064074157] [global_planner_node]: [t=1771741101.1s] x=2.3 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=10
+[global_planner_node-1] [INFO] [1771741101.064803552] [global_planner_node]: [t=1771741101.1s] x=2.3 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.087807476] [global_planner_node]: [t=1771741101.1s] x=2.3 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.088744918] [global_planner_node]: [t=1771741101.1s] x=2.3 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.133436736] [global_planner_node]: [t=1771741101.1s] x=2.3 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.134118640] [global_planner_node]: [t=1771741101.1s] x=2.3 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.169116368] [global_planner_node]: [t=1771741101.2s] x=2.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.169971020] [global_planner_node]: [t=1771741101.2s] x=2.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.223717140] [global_planner_node]: [t=1771741101.2s] x=2.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.224469417] [global_planner_node]: [t=1771741101.2s] x=2.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.236314987] [global_planner_node]: [t=1771741101.2s] x=2.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.237132389] [global_planner_node]: [t=1771741101.2s] x=2.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.332247566] [global_planner_node]: [t=1771741101.3s] x=2.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.332943711] [global_planner_node]: [t=1771741101.3s] x=2.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.339410310] [global_planner_node]: [t=1771741101.3s] x=2.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.340133369] [global_planner_node]: [t=1771741101.3s] x=2.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.345672287] [global_planner_node]: [t=1771741101.3s] x=2.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.346344718] [global_planner_node]: [t=1771741101.3s] x=2.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.438475781] [global_planner_node]: [t=1771741101.4s] x=2.1 y=-6.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.439157269] [global_planner_node]: [t=1771741101.4s] x=2.1 y=-6.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.456997469] [global_planner_node]: [t=1771741101.5s] x=2.1 y=-6.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.457705551] [global_planner_node]: [t=1771741101.5s] x=2.1 y=-6.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.476931896] [global_planner_node]: [t=1771741101.5s] x=2.1 y=-6.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.477619849] [global_planner_node]: [t=1771741101.5s] x=2.1 y=-6.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.535829419] [global_planner_node]: [t=1771741101.5s] x=2.1 y=-6.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.537638507] [global_planner_node]: [t=1771741101.5s] x=2.1 y=-6.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.581858196] [global_planner_node]: [t=1771741101.6s] x=2.1 y=-6.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.582649548] [global_planner_node]: [t=1771741101.6s] x=2.1 y=-6.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.639162710] [global_planner_node]: [t=1771741101.6s] x=2.1 y=-6.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.640420527] [global_planner_node]: [t=1771741101.6s] x=2.1 y=-6.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.710347114] [global_planner_node]: [t=1771741101.7s] x=2.2 y=-6.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.711034043] [global_planner_node]: [t=1771741101.7s] x=2.2 y=-6.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.735912562] [global_planner_node]: [t=1771741101.7s] x=2.2 y=-6.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.736660999] [global_planner_node]: [t=1771741101.7s] x=2.2 y=-6.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.808658708] [global_planner_node]: [t=1771741101.8s] x=2.2 y=-6.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.809381927] [global_planner_node]: [t=1771741101.8s] x=2.2 y=-6.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.833901157] [global_planner_node]: [t=1771741101.8s] x=2.2 y=-6.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.834595382] [global_planner_node]: [t=1771741101.8s] x=2.2 y=-6.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.939949936] [global_planner_node]: [t=1771741101.9s] x=2.2 y=-6.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.940735847] [global_planner_node]: [t=1771741101.9s] x=2.2 y=-6.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.951225706] [global_planner_node]: [t=1771741102.0s] x=2.2 y=-6.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.951902201] [global_planner_node]: [t=1771741102.0s] x=2.2 y=-6.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741101.955375886] [global_planner_node]: [t=1771741102.0s] x=2.2 y=-6.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741101.956050621] [global_planner_node]: [t=1771741102.0s] x=2.2 y=-6.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741102.040409520] [global_planner_node]: [t=1771741102.0s] x=2.2 y=-6.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741102.041101025] [global_planner_node]: [t=1771741102.0s] x=2.2 y=-6.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741102.044252031] [global_planner_node]: [t=1771741102.0s] x=2.2 y=-6.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741102.044905965] [global_planner_node]: [t=1771741102.0s] x=2.2 y=-6.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741102.066371476] [global_planner_node]: [t=1771741102.1s] x=2.2 y=-6.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741102.067154251] [global_planner_node]: [t=1771741102.1s] x=2.2 y=-6.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741102.134453900] [global_planner_node]: [t=1771741102.1s] x=2.2 y=-6.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741102.135156605] [global_planner_node]: [t=1771741102.1s] x=2.2 y=-6.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741102.179729951] [global_planner_node]: [t=1771741102.2s] x=2.1 y=-6.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741102.180434673] [global_planner_node]: [t=1771741102.2s] x=2.1 y=-6.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741102.195100089] [global_planner_node]: [t=1771741102.2s] x=2.1 y=-6.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741102.195798154] [global_planner_node]: [t=1771741102.2s] x=2.1 y=-6.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741102.233905284] [global_planner_node]: [t=1771741102.2s] x=2.1 y=-6.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741102.234577716] [global_planner_node]: [t=1771741102.2s] x=2.1 y=-6.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741102.307183114] [global_planner_node]: [t=1771741102.3s] x=2.1 y=-6.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741102.307932319] [global_planner_node]: [t=1771741102.3s] x=2.1 y=-6.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741102.314931788] [global_planner_node]: [t=1771741102.3s] x=2.1 y=-6.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741102.315592442] [global_planner_node]: [t=1771741102.3s] x=2.1 y=-6.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741102.335428911] [global_planner_node]: [t=1771741102.3s] x=2.1 y=-6.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741102.336155938] [global_planner_node]: [t=1771741102.3s] x=2.1 y=-6.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741102.424803298] [global_planner_node]: [t=1771741102.4s] x=2.2 y=-6.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741102.425490482] [global_planner_node]: [t=1771741102.4s] x=2.2 y=-6.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741102.439774720] [global_planner_node]: [t=1771741102.4s] x=2.2 y=-6.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=11
+[global_planner_node-1] [INFO] [1771741102.440486930] [global_planner_node]: [t=1771741102.4s] x=2.2 y=-6.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741102.965544720] [global_planner_node]: [t=1771741103.0s] x=2.2 y=-6.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741102.966257283] [global_planner_node]: [t=1771741103.0s] x=2.2 y=-6.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.039729910] [global_planner_node]: [t=1771741103.0s] x=2.2 y=-6.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.040469930] [global_planner_node]: [t=1771741103.0s] x=2.2 y=-6.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.053658858] [global_planner_node]: [t=1771741103.1s] x=2.2 y=-6.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.054820060] [global_planner_node]: [t=1771741103.1s] x=2.2 y=-6.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.102997850] [global_planner_node]: [t=1771741103.1s] x=2.2 y=-6.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.103865239] [global_planner_node]: [t=1771741103.1s] x=2.2 y=-6.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.141152855] [global_planner_node]: [t=1771741103.1s] x=2.2 y=-6.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.143499612] [global_planner_node]: [t=1771741103.1s] x=2.2 y=-6.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.176251101] [global_planner_node]: [t=1771741103.2s] x=2.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.177049493] [global_planner_node]: [t=1771741103.2s] x=2.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.239299250] [global_planner_node]: [t=1771741103.2s] x=2.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.240216083] [global_planner_node]: [t=1771741103.2s] x=2.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.265480485] [global_planner_node]: [t=1771741103.3s] x=2.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.266366947] [global_planner_node]: [t=1771741103.3s] x=2.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.293418035] [global_planner_node]: [t=1771741103.3s] x=2.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.294671019] [global_planner_node]: [t=1771741103.3s] x=2.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.334205481] [global_planner_node]: [t=1771741103.3s] x=2.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.335005537] [global_planner_node]: [t=1771741103.3s] x=2.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.378173183] [global_planner_node]: [t=1771741103.4s] x=2.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.379373364] [global_planner_node]: [t=1771741103.4s] x=2.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.435373081] [global_planner_node]: [t=1771741103.4s] x=2.1 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.436545643] [global_planner_node]: [t=1771741103.4s] x=2.1 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.438637790] [global_planner_node]: [t=1771741103.4s] x=2.1 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.439269803] [global_planner_node]: [t=1771741103.4s] x=2.1 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.534558525] [global_planner_node]: [t=1771741103.5s] x=2.1 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.535326003] [global_planner_node]: [t=1771741103.5s] x=2.1 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.552515756] [global_planner_node]: [t=1771741103.6s] x=2.1 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.554242310] [global_planner_node]: [t=1771741103.6s] x=2.1 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.575560898] [global_planner_node]: [t=1771741103.6s] x=2.1 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.576529382] [global_planner_node]: [t=1771741103.6s] x=2.1 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.633218972] [global_planner_node]: [t=1771741103.6s] x=2.1 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.633927630] [global_planner_node]: [t=1771741103.6s] x=2.1 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.640442648] [global_planner_node]: [t=1771741103.6s] x=2.1 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.641284211] [global_planner_node]: [t=1771741103.6s] x=2.1 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.675690633] [global_planner_node]: [t=1771741103.7s] x=2.0 y=-5.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.676922399] [global_planner_node]: [t=1771741103.7s] x=2.0 y=-5.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.736768051] [global_planner_node]: [t=1771741103.7s] x=2.0 y=-5.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.737649425] [global_planner_node]: [t=1771741103.7s] x=2.0 y=-5.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.780457173] [global_planner_node]: [t=1771741103.8s] x=2.0 y=-5.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.781151974] [global_planner_node]: [t=1771741103.8s] x=2.0 y=-5.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.796911515] [global_planner_node]: [t=1771741103.8s] x=2.0 y=-5.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.797706067] [global_planner_node]: [t=1771741103.8s] x=2.0 y=-5.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.833203221] [global_planner_node]: [t=1771741103.8s] x=2.0 y=-5.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.833888229] [global_planner_node]: [t=1771741103.8s] x=2.0 y=-5.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.911563616] [global_planner_node]: [t=1771741103.9s] x=1.8 y=-5.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.913805950] [global_planner_node]: [t=1771741103.9s] x=1.8 y=-5.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741103.935602363] [global_planner_node]: [t=1771741103.9s] x=1.8 y=-5.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741103.936453527] [global_planner_node]: [t=1771741103.9s] x=1.8 y=-5.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.032615366] [global_planner_node]: [t=1771741104.0s] x=1.8 y=-5.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.045784645] [global_planner_node]: [t=1771741104.0s] x=1.8 y=-5.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.049132080] [global_planner_node]: [t=1771741104.0s] x=1.8 y=-5.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.050226109] [global_planner_node]: [t=1771741104.0s] x=1.8 y=-5.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.160410469] [global_planner_node]: [t=1771741104.2s] x=1.6 y=-5.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.161659037] [global_planner_node]: [t=1771741104.2s] x=1.6 y=-5.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.165004649] [global_planner_node]: [t=1771741104.2s] x=1.6 y=-5.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.168114019] [global_planner_node]: [t=1771741104.2s] x=1.6 y=-5.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.180842819] [global_planner_node]: [t=1771741104.2s] x=1.6 y=-5.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.181526515] [global_planner_node]: [t=1771741104.2s] x=1.6 y=-5.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.235286169] [global_planner_node]: [t=1771741104.2s] x=1.6 y=-5.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.236045455] [global_planner_node]: [t=1771741104.2s] x=1.6 y=-5.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.252456241] [global_planner_node]: [t=1771741104.3s] x=1.6 y=-5.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.253234632] [global_planner_node]: [t=1771741104.3s] x=1.6 y=-5.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.334596741] [global_planner_node]: [t=1771741104.3s] x=1.6 y=-5.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.335318999] [global_planner_node]: [t=1771741104.3s] x=1.6 y=-5.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.387065584] [global_planner_node]: [t=1771741104.4s] x=1.5 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.387746624] [global_planner_node]: [t=1771741104.4s] x=1.5 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.434379409] [global_planner_node]: [t=1771741104.4s] x=1.5 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.435088739] [global_planner_node]: [t=1771741104.4s] x=1.5 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.513163768] [global_planner_node]: [t=1771741104.5s] x=1.5 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.513861289] [global_planner_node]: [t=1771741104.5s] x=1.5 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.533841223] [global_planner_node]: [t=1771741104.5s] x=1.5 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.534517878] [global_planner_node]: [t=1771741104.5s] x=1.5 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.638652629] [global_planner_node]: [t=1771741104.6s] x=1.5 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.639770372] [global_planner_node]: [t=1771741104.6s] x=1.5 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.659105620] [global_planner_node]: [t=1771741104.7s] x=1.4 y=-5.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.659810598] [global_planner_node]: [t=1771741104.7s] x=1.4 y=-5.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.676535870] [global_planner_node]: [t=1771741104.7s] x=1.4 y=-5.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.677526468] [global_planner_node]: [t=1771741104.7s] x=1.4 y=-5.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.733822493] [global_planner_node]: [t=1771741104.7s] x=1.4 y=-5.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.734519822] [global_planner_node]: [t=1771741104.7s] x=1.4 y=-5.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.754179509] [global_planner_node]: [t=1771741104.8s] x=1.4 y=-5.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.754870822] [global_planner_node]: [t=1771741104.8s] x=1.4 y=-5.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.836025076] [global_planner_node]: [t=1771741104.8s] x=1.4 y=-5.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.836775272] [global_planner_node]: [t=1771741104.8s] x=1.4 y=-5.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.868206284] [global_planner_node]: [t=1771741104.9s] x=1.4 y=-5.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.868919934] [global_planner_node]: [t=1771741104.9s] x=1.4 y=-5.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.934210832] [global_planner_node]: [t=1771741104.9s] x=1.5 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.937719879] [global_planner_node]: [t=1771741104.9s] x=1.5 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741104.985736633] [global_planner_node]: [t=1771741105.0s] x=1.5 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741104.986417641] [global_planner_node]: [t=1771741105.0s] x=1.5 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.034727631] [global_planner_node]: [t=1771741105.0s] x=1.5 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.037316645] [global_planner_node]: [t=1771741105.0s] x=1.5 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.107051471] [global_planner_node]: [t=1771741105.1s] x=1.5 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.107764353] [global_planner_node]: [t=1771741105.1s] x=1.5 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.136964935] [global_planner_node]: [t=1771741105.1s] x=1.5 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.139461270] [global_planner_node]: [t=1771741105.1s] x=1.5 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.230982972] [global_planner_node]: [t=1771741105.2s] x=1.6 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.231684717] [global_planner_node]: [t=1771741105.2s] x=1.6 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.241441500] [global_planner_node]: [t=1771741105.2s] x=1.6 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.243576850] [global_planner_node]: [t=1771741105.2s] x=1.6 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.337224301] [global_planner_node]: [t=1771741105.3s] x=1.6 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.337930591] [global_planner_node]: [t=1771741105.3s] x=1.6 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.369244217] [global_planner_node]: [t=1771741105.4s] x=1.6 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.369938442] [global_planner_node]: [t=1771741105.4s] x=1.6 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.442274634] [global_planner_node]: [t=1771741105.4s] x=1.8 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.443119366] [global_planner_node]: [t=1771741105.4s] x=1.8 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.449976424] [global_planner_node]: [t=1771741105.4s] x=1.8 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.452343311] [global_planner_node]: [t=1771741105.4s] x=1.8 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.496378280] [global_planner_node]: [t=1771741105.5s] x=1.8 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.497096667] [global_planner_node]: [t=1771741105.5s] x=1.8 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.533785039] [global_planner_node]: [t=1771741105.5s] x=1.8 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.535722295] [global_planner_node]: [t=1771741105.5s] x=1.8 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.622221980] [global_planner_node]: [t=1771741105.6s] x=1.8 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.628215169] [global_planner_node]: [t=1771741105.6s] x=1.8 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.637483053] [global_planner_node]: [t=1771741105.6s] x=1.8 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.641042920] [global_planner_node]: [t=1771741105.6s] x=1.8 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.719439570] [global_planner_node]: [t=1771741105.7s] x=2.0 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.720280493] [global_planner_node]: [t=1771741105.7s] x=2.0 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.729021108] [global_planner_node]: [t=1771741105.7s] x=2.0 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.732002278] [global_planner_node]: [t=1771741105.7s] x=2.0 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.746736914] [global_planner_node]: [t=1771741105.7s] x=2.0 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.750002552] [global_planner_node]: [t=1771741105.7s] x=2.0 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.759304902] [global_planner_node]: [t=1771741105.8s] x=2.0 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.760237704] [global_planner_node]: [t=1771741105.8s] x=2.0 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.845487733] [global_planner_node]: [t=1771741105.8s] x=2.0 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.846245930] [global_planner_node]: [t=1771741105.8s] x=2.0 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.874941868] [global_planner_node]: [t=1771741105.9s] x=2.0 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.875650078] [global_planner_node]: [t=1771741105.9s] x=2.0 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.883917796] [global_planner_node]: [t=1771741105.9s] x=2.0 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.886205541] [global_planner_node]: [t=1771741105.9s] x=2.0 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741105.935124982] [global_planner_node]: [t=1771741105.9s] x=2.0 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741105.937873911] [global_planner_node]: [t=1771741105.9s] x=2.0 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.040195412] [global_planner_node]: [t=1771741106.0s] x=2.0 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.047488821] [global_planner_node]: [t=1771741106.0s] x=2.0 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.056333091] [global_planner_node]: [t=1771741106.1s] x=2.0 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.057177342] [global_planner_node]: [t=1771741106.1s] x=2.0 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.146072778] [global_planner_node]: [t=1771741106.1s] x=2.0 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.151151823] [global_planner_node]: [t=1771741106.1s] x=2.0 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.153450384] [global_planner_node]: [t=1771741106.2s] x=2.0 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.154132064] [global_planner_node]: [t=1771741106.2s] x=2.0 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.235088094] [global_planner_node]: [t=1771741106.2s] x=2.1 y=-5.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.236265008] [global_planner_node]: [t=1771741106.2s] x=2.1 y=-5.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.263581425] [global_planner_node]: [t=1771741106.3s] x=2.1 y=-5.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.264412172] [global_planner_node]: [t=1771741106.3s] x=2.1 y=-5.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.314044622] [global_planner_node]: [t=1771741106.3s] x=2.1 y=-5.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.316036954] [global_planner_node]: [t=1771741106.3s] x=2.1 y=-5.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.335020049] [global_planner_node]: [t=1771741106.3s] x=2.1 y=-5.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.335733155] [global_planner_node]: [t=1771741106.3s] x=2.1 y=-5.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.374789886] [global_planner_node]: [t=1771741106.4s] x=2.1 y=-5.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.375540979] [global_planner_node]: [t=1771741106.4s] x=2.1 y=-5.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.432914165] [global_planner_node]: [t=1771741106.4s] x=2.2 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.433622151] [global_planner_node]: [t=1771741106.4s] x=2.2 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.491749119] [global_planner_node]: [t=1771741106.5s] x=2.2 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.492501236] [global_planner_node]: [t=1771741106.5s] x=2.2 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.539625510] [global_planner_node]: [t=1771741106.5s] x=2.2 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.540413117] [global_planner_node]: [t=1771741106.5s] x=2.2 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.571182353] [global_planner_node]: [t=1771741106.6s] x=2.2 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.572318625] [global_planner_node]: [t=1771741106.6s] x=2.2 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.596850494] [global_planner_node]: [t=1771741106.6s] x=2.2 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.597887495] [global_planner_node]: [t=1771741106.6s] x=2.2 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.632884068] [global_planner_node]: [t=1771741106.6s] x=2.2 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.633780675] [global_planner_node]: [t=1771741106.6s] x=2.2 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.706698123] [global_planner_node]: [t=1771741106.7s] x=2.2 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.707629709] [global_planner_node]: [t=1771741106.7s] x=2.2 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.716390037] [global_planner_node]: [t=1771741106.7s] x=2.2 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.717246033] [global_planner_node]: [t=1771741106.7s] x=2.2 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.735697506] [global_planner_node]: [t=1771741106.7s] x=2.2 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.736969052] [global_planner_node]: [t=1771741106.7s] x=2.2 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.841047091] [global_planner_node]: [t=1771741106.8s] x=2.2 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.841872301] [global_planner_node]: [t=1771741106.8s] x=2.2 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.858455771] [global_planner_node]: [t=1771741106.9s] x=2.2 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=12
+[global_planner_node-1] [INFO] [1771741106.859179374] [global_planner_node]: [t=1771741106.9s] x=2.2 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.882625503] [global_planner_node]: [t=1771741106.9s] x=2.3 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741106.883339153] [global_planner_node]: [t=1771741106.9s] x=2.3 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.935911810] [global_planner_node]: [t=1771741106.9s] x=2.3 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741106.937031889] [global_planner_node]: [t=1771741106.9s] x=2.3 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741106.962482063] [global_planner_node]: [t=1771741107.0s] x=2.3 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741106.963142109] [global_planner_node]: [t=1771741107.0s] x=2.3 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.034724551] [global_planner_node]: [t=1771741107.0s] x=2.3 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.035564610] [global_planner_node]: [t=1771741107.0s] x=2.3 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.094254848] [global_planner_node]: [t=1771741107.1s] x=2.3 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.094963538] [global_planner_node]: [t=1771741107.1s] x=2.3 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.136215718] [global_planner_node]: [t=1771741107.1s] x=2.3 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.136913976] [global_planner_node]: [t=1771741107.1s] x=2.3 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.177183335] [global_planner_node]: [t=1771741107.2s] x=2.4 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.178365274] [global_planner_node]: [t=1771741107.2s] x=2.4 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.237971545] [global_planner_node]: [t=1771741107.2s] x=2.4 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.240549710] [global_planner_node]: [t=1771741107.2s] x=2.4 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.243050078] [global_planner_node]: [t=1771741107.2s] x=2.4 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.244362618] [global_planner_node]: [t=1771741107.2s] x=2.4 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.333674913] [global_planner_node]: [t=1771741107.3s] x=2.4 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.337005996] [global_planner_node]: [t=1771741107.3s] x=2.4 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.339867413] [global_planner_node]: [t=1771741107.3s] x=2.4 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.341069321] [global_planner_node]: [t=1771741107.3s] x=2.4 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.435667844] [global_planner_node]: [t=1771741107.4s] x=2.5 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.436931133] [global_planner_node]: [t=1771741107.4s] x=2.5 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.460682019] [global_planner_node]: [t=1771741107.5s] x=2.5 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.461566721] [global_planner_node]: [t=1771741107.5s] x=2.5 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.478088427] [global_planner_node]: [t=1771741107.5s] x=2.5 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.478911269] [global_planner_node]: [t=1771741107.5s] x=2.5 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.556222560] [global_planner_node]: [t=1771741107.6s] x=2.5 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.557317517] [global_planner_node]: [t=1771741107.6s] x=2.5 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.598164133] [global_planner_node]: [t=1771741107.6s] x=2.5 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.601383015] [global_planner_node]: [t=1771741107.6s] x=2.5 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.634983234] [global_planner_node]: [t=1771741107.6s] x=2.5 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.636062990] [global_planner_node]: [t=1771741107.6s] x=2.5 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.698778343] [global_planner_node]: [t=1771741107.7s] x=2.7 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.699484217] [global_planner_node]: [t=1771741107.7s] x=2.7 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.739577148] [global_planner_node]: [t=1771741107.7s] x=2.7 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.741397019] [global_planner_node]: [t=1771741107.7s] x=2.7 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.744500566] [global_planner_node]: [t=1771741107.7s] x=2.7 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.745150467] [global_planner_node]: [t=1771741107.7s] x=2.7 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.810049974] [global_planner_node]: [t=1771741107.8s] x=2.7 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.814044783] [global_planner_node]: [t=1771741107.8s] x=2.7 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.833844191] [global_planner_node]: [t=1771741107.8s] x=2.7 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.834521871] [global_planner_node]: [t=1771741107.8s] x=2.7 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.943414775] [global_planner_node]: [t=1771741107.9s] x=2.8 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.945092877] [global_planner_node]: [t=1771741107.9s] x=2.8 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.948524862] [global_planner_node]: [t=1771741107.9s] x=2.8 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=13
+[global_planner_node-1] [INFO] [1771741107.950828384] [global_planner_node]: [t=1771741107.9s] x=2.8 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741107.953586370] [global_planner_node]: [t=1771741108.0s] x=2.8 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741107.955028615] [global_planner_node]: [t=1771741108.0s] x=2.8 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.035406682] [global_planner_node]: [t=1771741108.0s] x=2.8 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.036248661] [global_planner_node]: [t=1771741108.0s] x=2.8 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.073149015] [global_planner_node]: [t=1771741108.1s] x=2.8 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.074104250] [global_planner_node]: [t=1771741108.1s] x=2.8 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.133155889] [global_planner_node]: [t=1771741108.1s] x=2.8 y=-4.7 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.133836769] [global_planner_node]: [t=1771741108.1s] x=2.8 y=-4.7 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.194580751] [global_planner_node]: [t=1771741108.2s] x=3.0 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.195393768] [global_planner_node]: [t=1771741108.2s] x=3.0 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.234213425] [global_planner_node]: [t=1771741108.2s] x=3.0 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.237167968] [global_planner_node]: [t=1771741108.2s] x=3.0 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.246438188] [global_planner_node]: [t=1771741108.2s] x=3.0 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.247678787] [global_planner_node]: [t=1771741108.2s] x=3.0 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.310937634] [global_planner_node]: [t=1771741108.3s] x=3.0 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.312152535] [global_planner_node]: [t=1771741108.3s] x=3.0 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.337523278] [global_planner_node]: [t=1771741108.3s] x=3.0 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.338624924] [global_planner_node]: [t=1771741108.3s] x=3.0 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.440350986] [global_planner_node]: [t=1771741108.4s] x=3.1 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.441510716] [global_planner_node]: [t=1771741108.4s] x=3.1 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.446123616] [global_planner_node]: [t=1771741108.4s] x=3.1 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.447205324] [global_planner_node]: [t=1771741108.4s] x=3.1 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.504139502] [global_planner_node]: [t=1771741108.5s] x=3.1 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.505540529] [global_planner_node]: [t=1771741108.5s] x=3.1 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.536278017] [global_planner_node]: [t=1771741108.5s] x=3.1 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.537296457] [global_planner_node]: [t=1771741108.5s] x=3.1 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.553749517] [global_planner_node]: [t=1771741108.6s] x=3.1 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.554542629] [global_planner_node]: [t=1771741108.6s] x=3.1 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.636496870] [global_planner_node]: [t=1771741108.6s] x=3.1 y=-4.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.638725698] [global_planner_node]: [t=1771741108.6s] x=3.1 y=-4.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.680720394] [global_planner_node]: [t=1771741108.7s] x=3.2 y=-4.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.681725297] [global_planner_node]: [t=1771741108.7s] x=3.2 y=-4.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.738416578] [global_planner_node]: [t=1771741108.7s] x=3.2 y=-4.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.740023059] [global_planner_node]: [t=1771741108.7s] x=3.2 y=-4.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.817155168] [global_planner_node]: [t=1771741108.8s] x=3.2 y=-4.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.819586539] [global_planner_node]: [t=1771741108.8s] x=3.2 y=-4.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.839866109] [global_planner_node]: [t=1771741108.8s] x=3.2 y=-4.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.840618002] [global_planner_node]: [t=1771741108.8s] x=3.2 y=-4.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.848133666] [global_planner_node]: [t=1771741108.8s] x=3.2 y=-4.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.848985054] [global_planner_node]: [t=1771741108.8s] x=3.2 y=-4.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.934374384] [global_planner_node]: [t=1771741108.9s] x=3.3 y=-4.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.936207505] [global_planner_node]: [t=1771741108.9s] x=3.3 y=-4.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741108.939325324] [global_planner_node]: [t=1771741108.9s] x=3.3 y=-4.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741108.941081191] [global_planner_node]: [t=1771741108.9s] x=3.3 y=-4.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.044258843] [global_planner_node]: [t=1771741109.0s] x=3.3 y=-4.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.044991759] [global_planner_node]: [t=1771741109.0s] x=3.3 y=-4.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.061369326] [global_planner_node]: [t=1771741109.1s] x=3.3 y=-4.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.064121711] [global_planner_node]: [t=1771741109.1s] x=3.3 y=-4.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.078426172] [global_planner_node]: [t=1771741109.1s] x=3.3 y=-4.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.079125582] [global_planner_node]: [t=1771741109.1s] x=3.3 y=-4.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.118854550] [global_planner_node]: [t=1771741109.1s] x=3.3 y=-4.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.119581833] [global_planner_node]: [t=1771741109.1s] x=3.3 y=-4.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.133750284] [global_planner_node]: [t=1771741109.1s] x=3.3 y=-4.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.134422108] [global_planner_node]: [t=1771741109.1s] x=3.3 y=-4.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.158615936] [global_planner_node]: [t=1771741109.2s] x=3.5 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.159285071] [global_planner_node]: [t=1771741109.2s] x=3.5 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.234089624] [global_planner_node]: [t=1771741109.2s] x=3.5 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.235093214] [global_planner_node]: [t=1771741109.2s] x=3.5 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.273378625] [global_planner_node]: [t=1771741109.3s] x=3.5 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.274055216] [global_planner_node]: [t=1771741109.3s] x=3.5 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.337728523] [global_planner_node]: [t=1771741109.3s] x=3.5 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.339102347] [global_planner_node]: [t=1771741109.3s] x=3.5 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.410529031] [global_planner_node]: [t=1771741109.4s] x=3.6 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.411499083] [global_planner_node]: [t=1771741109.4s] x=3.6 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.435640652] [global_planner_node]: [t=1771741109.4s] x=3.6 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.436520490] [global_planner_node]: [t=1771741109.4s] x=3.6 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.448184157] [global_planner_node]: [t=1771741109.4s] x=3.6 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.448981877] [global_planner_node]: [t=1771741109.4s] x=3.6 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.516655817] [global_planner_node]: [t=1771741109.5s] x=3.6 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.517471298] [global_planner_node]: [t=1771741109.5s] x=3.6 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.534337892] [global_planner_node]: [t=1771741109.5s] x=3.6 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.535014771] [global_planner_node]: [t=1771741109.5s] x=3.6 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.576270471] [global_planner_node]: [t=1771741109.6s] x=3.6 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.577033564] [global_planner_node]: [t=1771741109.6s] x=3.6 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.635911814] [global_planner_node]: [t=1771741109.6s] x=3.6 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.642200608] [global_planner_node]: [t=1771741109.6s] x=3.6 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.646148501] [global_planner_node]: [t=1771741109.6s] x=3.6 y=-5.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.648496666] [global_planner_node]: [t=1771741109.6s] x=3.6 y=-5.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.732387490] [global_planner_node]: [t=1771741109.7s] x=3.8 y=-5.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.733247198] [global_planner_node]: [t=1771741109.7s] x=3.8 y=-5.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.739243171] [global_planner_node]: [t=1771741109.7s] x=3.8 y=-5.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.741893758] [global_planner_node]: [t=1771741109.7s] x=3.8 y=-5.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.754282756] [global_planner_node]: [t=1771741109.8s] x=3.8 y=-5.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.755004759] [global_planner_node]: [t=1771741109.8s] x=3.8 y=-5.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.836119227] [global_planner_node]: [t=1771741109.8s] x=3.8 y=-5.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.836835374] [global_planner_node]: [t=1771741109.8s] x=3.8 y=-5.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.880855363] [global_planner_node]: [t=1771741109.9s] x=3.8 y=-5.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.881805798] [global_planner_node]: [t=1771741109.9s] x=3.8 y=-5.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741109.934579811] [global_planner_node]: [t=1771741109.9s] x=3.8 y=-5.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741109.935588586] [global_planner_node]: [t=1771741109.9s] x=3.8 y=-5.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.012418817] [global_planner_node]: [t=1771741110.0s] x=3.8 y=-5.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.013806274] [global_planner_node]: [t=1771741110.0s] x=3.8 y=-5.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.037870525] [global_planner_node]: [t=1771741110.0s] x=3.8 y=-5.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.039287745] [global_planner_node]: [t=1771741110.0s] x=3.8 y=-5.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.116793510] [global_planner_node]: [t=1771741110.1s] x=3.8 y=-5.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.117518105] [global_planner_node]: [t=1771741110.1s] x=3.8 y=-5.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.132973367] [global_planner_node]: [t=1771741110.1s] x=3.8 y=-5.1 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.133653703] [global_planner_node]: [t=1771741110.1s] x=3.8 y=-5.1 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.228294016] [global_planner_node]: [t=1771741110.2s] x=3.9 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.229009682] [global_planner_node]: [t=1771741110.2s] x=3.9 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.241056865] [global_planner_node]: [t=1771741110.2s] x=3.9 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.241732400] [global_planner_node]: [t=1771741110.2s] x=3.9 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.275793129] [global_planner_node]: [t=1771741110.3s] x=3.9 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.276500827] [global_planner_node]: [t=1771741110.3s] x=3.9 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.341802471] [global_planner_node]: [t=1771741110.3s] x=3.9 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.343528288] [global_planner_node]: [t=1771741110.3s] x=3.9 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.345907623] [global_planner_node]: [t=1771741110.3s] x=3.9 y=-5.2 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.346713120] [global_planner_node]: [t=1771741110.3s] x=3.9 y=-5.2 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.437778398] [global_planner_node]: [t=1771741110.4s] x=4.0 y=-5.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.438477103] [global_planner_node]: [t=1771741110.4s] x=4.0 y=-5.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.456745971] [global_planner_node]: [t=1771741110.5s] x=4.0 y=-5.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.460038266] [global_planner_node]: [t=1771741110.5s] x=4.0 y=-5.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.535656379] [global_planner_node]: [t=1771741110.5s] x=4.0 y=-5.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.538179180] [global_planner_node]: [t=1771741110.5s] x=4.0 y=-5.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.586135542] [global_planner_node]: [t=1771741110.6s] x=4.0 y=-5.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.587921011] [global_planner_node]: [t=1771741110.6s] x=4.0 y=-5.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.652887112] [global_planner_node]: [t=1771741110.7s] x=4.0 y=-5.3 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.653656222] [global_planner_node]: [t=1771741110.7s] x=4.0 y=-5.3 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.673980113] [global_planner_node]: [t=1771741110.7s] x=4.0 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.676684047] [global_planner_node]: [t=1771741110.7s] x=4.0 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.736377393] [global_planner_node]: [t=1771741110.7s] x=4.0 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.739001674] [global_planner_node]: [t=1771741110.7s] x=4.0 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.745201053] [global_planner_node]: [t=1771741110.7s] x=4.0 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.748043301] [global_planner_node]: [t=1771741110.7s] x=4.0 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.828863731] [global_planner_node]: [t=1771741110.8s] x=4.0 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.829780372] [global_planner_node]: [t=1771741110.8s] x=4.0 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.841992718] [global_planner_node]: [t=1771741110.8s] x=4.0 y=-5.4 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.842990516] [global_planner_node]: [t=1771741110.8s] x=4.0 y=-5.4 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.934741666] [global_planner_node]: [t=1771741110.9s] x=4.1 y=-5.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.935607135] [global_planner_node]: [t=1771741110.9s] x=4.1 y=-5.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741110.960276036] [global_planner_node]: [t=1771741111.0s] x=4.1 y=-5.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741110.961141057] [global_planner_node]: [t=1771741111.0s] x=4.1 y=-5.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.040507689] [global_planner_node]: [t=1771741111.0s] x=4.1 y=-5.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.041895434] [global_planner_node]: [t=1771741111.0s] x=4.1 y=-5.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.057009104] [global_planner_node]: [t=1771741111.1s] x=4.1 y=-5.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.059526945] [global_planner_node]: [t=1771741111.1s] x=4.1 y=-5.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.098451823] [global_planner_node]: [t=1771741111.1s] x=4.1 y=-5.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.099329229] [global_planner_node]: [t=1771741111.1s] x=4.1 y=-5.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.101574826] [global_planner_node]: [t=1771741111.1s] x=4.1 y=-5.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.102543918] [global_planner_node]: [t=1771741111.1s] x=4.1 y=-5.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.134399436] [global_planner_node]: [t=1771741111.1s] x=4.1 y=-5.5 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.135420500] [global_planner_node]: [t=1771741111.1s] x=4.1 y=-5.5 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.184589073] [global_planner_node]: [t=1771741111.2s] x=4.1 y=-5.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.186985722] [global_planner_node]: [t=1771741111.2s] x=4.1 y=-5.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.229265108] [global_planner_node]: [t=1771741111.2s] x=4.1 y=-5.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.230192693] [global_planner_node]: [t=1771741111.2s] x=4.1 y=-5.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.234316758] [global_planner_node]: [t=1771741111.2s] x=4.1 y=-5.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.235294875] [global_planner_node]: [t=1771741111.2s] x=4.1 y=-5.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.338550960] [global_planner_node]: [t=1771741111.3s] x=4.1 y=-5.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.339317958] [global_planner_node]: [t=1771741111.3s] x=4.1 y=-5.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.360291559] [global_planner_node]: [t=1771741111.4s] x=4.1 y=-5.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.361046044] [global_planner_node]: [t=1771741111.4s] x=4.1 y=-5.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.369917259] [global_planner_node]: [t=1771741111.4s] x=4.1 y=-5.6 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.370623037] [global_planner_node]: [t=1771741111.4s] x=4.1 y=-5.6 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.437396783] [global_planner_node]: [t=1771741111.4s] x=4.1 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.439400860] [global_planner_node]: [t=1771741111.4s] x=4.1 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.503857100] [global_planner_node]: [t=1771741111.5s] x=4.1 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.505039327] [global_planner_node]: [t=1771741111.5s] x=4.1 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.519703493] [global_planner_node]: [t=1771741111.5s] x=4.1 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.521688400] [global_planner_node]: [t=1771741111.5s] x=4.1 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.538058350] [global_planner_node]: [t=1771741111.5s] x=4.1 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.539005201] [global_planner_node]: [t=1771741111.5s] x=4.1 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.648780080] [global_planner_node]: [t=1771741111.6s] x=4.1 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.650065386] [global_planner_node]: [t=1771741111.6s] x=4.1 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.653939802] [global_planner_node]: [t=1771741111.7s] x=4.2 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.655065705] [global_planner_node]: [t=1771741111.7s] x=4.2 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.672370889] [global_planner_node]: [t=1771741111.7s] x=4.2 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.673773003] [global_planner_node]: [t=1771741111.7s] x=4.2 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.738069199] [global_planner_node]: [t=1771741111.7s] x=4.2 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.739608220] [global_planner_node]: [t=1771741111.7s] x=4.2 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.743736830] [global_planner_node]: [t=1771741111.7s] x=4.2 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.745117407] [global_planner_node]: [t=1771741111.7s] x=4.2 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.775585947] [global_planner_node]: [t=1771741111.8s] x=4.2 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.776661414] [global_planner_node]: [t=1771741111.8s] x=4.2 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.836099157] [global_planner_node]: [t=1771741111.8s] x=4.2 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.836891245] [global_planner_node]: [t=1771741111.8s] x=4.2 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.882646939] [global_planner_node]: [t=1771741111.9s] x=4.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.885276308] [global_planner_node]: [t=1771741111.9s] x=4.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.933594774] [global_planner_node]: [t=1771741111.9s] x=4.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.934287942] [global_planner_node]: [t=1771741111.9s] x=4.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741111.957890784] [global_planner_node]: [t=1771741112.0s] x=4.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741111.958580913] [global_planner_node]: [t=1771741112.0s] x=4.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.010796644] [global_planner_node]: [t=1771741112.0s] x=4.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.011472756] [global_planner_node]: [t=1771741112.0s] x=4.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.035331967] [global_planner_node]: [t=1771741112.0s] x=4.2 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.036054738] [global_planner_node]: [t=1771741112.0s] x=4.2 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.147702163] [global_planner_node]: [t=1771741112.1s] x=4.4 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.153534316] [global_planner_node]: [t=1771741112.1s] x=4.4 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.165369740] [global_planner_node]: [t=1771741112.2s] x=4.4 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.169953646] [global_planner_node]: [t=1771741112.2s] x=4.4 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.235485000] [global_planner_node]: [t=1771741112.2s] x=4.4 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.236561107] [global_planner_node]: [t=1771741112.2s] x=4.4 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.270812921] [global_planner_node]: [t=1771741112.3s] x=4.4 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.271890404] [global_planner_node]: [t=1771741112.3s] x=4.4 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.290021693] [global_planner_node]: [t=1771741112.3s] x=4.4 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.290810805] [global_planner_node]: [t=1771741112.3s] x=4.4 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.333949418] [global_planner_node]: [t=1771741112.3s] x=4.4 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.334777541] [global_planner_node]: [t=1771741112.3s] x=4.4 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.389411521] [global_planner_node]: [t=1771741112.4s] x=4.4 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.390117299] [global_planner_node]: [t=1771741112.4s] x=4.4 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.438470903] [global_planner_node]: [t=1771741112.4s] x=4.5 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.439213291] [global_planner_node]: [t=1771741112.4s] x=4.5 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.465469791] [global_planner_node]: [t=1771741112.5s] x=4.5 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.466154735] [global_planner_node]: [t=1771741112.5s] x=4.5 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.529339044] [global_planner_node]: [t=1771741112.5s] x=4.5 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.530173279] [global_planner_node]: [t=1771741112.5s] x=4.5 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.533789308] [global_planner_node]: [t=1771741112.5s] x=4.5 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.535402926] [global_planner_node]: [t=1771741112.5s] x=4.5 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.575444266] [global_planner_node]: [t=1771741112.6s] x=4.5 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.576157596] [global_planner_node]: [t=1771741112.6s] x=4.5 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.628442324] [global_planner_node]: [t=1771741112.6s] x=4.5 y=-6.0 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.629238156] [global_planner_node]: [t=1771741112.6s] x=4.5 y=-6.0 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.646962056] [global_planner_node]: [t=1771741112.6s] x=4.7 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.647673722] [global_planner_node]: [t=1771741112.6s] x=4.7 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.734632501] [global_planner_node]: [t=1771741112.7s] x=4.7 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.735359560] [global_planner_node]: [t=1771741112.7s] x=4.7 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.747702891] [global_planner_node]: [t=1771741112.7s] x=4.7 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.748409597] [global_planner_node]: [t=1771741112.7s] x=4.7 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.756850509] [global_planner_node]: [t=1771741112.8s] x=4.7 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.758832408] [global_planner_node]: [t=1771741112.8s] x=4.7 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.832721725] [global_planner_node]: [t=1771741112.8s] x=4.7 y=-5.9 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.833397005] [global_planner_node]: [t=1771741112.8s] x=4.7 y=-5.9 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.904255709] [global_planner_node]: [t=1771741112.9s] x=4.8 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.905083255] [global_planner_node]: [t=1771741112.9s] x=4.8 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.920262657] [global_planner_node]: [t=1771741112.9s] x=4.8 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.920972147] [global_planner_node]: [t=1771741112.9s] x=4.8 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741112.934374336] [global_planner_node]: [t=1771741112.9s] x=4.8 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741112.935050896] [global_planner_node]: [t=1771741112.9s] x=4.8 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741113.016456964] [global_planner_node]: [t=1771741113.0s] x=4.8 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741113.017191384] [global_planner_node]: [t=1771741113.0s] x=4.8 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741113.037788318] [global_planner_node]: [t=1771741113.0s] x=4.8 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741113.038501680] [global_planner_node]: [t=1771741113.0s] x=4.8 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741113.137429266] [global_planner_node]: [t=1771741113.1s] x=4.8 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741113.138191111] [global_planner_node]: [t=1771741113.1s] x=4.8 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []
+[global_planner_node-1] [INFO] [1771741113.151573811] [global_planner_node]: [t=1771741113.2s] x=4.8 y=-5.8 (m) | Detection update: received 1 detections, types={'class_4'}, gates=0, obstacles=14
+[global_planner_node-1] [INFO] [1771741113.156295647] [global_planner_node]: [t=1771741113.2s] x=4.8 y=-5.8 (m) | Seen red-green buoy pairs: 0 pair(s) []

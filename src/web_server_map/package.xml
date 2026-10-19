@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>web_server_map</name>
+  <version>0.1.0</version>
+  <description>Web-based 2D map visualization for boat position and global detections</description>
+  <maintainer email="lorenzo@example.com">lorenzo</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
+
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>builtin_interfaces</depend>
+
+  <exec_depend>python3-aiohttp</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

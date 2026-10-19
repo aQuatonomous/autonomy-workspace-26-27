@@ -1,0 +1,96 @@
+# Class ID to Object Name Mapping
+# This file maps class IDs to human-readable object names for combined detection output.
+# Used by vision_combiner to set detections[].class_name in /combined/detection_info.
+# YOLO main model: 0-8. Indicator buoy (task 2/3): 9-10. Supply drop (task 4): 11-12. Docking numbers (task 5): 20-22.
+# Convention: 255 = unknown (unmatched LiDAR tracks, invalid IDs); used by fusion and detection_to_global.
+
+# Class ID Mapping
+# Format: class_id: class_name
+classes:
+  0: black_buoy
+  1: green_buoy
+  2: green_pole_buoy
+  3: red_buoy
+  4: red_pole_buoy
+  5: yellow_buoy
+  6: cross
+  7: dock
+  8: triangle
+  # Indicator buoy (colour indicator buoy detector); used for class_name in combined output
+  9: red_indicator_buoy
+  10: green_indicator_buoy
+  # Supply drop (task4_supply_processor); task4 uses type yellow_supply_drop/black_supply_drop
+  11: yellow_supply_drop
+  12: black_supply_drop
+  # Docking number detection (vision_inference number model); remapped from model 0,1,2 to 20,21,22
+  20: digit_1
+  21: digit_2
+  22: digit_3
+
+# Reverse mapping (class_name -> class_id) for convenience
+class_name_to_id:
+  black_buoy: 0
+  green_buoy: 1
+  green_pole_buoy: 2
+  red_buoy: 3
+  red_pole_buoy: 4
+  yellow_buoy: 5
+  cross: 6
+  dock: 7
+  triangle: 8
+  red_indicator_buoy: 9
+  green_indicator_buoy: 10
+  yellow_supply_drop: 11
+  black_supply_drop: 12
+  digit_1: 20
+  digit_2: 21
+  digit_3: 22
+
+# Metadata
+metadata:
+  total_classes: 23
+  description: "Maritime object detection class mapping for autonomous navigation; includes YOLO (0-8), indicator buoy (9-10), supply drop (11-12), docking numbers (20-22). class_id 255 = unknown."
+  dataset_counts:
+    black_buoy: 4931
+    cross: 3311
+    dock: 4991
+    green_buoy: 9007
+    green_pole_buoy: 7533
+    red_buoy: 8760
+    red_pole_buoy: 6767
+    triangle: 3345
+    yellow_buoy: 4938
+
+# Category groupings (optional, for filtering/analysis)
+categories:
+  buoys:
+    - black_buoy
+    - green_buoy
+    - green_pole_buoy
+    - red_buoy
+    - red_pole_buoy
+    - yellow_buoy
+  indicator_buoys:
+    - red_indicator_buoy
+    - green_indicator_buoy
+  supply_drops:
+    - yellow_supply_drop
+    - black_supply_drop
+  navigation_markers:
+    - cross
+    - triangle
+  infrastructure:
+    - dock
+  docking_numbers:
+    - digit_1
+    - digit_2
+    - digit_3
+
+# Color information for buoys (for visualization/processing)
+buoy_colors:
+  black_buoy: black
+  green_buoy: green
+  green_pole_buoy: green
+  red_buoy: red
+  red_pole_buoy: red
+  yellow_buoy: yellow

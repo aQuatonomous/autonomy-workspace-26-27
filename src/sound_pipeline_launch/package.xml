@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>sound_pipeline_launch</name>
+  <version>0.0.0</version>
+  <description>Launch file to run audio_capturer, sound_signal, and message_node together.</description>
+  <maintainer email="ethanastri@hotmail.com">ethan</maintainer>
+  <license>TODO</license>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>audio_common</exec_depend>
+  <exec_depend>sound_signal</exec_depend>
+  <exec_depend>message_node</exec_depend>
+
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>python3-launch</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

@@ -1,0 +1,22 @@
+Log run: run_2026-02-22_01-17-47
+Total lines: 6145
+Nodes detected: 16
+
+  boat_state_node                               4 lines
+  buoy_detector                               324 lines
+  buoy_tracker                                543 lines
+  buoy_visualizer                            3961 lines
+  detection_to_global_node                      1 lines
+  global_planner_node                         914 lines
+  lidar_range_filter                            1 lines
+  maritime_distance_estimator                   8 lines
+  mavros_node                                 283 lines
+  tracked_buoy_visualizer                       3 lines
+  unitree_lidar_ros2_node                       1 lines
+  v4l2_camera_node                             25 lines
+  vision_combiner                              23 lines
+  vision_inference                             11 lines
+  vision_lidar_fusion                           1 lines
+  vision_preprocessing                         21 lines
+
+  _unmatched                                   21 lines

@@ -1,0 +1,8 @@
+[maritime_distance_estimator-5] [INFO] [1771741082.048187733] [maritime_distance_estimator]: Maritime Distance Estimator initialized
+[maritime_distance_estimator-5] [INFO] [1771741082.048949291] [maritime_distance_estimator]: Task 2 configuration loaded
+[maritime_distance_estimator-5] [INFO] [1771741082.049828265] [maritime_distance_estimator]: Camera specs: 1920×1200, 3.0μm pixels, 3.56mm focal length
+[maritime_distance_estimator-5] [INFO] [1771741082.050661540] [maritime_distance_estimator]: Native fy: 1186.7 px, loaded 15 object reference dimensions
+[maritime_distance_estimator-5] [INFO] [1771741082.051292273] [maritime_distance_estimator]: Small buoy dimensions (Task 2): {'black_buoy': 0.1524, 'green_buoy': 0.1524, 'red_buoy': 0.1524, 'yellow_buoy': 0.1524}
+[maritime_distance_estimator-5] [INFO] [1771741082.057371167] [maritime_distance_estimator]: Subscribed to: /combined/detection_info
+[maritime_distance_estimator-5] [INFO] [1771741082.058083249] [maritime_distance_estimator]: Publishing to: /combined/detection_info_with_distance
+[maritime_distance_estimator-5] [INFO] [1771741082.156916895] [maritime_distance_estimator]: Updated frame size to 960×600, fy_eff: 593.3 px

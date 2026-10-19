@@ -1,0 +1,270 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="aquatonomous_course">
+    <!-- Jetson: 2ms step reduces CPU load (was 1ms) -->
+    <physics name="2ms" type="ode">
+      <max_step_size>0.002</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"></plugin>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+      <background_color>0.8 0.8 0.8</background_color>
+    </plugin>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"></plugin>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"></plugin>
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"></plugin>
+
+    <scene>
+      <ambient>1.0 1.0 1.0</ambient>
+      <background>0.8 0.8 0.8</background>
+      <sky></sky>
+    </scene>
+
+    <!-- Jetson: shadows off to reduce GPU load -->
+    <light type="directional" name="sun">
+      <cast_shadows>false</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.6 0.6 0.6 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <include>
+      <pose>0 0 0 0 0 0</pose>
+      <uri>model://waves</uri>
+    </include>
+
+    <model name="axes">
+      <pose>-22.192 0 0 0 0 0</pose>
+      <static>1</static>
+      <link name="link">
+        <visual name="r">
+          <cast_shadows>0</cast_shadows>
+          <pose>5 0 0.1 0 0 0</pose>
+          <geometry><box><size>10 0.01 0.01</size></box></geometry>
+          <material>
+            <ambient>1 0 0 1</ambient>
+            <diffuse>1 0 0 1</diffuse>
+            <emissive>1 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="g">
+          <cast_shadows>0</cast_shadows>
+          <pose>0 5 0.1 0 0 0</pose>
+          <geometry><box><size>0.01 10 0.01</size></box></geometry>
+          <material>
+            <ambient>0 1 0 1</ambient>
+            <diffuse>0 1 0 1</diffuse>
+            <emissive>0 1 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="b">
+          <cast_shadows>0</cast_shadows>
+          <pose>0 0 5.1 0 0 0</pose>
+          <geometry><box><size>0.01 0.01 10</size></box></geometry>
+          <material>
+            <ambient>0 0 1 1</ambient>
+            <diffuse>0 0 1 1</diffuse>
+            <emissive>0 0 1 1</emissive>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <include>
+      <pose>-27.192 0 0 0 0 0</pose>
+      <uri>model://ourboat</uri>
+    </include>
+    <!-- Gate 1: red left, green right, 8 ft (2.44 m) apart -->
+    <include>
+      <name>RedSurMark_2</name>
+      <pose>-22.192 -1.22 0 0 0 0</pose>
+      <uri>model://RedSurMark</uri>
+    </include>
+    <include>
+      <name>GreenSurMark_6</name>
+      <pose>-22.192 1.22 0 0 0 0</pose>
+      <uri>model://GreenSurMark</uri>
+    </include>
+    <!-- Gate 2: 50 ft (15.24 m) after gate 1, same 8 ft width -->
+    <include>
+      <name>RedSurMark_3</name>
+      <pose>-6.952 -1.22 0 0 0 0</pose>
+      <uri>model://RedSurMark</uri>
+    </include>
+    <include>
+      <name>GreenSurMark_7</name>
+      <pose>-6.952 1.22 0 0 0 0</pose>
+      <uri>model://GreenSurMark</uri>
+    </include>
+    <!-- Parallel course: right of first gates (more negative y), +x direction. Gate 8ft, red left/green right; 60ft ahead yellow; red indicator halfway; black buoys within 4ft of gate lines -->
+    <include>
+      <name>RedSurMark_4</name>
+      <pose>-22.192 -6.78 0 0 0 0</pose>
+      <uri>model://RedSurMark</uri>
+    </include>
+    <include>
+      <name>GreenSurMark_8</name>
+      <pose>-22.192 -9.22 0 0 0 0</pose>
+      <uri>model://GreenSurMark</uri>
+    </include>
+    <include>
+      <name>ColourIndicatorRed_9</name>
+      <pose>-13.048 -8 0 0 0 0</pose>
+      <uri>model://ColourIndicatorRed</uri>
+    </include>
+    <include>
+      <name>YellowRopehold_0</name>
+      <pose>-3.904 -8 0 0 0 0</pose>
+      <uri>model://YellowRopehold</uri>
+    </include>
+    <include>
+      <name>BlackRopehold_24</name>
+      <pose>-20 -7.5 0 0 0 0</pose>
+      <uri>model://BlackRopehold</uri>
+    </include>
+    <include>
+      <name>BlackRopehold_25</name>
+      <pose>-17 -9 0 0 0 0</pose>
+      <uri>model://BlackRopehold</uri>
+    </include>
+    <include>
+      <name>BlackRopehold_26</name>
+      <pose>-14 -7 0 0 0 0</pose>
+      <uri>model://BlackRopehold</uri>
+    </include>
+    <include>
+      <name>BlackRopehold_27</name>
+      <pose>-11 -8.5 0 0 0 0</pose>
+      <uri>model://BlackRopehold</uri>
+    </include>
+    <include>
+      <name>BlackRopehold_28</name>
+      <pose>-8 -9.3 0 0 0 0</pose>
+      <uri>model://BlackRopehold</uri>
+    </include>
+    <include>
+      <name>BlackRopehold_29</name>
+      <pose>-5 -6.8 0 0 0 0</pose>
+      <uri>model://BlackRopehold</uri>
+    </include>
+    <include>
+      <name>BlackRopehold_30</name>
+      <pose>-2 -8 0 0 0 0</pose>
+      <uri>model://BlackRopehold</uri>
+    </include>
+    <!-- Buoys after gate 2: origin = 4 m past gate 2 green (24.24, 1.22), rotated CW 90° so path goes right -->
+    <!-- Red ropeholds -->
+    <include>
+      <name>RedRopehold_6</name>
+      <pose>3.048 1.22 0 0 0 0</pose>
+      <uri>model://RedRopehold</uri>
+    </include>
+    <include>
+      <name>RedRopehold_7</name>
+      <pose>10.548 -0.28 0 0 0 0</pose>
+      <uri>model://RedRopehold</uri>
+    </include>
+    <include>
+      <name>RedRopehold_8</name>
+      <pose>16.548 -5.28 0 0 0 0</pose>
+      <uri>model://RedRopehold</uri>
+    </include>
+    <include>
+      <name>RedRopehold_9</name>
+      <pose>23.048 -9.78 0 0 0 0</pose>
+      <uri>model://RedRopehold</uri>
+    </include>
+    <!-- Green ropeholds -->
+    <include>
+      <name>GreenRopehold_1</name>
+      <pose>0.048 -5.28 0 0 0 0</pose>
+      <uri>model://GreenRopehold</uri>
+    </include>
+    <include>
+      <name>GreenRopehold_2</name>
+      <pose>6.548 -6.78 0 0 0 0</pose>
+      <uri>model://GreenRopehold</uri>
+    </include>
+    <include>
+      <name>GreenRopehold_3</name>
+      <pose>11.548 -11.28 0 0 0 0</pose>
+      <uri>model://GreenRopehold</uri>
+    </include>
+    <include>
+      <name>GreenRopehold_4</name>
+      <pose>17.548 -14.78 0 0 0 0</pose>
+      <uri>model://GreenRopehold</uri>
+    </include>
+    <!-- Black buoys between each red/green gate -->
+    <include>
+      <name>BlackRopehold_10</name>
+      <pose>5.048 0 0 0 0 0</pose>
+      <uri>model://BlackRopehold</uri>
+    </include>
+    <include>
+      <name>BlackRopehold_11</name>
+      <pose>9.298 -5.91 0 0 0 0</pose>
+      <uri>model://BlackRopehold</uri>
+    </include>
+    <include>
+      <name>BlackRopehold_12</name>
+      <pose>15.178 -7.28 0 0 0 0</pose>
+      <uri>model://BlackRopehold</uri>
+    </include>
+    <include>
+      <name>BlackRopehold_21</name>
+      <pose>17.178 -13.28 0 0 0 0</pose>
+      <uri>model://BlackRopehold</uri>
+    </include>
+    <!-- Black buoys between last gate (x~20) and final indicator buoys (x~21-25) -->
+    <include>
+      <name>BlackRopehold_13</name>
+      <pose>21.5 -12.5 0 0 0 0</pose>
+      <uri>model://BlackRopehold</uri>
+    </include>
+    <include>
+      <name>BlackRopehold_14</name>
+      <pose>25 -11.5 0 0 0 0</pose>
+      <uri>model://BlackRopehold</uri>
+    </include>
+    <include>
+      <name>BlackRopehold_15</name>
+      <pose>22 -15 0 0 0 0</pose>
+      <uri>model://BlackRopehold</uri>
+    </include>
+    <!-- Black buoys around the final indicator buoys (red 25.5,-14.78, green 21.5,-16.78) -->
+    <include>
+      <name>BlackRopehold_18</name>
+      <pose>19.5 -16 0 0 0 0</pose>
+      <uri>model://BlackRopehold</uri>
+    </include>
+    <include>
+      <name>BlackRopehold_20</name>
+      <pose>24 -17.5 0 0 0 0</pose>
+      <uri>model://BlackRopehold</uri>
+    </include>
+    <include>
+      <name>ColourIndicatorRed_8</name>
+      <pose>25.548 -14.78 0 0 0 0</pose>
+      <uri>model://ColourIndicatorRed</uri>
+    </include>
+    <include>
+      <name>ColourIndicatorGreen_5</name>
+      <pose>21.548 -16.78 0 0 0 0</pose>
+      <uri>model://ColourIndicatorGreen</uri>
+    </include>
+    <!-- Task 4 vessels: yellow and black boats at x 10, y -10, 90° CW around +x, spaced apart -->
+    <include>
+      <name>aqua_t4_yellow</name>
+      <pose>10 -10 0 -1.5708 0 0</pose>
+      <uri>model://aqua_t4_yellow</uri>
+    </include>
+    <include>
+      <name>aqua_t4_black</name>
+      <pose>18 -10 0 -1.5708 0 0</pose>
+      <uri>model://aqua_t4_black</uri>
+    </include>
+  </world>
+</sdf>

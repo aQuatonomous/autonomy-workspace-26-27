@@ -1,0 +1,21 @@
+[vision_preprocessing-2] [INFO] [1771741078.072128786] [preprocess_camera1]: Preprocessing node for camera1 initialized (encoding=bgr8, max_fps=8.0)
+[vision_preprocessing-2] [INFO] [1771741078.072911881] [preprocess_camera1]: Subscribed to: /camera1/image_raw
+[vision_preprocessing-2] [INFO] [1771741078.073545718] [preprocess_camera1]: Publishing to: /camera1/image_preprocessed
+[vision_preprocessing-2] [INFO] [1771741078.078630142] [preprocess_camera1]: Preprocessing input encoding: yuv422_yuy2 -> output encoding: bgr8
+[vision_preprocessing-2] [INFO] [1771741080.274535847] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))
+[vision_preprocessing-2] [INFO] [1771741083.713245420] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))
+[vision_preprocessing-2] [INFO] [1771741085.750193249] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))
+[vision_preprocessing-2] [INFO] [1771741088.084320718] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))
+[vision_preprocessing-2] [INFO] [1771741089.687243640] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))
+[vision_preprocessing-2] [INFO] [1771741092.124118300] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))
+[vision_preprocessing-2] [INFO] [1771741094.117652824] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))
+[vision_preprocessing-2] [INFO] [1771741095.753701662] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))
+[vision_preprocessing-2] [INFO] [1771741097.359552360] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))
+[vision_preprocessing-2] [INFO] [1771741099.457900973] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))
+[vision_preprocessing-2] [INFO] [1771741100.821502291] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))
+[vision_preprocessing-2] [INFO] [1771741102.293678516] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))
+[vision_preprocessing-2] [INFO] [1771741103.622421892] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))
+[vision_preprocessing-2] [INFO] [1771741106.301634789] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))
+[vision_preprocessing-2] [INFO] [1771741108.230947147] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))
+[vision_preprocessing-2] [INFO] [1771741110.261395126] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))
+[vision_preprocessing-2] [INFO] [1771741111.760689284] [preprocess_camera1]: Published 8 processed frames (preprocess fps=8.0, last size=(600, 960, 3))

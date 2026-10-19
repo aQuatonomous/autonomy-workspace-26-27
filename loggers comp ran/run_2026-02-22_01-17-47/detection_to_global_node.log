@@ -1,0 +1,1 @@
+[detection_to_global_node-2] [INFO] [1771741071.716159341] [detection_to_global_node]: detection_to_global: pose=/boat_pose, source=fused (/fused_buoys) -> /global_detections

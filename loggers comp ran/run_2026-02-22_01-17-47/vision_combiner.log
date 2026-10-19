@@ -1,0 +1,23 @@
+[vision_combiner-4] [INFO] [1771741081.813712554] [detection_combiner]: Subscribed to: /camera1/detection_info
+[vision_combiner-4] [INFO] [1771741081.815884708] [detection_combiner]: Subscribed to: /camera1/task4_detections
+[vision_combiner-4] [INFO] [1771741081.818349746] [detection_combiner]: Subscribed to: /camera1/indicator_detections
+[vision_combiner-4] [INFO] [1771741081.820420325] [detection_combiner]: Detection combiner node initialized
+[vision_combiner-4] [INFO] [1771741081.821136951] [detection_combiner]: Publishing to: /combined/detection_info
+[vision_combiner-4] [INFO] [1771741081.822611200] [detection_combiner]: Camera intrinsics: fx=1047.7, fy=873.0, cx=960.0, cy=600.0
+[vision_combiner-4] [INFO] [1771741081.823338931] [detection_combiner]: Camera mounting angles: [-70.0, 0.0, 70.0]
+[vision_combiner-4] [WARN] [1771741081.925590101] [detection_combiner]: Camera health: 0 active, 0 stale, 1 no data | Total detections: 0
+[vision_combiner-4] [INFO] [1771741082.154907185] [detection_combiner]: Updated frame size to 960×600, recomputed intrinsics: fx=523.8, fy=436.5
+[vision_combiner-4] [INFO] [1771741084.325668175] [detection_combiner]: Combined detections: 0 total | Active cameras: 1/1 | Camera1: 0
+[vision_combiner-4] [INFO] [1771741086.425234582] [detection_combiner]: Combined detections: 0 total | Active cameras: 1/1 | Camera1: 0
+[vision_combiner-4] [INFO] [1771741088.625235400] [detection_combiner]: Combined detections: 0 total | Active cameras: 1/1 | Camera1: 0
+[vision_combiner-4] [INFO] [1771741090.825283147] [detection_combiner]: Combined detections: 0 total | Active cameras: 1/1 | Camera1: 0
+[vision_combiner-4] [INFO] [1771741092.925297452] [detection_combiner]: Combined detections: 1 total | Active cameras: 1/1 | Camera1: 1
+[vision_combiner-4] [INFO] [1771741095.125345743] [detection_combiner]: Combined detections: 1 total | Active cameras: 1/1 | Camera1: 1
+[vision_combiner-4] [INFO] [1771741097.125291979] [detection_combiner]: Combined detections: 1 total | Active cameras: 1/1 | Camera1: 1
+[vision_combiner-4] [INFO] [1771741099.325295792] [detection_combiner]: Combined detections: 1 total | Active cameras: 1/1 | Camera1: 1
+[vision_combiner-4] [INFO] [1771741101.225466160] [detection_combiner]: Combined detections: 1 total | Active cameras: 1/1 | Camera1: 1
+[vision_combiner-4] [INFO] [1771741103.225912260] [detection_combiner]: Combined detections: 1 total | Active cameras: 1/1 | Camera1: 1
+[vision_combiner-4] [INFO] [1771741105.433914846] [detection_combiner]: Combined detections: 1 total | Active cameras: 1/1 | Camera1: 1
+[vision_combiner-4] [INFO] [1771741107.525333765] [detection_combiner]: Combined detections: 1 total | Active cameras: 1/1 | Camera1: 1
+[vision_combiner-4] [INFO] [1771741109.628041565] [detection_combiner]: Combined detections: 1 total | Active cameras: 1/1 | Camera1: 1
+[vision_combiner-4] [INFO] [1771741111.725321776] [detection_combiner]: Combined detections: 1 total | Active cameras: 1/1 | Camera1: 1

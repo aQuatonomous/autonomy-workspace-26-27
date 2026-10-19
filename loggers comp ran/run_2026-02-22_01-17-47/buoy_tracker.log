@@ -1,0 +1,543 @@
+[buoy_tracker-4] [INFO] [1771741072.809659051] [buoy_tracker]: Buoy tracker started (publishes /tracked_buoys and /tracked_buoys_json)
+[buoy_tracker-4] [INFO] [1771741072.810374654] [buoy_tracker]: Association threshold: 0.90m, Max misses: 50, Min observations to add track: 2, Candidate max misses: 8
+[buoy_tracker-4] [INFO] [1771741074.337333061] [buoy_tracker]: Tracking: 0 buoys | Matched: 0 | Candidates: 12 | New candidates: 12 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741074.432010715] [buoy_tracker]: New buoy 0 (promoted after 2 observations) at range=12.07m, bearing=-18.4°
+[buoy_tracker-4] [INFO] [1771741074.432741807] [buoy_tracker]: New buoy 1 (promoted after 2 observations) at range=9.34m, bearing=-0.3°
+[buoy_tracker-4] [INFO] [1771741074.433387868] [buoy_tracker]: New buoy 2 (promoted after 2 observations) at range=0.32m, bearing=-162.3°
+[buoy_tracker-4] [INFO] [1771741074.433963621] [buoy_tracker]: New buoy 3 (promoted after 2 observations) at range=1.12m, bearing=14.0°
+[buoy_tracker-4] [INFO] [1771741074.434532717] [buoy_tracker]: New buoy 4 (promoted after 2 observations) at range=7.01m, bearing=67.2°
+[buoy_tracker-4] [INFO] [1771741074.435090101] [buoy_tracker]: New buoy 5 (promoted after 2 observations) at range=9.46m, bearing=11.1°
+[buoy_tracker-4] [INFO] [1771741074.435638876] [buoy_tracker]: New buoy 6 (promoted after 2 observations) at range=3.48m, bearing=-105.0°
+[buoy_tracker-4] [INFO] [1771741074.436252263] [buoy_tracker]: New buoy 7 (promoted after 2 observations) at range=6.89m, bearing=33.9°
+[buoy_tracker-4] [INFO] [1771741074.436870419] [buoy_tracker]: New buoy 8 (promoted after 2 observations) at range=9.71m, bearing=-13.7°
+[buoy_tracker-4] [INFO] [1771741074.437468541] [buoy_tracker]: New buoy 9 (promoted after 2 observations) at range=9.60m, bearing=45.4°
+[buoy_tracker-4] [INFO] [1771741074.438492902] [buoy_tracker]: New buoy 10 (promoted after 2 observations) at range=8.63m, bearing=-31.0°
+[buoy_tracker-4] [INFO] [1771741074.439574771] [buoy_tracker]: Tracking: 11 buoys | Matched: 0 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741074.540695377] [buoy_tracker]: New buoy 11 (promoted after 2 observations) at range=7.36m, bearing=-24.5°
+[buoy_tracker-4] [INFO] [1771741074.541584272] [buoy_tracker]: Tracking: 12 buoys | Matched: 11 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741074.770963406] [buoy_tracker]: Tracking: 12 buoys | Matched: 9 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741074.895901668] [buoy_tracker]: Tracking: 12 buoys | Matched: 9 | Candidates: 3 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741075.005430390] [buoy_tracker]: New buoy 12 (promoted after 2 observations) at range=13.59m, bearing=-31.2°
+[buoy_tracker-4] [INFO] [1771741075.006121287] [buoy_tracker]: New buoy 13 (promoted after 2 observations) at range=7.77m, bearing=-37.7°
+[buoy_tracker-4] [INFO] [1771741075.006724242] [buoy_tracker]: Tracking: 14 buoys | Matched: 7 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741075.116421101] [buoy_tracker]: New buoy 14 (promoted after 2 observations) at range=12.49m, bearing=-22.5°
+[buoy_tracker-4] [INFO] [1771741075.117189572] [buoy_tracker]: Tracking: 15 buoys | Matched: 8 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741075.240735733] [buoy_tracker]: Tracking: 15 buoys | Matched: 9 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741075.348729016] [buoy_tracker]: Tracking: 15 buoys | Matched: 9 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741075.459017981] [buoy_tracker]: Tracking: 15 buoys | Matched: 9 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741075.570745961] [buoy_tracker]: New buoy 15 (promoted after 2 observations) at range=12.11m, bearing=-9.9°
+[buoy_tracker-4] [INFO] [1771741075.571418713] [buoy_tracker]: Tracking: 16 buoys | Matched: 6 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741075.669517279] [buoy_tracker]: New buoy 16 (promoted after 2 observations) at range=8.46m, bearing=37.1°
+[buoy_tracker-4] [INFO] [1771741075.670193327] [buoy_tracker]: Tracking: 17 buoys | Matched: 4 | Candidates: 4 | New candidates: 3 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741075.784899309] [buoy_tracker]: New buoy 17 (promoted after 2 observations) at range=6.93m, bearing=46.4°
+[buoy_tracker-4] [INFO] [1771741075.785774923] [buoy_tracker]: New buoy 18 (promoted after 2 observations) at range=8.17m, bearing=16.3°
+[buoy_tracker-4] [INFO] [1771741075.786546402] [buoy_tracker]: Tracking: 19 buoys | Matched: 6 | Candidates: 6 | New candidates: 4 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741075.918763769] [buoy_tracker]: New buoy 19 (promoted after 2 observations) at range=8.32m, bearing=26.3°
+[buoy_tracker-4] [INFO] [1771741075.920181213] [buoy_tracker]: New buoy 20 (promoted after 2 observations) at range=7.26m, bearing=-9.4°
+[buoy_tracker-4] [INFO] [1771741075.921503995] [buoy_tracker]: Tracking: 21 buoys | Matched: 7 | Candidates: 7 | New candidates: 4 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741076.002544489] [buoy_tracker]: New buoy 21 (promoted after 2 observations) at range=7.01m, bearing=81.0°
+[buoy_tracker-4] [INFO] [1771741076.003474411] [buoy_tracker]: New buoy 22 (promoted after 2 observations) at range=5.85m, bearing=40.2°
+[buoy_tracker-4] [INFO] [1771741076.004537750] [buoy_tracker]: New buoy 23 (promoted after 2 observations) at range=1.21m, bearing=-44.4°
+[buoy_tracker-4] [INFO] [1771741076.005407988] [buoy_tracker]: New buoy 24 (promoted after 2 observations) at range=13.58m, bearing=-15.9°
+[buoy_tracker-4] [INFO] [1771741076.006293330] [buoy_tracker]: Tracking: 25 buoys | Matched: 8 | Candidates: 4 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741076.132514751] [buoy_tracker]: New buoy 25 (promoted after 2 observations) at range=9.73m, bearing=61.4°
+[buoy_tracker-4] [INFO] [1771741076.133241106] [buoy_tracker]: Tracking: 26 buoys | Matched: 10 | Candidates: 7 | New candidates: 4 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741076.260657491] [buoy_tracker]: New buoy 26 (promoted after 2 observations) at range=8.80m, bearing=-16.3°
+[buoy_tracker-4] [INFO] [1771741076.261314113] [buoy_tracker]: New buoy 27 (promoted after 2 observations) at range=12.89m, bearing=-10.6°
+[buoy_tracker-4] [INFO] [1771741076.261877673] [buoy_tracker]: New buoy 28 (promoted after 2 observations) at range=12.06m, bearing=-14.0°
+[buoy_tracker-4] [INFO] [1771741076.262461267] [buoy_tracker]: Tracking: 29 buoys | Matched: 10 | Candidates: 4 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741076.401409156] [buoy_tracker]: Tracking: 29 buoys | Matched: 13 | Candidates: 4 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741076.504350464] [buoy_tracker]: Tracking: 29 buoys | Matched: 9 | Candidates: 5 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741076.617239228] [buoy_tracker]: Tracking: 29 buoys | Matched: 10 | Candidates: 6 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741076.735103736] [buoy_tracker]: New buoy 29 (promoted after 2 observations) at range=9.59m, bearing=29.1°
+[buoy_tracker-4] [INFO] [1771741076.735792905] [buoy_tracker]: Tracking: 30 buoys | Matched: 10 | Candidates: 4 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741076.836795643] [buoy_tracker]: Tracking: 30 buoys | Matched: 9 | Candidates: 3 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741076.931206650] [buoy_tracker]: Tracking: 30 buoys | Matched: 8 | Candidates: 3 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741077.050160515] [buoy_tracker]: Tracking: 30 buoys | Matched: 8 | Candidates: 4 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741077.159441405] [buoy_tracker]: Tracking: 30 buoys | Matched: 11 | Candidates: 3 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741077.280578751] [buoy_tracker]: Tracking: 30 buoys | Matched: 11 | Candidates: 4 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741077.401361160] [buoy_tracker]: New buoy 30 (promoted after 2 observations) at range=6.42m, bearing=26.6°
+[buoy_tracker-4] [INFO] [1771741077.402127006] [buoy_tracker]: Tracking: 31 buoys | Matched: 9 | Candidates: 6 | New candidates: 3 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741077.531871714] [buoy_tracker]: Tracking: 31 buoys | Matched: 10 | Candidates: 6 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741077.656498715] [buoy_tracker]: New buoy 31 (promoted after 2 observations) at range=11.18m, bearing=-31.2°
+[buoy_tracker-4] [INFO] [1771741077.657239695] [buoy_tracker]: Tracking: 32 buoys | Matched: 9 | Candidates: 4 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741077.781455179] [buoy_tracker]: New buoy 32 (promoted after 2 observations) at range=6.66m, bearing=-19.7°
+[buoy_tracker-4] [INFO] [1771741077.782162077] [buoy_tracker]: Tracking: 33 buoys | Matched: 13 | Candidates: 4 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741077.930379773] [buoy_tracker]: Tracking: 33 buoys | Matched: 10 | Candidates: 4 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741078.038018787] [buoy_tracker]: Tracking: 33 buoys | Matched: 11 | Candidates: 5 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741078.154012695] [buoy_tracker]: New buoy 33 (promoted after 2 observations) at range=10.77m, bearing=33.9°
+[buoy_tracker-4] [INFO] [1771741078.154785677] [buoy_tracker]: Tracking: 34 buoys | Matched: 11 | Candidates: 4 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741078.295922261] [buoy_tracker]: Tracking: 34 buoys | Matched: 14 | Candidates: 4 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741078.420473383] [buoy_tracker]: Tracking: 34 buoys | Matched: 13 | Candidates: 4 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741078.539911918] [buoy_tracker]: Tracking: 34 buoys | Matched: 10 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741078.651668470] [buoy_tracker]: Tracking: 34 buoys | Matched: 9 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741078.756514165] [buoy_tracker]: Tracking: 34 buoys | Matched: 8 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741078.885463006] [buoy_tracker]: Tracking: 34 buoys | Matched: 7 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741079.012905308] [buoy_tracker]: Tracking: 34 buoys | Matched: 7 | Candidates: 3 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741079.133774983] [buoy_tracker]: New buoy 34 (promoted after 2 observations) at range=12.41m, bearing=-20.6°
+[buoy_tracker-4] [INFO] [1771741079.135700751] [buoy_tracker]: Tracking: 35 buoys | Matched: 11 | Candidates: 4 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741079.259079276] [buoy_tracker]: New buoy 35 (promoted after 2 observations) at range=9.55m, bearing=-30.4°
+[buoy_tracker-4] [INFO] [1771741079.259769212] [buoy_tracker]: Tracking: 36 buoys | Matched: 10 | Candidates: 3 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741079.359848552] [buoy_tracker]: Tracking: 36 buoys | Matched: 13 | Candidates: 5 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741079.468256161] [buoy_tracker]: New buoy 36 (promoted after 2 observations) at range=5.49m, bearing=-21.8°
+[buoy_tracker-4] [INFO] [1771741079.468938481] [buoy_tracker]: New buoy 37 (promoted after 2 observations) at range=6.59m, bearing=-27.6°
+[buoy_tracker-4] [INFO] [1771741079.469553693] [buoy_tracker]: Tracking: 38 buoys | Matched: 9 | Candidates: 3 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741079.605039602] [buoy_tracker]: Tracking: 38 buoys | Matched: 10 | Candidates: 3 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741079.705864850] [buoy_tracker]: New buoy 38 (promoted after 2 observations) at range=5.64m, bearing=30.1°
+[buoy_tracker-4] [INFO] [1771741079.706585925] [buoy_tracker]: Tracking: 39 buoys | Matched: 9 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741079.844174575] [buoy_tracker]: Tracking: 39 buoys | Matched: 10 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741079.942133797] [buoy_tracker]: Tracking: 39 buoys | Matched: 8 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741080.076875108] [buoy_tracker]: Tracking: 39 buoys | Matched: 9 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741080.179875037] [buoy_tracker]: Tracking: 39 buoys | Matched: 8 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741080.317746361] [buoy_tracker]: New buoy 39 (promoted after 2 observations) at range=9.75m, bearing=20.1°
+[buoy_tracker-4] [INFO] [1771741080.318463915] [buoy_tracker]: Tracking: 40 buoys | Matched: 7 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741080.437721474] [buoy_tracker]: Tracking: 40 buoys | Matched: 12 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741080.537638048] [buoy_tracker]: Tracking: 40 buoys | Matched: 11 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741080.643157323] [buoy_tracker]: New buoy 40 (promoted after 2 observations) at range=0.78m, bearing=60.4°
+[buoy_tracker-4] [INFO] [1771741080.643880158] [buoy_tracker]: Tracking: 41 buoys | Matched: 11 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741080.801226364] [buoy_tracker]: Tracking: 41 buoys | Matched: 11 | Candidates: 3 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741080.897147583] [buoy_tracker]: New buoy 41 (promoted after 2 observations) at range=9.41m, bearing=-5.0°
+[buoy_tracker-4] [INFO] [1771741080.897880051] [buoy_tracker]: Tracking: 42 buoys | Matched: 10 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741081.018870532] [buoy_tracker]: Tracking: 42 buoys | Matched: 9 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741081.138457328] [buoy_tracker]: Tracking: 42 buoys | Matched: 9 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741081.277746638] [buoy_tracker]: Tracking: 42 buoys | Matched: 11 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741081.425805496] [buoy_tracker]: Tracking: 42 buoys | Matched: 11 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741081.587905892] [buoy_tracker]: Tracking: 42 buoys | Matched: 14 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741081.684060118] [buoy_tracker]: New buoy 42 (promoted after 2 observations) at range=8.29m, bearing=-6.4°
+[buoy_tracker-4] [INFO] [1771741081.684768456] [buoy_tracker]: Tracking: 43 buoys | Matched: 15 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741081.805609485] [buoy_tracker]: Tracking: 43 buoys | Matched: 15 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741081.934312542] [buoy_tracker]: Tracking: 43 buoys | Matched: 15 | Candidates: 1 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741082.038710679] [buoy_tracker]: New buoy 43 (promoted after 2 observations) at range=2.38m, bearing=-12.4°
+[buoy_tracker-4] [INFO] [1771741082.039484302] [buoy_tracker]: Tracking: 44 buoys | Matched: 13 | Candidates: 1 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741082.156087268] [buoy_tracker]: New buoy 44 (promoted after 2 observations) at range=9.81m, bearing=20.2°
+[buoy_tracker-4] [INFO] [1771741082.156783862] [buoy_tracker]: Removing buoy 20 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741082.157343389] [buoy_tracker]: Tracking: 44 buoys | Matched: 12 | Candidates: 0 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741082.266119083] [buoy_tracker]: Tracking: 44 buoys | Matched: 11 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741082.383349934] [buoy_tracker]: Removing buoy 19 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741082.384743408] [buoy_tracker]: Tracking: 43 buoys | Matched: 10 | Candidates: 0 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741082.499393693] [buoy_tracker]: Removing buoy 26 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741082.500050476] [buoy_tracker]: Removing buoy 28 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741082.500613940] [buoy_tracker]: Tracking: 41 buoys | Matched: 10 | Candidates: 0 | New candidates: 0 | Lost: 2
+[buoy_tracker-4] [INFO] [1771741082.604260086] [buoy_tracker]: Removing buoy 25 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741082.605460619] [buoy_tracker]: Tracking: 40 buoys | Matched: 9 | Candidates: 0 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741082.715585432] [buoy_tracker]: Removing buoy 22 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741082.716491224] [buoy_tracker]: Tracking: 39 buoys | Matched: 11 | Candidates: 0 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741082.821572704] [buoy_tracker]: Removing buoy 21 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741082.822446942] [buoy_tracker]: Removing buoy 23 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741082.823701430] [buoy_tracker]: Tracking: 37 buoys | Matched: 10 | Candidates: 0 | New candidates: 0 | Lost: 2
+[buoy_tracker-4] [INFO] [1771741082.947201813] [buoy_tracker]: Removing buoy 24 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741082.949457237] [buoy_tracker]: Tracking: 36 buoys | Matched: 9 | Candidates: 1 | New candidates: 1 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741083.075221074] [buoy_tracker]: Removing buoy 17 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741083.076245723] [buoy_tracker]: Tracking: 35 buoys | Matched: 12 | Candidates: 1 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741083.190602865] [buoy_tracker]: Removing buoy 27 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741083.191413770] [buoy_tracker]: Removing buoy 29 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741083.192151006] [buoy_tracker]: Tracking: 33 buoys | Matched: 8 | Candidates: 2 | New candidates: 1 | Lost: 2
+[buoy_tracker-4] [INFO] [1771741083.314962058] [buoy_tracker]: Tracking: 33 buoys | Matched: 7 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741083.411627421] [buoy_tracker]: Removing buoy 15 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741083.412353809] [buoy_tracker]: Tracking: 32 buoys | Matched: 8 | Candidates: 2 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741083.547174286] [buoy_tracker]: Tracking: 32 buoys | Matched: 11 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741083.663373702] [buoy_tracker]: Tracking: 32 buoys | Matched: 10 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741083.795709491] [buoy_tracker]: Tracking: 32 buoys | Matched: 9 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741083.921113879] [buoy_tracker]: Tracking: 32 buoys | Matched: 14 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741084.032570143] [buoy_tracker]: Tracking: 32 buoys | Matched: 13 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741084.169062768] [buoy_tracker]: Tracking: 32 buoys | Matched: 12 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741084.298953838] [buoy_tracker]: Tracking: 32 buoys | Matched: 10 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741084.432705566] [buoy_tracker]: Removing buoy 30 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741084.433349803] [buoy_tracker]: Tracking: 31 buoys | Matched: 9 | Candidates: 0 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741084.558680615] [buoy_tracker]: Tracking: 31 buoys | Matched: 7 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741084.689894243] [buoy_tracker]: Tracking: 31 buoys | Matched: 8 | Candidates: 4 | New candidates: 4 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741084.806465811] [buoy_tracker]: New buoy 45 (promoted after 2 observations) at range=8.09m, bearing=63.4°
+[buoy_tracker-4] [INFO] [1771741084.807266124] [buoy_tracker]: New buoy 46 (promoted after 2 observations) at range=9.40m, bearing=42.4°
+[buoy_tracker-4] [INFO] [1771741084.808237553] [buoy_tracker]: New buoy 47 (promoted after 2 observations) at range=5.31m, bearing=-31.7°
+[buoy_tracker-4] [INFO] [1771741084.808978981] [buoy_tracker]: Tracking: 34 buoys | Matched: 10 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741084.936359378] [buoy_tracker]: Tracking: 34 buoys | Matched: 13 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741085.051447929] [buoy_tracker]: New buoy 48 (promoted after 2 observations) at range=8.18m, bearing=-29.5°
+[buoy_tracker-4] [INFO] [1771741085.054383272] [buoy_tracker]: Tracking: 35 buoys | Matched: 13 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741085.174477104] [buoy_tracker]: New buoy 49 (promoted after 2 observations) at range=7.19m, bearing=-10.6°
+[buoy_tracker-4] [INFO] [1771741085.175402609] [buoy_tracker]: Tracking: 36 buoys | Matched: 12 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741085.291713838] [buoy_tracker]: Tracking: 36 buoys | Matched: 13 | Candidates: 3 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741085.400775562] [buoy_tracker]: New buoy 50 (promoted after 2 observations) at range=11.77m, bearing=-7.1°
+[buoy_tracker-4] [INFO] [1771741085.401485628] [buoy_tracker]: New buoy 51 (promoted after 2 observations) at range=9.15m, bearing=-12.2°
+[buoy_tracker-4] [INFO] [1771741085.402104360] [buoy_tracker]: Tracking: 38 buoys | Matched: 10 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741085.516155460] [buoy_tracker]: Removing buoy 34 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741085.516951388] [buoy_tracker]: Tracking: 37 buoys | Matched: 11 | Candidates: 2 | New candidates: 1 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741085.639268577] [buoy_tracker]: New buoy 52 (promoted after 2 observations) at range=10.91m, bearing=-3.0°
+[buoy_tracker-4] [INFO] [1771741085.640148799] [buoy_tracker]: Tracking: 38 buoys | Matched: 10 | Candidates: 3 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741085.758667960] [buoy_tracker]: New buoy 53 (promoted after 2 observations) at range=10.40m, bearing=-8.2°
+[buoy_tracker-4] [INFO] [1771741085.759428558] [buoy_tracker]: New buoy 54 (promoted after 2 observations) at range=13.58m, bearing=-16.6°
+[buoy_tracker-4] [INFO] [1771741085.762219347] [buoy_tracker]: Tracking: 40 buoys | Matched: 12 | Candidates: 5 | New candidates: 5 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741085.873277884] [buoy_tracker]: New buoy 55 (promoted after 2 observations) at range=11.43m, bearing=-20.4°
+[buoy_tracker-4] [INFO] [1771741085.873939179] [buoy_tracker]: New buoy 56 (promoted after 2 observations) at range=13.69m, bearing=-21.0°
+[buoy_tracker-4] [INFO] [1771741085.874628475] [buoy_tracker]: New buoy 57 (promoted after 2 observations) at range=8.08m, bearing=-0.6°
+[buoy_tracker-4] [INFO] [1771741085.875208036] [buoy_tracker]: New buoy 58 (promoted after 2 observations) at range=11.54m, bearing=-0.5°
+[buoy_tracker-4] [INFO] [1771741085.875807311] [buoy_tracker]: Tracking: 44 buoys | Matched: 10 | Candidates: 3 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741085.997724279] [buoy_tracker]: New buoy 59 (promoted after 2 observations) at range=4.39m, bearing=-119.6°
+[buoy_tracker-4] [INFO] [1771741085.998514831] [buoy_tracker]: New buoy 60 (promoted after 2 observations) at range=12.24m, bearing=10.0°
+[buoy_tracker-4] [INFO] [1771741085.999208736] [buoy_tracker]: Tracking: 46 buoys | Matched: 10 | Candidates: 4 | New candidates: 3 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741086.122254294] [buoy_tracker]: New buoy 61 (promoted after 2 observations) at range=5.68m, bearing=53.2°
+[buoy_tracker-4] [INFO] [1771741086.123132884] [buoy_tracker]: New buoy 62 (promoted after 2 observations) at range=13.69m, bearing=-2.3°
+[buoy_tracker-4] [INFO] [1771741086.123996849] [buoy_tracker]: Tracking: 48 buoys | Matched: 9 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741086.221465624] [buoy_tracker]: Tracking: 48 buoys | Matched: 13 | Candidates: 4 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741086.352101383] [buoy_tracker]: New buoy 63 (promoted after 2 observations) at range=13.49m, bearing=-9.3°
+[buoy_tracker-4] [INFO] [1771741086.352895839] [buoy_tracker]: New buoy 64 (promoted after 2 observations) at range=13.62m, bearing=2.2°
+[buoy_tracker-4] [INFO] [1771741086.353672662] [buoy_tracker]: Removing buoy 37 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741086.354369319] [buoy_tracker]: Tracking: 49 buoys | Matched: 5 | Candidates: 3 | New candidates: 1 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741086.482682481] [buoy_tracker]: New buoy 65 (promoted after 2 observations) at range=7.24m, bearing=95.6°
+[buoy_tracker-4] [INFO] [1771741086.483370818] [buoy_tracker]: Tracking: 50 buoys | Matched: 7 | Candidates: 5 | New candidates: 3 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741086.596636581] [buoy_tracker]: New buoy 66 (promoted after 2 observations) at range=5.07m, bearing=1.3°
+[buoy_tracker-4] [INFO] [1771741086.598283930] [buoy_tracker]: New buoy 67 (promoted after 2 observations) at range=3.07m, bearing=108.6°
+[buoy_tracker-4] [INFO] [1771741086.599281024] [buoy_tracker]: Removing buoy 13 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741086.602667951] [buoy_tracker]: Tracking: 51 buoys | Matched: 7 | Candidates: 8 | New candidates: 5 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741086.725014740] [buoy_tracker]: New buoy 68 (promoted after 2 observations) at range=5.73m, bearing=80.5°
+[buoy_tracker-4] [INFO] [1771741086.726101697] [buoy_tracker]: New buoy 69 (promoted after 2 observations) at range=9.43m, bearing=34.7°
+[buoy_tracker-4] [INFO] [1771741086.742048936] [buoy_tracker]: New buoy 70 (promoted after 2 observations) at range=7.00m, bearing=20.7°
+[buoy_tracker-4] [INFO] [1771741086.744276453] [buoy_tracker]: Tracking: 54 buoys | Matched: 8 | Candidates: 5 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741086.842090597] [buoy_tracker]: Removing buoy 40 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741086.842820248] [buoy_tracker]: Tracking: 53 buoys | Matched: 7 | Candidates: 4 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741086.947165829] [buoy_tracker]: Tracking: 53 buoys | Matched: 7 | Candidates: 4 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741087.071319496] [buoy_tracker]: Tracking: 53 buoys | Matched: 6 | Candidates: 3 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741087.184990150] [buoy_tracker]: New buoy 71 (promoted after 2 observations) at range=4.54m, bearing=96.1°
+[buoy_tracker-4] [INFO] [1771741087.185709497] [buoy_tracker]: Tracking: 54 buoys | Matched: 7 | Candidates: 3 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741087.297014672] [buoy_tracker]: Tracking: 54 buoys | Matched: 5 | Candidates: 3 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741087.397649396] [buoy_tracker]: Tracking: 54 buoys | Matched: 5 | Candidates: 3 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741087.506374293] [buoy_tracker]: Tracking: 54 buoys | Matched: 4 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741087.629893194] [buoy_tracker]: Tracking: 54 buoys | Matched: 5 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741087.754135603] [buoy_tracker]: Removing buoy 38 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741087.755214207] [buoy_tracker]: Tracking: 53 buoys | Matched: 7 | Candidates: 3 | New candidates: 1 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741087.866713828] [buoy_tracker]: New buoy 72 (promoted after 2 observations) at range=7.07m, bearing=48.8°
+[buoy_tracker-4] [INFO] [1771741087.867436503] [buoy_tracker]: Tracking: 54 buoys | Matched: 11 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741088.007230698] [buoy_tracker]: Tracking: 54 buoys | Matched: 11 | Candidates: 3 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741088.136303654] [buoy_tracker]: New buoy 73 (promoted after 2 observations) at range=12.65m, bearing=-19.8°
+[buoy_tracker-4] [INFO] [1771741088.137032185] [buoy_tracker]: Tracking: 55 buoys | Matched: 11 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741088.262067031] [buoy_tracker]: Removing buoy 43 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741088.262771433] [buoy_tracker]: Tracking: 54 buoys | Matched: 8 | Candidates: 1 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741088.393686151] [buoy_tracker]: Tracking: 54 buoys | Matched: 11 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741088.512898282] [buoy_tracker]: Tracking: 54 buoys | Matched: 9 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741088.631268370] [buoy_tracker]: Tracking: 54 buoys | Matched: 8 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741088.750661634] [buoy_tracker]: Tracking: 54 buoys | Matched: 9 | Candidates: 1 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741088.883432803] [buoy_tracker]: Tracking: 54 buoys | Matched: 8 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741089.008640493] [buoy_tracker]: Removing buoy 41 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741089.009297628] [buoy_tracker]: Tracking: 53 buoys | Matched: 7 | Candidates: 2 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741089.184399879] [buoy_tracker]: Removing buoy 16 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741089.185083448] [buoy_tracker]: Tracking: 52 buoys | Matched: 6 | Candidates: 3 | New candidates: 1 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741089.274800374] [buoy_tracker]: New buoy 74 (promoted after 2 observations) at range=8.24m, bearing=-19.2°
+[buoy_tracker-4] [INFO] [1771741089.275570701] [buoy_tracker]: Removing buoy 44 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741089.276284895] [buoy_tracker]: Tracking: 52 buoys | Matched: 8 | Candidates: 2 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741089.392135955] [buoy_tracker]: Tracking: 52 buoys | Matched: 8 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741089.518739006] [buoy_tracker]: Tracking: 52 buoys | Matched: 8 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741089.628609708] [buoy_tracker]: Tracking: 52 buoys | Matched: 9 | Candidates: 4 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741089.749919329] [buoy_tracker]: New buoy 75 (promoted after 2 observations) at range=8.61m, bearing=25.9°
+[buoy_tracker-4] [INFO] [1771741089.750615986] [buoy_tracker]: Tracking: 53 buoys | Matched: 9 | Candidates: 5 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741089.874526335] [buoy_tracker]: New buoy 76 (promoted after 2 observations) at range=9.49m, bearing=-3.9°
+[buoy_tracker-4] [INFO] [1771741089.875238385] [buoy_tracker]: New buoy 77 (promoted after 2 observations) at range=10.78m, bearing=-14.8°
+[buoy_tracker-4] [INFO] [1771741089.875924130] [buoy_tracker]: Tracking: 55 buoys | Matched: 7 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741089.994911955] [buoy_tracker]: Tracking: 55 buoys | Matched: 8 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741090.101399344] [buoy_tracker]: Tracking: 55 buoys | Matched: 8 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741090.216341538] [buoy_tracker]: Tracking: 55 buoys | Matched: 8 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741090.395818271] [buoy_tracker]: Tracking: 55 buoys | Matched: 7 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741090.501943939] [buoy_tracker]: Tracking: 55 buoys | Matched: 8 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741090.633294619] [buoy_tracker]: Removing buoy 33 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741090.633958378] [buoy_tracker]: Tracking: 54 buoys | Matched: 8 | Candidates: 1 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741090.739017858] [buoy_tracker]: Tracking: 54 buoys | Matched: 10 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741090.892199263] [buoy_tracker]: Tracking: 54 buoys | Matched: 10 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741090.995234088] [buoy_tracker]: Tracking: 54 buoys | Matched: 11 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741091.096579545] [buoy_tracker]: Tracking: 54 buoys | Matched: 10 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741091.221843681] [buoy_tracker]: Removing buoy 14 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741091.222433899] [buoy_tracker]: Removing buoy 48 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741091.222999027] [buoy_tracker]: Tracking: 52 buoys | Matched: 9 | Candidates: 1 | New candidates: 1 | Lost: 2
+[buoy_tracker-4] [INFO] [1771741091.313546825] [buoy_tracker]: Tracking: 52 buoys | Matched: 8 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741091.427375210] [buoy_tracker]: Removing buoy 46 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741091.428254056] [buoy_tracker]: Removing buoy 49 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741091.428878644] [buoy_tracker]: Tracking: 50 buoys | Matched: 8 | Candidates: 1 | New candidates: 0 | Lost: 2
+[buoy_tracker-4] [INFO] [1771741091.531372630] [buoy_tracker]: Removing buoy 10 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741091.534203517] [buoy_tracker]: Tracking: 49 buoys | Matched: 7 | Candidates: 1 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741091.653193803] [buoy_tracker]: Removing buoy 51 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741091.653834904] [buoy_tracker]: Tracking: 48 buoys | Matched: 6 | Candidates: 1 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741091.775278547] [buoy_tracker]: Removing buoy 52 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741091.776625010] [buoy_tracker]: Tracking: 47 buoys | Matched: 6 | Candidates: 1 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741091.894543892] [buoy_tracker]: Tracking: 47 buoys | Matched: 7 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741091.996253566] [buoy_tracker]: Removing buoy 45 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741091.998101856] [buoy_tracker]: Tracking: 46 buoys | Matched: 8 | Candidates: 2 | New candidates: 1 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741092.102307385] [buoy_tracker]: Removing buoy 36 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741092.102997801] [buoy_tracker]: Tracking: 45 buoys | Matched: 9 | Candidates: 2 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741092.235565939] [buoy_tracker]: Tracking: 45 buoys | Matched: 8 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741092.357223995] [buoy_tracker]: Removing buoy 42 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741092.357945614] [buoy_tracker]: Removing buoy 54 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741092.358539000] [buoy_tracker]: Tracking: 43 buoys | Matched: 8 | Candidates: 1 | New candidates: 0 | Lost: 2
+[buoy_tracker-4] [INFO] [1771741092.492007489] [buoy_tracker]: Removing buoy 63 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741092.492715827] [buoy_tracker]: Tracking: 42 buoys | Matched: 9 | Candidates: 1 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741092.595502343] [buoy_tracker]: Removing buoy 57 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741092.596435977] [buoy_tracker]: Tracking: 41 buoys | Matched: 13 | Candidates: 2 | New candidates: 1 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741092.727871330] [buoy_tracker]: New buoy 78 (promoted after 2 observations) at range=10.79m, bearing=-22.6°
+[buoy_tracker-4] [INFO] [1771741092.728566483] [buoy_tracker]: Tracking: 42 buoys | Matched: 12 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741092.875103030] [buoy_tracker]: Removing buoy 18 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741092.875839722] [buoy_tracker]: Removing buoy 66 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741092.876635331] [buoy_tracker]: Tracking: 40 buoys | Matched: 10 | Candidates: 1 | New candidates: 0 | Lost: 2
+[buoy_tracker-4] [INFO] [1771741093.025509834] [buoy_tracker]: Tracking: 40 buoys | Matched: 12 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741093.116188455] [buoy_tracker]: Tracking: 40 buoys | Matched: 13 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741093.244574983] [buoy_tracker]: Tracking: 40 buoys | Matched: 10 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741093.366904508] [buoy_tracker]: Removing buoy 64 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741093.367512647] [buoy_tracker]: Removing buoy 67 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741093.368119474] [buoy_tracker]: Removing buoy 68 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741093.368657976] [buoy_tracker]: Removing buoy 70 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741093.369185405] [buoy_tracker]: Removing buoy 71 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741093.369730660] [buoy_tracker]: Tracking: 35 buoys | Matched: 11 | Candidates: 0 | New candidates: 0 | Lost: 5
+[buoy_tracker-4] [INFO] [1771741093.484150635] [buoy_tracker]: Tracking: 35 buoys | Matched: 13 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741093.589939633] [buoy_tracker]: Tracking: 35 buoys | Matched: 13 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741093.706730111] [buoy_tracker]: Removing buoy 69 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741093.707988824] [buoy_tracker]: Tracking: 34 buoys | Matched: 12 | Candidates: 0 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741093.838934189] [buoy_tracker]: Removing buoy 65 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741093.839714596] [buoy_tracker]: Tracking: 33 buoys | Matched: 12 | Candidates: 0 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741093.956312229] [buoy_tracker]: Tracking: 33 buoys | Matched: 11 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741094.073730238] [buoy_tracker]: Removing buoy 39 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741094.074423279] [buoy_tracker]: Removing buoy 60 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741094.074996056] [buoy_tracker]: Removing buoy 62 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741094.075550879] [buoy_tracker]: Tracking: 30 buoys | Matched: 12 | Candidates: 0 | New candidates: 0 | Lost: 3
+[buoy_tracker-4] [INFO] [1771741094.210775839] [buoy_tracker]: Removing buoy 58 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741094.211441166] [buoy_tracker]: Removing buoy 59 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741094.212377232] [buoy_tracker]: Tracking: 28 buoys | Matched: 10 | Candidates: 1 | New candidates: 1 | Lost: 2
+[buoy_tracker-4] [INFO] [1771741094.327223571] [buoy_tracker]: New buoy 79 (promoted after 2 observations) at range=9.29m, bearing=41.0°
+[buoy_tracker-4] [INFO] [1771741094.327933349] [buoy_tracker]: Removing buoy 5 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741094.328531696] [buoy_tracker]: Removing buoy 56 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741094.329070710] [buoy_tracker]: Removing buoy 72 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741094.329622845] [buoy_tracker]: Tracking: 26 buoys | Matched: 10 | Candidates: 0 | New candidates: 0 | Lost: 3
+[buoy_tracker-4] [INFO] [1771741094.446720991] [buoy_tracker]: Removing buoy 31 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741094.447876400] [buoy_tracker]: Tracking: 25 buoys | Matched: 12 | Candidates: 0 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741094.560537209] [buoy_tracker]: Removing buoy 50 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741094.561275149] [buoy_tracker]: Tracking: 24 buoys | Matched: 12 | Candidates: 0 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741094.670470466] [buoy_tracker]: Tracking: 24 buoys | Matched: 10 | Candidates: 1 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741094.798154639] [buoy_tracker]: New buoy 80 (promoted after 2 observations) at range=12.33m, bearing=-27.5°
+[buoy_tracker-4] [INFO] [1771741094.799214714] [buoy_tracker]: Tracking: 25 buoys | Matched: 8 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741094.942043954] [buoy_tracker]: Tracking: 25 buoys | Matched: 11 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741095.073286201] [buoy_tracker]: Tracking: 25 buoys | Matched: 10 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741095.170403320] [buoy_tracker]: Tracking: 25 buoys | Matched: 10 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741095.290906760] [buoy_tracker]: Tracking: 25 buoys | Matched: 10 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741095.402661360] [buoy_tracker]: Tracking: 25 buoys | Matched: 10 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741095.517858538] [buoy_tracker]: Tracking: 25 buoys | Matched: 10 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741095.656902421] [buoy_tracker]: Tracking: 25 buoys | Matched: 10 | Candidates: 1 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741095.768620090] [buoy_tracker]: Tracking: 25 buoys | Matched: 10 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741095.882310506] [buoy_tracker]: Removing buoy 75 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741095.882970072] [buoy_tracker]: Tracking: 24 buoys | Matched: 11 | Candidates: 1 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741096.016266415] [buoy_tracker]: Tracking: 24 buoys | Matched: 10 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741096.108445104] [buoy_tracker]: New buoy 81 (promoted after 2 observations) at range=9.50m, bearing=6.4°
+[buoy_tracker-4] [INFO] [1771741096.109145954] [buoy_tracker]: Tracking: 25 buoys | Matched: 10 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741096.267106176] [buoy_tracker]: Tracking: 25 buoys | Matched: 11 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741096.371134021] [buoy_tracker]: New buoy 82 (promoted after 2 observations) at range=7.73m, bearing=-38.5°
+[buoy_tracker-4] [INFO] [1771741096.371832022] [buoy_tracker]: Tracking: 26 buoys | Matched: 13 | Candidates: 1 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741096.504255181] [buoy_tracker]: New buoy 83 (promoted after 2 observations) at range=11.28m, bearing=-33.9°
+[buoy_tracker-4] [INFO] [1771741096.504926716] [buoy_tracker]: Tracking: 27 buoys | Matched: 14 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741096.645050993] [buoy_tracker]: Tracking: 27 buoys | Matched: 13 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741096.777219478] [buoy_tracker]: Tracking: 27 buoys | Matched: 12 | Candidates: 2 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741096.914314293] [buoy_tracker]: New buoy 84 (promoted after 2 observations) at range=8.29m, bearing=-9.1°
+[buoy_tracker-4] [INFO] [1771741096.914996486] [buoy_tracker]: Tracking: 28 buoys | Matched: 10 | Candidates: 3 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741097.039189047] [buoy_tracker]: New buoy 85 (promoted after 2 observations) at range=8.44m, bearing=26.2°
+[buoy_tracker-4] [INFO] [1771741097.040111128] [buoy_tracker]: New buoy 86 (promoted after 2 observations) at range=8.18m, bearing=2.0°
+[buoy_tracker-4] [INFO] [1771741097.040954196] [buoy_tracker]: Tracking: 30 buoys | Matched: 12 | Candidates: 3 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741097.170363251] [buoy_tracker]: New buoy 87 (promoted after 2 observations) at range=4.26m, bearing=4.2°
+[buoy_tracker-4] [INFO] [1771741097.171387420] [buoy_tracker]: New buoy 88 (promoted after 2 observations) at range=8.11m, bearing=16.0°
+[buoy_tracker-4] [INFO] [1771741097.172443750] [buoy_tracker]: Tracking: 32 buoys | Matched: 13 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741097.290060935] [buoy_tracker]: New buoy 89 (promoted after 2 observations) at range=6.74m, bearing=-18.3°
+[buoy_tracker-4] [INFO] [1771741097.290713973] [buoy_tracker]: Tracking: 33 buoys | Matched: 15 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741097.420473933] [buoy_tracker]: Tracking: 33 buoys | Matched: 15 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741097.553412486] [buoy_tracker]: Tracking: 33 buoys | Matched: 15 | Candidates: 3 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741097.680536645] [buoy_tracker]: New buoy 90 (promoted after 2 observations) at range=5.96m, bearing=25.5°
+[buoy_tracker-4] [INFO] [1771741097.681572878] [buoy_tracker]: Tracking: 34 buoys | Matched: 12 | Candidates: 4 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741097.809532872] [buoy_tracker]: New buoy 91 (promoted after 2 observations) at range=7.22m, bearing=21.9°
+[buoy_tracker-4] [INFO] [1771741097.810296797] [buoy_tracker]: New buoy 92 (promoted after 2 observations) at range=12.12m, bearing=-17.4°
+[buoy_tracker-4] [INFO] [1771741097.810993614] [buoy_tracker]: Removing buoy 76 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741097.811587832] [buoy_tracker]: Tracking: 35 buoys | Matched: 10 | Candidates: 3 | New candidates: 1 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741097.908461379] [buoy_tracker]: Tracking: 35 buoys | Matched: 13 | Candidates: 3 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741098.054843790] [buoy_tracker]: Tracking: 35 buoys | Matched: 15 | Candidates: 3 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741098.197257856] [buoy_tracker]: Tracking: 35 buoys | Matched: 13 | Candidates: 3 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741098.308797907] [buoy_tracker]: Removing buoy 77 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741098.309480867] [buoy_tracker]: Tracking: 34 buoys | Matched: 12 | Candidates: 4 | New candidates: 1 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741098.439912137] [buoy_tracker]: New buoy 93 (promoted after 2 observations) at range=10.62m, bearing=32.0°
+[buoy_tracker-4] [INFO] [1771741098.440595833] [buoy_tracker]: Tracking: 35 buoys | Matched: 16 | Candidates: 3 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741098.547237619] [buoy_tracker]: Tracking: 35 buoys | Matched: 15 | Candidates: 4 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741098.663309573] [buoy_tracker]: Tracking: 35 buoys | Matched: 14 | Candidates: 3 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741098.777387178] [buoy_tracker]: Tracking: 35 buoys | Matched: 14 | Candidates: 3 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741098.897623105] [buoy_tracker]: Tracking: 35 buoys | Matched: 13 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741099.024862406] [buoy_tracker]: Removing buoy 53 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741099.025535605] [buoy_tracker]: Removing buoy 73 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741099.026136064] [buoy_tracker]: Removing buoy 78 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741099.026720905] [buoy_tracker]: Tracking: 32 buoys | Matched: 15 | Candidates: 1 | New candidates: 0 | Lost: 3
+[buoy_tracker-4] [INFO] [1771741099.118886181] [buoy_tracker]: Tracking: 32 buoys | Matched: 12 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741099.249944757] [buoy_tracker]: Tracking: 32 buoys | Matched: 11 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741099.372075503] [buoy_tracker]: New buoy 94 (promoted after 2 observations) at range=8.24m, bearing=19.5°
+[buoy_tracker-4] [INFO] [1771741099.372750367] [buoy_tracker]: Tracking: 33 buoys | Matched: 10 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741099.495360604] [buoy_tracker]: Tracking: 33 buoys | Matched: 11 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741099.619473570] [buoy_tracker]: Tracking: 33 buoys | Matched: 14 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741099.724890468] [buoy_tracker]: Tracking: 33 buoys | Matched: 14 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741099.849668953] [buoy_tracker]: Tracking: 33 buoys | Matched: 9 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741099.944938800] [buoy_tracker]: Tracking: 33 buoys | Matched: 11 | Candidates: 1 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741100.069943572] [buoy_tracker]: Tracking: 33 buoys | Matched: 10 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741100.191276404] [buoy_tracker]: New buoy 95 (promoted after 2 observations) at range=14.10m, bearing=-34.7°
+[buoy_tracker-4] [INFO] [1771741100.192142321] [buoy_tracker]: Tracking: 34 buoys | Matched: 10 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741100.311755481] [buoy_tracker]: New buoy 96 (promoted after 2 observations) at range=7.41m, bearing=-26.7°
+[buoy_tracker-4] [INFO] [1771741100.316457348] [buoy_tracker]: Tracking: 35 buoys | Matched: 12 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741100.452190875] [buoy_tracker]: New buoy 97 (promoted after 2 observations) at range=12.37m, bearing=-21.8°
+[buoy_tracker-4] [INFO] [1771741100.452951216] [buoy_tracker]: Tracking: 36 buoys | Matched: 11 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741100.563712809] [buoy_tracker]: Removing buoy 79 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741100.564405753] [buoy_tracker]: Tracking: 35 buoys | Matched: 13 | Candidates: 1 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741100.706543763] [buoy_tracker]: Tracking: 35 buoys | Matched: 12 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741100.844492518] [buoy_tracker]: Tracking: 35 buoys | Matched: 8 | Candidates: 5 | New candidates: 3 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741100.952682281] [buoy_tracker]: New buoy 98 (promoted after 2 observations) at range=9.76m, bearing=13.4°
+[buoy_tracker-4] [INFO] [1771741100.953393947] [buoy_tracker]: New buoy 99 (promoted after 2 observations) at range=12.39m, bearing=-28.5°
+[buoy_tracker-4] [INFO] [1771741100.953975588] [buoy_tracker]: New buoy 100 (promoted after 2 observations) at range=11.94m, bearing=-37.6°
+[buoy_tracker-4] [INFO] [1771741100.954728601] [buoy_tracker]: Removing buoy 74 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741100.955295713] [buoy_tracker]: Tracking: 37 buoys | Matched: 9 | Candidates: 2 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741101.071214083] [buoy_tracker]: Tracking: 37 buoys | Matched: 13 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741101.210049842] [buoy_tracker]: Tracking: 37 buoys | Matched: 11 | Candidates: 6 | New candidates: 4 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741101.316094076] [buoy_tracker]: New buoy 101 (promoted after 2 observations) at range=14.40m, bearing=-46.8°
+[buoy_tracker-4] [INFO] [1771741101.316793678] [buoy_tracker]: New buoy 102 (promoted after 2 observations) at range=8.56m, bearing=-42.4°
+[buoy_tracker-4] [INFO] [1771741101.317404921] [buoy_tracker]: New buoy 103 (promoted after 2 observations) at range=8.21m, bearing=-10.3°
+[buoy_tracker-4] [INFO] [1771741101.318043686] [buoy_tracker]: Tracking: 40 buoys | Matched: 9 | Candidates: 4 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741101.464523663] [buoy_tracker]: New buoy 104 (promoted after 2 observations) at range=6.42m, bearing=11.8°
+[buoy_tracker-4] [INFO] [1771741101.465257762] [buoy_tracker]: Removing buoy 61 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741101.465862573] [buoy_tracker]: Tracking: 40 buoys | Matched: 11 | Candidates: 4 | New candidates: 1 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741101.564663609] [buoy_tracker]: Tracking: 40 buoys | Matched: 11 | Candidates: 6 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741101.696962876] [buoy_tracker]: New buoy 105 (promoted after 2 observations) at range=9.58m, bearing=31.9°
+[buoy_tracker-4] [INFO] [1771741101.697837850] [buoy_tracker]: Tracking: 41 buoys | Matched: 10 | Candidates: 6 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741101.786793105] [buoy_tracker]: Tracking: 41 buoys | Matched: 11 | Candidates: 6 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741101.925037270] [buoy_tracker]: New buoy 106 (promoted after 2 observations) at range=7.40m, bearing=-36.7°
+[buoy_tracker-4] [INFO] [1771741101.925807180] [buoy_tracker]: Tracking: 42 buoys | Matched: 9 | Candidates: 5 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741102.053304284] [buoy_tracker]: New buoy 107 (promoted after 2 observations) at range=11.26m, bearing=-47.9°
+[buoy_tracker-4] [INFO] [1771741102.054000557] [buoy_tracker]: Tracking: 43 buoys | Matched: 10 | Candidates: 4 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741102.160489525] [buoy_tracker]: Removing buoy 47 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741102.161174117] [buoy_tracker]: Tracking: 42 buoys | Matched: 10 | Candidates: 4 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741102.298567372] [buoy_tracker]: Tracking: 42 buoys | Matched: 11 | Candidates: 3 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741102.411727625] [buoy_tracker]: Tracking: 42 buoys | Matched: 12 | Candidates: 3 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741102.538630798] [buoy_tracker]: Tracking: 42 buoys | Matched: 10 | Candidates: 3 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741102.663306230] [buoy_tracker]: New buoy 108 (promoted after 2 observations) at range=9.91m, bearing=-33.0°
+[buoy_tracker-4] [INFO] [1771741102.666610751] [buoy_tracker]: New buoy 109 (promoted after 2 observations) at range=8.38m, bearing=10.6°
+[buoy_tracker-4] [INFO] [1771741102.668606059] [buoy_tracker]: Tracking: 44 buoys | Matched: 10 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741102.790295521] [buoy_tracker]: Tracking: 44 buoys | Matched: 10 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741102.903530499] [buoy_tracker]: Tracking: 44 buoys | Matched: 10 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741103.029746231] [buoy_tracker]: Removing buoy 1 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741103.030643318] [buoy_tracker]: Tracking: 43 buoys | Matched: 9 | Candidates: 2 | New candidates: 2 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741103.157645504] [buoy_tracker]: New buoy 110 (promoted after 2 observations) at range=14.31m, bearing=-53.0°
+[buoy_tracker-4] [INFO] [1771741103.158678825] [buoy_tracker]: Tracking: 44 buoys | Matched: 9 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741103.279439387] [buoy_tracker]: Removing buoy 85 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741103.280129196] [buoy_tracker]: Tracking: 43 buoys | Matched: 8 | Candidates: 2 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741103.414937850] [buoy_tracker]: Tracking: 43 buoys | Matched: 9 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741103.558550741] [buoy_tracker]: New buoy 111 (promoted after 2 observations) at range=8.28m, bearing=-22.5°
+[buoy_tracker-4] [INFO] [1771741103.559283625] [buoy_tracker]: Removing buoy 11 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741103.560194633] [buoy_tracker]: Tracking: 43 buoys | Matched: 8 | Candidates: 2 | New candidates: 1 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741103.659143388] [buoy_tracker]: New buoy 112 (promoted after 2 observations) at range=8.16m, bearing=-54.7°
+[buoy_tracker-4] [INFO] [1771741103.659881008] [buoy_tracker]: Tracking: 44 buoys | Matched: 10 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741103.769386314] [buoy_tracker]: Tracking: 44 buoys | Matched: 9 | Candidates: 3 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741103.891111072] [buoy_tracker]: New buoy 113 (promoted after 2 observations) at range=9.59m, bearing=-5.7°
+[buoy_tracker-4] [INFO] [1771741103.891777071] [buoy_tracker]: Tracking: 45 buoys | Matched: 11 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741104.015341255] [buoy_tracker]: New buoy 114 (promoted after 2 observations) at range=6.80m, bearing=-51.1°
+[buoy_tracker-4] [INFO] [1771741104.016106653] [buoy_tracker]: Tracking: 46 buoys | Matched: 14 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741104.126035539] [buoy_tracker]: Tracking: 46 buoys | Matched: 13 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741104.239357688] [buoy_tracker]: Removing buoy 92 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741104.240076618] [buoy_tracker]: Tracking: 45 buoys | Matched: 14 | Candidates: 2 | New candidates: 2 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741104.370941122] [buoy_tracker]: New buoy 115 (promoted after 2 observations) at range=12.36m, bearing=-49.0°
+[buoy_tracker-4] [INFO] [1771741104.371599536] [buoy_tracker]: New buoy 116 (promoted after 2 observations) at range=7.87m, bearing=39.0°
+[buoy_tracker-4] [INFO] [1771741104.372226908] [buoy_tracker]: Tracking: 47 buoys | Matched: 14 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741104.489488982] [buoy_tracker]: Tracking: 47 buoys | Matched: 12 | Candidates: 1 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741104.626603941] [buoy_tracker]: Tracking: 47 buoys | Matched: 9 | Candidates: 3 | New candidates: 2 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741104.737911389] [buoy_tracker]: New buoy 117 (promoted after 2 observations) at range=8.69m, bearing=-38.4°
+[buoy_tracker-4] [INFO] [1771741104.738640112] [buoy_tracker]: New buoy 118 (promoted after 2 observations) at range=11.06m, bearing=13.9°
+[buoy_tracker-4] [INFO] [1771741104.739306015] [buoy_tracker]: Removing buoy 93 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741104.739927402] [buoy_tracker]: Tracking: 48 buoys | Matched: 10 | Candidates: 1 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741104.856431471] [buoy_tracker]: Tracking: 48 buoys | Matched: 16 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741104.973472634] [buoy_tracker]: Tracking: 48 buoys | Matched: 12 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741105.095504866] [buoy_tracker]: Tracking: 48 buoys | Matched: 9 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741105.217628497] [buoy_tracker]: Removing buoy 82 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741105.218287199] [buoy_tracker]: Tracking: 47 buoys | Matched: 13 | Candidates: 1 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741105.356702279] [buoy_tracker]: Tracking: 47 buoys | Matched: 13 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741105.484544616] [buoy_tracker]: Tracking: 47 buoys | Matched: 11 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741105.604107266] [buoy_tracker]: Tracking: 47 buoys | Matched: 11 | Candidates: 1 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741105.727079788] [buoy_tracker]: New buoy 119 (promoted after 2 observations) at range=8.52m, bearing=-0.1°
+[buoy_tracker-4] [INFO] [1771741105.727815839] [buoy_tracker]: Removing buoy 55 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741105.728424362] [buoy_tracker]: Removing buoy 94 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741105.729004179] [buoy_tracker]: Tracking: 46 buoys | Matched: 11 | Candidates: 1 | New candidates: 1 | Lost: 2
+[buoy_tracker-4] [INFO] [1771741105.863896035] [buoy_tracker]: Tracking: 46 buoys | Matched: 13 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741106.012305450] [buoy_tracker]: Removing buoy 0 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741106.013029405] [buoy_tracker]: Tracking: 45 buoys | Matched: 14 | Candidates: 1 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741106.123510743] [buoy_tracker]: Removing buoy 12 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741106.124202344] [buoy_tracker]: Tracking: 44 buoys | Matched: 13 | Candidates: 2 | New candidates: 1 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741106.247347196] [buoy_tracker]: New buoy 120 (promoted after 2 observations) at range=8.75m, bearing=-45.5°
+[buoy_tracker-4] [INFO] [1771741106.248046637] [buoy_tracker]: Removing buoy 89 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741106.248598068] [buoy_tracker]: Tracking: 44 buoys | Matched: 13 | Candidates: 1 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741106.359805216] [buoy_tracker]: Tracking: 44 buoys | Matched: 12 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741106.477639327] [buoy_tracker]: New buoy 121 (promoted after 2 observations) at range=12.81m, bearing=-39.7°
+[buoy_tracker-4] [INFO] [1771741106.478381043] [buoy_tracker]: Tracking: 45 buoys | Matched: 12 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741106.582215833] [buoy_tracker]: Removing buoy 88 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741106.582853606] [buoy_tracker]: Tracking: 44 buoys | Matched: 12 | Candidates: 3 | New candidates: 2 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741106.687467971] [buoy_tracker]: New buoy 122 (promoted after 2 observations) at range=11.36m, bearing=-45.7°
+[buoy_tracker-4] [INFO] [1771741106.688357665] [buoy_tracker]: New buoy 123 (promoted after 2 observations) at range=7.36m, bearing=-28.0°
+[buoy_tracker-4] [INFO] [1771741106.689146393] [buoy_tracker]: Removing buoy 97 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741106.689912111] [buoy_tracker]: Tracking: 45 buoys | Matched: 12 | Candidates: 1 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741106.814786140] [buoy_tracker]: Removing buoy 32 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741106.816389613] [buoy_tracker]: Removing buoy 95 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741106.820509807] [buoy_tracker]: Tracking: 43 buoys | Matched: 14 | Candidates: 0 | New candidates: 0 | Lost: 2
+[buoy_tracker-4] [INFO] [1771741106.942379305] [buoy_tracker]: Removing buoy 90 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741106.943054873] [buoy_tracker]: Removing buoy 91 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741106.943644130] [buoy_tracker]: Tracking: 41 buoys | Matched: 14 | Candidates: 0 | New candidates: 0 | Lost: 2
+[buoy_tracker-4] [INFO] [1771741107.078706971] [buoy_tracker]: Tracking: 41 buoys | Matched: 12 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741107.217219110] [buoy_tracker]: Tracking: 41 buoys | Matched: 13 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741107.316983564] [buoy_tracker]: Removing buoy 83 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741107.317669116] [buoy_tracker]: Removing buoy 98 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741107.318259878] [buoy_tracker]: Removing buoy 99 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741107.318838094] [buoy_tracker]: Tracking: 38 buoys | Matched: 12 | Candidates: 0 | New candidates: 0 | Lost: 3
+[buoy_tracker-4] [INFO] [1771741107.464527825] [buoy_tracker]: Tracking: 38 buoys | Matched: 11 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741107.584128298] [buoy_tracker]: Tracking: 38 buoys | Matched: 9 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741107.685673774] [buoy_tracker]: Tracking: 38 buoys | Matched: 11 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741107.792923714] [buoy_tracker]: Tracking: 38 buoys | Matched: 11 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741107.922971194] [buoy_tracker]: Tracking: 38 buoys | Matched: 14 | Candidates: 1 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741108.062817249] [buoy_tracker]: Tracking: 38 buoys | Matched: 13 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741108.179566063] [buoy_tracker]: Tracking: 38 buoys | Matched: 10 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741108.297499409] [buoy_tracker]: Tracking: 38 buoys | Matched: 11 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741108.416900122] [buoy_tracker]: Tracking: 38 buoys | Matched: 13 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741108.542353324] [buoy_tracker]: Tracking: 38 buoys | Matched: 13 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741108.667296315] [buoy_tracker]: Tracking: 38 buoys | Matched: 10 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741108.805309024] [buoy_tracker]: Tracking: 38 buoys | Matched: 10 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741108.918972821] [buoy_tracker]: Tracking: 38 buoys | Matched: 11 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741109.048618446] [buoy_tracker]: New buoy 124 (promoted after 2 observations) at range=6.76m, bearing=14.3°
+[buoy_tracker-4] [INFO] [1771741109.049358594] [buoy_tracker]: Tracking: 39 buoys | Matched: 11 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741109.142032626] [buoy_tracker]: Tracking: 39 buoys | Matched: 13 | Candidates: 1 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741109.261027293] [buoy_tracker]: Tracking: 39 buoys | Matched: 12 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741109.385178674] [buoy_tracker]: Tracking: 39 buoys | Matched: 12 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741109.504596058] [buoy_tracker]: Tracking: 39 buoys | Matched: 13 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741109.616368104] [buoy_tracker]: Tracking: 39 buoys | Matched: 11 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741109.735913978] [buoy_tracker]: Tracking: 39 buoys | Matched: 10 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741109.866747044] [buoy_tracker]: Removing buoy 107 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741109.867469015] [buoy_tracker]: Tracking: 38 buoys | Matched: 11 | Candidates: 2 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741109.995321039] [buoy_tracker]: Tracking: 38 buoys | Matched: 11 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741110.104362877] [buoy_tracker]: Tracking: 38 buoys | Matched: 10 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741110.211863390] [buoy_tracker]: New buoy 125 (promoted after 2 observations) at range=5.76m, bearing=18.1°
+[buoy_tracker-4] [INFO] [1771741110.212595761] [buoy_tracker]: Tracking: 39 buoys | Matched: 12 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741110.321888816] [buoy_tracker]: Tracking: 39 buoys | Matched: 13 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741110.446568072] [buoy_tracker]: Tracking: 39 buoys | Matched: 10 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741110.574450753] [buoy_tracker]: Removing buoy 116 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741110.575344031] [buoy_tracker]: Tracking: 38 buoys | Matched: 9 | Candidates: 0 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741110.713945897] [buoy_tracker]: Removing buoy 110 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741110.714884651] [buoy_tracker]: Removing buoy 115 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741110.715762921] [buoy_tracker]: Tracking: 36 buoys | Matched: 9 | Candidates: 0 | New candidates: 0 | Lost: 2
+[buoy_tracker-4] [INFO] [1771741110.816648825] [buoy_tracker]: Tracking: 36 buoys | Matched: 13 | Candidates: 1 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741110.946771920] [buoy_tracker]: Tracking: 36 buoys | Matched: 14 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741111.086119277] [buoy_tracker]: Tracking: 36 buoys | Matched: 11 | Candidates: 2 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741111.212119359] [buoy_tracker]: Tracking: 36 buoys | Matched: 7 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741111.354152760] [buoy_tracker]: Tracking: 36 buoys | Matched: 8 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741111.482518097] [buoy_tracker]: Tracking: 36 buoys | Matched: 11 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741111.612794416] [buoy_tracker]: Removing buoy 100 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741111.614119277] [buoy_tracker]: Tracking: 35 buoys | Matched: 9 | Candidates: 2 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741111.724658017] [buoy_tracker]: Tracking: 35 buoys | Matched: 8 | Candidates: 3 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741111.866625526] [buoy_tracker]: New buoy 126 (promoted after 2 observations) at range=7.32m, bearing=-26.2°
+[buoy_tracker-4] [INFO] [1771741111.867704929] [buoy_tracker]: Tracking: 36 buoys | Matched: 7 | Candidates: 2 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741111.999717370] [buoy_tracker]: Removing buoy 113 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741112.000416779] [buoy_tracker]: Tracking: 35 buoys | Matched: 11 | Candidates: 1 | New candidates: 0 | Lost: 1
+[buoy_tracker-4] [INFO] [1771741112.128443722] [buoy_tracker]: Tracking: 35 buoys | Matched: 12 | Candidates: 1 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741112.256145586] [buoy_tracker]: Tracking: 35 buoys | Matched: 11 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741112.370118902] [buoy_tracker]: Tracking: 35 buoys | Matched: 9 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741112.507693588] [buoy_tracker]: Tracking: 35 buoys | Matched: 9 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741112.617438927] [buoy_tracker]: Tracking: 35 buoys | Matched: 11 | Candidates: 1 | New candidates: 1 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741112.741983097] [buoy_tracker]: New buoy 127 (promoted after 2 observations) at range=5.98m, bearing=-29.2°
+[buoy_tracker-4] [INFO] [1771741112.742711276] [buoy_tracker]: Tracking: 36 buoys | Matched: 11 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741112.878463626] [buoy_tracker]: Tracking: 36 buoys | Matched: 12 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741113.000730612] [buoy_tracker]: Tracking: 36 buoys | Matched: 14 | Candidates: 0 | New candidates: 0 | Lost: 0
+[buoy_tracker-4] [INFO] [1771741113.134880031] [buoy_tracker]: Removing buoy 106 (not seen for 50 frames)
+[buoy_tracker-4] [INFO] [1771741113.135528172] [buoy_tracker]: Tracking: 35 buoys | Matched: 16 | Candidates: 0 | New candidates: 0 | Lost: 1
