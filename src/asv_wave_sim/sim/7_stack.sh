@@ -8,6 +8,7 @@
 #   7_stack.sh --task 2 --no-cv  skip the TensorRT CV pipeline (LiDAR-only detections)
 #   7_stack.sh --no-arm          leave mode/arming to you (MAVProxy: mode GUIDED, arm throttle)
 . "$(dirname "${BASH_SOURCE[0]}")/env.sh"
+sim_load_course || { echo "No course selected; run select_course.sh or 1_gazebo.sh first." >&2; exit 1; }
 
 TASK=1 CV=1 ARM=1
 while [ $# -gt 0 ]; do
@@ -43,8 +44,8 @@ start "LiDAR buoy pipeline (team tuning) on the simulated Airy (/rslidar_points)
 if [ $CV = 1 ]; then
   ENGINES="$(bash "$SIM_DIR/build_engines.sh" --print-dir 2>/dev/null)"
   if bash "$SIM_DIR/build_engines.sh" --check 2>/dev/null; then
-    start "CV pipeline (3 cameras, 960x600, task:=$CV_TASK, engines $ENGINES)" \
-      ros2 launch cv_ros_nodes launch_cv_sim.py resolution:=960,600 task:="$CV_TASK" conf_threshold:=0.25 \
+    start "CV pipeline (3 cameras, ${SIM_CAM_WIDTH}x${SIM_CAM_HEIGHT}, task:=$CV_TASK, engines $ENGINES)" \
+      ros2 launch cv_ros_nodes launch_cv_sim.py resolution:="$SIM_CAM_WIDTH,$SIM_CAM_HEIGHT" task:="$CV_TASK" conf_threshold:=0.25 \
         engine_path:="$ENGINES/aqua_main.engine" number_detection_engine:="$ENGINES/number_detection.engine" \
         enable_indicator_buoy:=true enable_number_detection:=$NUMBERS
     start "CV-LiDAR fusion" ros2 run cv_lidar_fusion vision_lidar_fusion

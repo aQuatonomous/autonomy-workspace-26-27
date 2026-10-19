@@ -72,7 +72,14 @@ sim_check_gpu() {
 sim_load_course() {
   if [ -f "$SIM_STATE_DIR/current.env" ]; then
     . "$SIM_STATE_DIR/current.env"
-    export SIM_WORLD SIM_WORLD_NAME SIM_ANSWER_KEY SIM_SITL_HOME SIM_WATER_DENSITY SIM_SEED
+    export SIM_WORLD SIM_WORLD_NAME SIM_ANSWER_KEY SIM_SITL_HOME SIM_WATER_DENSITY SIM_SEED SIM_CAMERA
+    SIM_CAM_WIDTH="${SIM_CAMERA%%x*}"; SIM_CAM_HEIGHT="${SIM_CAMERA#*x}"; SIM_CAM_HEIGHT="${SIM_CAM_HEIGHT%@*}"
+    SIM_CAM_RATE="${SIM_CAMERA#*@}"
+    export SIM_CAM_WIDTH SIM_CAM_HEIGHT SIM_CAM_RATE
+    case ":$GZ_SIM_RESOURCE_PATH:" in
+      *":$SIM_STATE_DIR/models:"*) ;;
+      *) [ -d "$SIM_STATE_DIR/models" ] && export GZ_SIM_RESOURCE_PATH="$SIM_STATE_DIR/models:$GZ_SIM_RESOURCE_PATH" ;;
+    esac
     return 0
   fi
   return 1

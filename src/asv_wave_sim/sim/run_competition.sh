@@ -6,6 +6,7 @@
 #   run_competition.sh --seed 7 --task 3 --waves breezy_lake
 #   run_competition.sh --seed 3 --no-stack        everything but the autonomy stack (drive it yourself)
 #   run_competition.sh ... --no-cv --rviz --no-attach
+#   run_competition.sh ... --full-res           cameras as on the boat (1920x1200@30); --camera WxH@HZ
 #
 # Windows: Ctrl+b then w lists them (gazebo, bridges, sitl, mavros, judge, stack, rviz, shell).
 # Stop with stop_competition.sh; it ends the judge first so the run report is written.
@@ -21,11 +22,13 @@ while [ $# -gt 0 ]; do
     --legacy) COURSE_ARGS+=(--legacy); SEED=""; shift ;;
     --task) TASK="$2"; shift 2 ;;
     --waves) COURSE_ARGS+=(--waves "$2"); shift 2 ;;
+    --camera) COURSE_ARGS+=(--camera "$2"); shift 2 ;;
+    --full-res) COURSE_ARGS+=(--full-res); shift ;;
     --no-stack) STACK=0; shift ;;
     --no-cv|--no-arm) STACK_ARGS+=("$1"); shift ;;
     --rviz) RVIZ=1; shift ;;
     --no-attach) ATTACH=0; shift ;;
-    -h|--help) sed -n '2,12p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,13p' "$0"; exit 0 ;;
     *) COURSE_ARGS+=("$1"); shift ;;
   esac
 done

@@ -37,7 +37,7 @@ Install the current NVIDIA Windows driver; do not install a Linux NVIDIA driver 
 
 One tmux session (`roboboat`) with a window per component: `gazebo`, `bridges`, `sitl`,
 `mavros`, `judge`, `stack`, `shell` (and `rviz` with `--rviz`). `Ctrl+b w` lists them.
-Other options: `--waves calm_lake|breezy_lake`, `--no-cv`, `--no-arm`, `--no-attach`,
+Other options: `--waves calm_lake|breezy_lake`, `--full-res` or `--camera WxH@HZ`, `--no-cv`, `--no-arm`, `--no-attach`,
 `--world FILE`, `--legacy` (the original world, no judge), `--cmd-mode` (below).
 
 The numbered scripts start the same pieces one per terminal: `1_gazebo.sh` ... `7_stack.sh`, plus
@@ -73,7 +73,12 @@ answer key share one datum.
   1.2 m, standing in for the driver's `min_distance`: from this mount the deck and stern fill
   ~85 % of the scan otherwise. Set the same cut in `rslidar_sdk` on the Jetson.
 - Cameras: `/camera0/image_raw` (70 deg left), `/camera1` (centre), `/camera2` (70 deg right),
-  960 x 600 at 15 Hz, matching the CV `mounting_angles_deg [-70, 0, 70]`.
+  matching the CV `mounting_angles_deg [-70, 0, 70]`. Resolution and rate come from `SIM_CAMERA`
+  in `config.env` (default `960x600@15`, so three cameras render on a mid-range GPU). The real
+  cameras are 1920 x 1200 at 30 Hz: use `--full-res` (or `--camera WxH@HZ`) when testing CV
+  detection range or confidence thresholds, which the lower resolution makes look worse than on
+  the boat. `select_course.sh` writes the boat model with that setting to
+  `course/generated/models/ourboat`, and `7_stack.sh` passes the same resolution to CV.
 - Placeholders to replace with measured values: LiDAR and camera mounting poses, dock freeboard,
   venue datum.
 
