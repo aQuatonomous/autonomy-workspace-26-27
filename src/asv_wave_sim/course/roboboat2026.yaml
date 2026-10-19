@@ -1,0 +1,180 @@
+# RoboBoat 2026 course description (Tasks 1, 2, 3, 5).
+#
+# Transcribed from the RoboNation 2026 team handbook:
+#   3.2 Task Descriptions   https://robonation.gitbook.io/roboboat-resources/section-3-autonomy-challenge/3.2-task-descriptions
+#   3.4 Qualifying Round    https://robonation.gitbook.io/roboboat-resources/section-3-autonomy-challenge/3.4-qualifying-round
+#   Section 4 Scoring       https://robonation.gitbook.io/roboboat-resources/section-4-scoring-and-awards
+# Diagrams used: "Preliminary task Layout" (Alpha OG.png), "Navigation Channel-dimensions-RB25.png",
+# "Navigation Channel (dimensions).png", "Speed Challenge (dimensions).png", "Docking (dimensions).png",
+# "Plan-Stationary Vessel-RB25.png", "Light Buoy Specs.png", "Light_Beacon_buoy_sign_dimensions.png".
+#
+# Values tagged PLACEHOLDER are not published by RoboNation yet (or were inferred from a
+# drawing that is not to scale). Replace them when the official course map is released.
+#
+# Course frame: the frame of the handbook drawings. u = drawing right, v = drawing up,
+# yaw is counter-clockwise from +u, in degrees. tools/generate_course.py rotates this frame
+# into Gazebo ENU using venue.course_up_bearing_deg.
+
+units: {length: m, angle: deg}
+
+venue:
+  name: Nathan Benderson Park, Sarasota, FL (regatta lake, freshwater, wave attenuator)
+  # Course frame origin (u=0, v=0) in WGS84. PLACEHOLDER: chosen so the Task 3 yellow buoy lands
+  # near task_sequence_coordinator's yellow_buoy default (27.37420, -82.45300).
+  # Note: that node's marina_lon default (-82.35259) is 10 km east of the park; -82.45259 is
+  # probably intended. Left unchanged in the node.
+  datum: {lat: 27.37372, lon: -82.45270, alt: 0.0}
+  # Compass bearing of drawing "up". PLACEHOLDER inferred from the Docking drawing, which labels
+  # the left dock "S" and the right dock "N" (so drawing right = north, drawing up = west).
+  course_up_bearing_deg: 270.0
+  water_density: 1000.0          # freshwater lake
+  waves_preset: calm_lake        # see tools/generate_course.py WAVE_PRESETS
+
+# Course boundary (crossing it terminates the run, rule 5.1.12).
+# PLACEHOLDER: the preliminary layout shows four corner markers; its scale is set by the dock
+# cubes (20 in = 16 px), which gives 0.03175 m/px, but at that scale the task spacings fall below
+# the rulebook minimums. Task anchors below use 0.07 m/px instead, which satisfies every published
+# spacing range; the boundary is the corner markers at that scale plus a 6 m margin on the right.
+boundary: {u_min: 0.0, u_max: 66.0, v_min: 0.0, v_max: 50.0}
+
+# Boat start: Task 1 requires starting at least 6 ft (1.83 m) before the first gate.
+start: {u: 9.1, v: 2.8, yaw: 90.0}
+
+# Task element dimensions (rulebook values, inches converted to metres).
+elements:
+  sur_mark:            # Taylor Made Sur-Mark 950410 (red, port) / 950400 (green, starboard)
+    diameter: 0.4572   # 18 in
+    above_water: 0.9906  # 39 in
+    mesh_height: 1.2446  # existing RedSurMark/GreenSurMark mesh, origin at the base
+  polyform_a0:         # Task 2 gates and obstacles
+    diameter: 0.203
+    above_water: 0.1524  # 0.5 ft
+    mesh_top: 0.1778     # existing *Ropehold mesh: sphere centre at origin, rope eye to +0.178
+  polyform_a2:         # Task 3 gates, obstacles, yellow buoy
+    diameter: 0.368
+    above_water: 0.3048  # 1 ft
+  indicator_buoy:      # custom PVC + coroplast buoy with a red/green cylinder on top
+    base_square: 0.4572        # 18 in nominal, excluding the 3 in floats
+    float_diameter: 0.0762
+    panel_bottom_width: 0.4318 # 17 in
+    panel_top_width: 0.18415   # 7.25 in
+    panel_slant_height: 0.3048 # 12 in
+    frame_height: 0.3175       # 12.5 in above waterline
+    diamond_diagonal: 0.2032   # 8 in black diamond
+    diamond_bottom_offset: 0.0635  # 2.5 in from panel bottom edge
+    above_water: 0.3048        # 1 ft, rulebook table
+    cylinder: {height: 0.1321, diameter: 0.128}  # 131.5 mm x 128 mm
+  dock_cube:
+    size: [0.508, 0.508, 0.4064]  # 20 x 20 x 16 in
+    freeboard: 0.30               # PLACEHOLDER: height of the cube top above the waterline
+  number_banner:
+    size: [0.6096, 0.6096]        # 24 x 24 in, white with a black numeral
+    bottom_above_dock: 0.0        # PLACEHOLDER
+  dock_indicator:
+    cylinder: {height: 0.1321, diameter: 0.127}  # 5.2 in H x 5 in W
+  stationary_vessel:   # coroplast tray from Plan-Stationary_Vessel-RB25
+    body_length: 1.0668    # 42 in
+    bow_length: 0.50       # bow panels 19.70 / 22.63 in meeting at a point
+    beam: 0.4064           # 16 in
+    wall_height: 0.1397    # 5.5 in
+    freeboard: 0.11        # PLACEHOLDER
+    sign: {width: 0.45, height: 0.25}  # PLACEHOLDER white sign with black triangle (yellow) or plus (black)
+
+# Randomization applied by tools/generate_course.py --seed N.
+randomize:
+  gate_width: true            # within each task's gate_width_range
+  task1_gate_spacing: true
+  task3_distance: true
+  debris_jitter: 0.5          # +/- metres on Task 2 debris field buoys and vessels
+  min_separation: 1.0         # minimum spacing between randomized elements
+  task2_indicator_colors: true
+  task2_require_both_colors: true   # scoring awards red AND green debris points, so both appear
+  task3_indicator_color: true
+  dock_indicators: true
+  dock_vessel_probability: 0.6      # chance that a red slip holds a stationary vessel
+  slip_number_order: false          # PLACEHOLDER: shuffle banner numbers along each dock
+
+tasks:
+  # Task 1 - Evacuation Route & Return. Two red/green gate pairs, red on the left (port).
+  task1:
+    gate_model: sur_mark
+    gate_width_range: [1.8288, 3.048]    # 6-10 ft
+    gate_spacing_range: [7.62, 12.0]     # rulebook 25-100 ft; upper end clipped to fit the layout
+    gate_width: 2.4384                   # default (8 ft)
+    gate_spacing: 8.05                   # default, from the preliminary layout
+    gate1: {u: 9.1, v: 5.81}             # preliminary layout (182, 655) px
+    yaw: 90.0
+
+  # Task 2 - Debris Clearance. Navigation channel of A-0 gates, then a debris field.
+  # Positions from "Navigation Channel (dimensions).png" (0.01954 m/px, set by the 6-10 ft gate
+  # label), relative to the first gate centre, in the course frame.
+  task2:
+    gate_model: polyform_a0
+    origin: {u: 11.13, v: 24.05}         # preliminary layout first channel gate (211, 394) px
+    # PLACEHOLDER: the channel drawing puts gates 8 ft apart; spacing_scale stretches gate-to-gate
+    # and debris-field distances (gate widths stay at their rulebook value).
+    spacing_scale: 2.0
+    gate_width_range: [1.8288, 3.048]
+    gates:                               # centre and forward yaw (direction of travel)
+      - {u: 0.000, v: 0.000, yaw: 67.2, width: 2.44}
+      - {u: 0.489, v: 2.394, yaw: 59.1, width: 2.55}
+      - {u: 2.110, v: 4.270, yaw: 49.5, width: 2.62}
+      - {u: 3.439, v: 6.204, yaw: 41.4, width: 2.42}
+    # Black A-0 buoys inside the channel, placed relative to a gate: t is the fraction along the
+    # red->green line, forward is metres along the gate's forward direction (unscaled).
+    channel_obstacles:
+      - {gate: 2, t: 0.23, forward: 0.45}
+      - {gate: 3, t: 0.66, forward: -0.38}
+      - {gate: 4, t: 0.15, forward: 0.54}
+    debris_field:                        # relative to the first gate centre (scaled)
+      black_buoys:
+        - {u: 5.94, v: 7.50}
+        - {u: 7.43, v: 5.28}
+        - {u: 9.57, v: 9.81}
+      indicators:                        # colours randomized; the drawing shows red then green
+        - {u: 7.39, v: 10.47, color: red}
+        - {u: 9.38, v: 7.21, color: green}
+      vessels:
+        - {u: 1.86, v: 8.03, yaw: 47.4, color: black}
+
+  # Task 3 - Emergency Response Sprint. A-2 gate, yellow A-2 buoy 40-100 ft beyond it,
+  # indicator buoy between them. Red indicator = circle counter-clockwise (from the right),
+  # green = clockwise (from the left).
+  # Geometry from "Speed Challenge (dimensions).png" rotated 180 degrees to match the
+  # preliminary layout (boat enters heading +u). Along-track positions are fractions of the
+  # gate-to-yellow distance; lateral offsets are metres to the left (0.01401 m/px).
+  task3:
+    gate_model: polyform_a2
+    gate: {u: 39.1, v: 29.8, yaw: 0.0}   # preliminary layout (611, 312) px
+    gate_width_range: [1.8288, 3.048]
+    gate_width: 2.4384
+    distance_range: [12.19, 18.0]        # rulebook 40-100 ft; upper end clipped to the boundary
+    distance: 14.5                       # preliminary layout gate -> yellow buoy
+    yellow: {along: 1.0, left: -0.41}
+    indicator: {along: 0.40, left: -0.21, color: red}
+    black_buoys:
+      - {along: 1.0, along_offset: -0.66, left: 0.33}   # beside the yellow buoy
+      - {along: 0.36, left: 2.51}
+    vessels:
+      - {along: 0.70, left: 1.65, yaw: -149.5, color: yellow}
+
+  # Task 5 - Navigate the Marina. Two docks (S and N), three slips each, from
+  # "Docking (dimensions).png". Dock frame origin: midpoint between the two docks at the
+  # entrance end; docks extend toward -v. Cube grid is exact (20 in cubes).
+  task5:
+    origin: {u: 34.65, v: 12.0}          # preliminary layout dock pair centre; v PLACEHOLDER
+    spine_length_cubes: 17               # 340 in
+    spine_width_cubes: 2                 # 40 in
+    tine_length_cubes: 4                 # 80 in (rulebook 4-7 ft)
+    tine_rows: [1, 5, 9, 13]             # cube rows (from the entrance end) carrying a tine
+    spine_centre_offset: 4.52            # |u| of each spine centreline from the origin
+    docks:
+      - {name: S, side: -1}              # left dock, tines point +u
+      - {name: N, side: 1}               # right dock, tines point -u
+    # Slip k sits between tine rows; slip_numbers lists the banner number of each slip ordered
+    # from the entrance end. PLACEHOLDER order.
+    slip_numbers: [1, 2, 3]
+    # Drawing example: S = red(vessel), green, red; N = green, red, red(vessel).
+    example:
+      S: [{indicator: red, vessel: yellow}, {indicator: green}, {indicator: red}]
+      N: [{indicator: green}, {indicator: red}, {indicator: red, vessel: black}]

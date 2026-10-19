@@ -663,6 +663,7 @@ void WavesVisualPrivate::OnUpdate()
             oceanVisual->SetLocalPosition(tilePosition);
             oceanVisual->SetMaterial(this->oceanMaterial, false);
             oceanVisual->SetVisible(true);
+            oceanVisual->SetVisibilityFlags(this->visual->VisibilityFlags());
 
             // add visual to parent
             auto parent = this->visual->Parent();
@@ -685,6 +686,7 @@ void WavesVisualPrivate::OnUpdate()
             geometry->LoadMesh(this->oceanTileMesh);
             geometry->SetMaterial(this->oceanMaterial, false);
             oceanVisual->AddGeometry(geometry);
+            oceanVisual->SetVisibilityFlags(this->visual->VisibilityFlags());
 
             // add visual to parent
             auto parent = this->visual->Parent();
@@ -767,6 +769,7 @@ void WavesVisualPrivate::OnUpdate()
             oceanVisual->AddGeometry(geometry->Clone());
             oceanVisual->SetMaterial(this->oceanMaterial, false);
             oceanVisual->SetLocalPosition(tilePosition);
+            oceanVisual->SetVisibilityFlags(this->visual->VisibilityFlags());
 
             // add visual to parent
             auto parent = this->visual->Parent();
