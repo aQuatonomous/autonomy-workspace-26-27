@@ -201,6 +201,20 @@ gz_find_package(GzOGRE VERSION 1.9.0
   PRIVATE_FOR ogre)
 
 #--------------------------------------
+# ROS 2 Jazzy ships Ogre-Next in gz_ogre_next_vendor, outside the default
+# pkg-config search path. Add it so GzOGRE2 is found without extra setup.
+foreach(_ogre_next_prefix "$ENV{AMENT_PREFIX_PATH}" "/opt/ros/jazzy")
+  string(REPLACE ":" ";" _ogre_next_prefixes "${_ogre_next_prefix}")
+  foreach(_prefix ${_ogre_next_prefixes})
+    set(_ogre_next_pc "${_prefix}/opt/gz_ogre_next_vendor/lib/pkgconfig")
+    if(EXISTS "${_ogre_next_pc}" AND NOT "$ENV{PKG_CONFIG_PATH}" MATCHES "gz_ogre_next_vendor")
+      message(STATUS "Using vendored Ogre-Next from ${_ogre_next_pc}")
+      set(ENV{PKG_CONFIG_PATH} "${_ogre_next_pc}:$ENV{PKG_CONFIG_PATH}")
+    endif()
+  endforeach()
+endforeach()
+
+#--------------------------------------
 # Find OGRE2: first try to find OGRE2 built with PlanarReflections support and
 # fallback to look for OGRE2 without it. Both seems to works for gz-rendering.
 # See https://github.com/gazebosim/gz-rendering/issues/597

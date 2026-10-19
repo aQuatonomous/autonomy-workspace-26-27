@@ -472,33 +472,55 @@
           <izz>0.0001</izz>
         </inertia>
       </inertial>
+      <!-- RoboSense Airy 96: 360 x 90 deg hemispherical FOV, 0.4 x 0.947 deg resolution, 10 Hz,
+           0.1-60 m range, 1.5 cm accuracy. Mounting is a PLACEHOLDER: level with the hull, dome
+           pointing down, so the 90 deg vertical FOV spans the horizon to straight down and the
+           cloud arrives in boat orientation (x forward, z up). Water visuals are masked out
+           (visibility_flags 2) because NIR returns off calm water are rare. The 1.2 m minimum
+           range stands in for rslidar_sdk min_distance: from this mount the deck, console and
+           stern (out to ~1.1 m) fill ~85% of the 86k-point scan, so set the same cut on the Jetson. -->
       <sensor name="lidar" type="gpu_lidar">
-        <!-- 30 deg down (was 15 deg): pitch -0.5236 rad -->
-        <pose>0.3 0 0.2 -0.5236 0 -1.59</pose>
+        <pose>0.3 0 0.2 0 0 0</pose>
         <always_on>1</always_on>
         <update_rate>10.0</update_rate>
-	<topic>lidar_topic</topic>
-	<visualize>true</visualize>
-	<lidar>
-		<scan>
-			<horizontal>
-				<samples>720</samples>
-				<resolution>1</resolution>
-				<min_angle>-3.14</min_angle>
-				<max_angle>3.14</max_angle>
-			</horizontal>
-			<vertical>
-				<samples>360</samples>
-				<resolution>1</resolution>
-				<min_angle>0</min_angle>
-				<max_angle>3.14</max_angle>
-			</vertical>
-		</scan>
-		<range>
-			<min>0.15</min>
-			<max>15</max>
-		</range>
-	</lidar>
+        <topic>lidar_topic</topic>
+        <gz_frame_id>rslidar</gz_frame_id>
+        <visualize>false</visualize>
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>900</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.14159</min_angle>
+              <max_angle>3.13461</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>96</samples>
+              <resolution>1</resolution>
+              <min_angle>-1.5708</min_angle>
+              <max_angle>0</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>1.2</min>
+            <max>60</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.015</stddev>
+          </noise>
+          <visibility_mask>4294967293</visibility_mask>
+        </lidar>
+      </sensor>
+      <!-- Airy built-in IMU -->
+      <sensor name="rslidar_imu" type="imu">
+        <pose>0.3 0 0.2 0 0 0</pose>
+        <always_on>1</always_on>
+        <update_rate>200</update_rate>
+        <topic>rslidar_imu</topic>
+        <gz_frame_id>rslidar</gz_frame_id>
       </sensor>
     </link>
     <joint name="lidar_joint" type="fixed">
@@ -518,18 +540,19 @@
           <izz>0.0001</izz>
         </inertia>
       </inertial>
-      <!-- Left camera: 70 deg left → bridge maps to /camera0/image_raw -->
+      <!-- Left camera: 70 deg left (+yaw is port in Gazebo) → bridge maps to /camera0/image_raw,
+           matching the CV mounting_angles_deg [-70, 0, 70] (negative = left) -->
       <sensor name="camera1" type="camera">
-        <pose>0.3 0 0.2 0 0 -1.22173</pose>
+        <pose>0.3 0 0.2 0 0 1.22173</pose>
         <always_on>1</always_on>
-        <update_rate>30.0</update_rate>
+        <update_rate>15.0</update_rate>
 	<topic>camera1_topic</topic>
 	<visualize>true</visualize>
 	<camera>
 		<horizontal_fov>1.484</horizontal_fov>
 		<image>
-			<width>1920</width>
-			<height>1200</height>
+			<width>960</width>
+			<height>600</height>
 		</image>
 		<clip>
 			<near>0.05</near>
@@ -559,14 +582,14 @@
       <sensor name="camera2" type="camera">
         <pose>0.3 0 0.2 0 0 0</pose>
         <always_on>1</always_on>
-        <update_rate>30.0</update_rate>
+        <update_rate>15.0</update_rate>
 	<topic>camera2_topic</topic>
 	<visualize>true</visualize>
 	<camera>
 		<horizontal_fov>1.484</horizontal_fov>
 		<image>
-			<width>1920</width>
-			<height>1200</height>
+			<width>960</width>
+			<height>600</height>
 		</image>
 		<clip>
 			<near>0.05</near>
@@ -594,16 +617,16 @@
       </inertial>
       <!-- Right camera: 70 deg right → bridge maps to /camera2/image_raw -->
       <sensor name="camera3" type="camera">
-        <pose>0.3 0 0.2 0 0 1.22173</pose>
+        <pose>0.3 0 0.2 0 0 -1.22173</pose>
         <always_on>1</always_on>
-        <update_rate>30.0</update_rate>
+        <update_rate>15.0</update_rate>
 	<topic>camera3_topic</topic>
 	<visualize>true</visualize>
 	<camera>
 		<horizontal_fov>1.484</horizontal_fov>
 		<image>
-			<width>1920</width>
-			<height>1200</height>
+			<width>960</width>
+			<height>600</height>
 		</image>
 		<clip>
 			<near>0.05</near>
@@ -634,7 +657,7 @@
       <namespace>ourboat</namespace>
       <joint_name>motor_port_joint</joint_name>
       <thrust_coefficient>-0.02</thrust_coefficient>
-      <fluid_density>1025</fluid_density>
+      <fluid_density>1000</fluid_density>
       <propeller_diameter>0.112</propeller_diameter>
       <velocity_control>0</velocity_control>
       <use_angvel_cmd>0</use_angvel_cmd>
@@ -646,7 +669,7 @@
       <namespace>ourboat</namespace>
       <joint_name>motor_stbd_joint</joint_name>
       <thrust_coefficient>0.02</thrust_coefficient>
-      <fluid_density>1025</fluid_density>
+      <fluid_density>1000</fluid_density>
       <propeller_diameter>0.112</propeller_diameter>
       <velocity_control>0</velocity_control>
       <use_angvel_cmd>0</use_angvel_cmd>
@@ -656,10 +679,19 @@
     <plugin name="gz::sim::systems::Hydrodynamics" 
         filename="gz-waves1-hydrodynamics-system">
         <enable>ourboat::base_link</enable>
+        <!-- Calibrated to the boat's ArduPilot tuning (task_sequence_coordinator/mav.parm):
+             1.18 m/s straight at CRUISE_THROTTLE 51 (17.9 N per thruster) = CRUISE_SPEED, and
+             ~190 deg/s pivot at full differential = 1 / ATC_STR_RAT_FF (0.3). The default
+             pressure drag (100) gave 2.0 m/s and only 7 deg/s turning under way. -->
         <hydrodynamics>
           <damping_on>1</damping_on>
           <viscous_drag_on>1</viscous_drag_on>
           <pressure_drag_on>1</pressure_drag_on>
+          <cDampL2>40</cDampL2>
+          <cPDrag1>30</cPDrag1>
+          <cPDrag2>30</cPDrag2>
+          <cSDrag1>30</cSDrag1>
+          <cSDrag2>30</cSDrag2>
         </hydrodynamics>
     </plugin>
 

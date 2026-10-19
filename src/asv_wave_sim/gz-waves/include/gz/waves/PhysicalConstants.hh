@@ -42,7 +42,8 @@ class PhysicalConstants
 
   /// \brief Density of water.
   ///
-  /// \return     998.6 [kg m-3].
+  /// \return     1025.0 [kg m-3], or the value of the environment variable
+  ///             GZ_WAVES_WATER_DENSITY when it is set.
   static double WaterDensity();
 
   /// \brief Kinematic viscosity of water at 18 dgree C.

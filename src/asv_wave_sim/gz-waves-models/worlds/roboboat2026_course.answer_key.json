@@ -1,0 +1,1552 @@
+{
+  "generator": "src/asv_wave_sim/tools/generate_course.py",
+  "seed": 0,
+  "world": "roboboat2026_course.sdf",
+  "world_name": "aquatonomous_course",
+  "venue": "Nathan Benderson Park, Sarasota, FL (regatta lake, freshwater, wave attenuator)",
+  "datum": {
+    "lat": 27.37401644576346,
+    "lon": -82.45295289803403,
+    "alt": 0.0,
+    "m_per_deg": 111318.84502145034
+  },
+  "sitl_home": "27.37401645,-82.45295290,0.0,270",
+  "start": {
+    "x": 22.2,
+    "y": -23.9,
+    "yaw": -3.14159,
+    "lat": 27.37380175,
+    "lon": -82.45272832,
+    "compass_heading_deg": 270.0
+  },
+  "boundary": [
+    [
+      25.0,
+      -33.0
+    ],
+    [
+      25.0,
+      33.0
+    ],
+    [
+      -25.0,
+      33.0
+    ],
+    [
+      -25.0,
+      -33.0
+    ]
+  ],
+  "waves": "calm_lake",
+  "water_density": 1000.0,
+  "gates": [
+    {
+      "task": 1,
+      "label": "gate1",
+      "red_id": 1,
+      "green_id": 2,
+      "center": [
+        19.19,
+        -23.9
+      ],
+      "heading": -3.14159,
+      "width": 2.4384
+    },
+    {
+      "task": 1,
+      "label": "gate2",
+      "red_id": 3,
+      "green_id": 4,
+      "center": [
+        11.14,
+        -23.9
+      ],
+      "heading": -3.14159,
+      "width": 2.4384
+    },
+    {
+      "task": 2,
+      "label": "channel1",
+      "red_id": 5,
+      "green_id": 6,
+      "center": [
+        0.95,
+        -21.87
+      ],
+      "heading": 2.74366,
+      "width": 2.44
+    },
+    {
+      "task": 2,
+      "label": "channel2",
+      "red_id": 7,
+      "green_id": 8,
+      "center": [
+        -3.838,
+        -20.892
+      ],
+      "heading": 2.60229,
+      "width": 2.55
+    },
+    {
+      "task": 2,
+      "label": "channel3",
+      "red_id": 9,
+      "green_id": 10,
+      "center": [
+        -7.59,
+        -17.65
+      ],
+      "heading": 2.43473,
+      "width": 2.62
+    },
+    {
+      "task": 2,
+      "label": "channel4",
+      "red_id": 11,
+      "green_id": 12,
+      "center": [
+        -11.458,
+        -14.992
+      ],
+      "heading": 2.29336,
+      "width": 2.42
+    },
+    {
+      "task": 3,
+      "label": "speed_gate",
+      "red_id": 22,
+      "green_id": 23,
+      "center": [
+        -4.8,
+        6.1
+      ],
+      "heading": 1.5708,
+      "width": 2.4384
+    }
+  ],
+  "tasks": {
+    "1": {
+      "name": "Evacuation Route & Return",
+      "gates": [
+        "gate1",
+        "gate2"
+      ],
+      "gate_width": 2.438,
+      "gate_spacing": 8.05
+    },
+    "2": {
+      "name": "Debris Clearance",
+      "gates": [
+        "channel1",
+        "channel2",
+        "channel3",
+        "channel4"
+      ],
+      "indicators": [
+        {
+          "id": 19,
+          "color": "red"
+        },
+        {
+          "id": 20,
+          "color": "green"
+        }
+      ],
+      "debris_ids": [
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    "3": {
+      "name": "Emergency Response Sprint",
+      "gate": "speed_gate",
+      "yellow_id": 24,
+      "indicator_id": 25,
+      "indicator_color": "red",
+      "required_direction": "ccw",
+      "distance": 14.5,
+      "gate_width": 2.438
+    },
+    "5": {
+      "name": "Navigate the Marina",
+      "slips": [
+        {
+          "dock": "S",
+          "slip": 1,
+          "indicator": "red",
+          "indicator_id": 31,
+          "vessel_id": 32,
+          "occupied": true,
+          "polygon": [
+            [
+              14.016,
+              -2.362
+            ],
+            [
+              14.016,
+              -0.33
+            ],
+            [
+              15.54,
+              -0.33
+            ],
+            [
+              15.54,
+              -2.362
+            ]
+          ],
+          "center": [
+            14.778,
+            -1.346
+          ],
+          "entry_heading": -1.5708
+        },
+        {
+          "dock": "S",
+          "slip": 2,
+          "indicator": "green",
+          "indicator_id": 34,
+          "vessel_id": null,
+          "occupied": false,
+          "polygon": [
+            [
+              16.048,
+              -2.362
+            ],
+            [
+              16.048,
+              -0.33
+            ],
+            [
+              17.572,
+              -0.33
+            ],
+            [
+              17.572,
+              -2.362
+            ]
+          ],
+          "center": [
+            16.81,
+            -1.346
+          ],
+          "entry_heading": -1.5708
+        },
+        {
+          "dock": "S",
+          "slip": 3,
+          "indicator": "red",
+          "indicator_id": 36,
+          "vessel_id": null,
+          "occupied": false,
+          "polygon": [
+            [
+              18.08,
+              -2.362
+            ],
+            [
+              18.08,
+              -0.33
+            ],
+            [
+              19.604,
+              -0.33
+            ],
+            [
+              19.604,
+              -2.362
+            ]
+          ],
+          "center": [
+            18.842,
+            -1.346
+          ],
+          "entry_heading": -1.5708
+        },
+        {
+          "dock": "N",
+          "slip": 1,
+          "indicator": "green",
+          "indicator_id": 39,
+          "vessel_id": null,
+          "occupied": false,
+          "polygon": [
+            [
+              14.016,
+              5.662
+            ],
+            [
+              14.016,
+              3.63
+            ],
+            [
+              15.54,
+              3.63
+            ],
+            [
+              15.54,
+              5.662
+            ]
+          ],
+          "center": [
+            14.778,
+            4.646
+          ],
+          "entry_heading": 1.5708
+        },
+        {
+          "dock": "N",
+          "slip": 2,
+          "indicator": "red",
+          "indicator_id": 41,
+          "vessel_id": null,
+          "occupied": false,
+          "polygon": [
+            [
+              16.048,
+              5.662
+            ],
+            [
+              16.048,
+              3.63
+            ],
+            [
+              17.572,
+              3.63
+            ],
+            [
+              17.572,
+              5.662
+            ]
+          ],
+          "center": [
+            16.81,
+            4.646
+          ],
+          "entry_heading": 1.5708
+        },
+        {
+          "dock": "N",
+          "slip": 3,
+          "indicator": "red",
+          "indicator_id": 43,
+          "vessel_id": 44,
+          "occupied": true,
+          "polygon": [
+            [
+              18.08,
+              5.662
+            ],
+            [
+              18.08,
+              3.63
+            ],
+            [
+              19.604,
+              3.63
+            ],
+            [
+              19.604,
+              5.662
+            ]
+          ],
+          "center": [
+            18.842,
+            4.646
+          ],
+          "entry_heading": 1.5708
+        }
+      ],
+      "correct": [
+        {
+          "dock": "N",
+          "slip": 1
+        }
+      ],
+      "green": [
+        {
+          "dock": "S",
+          "slip": 2
+        },
+        {
+          "dock": "N",
+          "slip": 1
+        }
+      ]
+    }
+  },
+  "elements": [
+    {
+      "id": 1,
+      "name": "t1_gate1_red_1",
+      "task": 1,
+      "kind": "sur_mark",
+      "color": "red",
+      "role": "gate1_red",
+      "x": 19.19,
+      "y": -25.1192,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37379079,
+      "lon": -82.45275877,
+      "uri": "model://RedSurMark",
+      "radius": 0.2286
+    },
+    {
+      "id": 2,
+      "name": "t1_gate1_green_2",
+      "task": 1,
+      "kind": "sur_mark",
+      "color": "green",
+      "role": "gate1_green",
+      "x": 19.19,
+      "y": -22.6808,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.3738127,
+      "lon": -82.45275877,
+      "uri": "model://GreenSurMark",
+      "radius": 0.2286
+    },
+    {
+      "id": 3,
+      "name": "t1_gate2_red_3",
+      "task": 1,
+      "kind": "sur_mark",
+      "color": "red",
+      "role": "gate2_red",
+      "x": 11.14,
+      "y": -25.1192,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37379079,
+      "lon": -82.45284021,
+      "uri": "model://RedSurMark",
+      "radius": 0.2286
+    },
+    {
+      "id": 4,
+      "name": "t1_gate2_green_4",
+      "task": 1,
+      "kind": "sur_mark",
+      "color": "green",
+      "role": "gate2_green",
+      "x": 11.14,
+      "y": -22.6808,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.3738127,
+      "lon": -82.45284021,
+      "uri": "model://GreenSurMark",
+      "radius": 0.2286
+    },
+    {
+      "id": 5,
+      "name": "t2_channel1_red_5",
+      "task": 2,
+      "kind": "a0",
+      "color": "red",
+      "role": "channel1_red",
+      "x": 0.4772,
+      "y": -22.9947,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37380988,
+      "lon": -82.45294807,
+      "uri": "model://RedRopehold",
+      "radius": 0.1016
+    },
+    {
+      "id": 6,
+      "name": "t2_channel1_green_6",
+      "task": 2,
+      "kind": "a0",
+      "color": "green",
+      "role": "channel1_green",
+      "x": 1.4228,
+      "y": -20.7453,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37383009,
+      "lon": -82.45293851,
+      "uri": "model://GreenRopehold",
+      "radius": 0.1016
+    },
+    {
+      "id": 7,
+      "name": "t2_channel2_red_7",
+      "task": 2,
+      "kind": "a0",
+      "color": "red",
+      "role": "channel2_red",
+      "x": -4.4928,
+      "y": -21.986,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37381894,
+      "lon": -82.45299835,
+      "uri": "model://RedRopehold",
+      "radius": 0.1016
+    },
+    {
+      "id": 8,
+      "name": "t2_channel2_green_8",
+      "task": 2,
+      "kind": "a0",
+      "color": "green",
+      "role": "channel2_green",
+      "x": -3.1832,
+      "y": -19.798,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.3738386,
+      "lon": -82.4529851,
+      "uri": "model://GreenRopehold",
+      "radius": 0.1016
+    },
+    {
+      "id": 9,
+      "name": "t2_channel3_red_9",
+      "task": 2,
+      "kind": "a0",
+      "color": "red",
+      "role": "channel3_red",
+      "x": -8.4408,
+      "y": -18.6461,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37384894,
+      "lon": -82.45303828,
+      "uri": "model://RedRopehold",
+      "radius": 0.1016
+    },
+    {
+      "id": 10,
+      "name": "t2_channel3_green_10",
+      "task": 2,
+      "kind": "a0",
+      "color": "green",
+      "role": "channel3_green",
+      "x": -6.7392,
+      "y": -16.6539,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37386684,
+      "lon": -82.45302107,
+      "uri": "model://GreenRopehold",
+      "radius": 0.1016
+    },
+    {
+      "id": 11,
+      "name": "t2_channel4_red_11",
+      "task": 2,
+      "kind": "a0",
+      "color": "red",
+      "role": "channel4_red",
+      "x": -12.3656,
+      "y": -15.7922,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37387458,
+      "lon": -82.45307799,
+      "uri": "model://RedRopehold",
+      "radius": 0.1016
+    },
+    {
+      "id": 12,
+      "name": "t2_channel4_green_12",
+      "task": 2,
+      "kind": "a0",
+      "color": "green",
+      "role": "channel4_green",
+      "x": -10.5504,
+      "y": -14.1918,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37388896,
+      "lon": -82.45305962,
+      "uri": "model://GreenRopehold",
+      "radius": 0.1016
+    },
+    {
+      "id": 13,
+      "name": "t2_channel_obstacle_13",
+      "task": 2,
+      "kind": "a0",
+      "color": "black",
+      "role": "channel_obstacle",
+      "x": -4.5777,
+      "y": -21.2517,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37382554,
+      "lon": -82.45299921,
+      "uri": "model://BlackRopehold",
+      "radius": 0.1016
+    },
+    {
+      "id": 14,
+      "name": "t2_channel_obstacle_14",
+      "task": 2,
+      "kind": "a0",
+      "color": "black",
+      "role": "channel_obstacle",
+      "x": -7.0288,
+      "y": -17.578,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37385854,
+      "lon": -82.453024,
+      "uri": "model://BlackRopehold",
+      "radius": 0.1016
+    },
+    {
+      "id": 15,
+      "name": "t2_channel_obstacle_15",
+      "task": 2,
+      "kind": "a0",
+      "color": "black",
+      "role": "channel_obstacle",
+      "x": -12.4505,
+      "y": -15.1471,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37388038,
+      "lon": -82.45307885,
+      "uri": "model://BlackRopehold",
+      "radius": 0.1016
+    },
+    {
+      "id": 16,
+      "name": "t2_debris_16",
+      "task": 2,
+      "kind": "a0",
+      "color": "black",
+      "role": "debris",
+      "x": -14.05,
+      "y": -9.99,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.3739267,
+      "lon": -82.45309503,
+      "uri": "model://BlackRopehold",
+      "radius": 0.1016
+    },
+    {
+      "id": 17,
+      "name": "t2_debris_17",
+      "task": 2,
+      "kind": "a0",
+      "color": "black",
+      "role": "debris",
+      "x": -9.61,
+      "y": -7.01,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37395347,
+      "lon": -82.45305011,
+      "uri": "model://BlackRopehold",
+      "radius": 0.1016
+    },
+    {
+      "id": 18,
+      "name": "t2_debris_18",
+      "task": 2,
+      "kind": "a0",
+      "color": "black",
+      "role": "debris",
+      "x": -18.67,
+      "y": -2.73,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37399192,
+      "lon": -82.45314176,
+      "uri": "model://BlackRopehold",
+      "radius": 0.1016
+    },
+    {
+      "id": 19,
+      "name": "t2_debris_indicator_19",
+      "task": 2,
+      "kind": "indicator_buoy",
+      "color": "red",
+      "role": "debris_indicator",
+      "x": -19.99,
+      "y": -7.09,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37395275,
+      "lon": -82.45315512,
+      "uri": "model://IndicatorBuoyRed",
+      "radius": 0.305
+    },
+    {
+      "id": 20,
+      "name": "t2_debris_indicator_20",
+      "task": 2,
+      "kind": "indicator_buoy",
+      "color": "green",
+      "role": "debris_indicator",
+      "x": -13.47,
+      "y": -3.11,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37398851,
+      "lon": -82.45308916,
+      "uri": "model://IndicatorBuoyGreen",
+      "radius": 0.305
+    },
+    {
+      "id": 21,
+      "name": "t2_debris_vessel_21",
+      "task": 2,
+      "kind": "vessel",
+      "color": "black",
+      "role": "debris_vessel",
+      "x": -15.11,
+      "y": -18.15,
+      "z": 0.0,
+      "yaw": 2.39808,
+      "lat": 27.3738534,
+      "lon": -82.45310575,
+      "uri": "model://StationaryVesselBlack",
+      "footprint": [
+        [
+          -14.5257,
+          -18.3026
+        ],
+        [
+          -15.3109,
+          -17.5805
+        ],
+        [
+          -15.8707,
+          -17.4505
+        ],
+        [
+          -15.6943,
+          -17.9974
+        ],
+        [
+          -14.9091,
+          -18.7195
+        ]
+      ]
+    },
+    {
+      "id": 22,
+      "name": "t3_speed_gate_red_22",
+      "task": 3,
+      "kind": "a2",
+      "color": "red",
+      "role": "speed_gate_red",
+      "x": -6.0192,
+      "y": 6.1,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37407124,
+      "lon": -82.45301379,
+      "uri": "model://PolyformA2Red",
+      "radius": 0.184
+    },
+    {
+      "id": 23,
+      "name": "t3_speed_gate_green_23",
+      "task": 3,
+      "kind": "a2",
+      "color": "green",
+      "role": "speed_gate_green",
+      "x": -3.5808,
+      "y": 6.1,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37407124,
+      "lon": -82.45298912,
+      "uri": "model://PolyformA2Green",
+      "radius": 0.184
+    },
+    {
+      "id": 24,
+      "name": "t3_yellow_buoy_24",
+      "task": 3,
+      "kind": "a2",
+      "color": "yellow",
+      "role": "yellow_buoy",
+      "x": -4.39,
+      "y": 20.6,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.3742015,
+      "lon": -82.45299731,
+      "uri": "model://PolyformA2Yellow",
+      "radius": 0.184
+    },
+    {
+      "id": 25,
+      "name": "t3_speed_indicator_25",
+      "task": 3,
+      "kind": "indicator_buoy",
+      "color": "red",
+      "role": "speed_indicator",
+      "x": -4.59,
+      "y": 11.9,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37412335,
+      "lon": -82.45299933,
+      "uri": "model://IndicatorBuoyRed",
+      "radius": 0.305
+    },
+    {
+      "id": 26,
+      "name": "t3_obstacle_26",
+      "task": 3,
+      "kind": "a2",
+      "color": "black",
+      "role": "obstacle",
+      "x": -5.13,
+      "y": 19.94,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37419557,
+      "lon": -82.45300479,
+      "uri": "model://PolyformA2Black",
+      "radius": 0.184
+    },
+    {
+      "id": 27,
+      "name": "t3_obstacle_27",
+      "task": 3,
+      "kind": "a2",
+      "color": "black",
+      "role": "obstacle",
+      "x": -7.31,
+      "y": 11.32,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37411814,
+      "lon": -82.45302685,
+      "uri": "model://PolyformA2Black",
+      "radius": 0.184
+    },
+    {
+      "id": 28,
+      "name": "t3_obstacle_vessel_28",
+      "task": 3,
+      "kind": "vessel",
+      "color": "yellow",
+      "role": "obstacle_vessel",
+      "x": -6.45,
+      "y": 16.25,
+      "z": 0.0,
+      "yaw": -1.03847,
+      "lat": 27.37416242,
+      "lon": -82.45301815,
+      "uri": "model://StationaryVesselYellow",
+      "footprint": [
+        [
+          -6.9647,
+          16.5659
+        ],
+        [
+          -6.4233,
+          15.6467
+        ],
+        [
+          -5.9255,
+          15.3596
+        ],
+        [
+          -5.9353,
+          15.9341
+        ],
+        [
+          -6.4767,
+          16.8533
+        ]
+      ]
+    },
+    {
+      "id": 29,
+      "name": "marina_dock_S",
+      "task": 5,
+      "kind": "dock",
+      "cubes": [
+        [
+          13.254,
+          -3.124
+        ],
+        [
+          13.254,
+          -2.616
+        ],
+        [
+          13.762,
+          -3.124
+        ],
+        [
+          13.762,
+          -2.616
+        ],
+        [
+          14.27,
+          -3.124
+        ],
+        [
+          14.27,
+          -2.616
+        ],
+        [
+          14.778,
+          -3.124
+        ],
+        [
+          14.778,
+          -2.616
+        ],
+        [
+          15.286,
+          -3.124
+        ],
+        [
+          15.286,
+          -2.616
+        ],
+        [
+          15.794,
+          -3.124
+        ],
+        [
+          15.794,
+          -2.616
+        ],
+        [
+          16.302,
+          -3.124
+        ],
+        [
+          16.302,
+          -2.616
+        ],
+        [
+          16.81,
+          -3.124
+        ],
+        [
+          16.81,
+          -2.616
+        ],
+        [
+          17.318,
+          -3.124
+        ],
+        [
+          17.318,
+          -2.616
+        ],
+        [
+          17.826,
+          -3.124
+        ],
+        [
+          17.826,
+          -2.616
+        ],
+        [
+          18.334,
+          -3.124
+        ],
+        [
+          18.334,
+          -2.616
+        ],
+        [
+          18.842,
+          -3.124
+        ],
+        [
+          18.842,
+          -2.616
+        ],
+        [
+          19.35,
+          -3.124
+        ],
+        [
+          19.35,
+          -2.616
+        ],
+        [
+          19.858,
+          -3.124
+        ],
+        [
+          19.858,
+          -2.616
+        ],
+        [
+          20.366,
+          -3.124
+        ],
+        [
+          20.366,
+          -2.616
+        ],
+        [
+          20.874,
+          -3.124
+        ],
+        [
+          20.874,
+          -2.616
+        ],
+        [
+          21.382,
+          -3.124
+        ],
+        [
+          21.382,
+          -2.616
+        ],
+        [
+          13.762,
+          -2.108
+        ],
+        [
+          13.762,
+          -1.6
+        ],
+        [
+          13.762,
+          -1.092
+        ],
+        [
+          13.762,
+          -0.584
+        ],
+        [
+          15.794,
+          -2.108
+        ],
+        [
+          15.794,
+          -1.6
+        ],
+        [
+          15.794,
+          -1.092
+        ],
+        [
+          15.794,
+          -0.584
+        ],
+        [
+          17.826,
+          -2.108
+        ],
+        [
+          17.826,
+          -1.6
+        ],
+        [
+          17.826,
+          -1.092
+        ],
+        [
+          17.826,
+          -0.584
+        ],
+        [
+          19.858,
+          -2.108
+        ],
+        [
+          19.858,
+          -1.6
+        ],
+        [
+          19.858,
+          -1.092
+        ],
+        [
+          19.858,
+          -0.584
+        ]
+      ],
+      "cube_size": 0.508
+    },
+    {
+      "id": 30,
+      "name": "t5_banner_S1_30",
+      "task": 5,
+      "kind": "banner",
+      "color": null,
+      "role": "banner_S1",
+      "x": 14.778,
+      "y": -2.87,
+      "z": 0.3,
+      "yaw": -3.14159,
+      "lat": 27.37399066,
+      "lon": -82.4528034,
+      "uri": "model://NumberBanner1",
+      "number": 1
+    },
+    {
+      "id": 31,
+      "name": "t5_dock_indicator_S1_31",
+      "task": 5,
+      "kind": "dock_indicator",
+      "color": "red",
+      "role": "dock_indicator_S1",
+      "x": 14.778,
+      "y": -2.616,
+      "z": 0.3,
+      "yaw": 1.5708,
+      "lat": 27.37399295,
+      "lon": -82.4528034,
+      "uri": "model://DockIndicatorRed"
+    },
+    {
+      "id": 32,
+      "name": "t5_slip_vessel_S1_32",
+      "task": 5,
+      "kind": "vessel",
+      "color": "yellow",
+      "role": "slip_vessel_S1",
+      "x": 14.778,
+      "y": -1.1786,
+      "z": 0.0,
+      "yaw": -1.5708,
+      "lat": 27.37400586,
+      "lon": -82.4528034,
+      "uri": "model://StationaryVesselYellow",
+      "footprint": [
+        [
+          14.4948,
+          -0.6452
+        ],
+        [
+          14.4948,
+          -1.712
+        ],
+        [
+          14.778,
+          -2.212
+        ],
+        [
+          15.0612,
+          -1.712
+        ],
+        [
+          15.0612,
+          -0.6452
+        ]
+      ]
+    },
+    {
+      "id": 33,
+      "name": "t5_banner_S2_33",
+      "task": 5,
+      "kind": "banner",
+      "color": null,
+      "role": "banner_S2",
+      "x": 16.81,
+      "y": -2.87,
+      "z": 0.3,
+      "yaw": -3.14159,
+      "lat": 27.37399066,
+      "lon": -82.45278285,
+      "uri": "model://NumberBanner2",
+      "number": 2
+    },
+    {
+      "id": 34,
+      "name": "t5_dock_indicator_S2_34",
+      "task": 5,
+      "kind": "dock_indicator",
+      "color": "green",
+      "role": "dock_indicator_S2",
+      "x": 16.81,
+      "y": -2.616,
+      "z": 0.3,
+      "yaw": 1.5708,
+      "lat": 27.37399295,
+      "lon": -82.45278285,
+      "uri": "model://DockIndicatorGreen"
+    },
+    {
+      "id": 35,
+      "name": "t5_banner_S3_35",
+      "task": 5,
+      "kind": "banner",
+      "color": null,
+      "role": "banner_S3",
+      "x": 18.842,
+      "y": -2.87,
+      "z": 0.3,
+      "yaw": -3.14159,
+      "lat": 27.37399066,
+      "lon": -82.45276229,
+      "uri": "model://NumberBanner3",
+      "number": 3
+    },
+    {
+      "id": 36,
+      "name": "t5_dock_indicator_S3_36",
+      "task": 5,
+      "kind": "dock_indicator",
+      "color": "red",
+      "role": "dock_indicator_S3",
+      "x": 18.842,
+      "y": -2.616,
+      "z": 0.3,
+      "yaw": 1.5708,
+      "lat": 27.37399295,
+      "lon": -82.45276229,
+      "uri": "model://DockIndicatorRed"
+    },
+    {
+      "id": 37,
+      "name": "marina_dock_N",
+      "task": 5,
+      "kind": "dock",
+      "cubes": [
+        [
+          13.254,
+          5.916
+        ],
+        [
+          13.254,
+          6.424
+        ],
+        [
+          13.762,
+          5.916
+        ],
+        [
+          13.762,
+          6.424
+        ],
+        [
+          14.27,
+          5.916
+        ],
+        [
+          14.27,
+          6.424
+        ],
+        [
+          14.778,
+          5.916
+        ],
+        [
+          14.778,
+          6.424
+        ],
+        [
+          15.286,
+          5.916
+        ],
+        [
+          15.286,
+          6.424
+        ],
+        [
+          15.794,
+          5.916
+        ],
+        [
+          15.794,
+          6.424
+        ],
+        [
+          16.302,
+          5.916
+        ],
+        [
+          16.302,
+          6.424
+        ],
+        [
+          16.81,
+          5.916
+        ],
+        [
+          16.81,
+          6.424
+        ],
+        [
+          17.318,
+          5.916
+        ],
+        [
+          17.318,
+          6.424
+        ],
+        [
+          17.826,
+          5.916
+        ],
+        [
+          17.826,
+          6.424
+        ],
+        [
+          18.334,
+          5.916
+        ],
+        [
+          18.334,
+          6.424
+        ],
+        [
+          18.842,
+          5.916
+        ],
+        [
+          18.842,
+          6.424
+        ],
+        [
+          19.35,
+          5.916
+        ],
+        [
+          19.35,
+          6.424
+        ],
+        [
+          19.858,
+          5.916
+        ],
+        [
+          19.858,
+          6.424
+        ],
+        [
+          20.366,
+          5.916
+        ],
+        [
+          20.366,
+          6.424
+        ],
+        [
+          20.874,
+          5.916
+        ],
+        [
+          20.874,
+          6.424
+        ],
+        [
+          21.382,
+          5.916
+        ],
+        [
+          21.382,
+          6.424
+        ],
+        [
+          13.762,
+          5.408
+        ],
+        [
+          13.762,
+          4.9
+        ],
+        [
+          13.762,
+          4.392
+        ],
+        [
+          13.762,
+          3.884
+        ],
+        [
+          15.794,
+          5.408
+        ],
+        [
+          15.794,
+          4.9
+        ],
+        [
+          15.794,
+          4.392
+        ],
+        [
+          15.794,
+          3.884
+        ],
+        [
+          17.826,
+          5.408
+        ],
+        [
+          17.826,
+          4.9
+        ],
+        [
+          17.826,
+          4.392
+        ],
+        [
+          17.826,
+          3.884
+        ],
+        [
+          19.858,
+          5.408
+        ],
+        [
+          19.858,
+          4.9
+        ],
+        [
+          19.858,
+          4.392
+        ],
+        [
+          19.858,
+          3.884
+        ]
+      ],
+      "cube_size": 0.508
+    },
+    {
+      "id": 38,
+      "name": "t5_banner_N1_38",
+      "task": 5,
+      "kind": "banner",
+      "color": null,
+      "role": "banner_N1",
+      "x": 14.778,
+      "y": 6.17,
+      "z": 0.3,
+      "yaw": 0.0,
+      "lat": 27.37407187,
+      "lon": -82.4528034,
+      "uri": "model://NumberBanner1",
+      "number": 1
+    },
+    {
+      "id": 39,
+      "name": "t5_dock_indicator_N1_39",
+      "task": 5,
+      "kind": "dock_indicator",
+      "color": "green",
+      "role": "dock_indicator_N1",
+      "x": 14.778,
+      "y": 5.916,
+      "z": 0.3,
+      "yaw": 1.5708,
+      "lat": 27.37406959,
+      "lon": -82.4528034,
+      "uri": "model://DockIndicatorGreen"
+    },
+    {
+      "id": 40,
+      "name": "t5_banner_N2_40",
+      "task": 5,
+      "kind": "banner",
+      "color": null,
+      "role": "banner_N2",
+      "x": 16.81,
+      "y": 6.17,
+      "z": 0.3,
+      "yaw": 0.0,
+      "lat": 27.37407187,
+      "lon": -82.45278285,
+      "uri": "model://NumberBanner2",
+      "number": 2
+    },
+    {
+      "id": 41,
+      "name": "t5_dock_indicator_N2_41",
+      "task": 5,
+      "kind": "dock_indicator",
+      "color": "red",
+      "role": "dock_indicator_N2",
+      "x": 16.81,
+      "y": 5.916,
+      "z": 0.3,
+      "yaw": 1.5708,
+      "lat": 27.37406959,
+      "lon": -82.45278285,
+      "uri": "model://DockIndicatorRed"
+    },
+    {
+      "id": 42,
+      "name": "t5_banner_N3_42",
+      "task": 5,
+      "kind": "banner",
+      "color": null,
+      "role": "banner_N3",
+      "x": 18.842,
+      "y": 6.17,
+      "z": 0.3,
+      "yaw": 0.0,
+      "lat": 27.37407187,
+      "lon": -82.45276229,
+      "uri": "model://NumberBanner3",
+      "number": 3
+    },
+    {
+      "id": 43,
+      "name": "t5_dock_indicator_N3_43",
+      "task": 5,
+      "kind": "dock_indicator",
+      "color": "red",
+      "role": "dock_indicator_N3",
+      "x": 18.842,
+      "y": 5.916,
+      "z": 0.3,
+      "yaw": 1.5708,
+      "lat": 27.37406959,
+      "lon": -82.45276229,
+      "uri": "model://DockIndicatorRed"
+    },
+    {
+      "id": 44,
+      "name": "t5_slip_vessel_N3_44",
+      "task": 5,
+      "kind": "vessel",
+      "color": "black",
+      "role": "slip_vessel_N3",
+      "x": 18.842,
+      "y": 4.4786,
+      "z": 0.0,
+      "yaw": 1.5708,
+      "lat": 27.37405668,
+      "lon": -82.45276229,
+      "uri": "model://StationaryVesselBlack",
+      "footprint": [
+        [
+          19.1252,
+          3.9452
+        ],
+        [
+          19.1252,
+          5.012
+        ],
+        [
+          18.842,
+          5.512
+        ],
+        [
+          18.5588,
+          5.012
+        ],
+        [
+          18.5588,
+          3.9452
+        ]
+      ]
+    }
+  ]
+}
