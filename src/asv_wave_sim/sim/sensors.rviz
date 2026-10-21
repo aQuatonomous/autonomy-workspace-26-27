@@ -1,0 +1,77 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Airy lidar (/rslidar_points)
+      Enabled: true
+      Topic:
+        Value: /rslidar_points
+        Reliability Policy: Best Effort
+        Depth: 5
+      Size (m): 0.05
+      Style: Points
+      Size (Pixels): 3
+      Color Transformer: AxisColor
+      Axis: Z
+      Decay Time: 0
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Filtered (/points_filtered)
+      Enabled: false
+      Topic:
+        Value: /points_filtered
+        Reliability Policy: Best Effort
+        Depth: 5
+      Size (Pixels): 4
+      Style: Points
+      Color Transformer: FlatColor
+      Color: 255; 255; 0
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Buoy markers
+      Enabled: true
+      Topic:
+        Value: /buoy_markers
+    - Class: rviz_default_plugins/Image
+      Name: Camera0 (right)
+      Enabled: true
+      Topic:
+        Value: /camera0/image_raw
+        Reliability Policy: Best Effort
+        Depth: 5
+    - Class: rviz_default_plugins/Image
+      Name: Camera1 (centre)
+      Enabled: true
+      Topic:
+        Value: /camera1/image_raw
+        Reliability Policy: Best Effort
+        Depth: 5
+    - Class: rviz_default_plugins/Image
+      Name: Camera2 (left)
+      Enabled: true
+      Topic:
+        Value: /camera2/image_raw
+        Reliability Policy: Best Effort
+        Depth: 5
+  Global Options:
+    Fixed Frame: rslidar
+    Background Color: 48; 48; 48
+  Tools:
+    - Class: rviz_default_plugins/Interact
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 25
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 0
+      Pitch: 0.6
+      Yaw: 3.14
+Window Geometry:
+  Width: 1400
+  Height: 900

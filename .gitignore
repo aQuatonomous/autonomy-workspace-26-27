@@ -78,3 +78,9 @@ src/asv_wave_sim/log/
 
 # SITL_Models lives in ~/SITL_Models, not in workspace
 SITL_Models/
+
+# Simulator: generated courses (select_course.sh), SITL state, judge run reports, machine overrides.
+# Per-GPU TensorRT engines are cached outside the repo (~/.cache/aquatonomous/engines).
+src/asv_wave_sim/course/generated/
+src/asv_wave_sim/sim/runs/
+src/asv_wave_sim/sim/config.local.env

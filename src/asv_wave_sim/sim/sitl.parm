@@ -1,0 +1,24 @@
+# Extra SITL parameters for the course runs (loaded by 3_sitl.sh after the rover-skid defaults).
+# The real boat arms through its RC transmitter / kill switch; in sim the stack scripts arm over MAVROS.
+ARMING_CHECK 0
+# Fail-safes would stop the boat without an RC transmitter or ground station.
+FS_ACTION 0
+FS_THR_ENABLE 0
+FS_GCS_ENABLE 0
+# MAVROS connects to SITL's second MAVLink port (TCP 5762), whose telemetry defaults to 1 Hz; the
+# planner and global_frame need position/heading at 10 Hz. MAV2_* is ArduPilot 4.7+, SR1_* older
+# releases; the unknown set is ignored.
+MAV2_POSITION 10
+MAV2_EXTRA1 10
+MAV2_EXTRA2 10
+MAV2_EXT_STAT 2
+MAV2_RAW_SENS 2
+MAV2_RC_CHAN 2
+MAV2_EXTRA3 2
+SR1_POSITION 10
+SR1_EXTRA1 10
+SR1_EXTRA2 10
+SR1_EXT_STAT 2
+SR1_RAW_SENS 2
+SR1_RC_CHAN 2
+SR1_EXTRA3 2

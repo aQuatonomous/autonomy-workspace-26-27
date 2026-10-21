@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>sim_judge</name>
+  <version>0.1.0</version>
+  <description>
+    Simulated RoboBoat 2026 judge: a stand-in RoboCommand server that decodes the team's
+    $R-framed protobuf reports, and a referee that scores Tasks 1, 2, 3 and 5 from Gazebo
+    ground truth and the course answer key.
+  </description>
+  <maintainer email="aquatonomous@queensu.ca">aQuatonomous</maintainer>
+  <license>MIT</license>
+
+  <exec_depend>python3-protobuf</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

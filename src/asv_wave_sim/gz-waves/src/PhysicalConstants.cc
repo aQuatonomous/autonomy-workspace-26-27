@@ -15,6 +15,8 @@
 
 #include "gz/waves/PhysicalConstants.hh"
 
+#include <cstdlib>
+
 namespace gz
 {
 namespace waves
@@ -36,8 +38,21 @@ double PhysicalConstants::G()
 
 double PhysicalConstants::WaterDensity()
 {
-  // return 998.6;
-  return 1025.0;
+  // GZ_WAVES_WATER_DENSITY overrides the seawater default, e.g. 1000 for a
+  // freshwater venue.
+  static const double density = []()
+  {
+    const char *env = std::getenv("GZ_WAVES_WATER_DENSITY");
+    if (env != nullptr)
+    {
+      char *end = nullptr;
+      const double value = std::strtod(env, &end);
+      if (end != env && value > 0.0)
+        return value;
+    }
+    return 1025.0;
+  }();
+  return density;
 }
 
 double PhysicalConstants::WaterKinematicViscosity()
