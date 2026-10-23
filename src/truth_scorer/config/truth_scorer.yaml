@@ -1,0 +1,57 @@
+# Scoring tunables for truth_scorer.
+#
+# This is NOT a ROS parameter file. It is a plain nested YAML matching core/config.py's
+# ScorerConfig, loaded by truth_scorer_node via its `scorer_config_file` ROS parameter.
+# Keeping it separate from ROS params is what lets analyse_run.py sweep these offline with no
+# ROS installed at all.
+#
+# Unknown keys raise on load -- a typo'd tunable that silently does nothing is a debugging
+# tar pit. Every value below is the code default, written out explicitly so the whole tuning
+# surface is visible in one place.
+
+viewpoint:
+  # The correlation discount. At ~2.6 Hz consecutive frames of a stationary buoy share most of
+  # their points; without this, p_exist saturates in three frames on what is really one look.
+  bearing_scale_rad: 0.3490658503988659   # 20 deg
+  range_scale_m: 8.0
+  min_weight: 0.05
+  max_history: 64
+
+existence:
+  p0: 0.30
+  p_detect: 0.85
+  clutter_rate: 0.15
+  miss_penalty: 0.70
+  logit_min: -4.0
+  logit_max: 4.0            # p ~ 0.982 -- the filter never claims certainty
+  decay_tau_s: 60.0
+  prune_below_p: 0.05
+  prune_after_expected_misses: 12
+
+classifier:
+  score_floor: 0.15         # camera0 currently peaks near 0.10, so it contributes nothing
+  score_reference: 0.60
+  max_logprob_spread: 6.0
+  cv_stale_s: 0.75
+  prior_strength: 1.0
+
+position:
+  sigma_range_lidar_m: 0.08
+  sigma_bearing_lidar_rad: 0.010471975511965976   # 0.6 deg
+  sigma_range_camera_frac: 0.12
+  sigma_bearing_camera_rad: 0.03490658503988659   # 2 deg
+  process_noise_m2_per_s: 0.0001
+  covariance_floor_m: 0.25  # correlated GPS bias does not average away
+  birth_sigma_m: 3.0
+
+association:
+  mahalanobis_gate: 9.21    # chi2(2) at 99 %
+  max_distance_m: 1.50      # hard backstop, well under the 2.4384 m gate-buoy spacing
+  ambiguity_margin: 2.0
+
+visibility:
+  max_range_m: 35.0
+  min_range_m: 0.8
+  fov_rad: 6.283185307179586   # the LiDAR is a 360 deg scanner
+  occlusion_object_radius_m: 0.3
+  occlusion_min_p_exist: 0.6

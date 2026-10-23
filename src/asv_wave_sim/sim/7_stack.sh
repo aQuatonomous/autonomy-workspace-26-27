@@ -7,14 +7,17 @@
 #   7_stack.sh --task 1          planner task_id (1, 2, 3, ...)
 #   7_stack.sh --task 2 --no-cv  skip the TensorRT CV pipeline (LiDAR-only detections)
 #   7_stack.sh --no-arm          leave mode/arming to you (MAVProxy: mode GUIDED, arm throttle)
+#   7_stack.sh --no-score        skip the truth scorer and its evaluator
 . "$(dirname "${BASH_SOURCE[0]}")/env.sh"
+sim_load_course >/dev/null 2>&1 || true
 
-TASK=1 CV=1 ARM=1
+TASK=1 CV=1 ARM=1 SCORE=1
 while [ $# -gt 0 ]; do
   case "$1" in
     --task) TASK="$2"; shift 2 ;;
     --no-cv) CV=0; shift ;;
     --no-arm) ARM=0; shift ;;
+    --no-score) SCORE=0; shift ;;
     -h|--help) sed -n '2,10p' "$0"; exit 0 ;;
     *) echo "unknown option $1" >&2; exit 2 ;;
   esac
@@ -65,6 +68,23 @@ if [ -d "$MESSAGE_NODE_PYDEPS/google/protobuf" ]; then
 else
   echo "!!! $MESSAGE_NODE_PYDEPS is missing (protobuf for message_node); run setup_sim.sh. No reports this run." >&2
 fi
+# Truth scorer: a pure observer. Nothing subscribes to /scored_objects, so the control path above
+# is unaffected and the boat still runs the course if either node dies. The evaluator writes its
+# report to $SIM_RUNS_DIR on Ctrl+C, alongside the sim judge's.
+if [ $SCORE = 1 ]; then
+  if [ -n "${SIM_ANSWER_KEY:-}" ] && [ -f "$SIM_ANSWER_KEY" ]; then
+    start "truth scorer + evaluator (-> $SIM_RUNS_DIR)" \
+      ros2 launch truth_scorer truth_scorer.launch.py \
+        answer_key:="$SIM_ANSWER_KEY" report_dir:="$SIM_RUNS_DIR"
+  else
+    # Scoring without an answer key is still useful -- /scored_objects is published either way --
+    # but there is nothing to measure it against, so say so rather than writing an empty report.
+    echo "!!! No SIM_ANSWER_KEY; running the scorer without the evaluator (no run report)." >&2
+    start "truth scorer (no answer key, no report)" \
+      ros2 launch truth_scorer truth_scorer.launch.py enable_eval:=false
+  fi
+fi
+
 [ $ARM = 1 ] && start "GUIDED + arm over MAVROS" bash "$SIM_DIR/arm_guided.sh"
 
 echo "=== Stack running (Ctrl+C stops it)."

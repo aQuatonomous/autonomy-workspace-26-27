@@ -20,6 +20,7 @@ import rclpy
 from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
 from std_msgs.msg import String
+from builtin_interfaces.msg import Time
 from pointcloud_filters.msg import TrackedBuoyArray, TrackedBuoy, FusedBuoyArray, FusedBuoy
 
 
@@ -27,8 +28,14 @@ from pointcloud_filters.msg import TrackedBuoyArray, TrackedBuoy, FusedBuoyArray
 CLASS_ID_UNKNOWN = 255
 
 
-def _track_to_fused(track: TrackedBuoy, class_id: int, class_name: str) -> FusedBuoy:
-    """Copy TrackedBuoy to FusedBuoy and set class_id, class_name."""
+def _track_to_fused(
+    track: TrackedBuoy,
+    class_id: int,
+    class_name: str,
+    class_confidence: float = 0.0,
+    class_stamp: Time = None,
+) -> FusedBuoy:
+    """Copy TrackedBuoy to FusedBuoy and set class_id, class_name, class_confidence, class_stamp."""
     fused = FusedBuoy()
     fused.id = track.id
     fused.range = track.range
@@ -42,6 +49,11 @@ def _track_to_fused(track: TrackedBuoy, class_id: int, class_name: str) -> Fused
     fused.observation_count = track.observation_count
     fused.first_seen = track.first_seen
     fused.last_seen = track.last_seen
+    # The YOLO score used to be parsed and thrown away here. Carrying it through is what lets a
+    # consumer weight class evidence by how sure the detector was, instead of treating a 0.08
+    # guess and a 0.95 call as the same statement.
+    fused.class_confidence = float(class_confidence)
+    fused.class_stamp = class_stamp if class_stamp is not None else Time()
     return fused
 
 
@@ -61,6 +73,11 @@ class VisionLidarFusionNode(Node):
         )
 
         self._latest_cv_detections: List[Dict] = []
+        # When the CV frame currently held in _latest_cv_detections arrived, on this node's clock.
+        # Recorded at receipt rather than taken from the CV JSON's own 'timestamp' field, because
+        # that one is wall-clock and everything else here runs on sim time -- comparing the two
+        # would produce an "age" of several decades.
+        self._latest_cv_stamp: Optional[Time] = None
         self._latest_lidar: Optional[TrackedBuoyArray] = None
 
         self._cv_sub = self.create_subscription(
@@ -94,6 +111,7 @@ class VisionLidarFusionNode(Node):
             self.get_logger().warn(f'CV: invalid JSON: {e}')
             return
         self._latest_cv_detections = data.get('detections', [])
+        self._latest_cv_stamp = self.get_clock().now().to_msg()
         self._maybe_publish_fused()
 
     def _lidar_callback(self, msg: TrackedBuoyArray) -> None:
@@ -145,8 +163,8 @@ class VisionLidarFusionNode(Node):
             cv_candidates.append((cv_bearing, cid, class_name, score))
 
         # For each CV detection, find closest LiDAR track in that direction (bearing only)
-        # track_id -> (class_id, class_name, best_bearing_diff)
-        assigned: Dict[int, Tuple[int, str, float]] = {}
+        # track_id -> (class_id, class_name, score, best_bearing_diff)
+        assigned: Dict[int, Tuple[int, str, float, float]] = {}
 
         for cv_bearing, class_id, class_name, score in cv_candidates:
             best_track_id = None
@@ -161,16 +179,17 @@ class VisionLidarFusionNode(Node):
                     best_track_id = track.id
 
             if best_track_id is not None:
-                if best_track_id not in assigned or best_bearing_diff < assigned[best_track_id][2]:
-                    assigned[best_track_id] = (class_id, class_name, best_bearing_diff)
+                if best_track_id not in assigned or best_bearing_diff < assigned[best_track_id][3]:
+                    assigned[best_track_id] = (class_id, class_name, score, best_bearing_diff)
 
         # Build output: every LiDAR track with assigned class or unknown
         for track in msg.buoys:
             if track.id in assigned:
-                cid, cname, _ = assigned[track.id]
-                out.buoys.append(_track_to_fused(track, cid, cname))
+                cid, cname, score, _ = assigned[track.id]
+                out.buoys.append(
+                    _track_to_fused(track, cid, cname, score, self._latest_cv_stamp))
             else:
-                out.buoys.append(_track_to_fused(track, CLASS_ID_UNKNOWN, 'unknown'))
+                out.buoys.append(_track_to_fused(track, CLASS_ID_UNKNOWN, 'unknown', 0.0, None))
 
         self._fused_pub.publish(out)
 
