@@ -654,6 +654,18 @@ class TaskMaster:
         
         return result
     
+    @property
+    def manager(self):
+        """The active task manager, or None.
+
+        global_planner_node reads `task_master.manager` in eight places (velocities, speeds,
+        pump_on, indicator_color, serviced_for_report, ...) and TaskMaster never exposed it, so
+        every planning tick died with AttributeError before it could issue a setpoint -- the boat
+        armed into GUIDED and then sat still. Aliasing the existing private accessor fixes all
+        eight call sites without changing any planning behaviour.
+        """
+        return self._get_active_manager()
+
     def _get_active_manager(self):
         """Get the currently active task manager"""
         if self.state == TaskMasterState.RUN_TASK_1:
