@@ -9,12 +9,17 @@ Reads course/roboboat2026.yaml and writes:
   --seed 0  the layout exactly as drawn in the handbook diagrams (default)
   --seed N  randomized within the rulebook limits listed under `randomize:` in the YAML
 
+Weather: --waves picks wind and waves together (WAVE_PRESETS), --wind / --wind-from override the
+wind, --light picks the sun from the time of day at the venue (LIGHT_PRESETS) or --time HH:MM.
+
 Examples:
   python3 tools/generate_course.py                       # worlds/roboboat2026_course.sdf
   python3 tools/generate_course.py --seed 7 --out /tmp/rb7/course
+  python3 tools/generate_course.py --waves breezy_lake --wind-from 200 --light low_sun
 """
 
 import argparse
+import datetime
 import json
 import math
 import os
@@ -33,11 +38,28 @@ DEFAULT_OUT = os.path.join(SIM_ROOT, 'gz-waves-models', 'worlds', 'roboboat2026_
 M_PER_DEG = 111318.84502145034
 
 WAVE_PRESETS = {
-    # name: (wind_speed m/s, steepness)
-    'flat': (0.1, 0.0),
-    'calm_lake': (1.0, 0.1),      # regatta lake behind a wave attenuator
-    'breezy_lake': (3.0, 0.2),
-    'legacy': (0.5, 0.2),         # values from the original aquatonomous_world
+    # name: (air wind m/s, gust fraction, wave-spectrum wind m/s, steepness)
+    # The air wind pushes the boat (WindEffects). The wave-spectrum wind only shapes the FFT waves
+    # and is lower than the air wind: the regatta lake is behind a wave attenuator with a short fetch.
+    'flat': (0.0, 0.0, 0.1, 0.0),
+    'calm_lake': (1.5, 0.3, 1.0, 0.1),
+    'breezy_lake': (4.0, 0.25, 3.0, 0.2),
+    'windy_lake': (7.0, 0.3, 5.0, 0.3),
+    'legacy': (0.0, 0.0, 0.5, 0.2),   # waves from the original aquatonomous_world, no wind force
+}
+
+# gz-sim WindEffects pushes each wind-enabled link with F = k * mass * (wind - link velocity).
+# k is chosen so F matches quadratic air drag 0.5 * rho * CdA * v^2 at the preset's mean wind.
+AIR_DENSITY = 1.2
+BOAT_WIND_LINK_MASS = 30.0   # ourboat base_link, the only link with <enable_wind>
+
+LIGHT_PRESETS = {
+    # name: (local time HH:MM, sky)
+    'morning': ('09:00', 'clear'),
+    'midday': ('12:30', 'clear'),
+    'afternoon': ('15:30', 'clear'),
+    'low_sun': ('17:45', 'clear'),       # sun low in the west: glare and long shadows for CV
+    'overcast': ('12:30', 'overcast'),
 }
 
 FOOTPRINT_RADIUS = {
@@ -420,15 +442,22 @@ class Course:
 # World SDF
 # ---------------------------------------------------------------------------
 
-def waves_model(preset):
-    wind, steep = WAVE_PRESETS[preset]
+def enu_toward_deg(compass_from_deg):
+    """ENU angle (counter-clockwise from east) the wind blows toward, from the compass bearing it
+    blows from."""
+    return (90.0 - (compass_from_deg + 180.0)) % 360.0
+
+
+def waves_model(weather, water):
+    deep = ' '.join(f'{c:.3f}' for c in water['deep'])
+    shallow = ' '.join(f'{c:.3f}' for c in water['shallow'])
     wave = f"""<wave>
             <algorithm>fft</algorithm>
             <tile_size>64</tile_size>
             <cell_count>64</cell_count>
-            <wind_speed>{wind}</wind_speed>
-            <wind_angle_deg>135</wind_angle_deg>
-            <steepness>{steep}</steepness>
+            <wind_speed>{weather['wave_wind']}</wind_speed>
+            <wind_angle_deg>{enu_toward_deg(weather['wind_from_deg']):.0f}</wind_angle_deg>
+            <steepness>{weather['steepness']}</steepness>
           </wave>"""
     return f"""
     <model name="waves">
@@ -471,10 +500,10 @@ def waves_model(preset):
             <param><shader>vertex</shader><name>bumpScale</name><value>128 128</value><type>float_array</type></param>
             <param><shader>vertex</shader><name>bumpSpeed</name><value>0.01 0.01</value><type>float_array</type></param>
             <param><shader>vertex</shader><name>t</name><value>TIME</value></param>
-            <param><shader>fragment</shader><name>deepColor</name><value>0.0 0.05 0.2 1.0</value><type>float_array</type></param>
-            <param><shader>fragment</shader><name>shallowColor</name><value>0.0 0.1 0.3 1.0</value><type>float_array</type></param>
+            <param><shader>fragment</shader><name>deepColor</name><value>{deep} 1.0</value><type>float_array</type></param>
+            <param><shader>fragment</shader><name>shallowColor</name><value>{shallow} 1.0</value><type>float_array</type></param>
             <param><shader>fragment</shader><name>fresnelPower</name><value>5.0</value><type>float</type></param>
-            <param><shader>fragment</shader><name>hdrMultiplier</name><value>0.4</value><type>float</type></param>
+            <param><shader>fragment</shader><name>hdrMultiplier</name><value>{weather['water_hdr']:.2f}</value><type>float</type></param>
             <param><shader>fragment</shader><name>bumpMap</name><value>model://waves/materials/wave_normals.dds</value><type>texture</type><arg>0</arg></param>
             <param><shader>fragment</shader><name>cubeMap</name><value>model://waves/materials/skybox_lowres.dds</value><type>texture_cube</type><arg>1</arg></param>
           </plugin>
@@ -526,11 +555,122 @@ def sun_direction(azimuth_deg, elevation_deg):
     return tuple(-c for c in to_sun)
 
 
-def world_sdf(course, args):
+def solar_position(lat_deg, lon_deg, day_of_year, utc_hour):
+    """Sun compass azimuth and elevation in degrees (NOAA low-precision formulas, ~0.2 deg)."""
+    g = 2.0 * math.pi / 365.0 * (day_of_year - 1 + (utc_hour - 12.0) / 24.0)
+    eqtime = 229.18 * (0.000075 + 0.001868 * math.cos(g) - 0.032077 * math.sin(g)
+                       - 0.014615 * math.cos(2 * g) - 0.040849 * math.sin(2 * g))
+    decl = (0.006918 - 0.399912 * math.cos(g) + 0.070257 * math.sin(g) - 0.006758 * math.cos(2 * g)
+            + 0.000907 * math.sin(2 * g) - 0.002697 * math.cos(3 * g) + 0.00148 * math.sin(3 * g))
+    true_solar_min = utc_hour * 60.0 + eqtime + 4.0 * lon_deg
+    ha = math.radians(true_solar_min / 4.0 - 180.0)
+    lat = math.radians(lat_deg)
+    cos_zen = math.sin(lat) * math.sin(decl) + math.cos(lat) * math.cos(decl) * math.cos(ha)
+    elevation = 90.0 - math.degrees(math.acos(max(-1.0, min(1.0, cos_zen))))
+    azimuth = math.degrees(math.atan2(math.sin(ha), math.cos(ha) * math.sin(lat) - math.tan(decl) * math.cos(lat)))
+    return (azimuth + 180.0) % 360.0, elevation
+
+
+def mix(a, b, t):
+    return tuple(x + (y - x) * t for x, y in zip(a, b))
+
+
+def rgb(c):
+    return ' '.join(f'{x:.3f}' for x in c)
+
+
+def resolve_weather(cfg, args, seed):
+    """Wind, waves and sun for this run, from the presets, the venue in the YAML and the options."""
+    venue = cfg['venue']
+    air, gust, wave_wind, steep = WAVE_PRESETS[args.waves]
+    if args.wind is not None:
+        air = args.wind
+    wind_from = float(venue.get('wind_from_deg', 240.0))
+    if args.wind_from is not None:
+        wind_from = args.wind_from
+    elif seed != 0 and cfg.get('randomize', {}).get('wind_direction'):
+        # Own generator so the course layout of a seed does not change with the weather options.
+        wind_from = random.Random(f'wind{seed}').uniform(0.0, 360.0)
+
+    light = args.light or venue.get('light_preset', 'midday')
+    local_time, sky = LIGHT_PRESETS[light]
+    if args.time:
+        local_time = args.time
+    hh, mm = (int(p) for p in local_time.split(':'))
+    date = str(venue.get('date', '2027-03-15'))
+    day_of_year = datetime.date.fromisoformat(date).timetuple().tm_yday
+    utc_hour = hh + mm / 60.0 - float(venue.get('utc_offset_h', -4.0))
+    az, el = solar_position(float(venue['datum']['lat']), float(venue['datum']['lon']), day_of_year, utc_hour)
+    if args.sun_azimuth is not None:
+        az = args.sun_azimuth
+    if args.sun_elevation is not None:
+        el = args.sun_elevation
+    if el < 5.0:
+        sys.exit(f'The sun is {el:.1f} deg above the horizon at {local_time}; pick a daytime --time.')
+
+    # Clear sky: low sun is dimmer and warmer, the sky fill (ambient) weaker. Overcast: no
+    # directional sun to speak of, bright flat ambient, grey sky.
+    day = min(1.0, math.sin(math.radians(el)) / math.sin(math.radians(50.0)))
+    warm = min(1.0, el / 30.0)
+    if sky == 'overcast':
+        sun_color, sun_intensity = (0.85, 0.87, 0.90), 0.35
+        ambient, background, humidity = (0.72, 0.73, 0.75), (0.70, 0.72, 0.75), 0.9
+        water_hdr = 0.25
+    else:
+        sun_color = mix((1.0, 0.70, 0.42), (1.0, 0.97, 0.90), warm)
+        sun_intensity = 0.5 + 0.7 * day
+        ambient = mix((0.32, 0.30, 0.30), (0.50, 0.52, 0.56), day)
+        background = mix((0.86, 0.72, 0.58), (0.62, 0.76, 0.92), warm)
+        humidity, water_hdr = 0.35, 0.4
+
+    cda = float(cfg.get('boat', {}).get('wind_cda', 0.35))
+    k = 0.5 * AIR_DENSITY * cda * air / BOAT_WIND_LINK_MASS if air > 0 else 0.0
+    return {
+        'preset': args.waves, 'wind_speed': air, 'wind_from_deg': round(wind_from % 360.0, 1),
+        'gust_fraction': gust, 'wind_force_scale': k, 'wave_wind': wave_wind, 'steepness': steep,
+        'light': light, 'sky': sky, 'local_time': local_time, 'date': date,
+        'sun_azimuth_deg': round(az, 1), 'sun_elevation_deg': round(el, 1),
+        'sun_color': sun_color, 'sun_intensity': sun_intensity, 'ambient': ambient,
+        'background': background, 'cloud_humidity': humidity, 'water_hdr': water_hdr,
+    }
+
+
+def wind_sdf(w):
+    """World wind plus the WindEffects system that pushes links with <enable_wind> (the boat hull)."""
+    if w['wind_speed'] <= 0:
+        return ''
+    a = math.radians(enu_toward_deg(w['wind_from_deg']))
+    vx, vy = w['wind_speed'] * math.cos(a), w['wind_speed'] * math.sin(a)
+    return f"""
+    <!-- Wind {w['wind_speed']} m/s from compass {w['wind_from_deg']} deg, gusts +/-{w['gust_fraction'] * 100:.0f} %.
+         Force on the hull: k * mass * (wind - hull velocity), k from air drag at the mean wind. -->
+    <wind><linear_velocity>{vx:.3f} {vy:.3f} 0</linear_velocity></wind>
+    <plugin filename="gz-sim-wind-effects-system" name="gz::sim::systems::WindEffects">
+      <force_approximation_scaling_factor>{w['wind_force_scale']:.4f}</force_approximation_scaling_factor>
+      <horizontal>
+        <magnitude>
+          <time_for_rise>10</time_for_rise>
+          <sin><amplitude_percent>{w['gust_fraction']}</amplitude_percent><period>40</period></sin>
+          <noise type="gaussian"><mean>0</mean><stddev>{0.05 * w['wind_speed']:.3f}</stddev></noise>
+        </magnitude>
+        <direction>
+          <time_for_rise>30</time_for_rise>
+          <sin><amplitude>10</amplitude><period>90</period></sin>
+          <noise type="gaussian"><mean>0</mean><stddev>0.03</stddev></noise>
+        </direction>
+      </horizontal>
+    </plugin>
+"""
+
+
+def world_sdf(course, args, weather):
     cfg = course.cfg
     fr = course.frame
     s = course.start
-    dx, dy, dz = sun_direction(args.sun_azimuth, args.sun_elevation)
+    w = weather
+    dx, dy, dz = sun_direction(w['sun_azimuth_deg'], w['sun_elevation_deg'])
+    water = cfg['venue'].get('water_color', {})
+    water = {'deep': water.get('deep', (0.0, 0.05, 0.2)), 'shallow': water.get('shallow', (0.0, 0.1, 0.3))}
     includes = []
     for e in course.elements:
         if 'uri' not in e:
@@ -578,23 +718,24 @@ def world_sdf(course, args):
     </spherical_coordinates>
 
     <scene>
-      <ambient>0.55 0.55 0.58 1</ambient>
-      <background>0.62 0.76 0.92 1</background>
-      <sky><clouds><speed>2</speed><humidity>0.35</humidity></clouds></sky>
+      <ambient>{rgb(w['ambient'])} 1</ambient>
+      <background>{rgb(w['background'])} 1</background>
+      <sky><clouds><speed>2</speed><humidity>{w['cloud_humidity']}</humidity></clouds></sky>
       <shadows>{'true' if args.shadows else 'false'}</shadows>
       <grid>false</grid>
     </scene>
 
-    <!-- Florida sun: azimuth {args.sun_azimuth} deg, elevation {args.sun_elevation} deg -->
+    <!-- Sun ({w['light']}, {w['sky']}): {w['date']} {w['local_time']} local, azimuth {w['sun_azimuth_deg']} deg,
+         elevation {w['sun_elevation_deg']} deg -->
     <light type="directional" name="sun">
       <cast_shadows>{'true' if args.shadows else 'false'}</cast_shadows>
       <pose>0 0 50 0 0 0</pose>
-      <diffuse>1.0 0.97 0.90 1</diffuse>
-      <specular>0.6 0.6 0.6 1</specular>
-      <intensity>1.2</intensity>
+      <diffuse>{rgb(w['sun_color'])} 1</diffuse>
+      <specular>{rgb(mix((0, 0, 0), w['sun_color'], 0.6))} 1</specular>
+      <intensity>{w['sun_intensity']:.2f}</intensity>
       <direction>{dx:.4f} {dy:.4f} {dz:.4f}</direction>
     </light>
-{waves_model(args.waves)}
+{wind_sdf(w)}{waves_model(w, water)}
 {shore}
 {''.join(course.models)}
 {chr(10).join(includes)}
@@ -604,7 +745,7 @@ def world_sdf(course, args):
 """
 
 
-def answer_key(course, args, world_path):
+def answer_key(course, args, world_path, weather):
     fr = course.frame
     s = course.start
     lat, lon = fr.latlon(s['x'], s['y'])
@@ -622,6 +763,8 @@ def answer_key(course, args, world_path):
         'start': {**s, 'lat': round(lat, 8), 'lon': round(lon, 8), 'compass_heading_deg': round(heading, 1)},
         'boundary': course.boundary_polygon,
         'waves': args.waves,
+        'weather': {k: weather[k] for k in ('wind_speed', 'wind_from_deg', 'gust_fraction', 'light', 'sky',
+                                            'date', 'local_time', 'sun_azimuth_deg', 'sun_elevation_deg')},
         'water_density': course.cfg['venue'].get('water_density', 1000.0),
         'gates': course.gates,
         'tasks': course.tasks,
@@ -635,8 +778,13 @@ def main(argv=None):
     ap.add_argument('--seed', type=int, default=0, help='0 = layout as drawn; N > 0 = randomized')
     ap.add_argument('--out', default=DEFAULT_OUT, help='output path without extension')
     ap.add_argument('--waves', default=None, choices=sorted(WAVE_PRESETS), help='wave preset (default from YAML)')
-    ap.add_argument('--sun-azimuth', type=float, default=120.0, help='compass degrees')
-    ap.add_argument('--sun-elevation', type=float, default=50.0)
+    ap.add_argument('--wind', type=float, default=None, help='mean wind m/s (default from --waves)')
+    ap.add_argument('--wind-from', type=float, default=None,
+                    help='compass degrees the wind blows from (default from YAML; random per seed if enabled)')
+    ap.add_argument('--light', default=None, choices=sorted(LIGHT_PRESETS), help='time of day and sky (default from YAML)')
+    ap.add_argument('--time', default=None, help='local time HH:MM, overrides the --light time')
+    ap.add_argument('--sun-azimuth', type=float, default=None, help='compass degrees, overrides the time of day')
+    ap.add_argument('--sun-elevation', type=float, default=None)
     ap.add_argument('--shadows', action='store_true', help='enable sun shadows (costs GPU time)')
     ap.add_argument('--no-shoreline', action='store_true')
     ap.add_argument('--no-boat', action='store_true', help='omit ourboat (course preview)')
@@ -649,15 +797,16 @@ def main(argv=None):
 
     course = Course(cfg, args.seed)
     course.build()
+    weather = resolve_weather(cfg, args, args.seed)
 
     out_dir = os.path.dirname(os.path.abspath(args.out))
     os.makedirs(out_dir, exist_ok=True)
     world_path = args.out + '.sdf'
     key_path = args.out + '.answer_key.json'
     with open(world_path, 'w', newline='\n') as f:
-        f.write(world_sdf(course, args))
+        f.write(world_sdf(course, args, weather))
     with open(key_path, 'w', newline='\n') as f:
-        json.dump(answer_key(course, args, world_path), f, indent=2)
+        json.dump(answer_key(course, args, world_path, weather), f, indent=2)
         f.write('\n')
 
     t2 = course.tasks['2']['indicators']
@@ -667,7 +816,9 @@ def main(argv=None):
     print(f'answer key: {key_path}')
     print(f'seed {args.seed}: task2 indicators {[i["color"] for i in t2]}, task3 {t3["indicator_color"]} '
           f'({t3["required_direction"]}), dock target {t5["correct"]}')
-    print(f'SITL home:  {answer_key(course, args, world_path)["sitl_home"]}')
+    print(f'SITL home:  {answer_key(course, args, world_path, weather)["sitl_home"]}')
+    print(f'weather:    wind {weather["wind_speed"]} m/s from {weather["wind_from_deg"]} deg ({args.waves}), '
+          f'{weather["light"]} {weather["local_time"]}: sun az {weather["sun_azimuth_deg"]} el {weather["sun_elevation_deg"]}')
     return 0
 
 

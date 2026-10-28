@@ -4,6 +4,7 @@
 #
 #   run_competition.sh --seed 0 --task 1          handbook layout, planner task 1
 #   run_competition.sh --seed 7 --task 3 --waves breezy_lake
+#   run_competition.sh --seed 2 --light low_sun --wind-from 270   weather and time of day (see README)
 #   run_competition.sh --seed 3 --no-stack        everything but the autonomy stack (drive it yourself)
 #   run_competition.sh ... --no-cv --rviz --no-attach
 #   run_competition.sh ... --full-res           cameras as on the boat (1920x1200@30); --camera WxH@HZ
@@ -28,7 +29,7 @@ while [ $# -gt 0 ]; do
     --no-cv|--no-arm) STACK_ARGS+=("$1"); shift ;;
     --rviz) RVIZ=1; shift ;;
     --no-attach) ATTACH=0; shift ;;
-    -h|--help) sed -n '2,13p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,14p' "$0"; exit 0 ;;
     *) COURSE_ARGS+=("$1"); shift ;;
   esac
 done

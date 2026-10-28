@@ -4,6 +4,7 @@
 #   select_course.sh                     # seed 0: the handbook layout as drawn
 #   select_course.sh --seed 7            # randomized layout within the handbook ranges
 #   select_course.sh --seed 7 --waves breezy_lake
+#   select_course.sh --seed 7 --wind 5 --wind-from 200 --light low_sun   # wind and time of day
 #   select_course.sh --world path/to/world.sdf   # any world; uses <world>.answer_key.json if present
 #   select_course.sh --legacy            # the original aquatonomous_world.sdf (no judge)
 #   select_course.sh --camera 1280x800@20   # boat camera resolution and rate (default SIM_CAMERA)
@@ -23,7 +24,7 @@ while [ $# -gt 0 ]; do
     --legacy) WORLD="$ASV_DIR/gz-waves-models/worlds/aquatonomous_world.sdf"; shift ;;
     --camera) SIM_CAMERA="$2"; shift 2 ;;
     --full-res) SIM_CAMERA=1920x1200@30; shift ;;
-    -h|--help) sed -n '2,14p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,15p' "$0"; exit 0 ;;
     *) GEN_ARGS+=("$1"); shift ;;
   esac
 done

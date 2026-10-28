@@ -38,6 +38,17 @@
     ]
   ],
   "waves": "calm_lake",
+  "weather": {
+    "wind_speed": 1.5,
+    "wind_from_deg": 240.0,
+    "gust_fraction": 0.3,
+    "light": "midday",
+    "sky": "clear",
+    "date": "2027-03-16",
+    "local_time": "12:30",
+    "sun_azimuth_deg": 147.7,
+    "sun_elevation_deg": 56.3
+  },
   "water_density": 1000.0,
   "gates": [
     {

@@ -37,7 +37,7 @@ Install the current NVIDIA Windows driver; do not install a Linux NVIDIA driver 
 
 One tmux session (`roboboat`) with a window per component: `gazebo`, `bridges`, `sitl`,
 `mavros`, `judge`, `stack`, `shell` (and `rviz` with `--rviz`). `Ctrl+b w` lists them.
-Other options: `--waves calm_lake|breezy_lake`, `--full-res` or `--camera WxH@HZ`, `--no-cv`, `--no-arm`, `--no-attach`,
+Other options: `--waves`, `--wind`, `--wind-from`, `--light`, `--time` (see Weather and light), `--full-res` or `--camera WxH@HZ`, `--no-cv`, `--no-arm`, `--no-attach`,
 `--world FILE`, `--legacy` (the original world, no judge), `--cmd-mode` (below).
 
 The numbered scripts start the same pieces one per terminal: `1_gazebo.sh` ... `7_stack.sh`, plus
@@ -52,6 +52,21 @@ Run `select_course.sh --seed N` first; every script reads the course it writes.
 correct answers. Seed 0 is the layout as drawn; other seeds move things within the limits listed
 under `randomize:` in the YAML. The SITL home is the world origin, so GPS from MAVROS and the
 answer key share one datum.
+
+## Weather and light
+
+Set per run with the same options on `run_competition.sh`, `1_gazebo.sh` or `select_course.sh`; the
+answer key records what was used (`weather`).
+
+- `--waves flat|calm_lake|breezy_lake|windy_lake` sets the wind and the waves together (1.5, 4 and
+  7 m/s mean wind with gusts). The wind pushes the hull through Gazebo's WindEffects system, sized
+  from the boat's windage (`boat.wind_cda` in the YAML), so expect drift and weather-vaning at low
+  speed and during docking. `--wind M/S` and `--wind-from DEG` (compass, where it blows from)
+  override it; the waves follow the same direction. Seeds other than 0 get a random wind bearing.
+- `--light morning|midday|afternoon|low_sun|overcast` places the sun for that local time on the
+  venue date in the YAML (`--time HH:MM` for any other time). Low sun is dimmer and warmer, the
+  sky and ambient light follow it; `low_sun` puts glare in the cameras on westward legs and
+  `overcast` gives flat light. `--shadows` adds sun shadows (costs GPU time).
 
 ## Judge
 
