@@ -53,6 +53,13 @@ correct answers. Seed 0 is the layout as drawn; other seeds move things within t
 under `randomize:` in the YAML. The SITL home is the world origin, so GPS from MAVROS and the
 answer key share one datum.
 
+Element models come from `tools/make_course_models.py` (rulebook dimensions, origin at the
+waterline). The Polyform A-0 / A-2 buoys and the colour indicator buoy use the mechanical team's
+CAD (`course/cad/*.step`): `tools/convert_cad.py` turns it into `roboboat_common/meshes/*.obj`, split
+into pieces that take different colours (needs `pip install gmsh trimesh scipy shapely`, not part of
+the sim runtime). To add another part, put its STEP export in `course/cad/`, add it to
+`PARTS` in `convert_cad.py`, then use the mesh in `make_course_models.py`.
+
 ## Weather and light
 
 Set per run with the same options on `run_competition.sh`, `1_gazebo.sh` or `select_course.sh`; the

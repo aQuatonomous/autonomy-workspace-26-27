@@ -62,11 +62,12 @@ elements:
   polyform_a0:         # Task 2 gates and obstacles
     diameter: 0.203
     above_water: 0.1524  # 0.5 ft
-    mesh_top: 0.1778     # existing *Ropehold mesh: sphere centre at origin, rope eye to +0.178
+    height: 0.2921       # 11.5 in to the top of the rope eye (mech team CAD, course/cad/polyform_a0.step)
   polyform_a2:         # Task 3 gates, obstacles, yellow buoy
     diameter: 0.368
     above_water: 0.3048  # 1 ft
   indicator_buoy:      # custom PVC + coroplast buoy with a red/green cylinder on top
+                       # (model from the mech team CAD, course/cad/indicator_buoy.step)
     base_square: 0.4572        # 18 in nominal, excluding the 3 in floats
     float_diameter: 0.0762
     panel_bottom_width: 0.4318 # 17 in

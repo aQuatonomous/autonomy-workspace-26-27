@@ -4,8 +4,9 @@
   <model name='PolyformA2Green'>
     <static>true</static>
     <link name="base_link">
-      <visual name="v0"><pose>0.0000 0.0000 -0.0172 0.0000 0.0000 0.0000</pose><geometry><mesh><uri>model://GreenRopehold/meshes/GreenRopehold.dae</uri><scale>0.001811 0.001811 0.001811</scale></mesh></geometry></visual>
-      <collision name="collision"><pose>0.0000 0.0000 -0.0172 0.0000 0.0000 0.0000</pose><geometry><sphere><radius>0.1840</radius></sphere></geometry></collision>
+      <visual name="v0"><pose>0.0000 0.0000 -0.2313 0.0000 0.0000 0.0000</pose><geometry><mesh><uri>model://roboboat_common/meshes/polyform_a0.obj</uri><scale>1.83541 1.83541 1.83541</scale></mesh></geometry><material><ambient>0.050 0.550 0.150 1</ambient><diffuse>0.050 0.550 0.150 1</diffuse><specular>0.5 0.5 0.5 1</specular><pbr><metal><metalness>0</metalness><roughness>0.35</roughness></metal></pbr></material></visual>
+      <visual name="v1"><pose>0.0000 0.0000 -0.2313 0.0000 0.0000 0.0000</pose><geometry><mesh><uri>model://roboboat_common/meshes/polyform_a0_ropehold.obj</uri><scale>1.83541 1.83541 1.83541</scale></mesh></geometry><material><ambient>0.030 0.100 0.450 1</ambient><diffuse>0.030 0.100 0.450 1</diffuse><specular>0.5 0.5 0.5 1</specular><pbr><metal><metalness>0</metalness><roughness>0.35</roughness></metal></pbr></material></visual>
+      <collision name="collision"><pose>0.0000 0.0000 -0.0448 0.0000 0.0000 0.0000</pose><geometry><sphere><radius>0.1840</radius></sphere></geometry></collision>
     </link>
   </model>
 </sdf>

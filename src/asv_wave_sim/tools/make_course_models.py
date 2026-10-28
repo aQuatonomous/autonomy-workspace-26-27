@@ -2,6 +2,7 @@
 """Generate the RoboBoat 2026 task element models from rulebook dimensions.
 
 Writes model folders into gz-waves-models/models:
+  {Red,Green,Black,Yellow}Ropehold     Task 2 channel / obstacle buoy (Polyform A-0)
   PolyformA2{Red,Green,Black,Yellow}   Task 3 gate / obstacle / yellow buoy (Polyform A-2)
   IndicatorBuoy{Red,Green}             custom color indicator buoy (white panels, black diamonds)
   DockIndicator{Red,Green}             5.2 in x 5 in cylinder mounted on the dock
@@ -34,15 +35,29 @@ COLORS = {
     'purple': (0.72, 0.42, 0.85),
     'blue': (0.0, 0.45, 0.78),
     'pvc': (0.88, 0.87, 0.82),
+    'ropehold_blue': (0.03, 0.10, 0.45),
 }
 
+# Polyform A-0 mesh from the mech team's CAD (tools/convert_cad.py): bottom at z = 0.
+POLYFORM_A0_DIAMETER = 0.2005
+POLYFORM_A0_HEIGHT = 0.2921     # top of the rope eye
+POLYFORM_A0_BALL_Z = 0.1016     # centre of the widest section
 
-def material(name, emissive=0.0):
+# Indicator buoy mesh from the mech team's CAD: bottom of the floats at z = 0.
+INDICATOR_HEIGHT = 0.4978         # top of the indicator cylinder
+INDICATOR_FLOAT_DIAMETER = 0.0635
+INDICATOR_FRAME_WIDTH = 0.5025
+
+
+def material(name, emissive=0.0, roughness=None):
     r, g, b = COLORS[name]
     e = f'<emissive>{r * emissive:.3f} {g * emissive:.3f} {b * emissive:.3f} 1</emissive>' if emissive else ''
+    pbr = (f'<pbr><metal><metalness>0</metalness><roughness>{roughness}</roughness></metal></pbr>'
+           if roughness is not None else '')
+    spec = 0.5 if roughness is not None and roughness < 0.5 else 0.2
     return (f'<material><ambient>{r:.3f} {g:.3f} {b:.3f} 1</ambient>'
             f'<diffuse>{r:.3f} {g:.3f} {b:.3f} 1</diffuse>'
-            f'<specular>0.2 0.2 0.2 1</specular>{e}</material>')
+            f'<specular>{spec} {spec} {spec} 1</specular>{e}{pbr}</material>')
 
 
 def pose(x=0.0, y=0.0, z=0.0, roll=0.0, pitch=0.0, yaw=0.0):
@@ -53,10 +68,10 @@ class Visuals:
     def __init__(self):
         self.parts = []
 
-    def add(self, geometry, color, p, emissive=0.0):
+    def add(self, geometry, color, p, emissive=0.0, roughness=None):
         n = len(self.parts)
-        self.parts.append(
-            f'<visual name="v{n}">{p}<geometry>{geometry}</geometry>{material(color, emissive)}</visual>')
+        self.parts.append(f'<visual name="v{n}">{p}<geometry>{geometry}</geometry>'
+                          f'{material(color, emissive, roughness)}</visual>')
 
     def box(self, size, color, p):
         self.add(f'<box><size>{size[0]:.4f} {size[1]:.4f} {size[2]:.4f}</size></box>', color, p)
@@ -64,8 +79,9 @@ class Visuals:
     def cylinder(self, radius, length, color, p):
         self.add(f'<cylinder><radius>{radius:.4f}</radius><length>{length:.4f}</length></cylinder>', color, p)
 
-    def mesh(self, uri, color, p, scale=1.0):
-        self.add(f'<mesh><uri>{uri}</uri><scale>{scale} {scale} {scale}</scale></mesh>', color, p)
+    def mesh(self, uri, color, p, scale=1.0, roughness=None):
+        self.add(f'<mesh><uri>{uri}</uri><scale>{scale} {scale} {scale}</scale></mesh>', color, p,
+                 roughness=roughness)
 
     def raw(self, xml):
         self.parts.append(xml)
@@ -140,14 +156,6 @@ def write_obj(path, vertices, faces, uvs=None, double_sided=False):
 # Shared meshes and textures
 # ---------------------------------------------------------------------------
 
-FRUSTUM_BOTTOM = 17.0 * IN
-FRUSTUM_TOP = 7.25 * IN
-FRUSTUM_SLANT = 12.0 * IN
-FRAME_HEIGHT = 12.5 * IN
-FRUSTUM_RISE = math.sqrt(FRUSTUM_SLANT ** 2 - ((FRUSTUM_BOTTOM - FRUSTUM_TOP) / 2) ** 2)
-FRUSTUM_Z0 = FRAME_HEIGHT - FRUSTUM_RISE
-PANEL_TILT = math.atan2((FRUSTUM_BOTTOM - FRUSTUM_TOP) / 2, FRUSTUM_RISE)
-
 VESSEL_BODY = 42.0 * IN
 VESSEL_BOW = 0.50
 VESSEL_BEAM = 16.0 * IN
@@ -160,13 +168,6 @@ def make_common():
     os.makedirs(d, exist_ok=True)
     m = os.path.join(MODELS, COMMON, 'materials', 'textures')
     os.makedirs(m, exist_ok=True)
-
-    # Indicator buoy frustum: four trapezoid coroplast panels plus a top plate.
-    b, t, z0, z1 = FRUSTUM_BOTTOM / 2, FRUSTUM_TOP / 2, FRUSTUM_Z0, FRAME_HEIGHT
-    v = [(-b, -b, z0), (b, -b, z0), (b, b, z0), (-b, b, z0),
-         (-t, -t, z1), (t, -t, z1), (t, t, z1), (-t, t, z1)]
-    f = [(0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7), (4, 5, 6, 7), (3, 2, 1, 0)]
-    write_obj(os.path.join(d, 'indicator_frustum.obj'), v, f)
 
     # Stationary vessel hull: open coroplast tray with a pointed, raked bow.
     L, B, H = VESSEL_BODY / 2, VESSEL_BEAM / 2, VESSEL_WALL
@@ -230,24 +231,36 @@ def make_common():
 # Models
 # ---------------------------------------------------------------------------
 
+def polyform(name, description, color, diameter, above_water):
+    """Polyform A-series buoy from the mech team's A-0 CAD (convert_cad.py), scaled to the diameter.
+
+    The body is glossy vinyl in the buoy colour, the rope eye is the blue ropehold. The A-series
+    sizes share one shape, so the A-2 is the A-0 scaled up.
+    """
+    scale = diameter / POLYFORM_A0_DIAMETER
+    z = above_water - POLYFORM_A0_HEIGHT * scale
+    vis = Visuals()
+    for part, c in (('polyform_a0', color), ('polyform_a0_ropehold', 'ropehold_blue')):
+        uri = f'model://{COMMON}/meshes/{part}.obj'
+        vis.add(f'<mesh><uri>{uri}</uri><scale>{scale:.5f} {scale:.5f} {scale:.5f}</scale></mesh>', c,
+                pose(z=z), emissive=0.15 if c == 'yellow' else 0.0, roughness=0.35)
+    col = (f'<collision name="collision">{pose(z=z + POLYFORM_A0_BALL_Z * scale)}<geometry><sphere>'
+           f'<radius>{diameter / 2:.4f}</radius></sphere></geometry></collision>')
+    write_model(name, description, vis, col)
+
+
+def make_polyform_a0():
+    # A-0: 8 in diameter, 0.5 ft above the waterline (top of the rope eye).
+    for color in ('Red', 'Green', 'Black', 'Yellow'):
+        polyform(f'{color}Ropehold', f'Polyform A-0 buoy ({color.lower()}, blue ropehold), 8 x 11.5 in, '
+                 f'0.5 ft above waterline.', color.lower(), POLYFORM_A0_DIAMETER, 0.1524)
+
+
 def make_polyform_a2():
-    # A-2: 36.8 cm diameter, 1 ft above the waterline. Reuses the A-0 ropehold mesh scaled up.
-    scale = 0.368 / 0.2032
-    mesh_top = 0.1778 * scale
-    z = 0.3048 - mesh_top
-    meshes = {'Red': 'RedRopehold', 'Green': 'GreenRopehold', 'Black': 'BlackRopehold', 'Yellow': 'RedRopehold'}
-    for color, src in meshes.items():
-        vis = Visuals()
-        uri = f'model://{src}/meshes/{src}.dae'
-        geom = f'<mesh><uri>{uri}</uri><scale>{0.001 * scale:.6f} {0.001 * scale:.6f} {0.001 * scale:.6f}</scale></mesh>'
-        if color == 'Yellow':
-            vis.add(geom, 'yellow', pose(z=z), emissive=0.15)
-        else:
-            vis.raw(f'<visual name="v0">{pose(z=z)}<geometry>{geom}</geometry></visual>')
-        col = (f'<collision name="collision">{pose(z=z)}<geometry><sphere><radius>{0.184:.4f}'
-               f'</radius></sphere></geometry></collision>')
-        write_model(f'PolyformA2{color}', f'Polyform A-2 buoy ({color.lower()}), 36.8 cm, 1 ft above waterline.',
-                    vis, col)
+    # A-2: 36.8 cm diameter, 1 ft above the waterline.
+    for color in ('Red', 'Green', 'Black', 'Yellow'):
+        polyform(f'PolyformA2{color}', f'Polyform A-2 buoy ({color.lower()}), 36.8 cm, 1 ft above waterline.',
+                 color.lower(), 0.368, 0.3048)
 
 
 def indicator_cylinder(vis, color, z_base, diameter, height):
@@ -259,44 +272,21 @@ def indicator_cylinder(vis, color, z_base, diameter, height):
 
 
 def make_indicator_buoys():
-    half = 18.0 * IN / 2
-    float_r = 1.5 * IN
-    float_len = 5.5 * IN
-    pvc_r = 1.05 * IN / 2
+    # Mech team CAD (convert_cad.py): bottom of the floats at z = 0, floats centred on the waterline.
+    z = -INDICATOR_FLOAT_DIAMETER / 2
+    half = INDICATOR_FRAME_WIDTH / 2
+    top = INDICATOR_HEIGHT + z
     for color in ('red', 'green'):
         vis = Visuals()
-        vis.mesh(f'model://{COMMON}/meshes/indicator_frustum.obj', 'white', pose())
-        # Black diamonds (8 in diagonal) centred 6.5 in up each panel's slant.
-        side = 8.0 * IN / math.sqrt(2)
-        s = 6.5 * IN
-        for k in range(4):
-            yaw = k * math.pi / 2
-            radial = FRUSTUM_BOTTOM / 2 - s * math.sin(PANEL_TILT) + 0.002
-            zc = FRUSTUM_Z0 + s * math.cos(PANEL_TILT)
-            x, y = radial * math.cos(yaw), radial * math.sin(yaw)
-            vis.box((0.002, side, side), 'black', pose(x, y, zc, math.pi / 4, -PANEL_TILT, yaw))
-        # 3/4 in PVC frame: bottom square and top ring.
-        for k in range(4):
-            yaw = k * math.pi / 2
-            cx, cy = half * math.cos(yaw), half * math.sin(yaw)
-            vis.cylinder(pvc_r, 2 * half, 'pvc', pose(cx, cy, 0.03, math.pi / 2, 0, yaw))
-            tx, ty = (FRUSTUM_TOP / 2) * math.cos(yaw), (FRUSTUM_TOP / 2) * math.sin(yaw)
-            vis.cylinder(pvc_r, FRUSTUM_TOP, 'pvc', pose(tx, ty, FRAME_HEIGHT - pvc_r, math.pi / 2, 0, yaw))
-        # Eight 3 in pool-noodle floats outside the frame, centred on the waterline.
-        for k in range(4):
-            yaw = k * math.pi / 2
-            off = half + float_r
-            for along in (-0.12, 0.12):
-                x = off * math.cos(yaw) - along * math.sin(yaw)
-                y = off * math.sin(yaw) + along * math.cos(yaw)
-                vis.cylinder(float_r, float_len, 'purple', pose(x, y, 0.0, math.pi / 2, 0, yaw))
-        indicator_cylinder(vis, color, FRAME_HEIGHT, 0.128, 0.1315)
-        vis.cylinder(0.005, 0.06, 'black', pose(0.04, 0, FRAME_HEIGHT + 0.1315 + 0.03))
-        col = box_collision((2 * (half + 2 * float_r), 2 * (half + 2 * float_r), FRAME_HEIGHT + 0.13),
-                            pose(z=(FRAME_HEIGHT + 0.13) / 2 - 0.04))
+        for piece, c, rough in (('panel', 'white', 0.6), ('diamond', 'black', 0.6), ('pvc', 'pvc', 0.4),
+                                ('float', 'purple', 0.7), ('indicator', color, 0.3)):
+            vis.mesh(f'model://{COMMON}/meshes/indicator_buoy_{piece}.obj', c, pose(z=z), roughness=rough)
+        vis.cylinder(0.005, 0.06, 'black', pose(0.04, 0, top + 0.03))
+        col = box_collision((2 * half, 2 * half, top + INDICATOR_FLOAT_DIAMETER / 2),
+                            pose(z=(top + z) / 2))
         write_model(f'IndicatorBuoy{color.capitalize()}',
-                    f'RoboBoat 2026 color indicator buoy with a {color} indicator: 18 in square, '
-                    f'white coroplast panels with black diamonds, 12.5 in frame above the waterline.',
+                    f'RoboBoat 2026 color indicator buoy with a {color} indicator: 17 in white coroplast '
+                    f'frustum with black diamonds on an 18 in PVC frame with floats (mech team CAD).',
                     vis, col)
 
 
@@ -365,6 +355,7 @@ def make_vessels():
 
 def main():
     make_common()
+    make_polyform_a0()
     make_polyform_a2()
     make_indicator_buoys()
     make_dock_indicators()
