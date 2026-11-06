@@ -21,6 +21,8 @@ import textwrap
 
 from PIL import Image, ImageDraw, ImageFont
 
+from sim_labels import label_plugin
+
 IN = 0.0254
 HERE = os.path.dirname(os.path.abspath(__file__))
 MODELS = os.path.normpath(os.path.join(HERE, '..', 'gz-waves-models', 'models'))
@@ -68,20 +70,21 @@ class Visuals:
     def __init__(self):
         self.parts = []
 
-    def add(self, geometry, color, p, emissive=0.0, roughness=None):
+    def add(self, geometry, color, p, emissive=0.0, roughness=None, label=None):
         n = len(self.parts)
+        plugin = label_plugin(label) if label else ''
         self.parts.append(f'<visual name="v{n}">{p}<geometry>{geometry}</geometry>'
-                          f'{material(color, emissive, roughness)}</visual>')
+                          f'{material(color, emissive, roughness)}{plugin}</visual>')
 
-    def box(self, size, color, p):
-        self.add(f'<box><size>{size[0]:.4f} {size[1]:.4f} {size[2]:.4f}</size></box>', color, p)
+    def box(self, size, color, p, label=None):
+        self.add(f'<box><size>{size[0]:.4f} {size[1]:.4f} {size[2]:.4f}</size></box>', color, p, label=label)
 
     def cylinder(self, radius, length, color, p):
         self.add(f'<cylinder><radius>{radius:.4f}</radius><length>{length:.4f}</length></cylinder>', color, p)
 
-    def mesh(self, uri, color, p, scale=1.0, roughness=None):
+    def mesh(self, uri, color, p, scale=1.0, roughness=None, label=None):
         self.add(f'<mesh><uri>{uri}</uri><scale>{scale} {scale} {scale}</scale></mesh>', color, p,
-                 roughness=roughness)
+                 roughness=roughness, label=label)
 
     def raw(self, xml):
         self.parts.append(xml)
@@ -300,19 +303,37 @@ def make_dock_indicators():
                     f'Dock-mounted {color} color indicator, 5.2 in H x 5 in W. Origin at its base.', vis, col)
 
 
+def numeral_uv(texture):
+    """UV box (u0, v0, u1, v1) around the dark numeral in a banner texture."""
+    img = Image.open(texture).convert('L')
+    left, top, right, bottom = img.point(lambda p: 255 if p < 128 else 0).getbbox()
+    w, h = img.size
+    return left / w, 1 - bottom / h, right / w, 1 - top / h
+
+
 def make_banners():
     size = 24.0 * IN
     for n in (1, 2, 3):
         vis = Visuals()
         vis.box((size, 0.006, size), 'white', pose(z=size / 2))
         tex = f'model://{COMMON}/materials/textures/banner_{n}.png'
+        # The numeral alone carries the autolabel label (the number model boxes the digit, not the
+        # banner): a quad over just the numeral, showing the same part of the texture, drawn just in
+        # front of each face. Read from the texture, so this does not redraw it.
+        u0, v0, u1, v1 = numeral_uv(os.path.join(MODELS, COMMON, 'materials', 'textures', f'banner_{n}.png'))
+        quad = [(u * size - size / 2, 0, v * size - size / 2) for u, v in ((u0, v0), (u1, v0), (u1, v1), (u0, v1))]
+        write_obj(os.path.join(MODELS, COMMON, 'meshes', f'banner_numeral_{n}.obj'), quad, [(0, 1, 2, 3)],
+                  uvs=[(u0, v0), (u1, v0), (u1, v1), (u0, v1)])
         for side, yaw in ((-1, 0.0), (1, math.pi)):
-            vis.raw(
-                f'<visual name="face{side + 1}">{pose(0, side * 0.0035, size / 2, 0, 0, yaw)}'
-                f'<geometry><mesh><uri>model://{COMMON}/meshes/banner_quad.obj</uri></mesh></geometry>'
-                f'<material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse><specular>0.1 0.1 0.1 1</specular>'
-                f'<pbr><metal><albedo_map>{tex}</albedo_map><roughness>0.9</roughness><metalness>0</metalness>'
-                f'</metal></pbr></material></visual>')
+            for name, mesh, y, label in ((f'face{side + 1}', 'banner_quad', 0.0035, ''),
+                                         (f'numeral{side + 1}', f'banner_numeral_{n}', 0.0040,
+                                          label_plugin(f'banner_{n}'))):
+                vis.raw(
+                    f'<visual name="{name}">{pose(0, side * y, size / 2, 0, 0, yaw)}'
+                    f'<geometry><mesh><uri>model://{COMMON}/meshes/{mesh}.obj</uri></mesh></geometry>'
+                    f'<material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse>'
+                    f'<specular>0.1 0.1 0.1 1</specular><pbr><metal><albedo_map>{tex}</albedo_map>'
+                    f'<roughness>0.9</roughness><metalness>0</metalness></metal></pbr></material>{label}</visual>')
         # Two PVC posts holding the banner up.
         for x in (-size / 2 + 0.02, size / 2 - 0.02):
             vis.cylinder(0.0133, size, 'pvc', pose(x, 0, size / 2))
@@ -338,13 +359,16 @@ def make_vessels():
         vis.box((sw, 0.006, sh), 'white', pose(-0.05, 0, zc))
         for x in (-0.05 - sw / 2 - 0.015, -0.05 + sw / 2 + 0.015):
             vis.cylinder(0.0133, sh + 0.04, 'pvc', pose(x, 0, zc))
+        # The symbols carry the autolabel label (the bounding-box camera merges them into one box
+        # per vessel); the hull is left unlabelled.
         for side in (-1, 1):
             y = side * 0.0045
             if symbol == 'triangle':
-                vis.mesh(f'model://{COMMON}/meshes/sign_triangle.obj', 'black', pose(-0.05, y, zc))
+                vis.mesh(f'model://{COMMON}/meshes/sign_triangle.obj', 'black', pose(-0.05, y, zc),
+                         label='vessel_sign_triangle')
             else:
-                vis.box((0.16, 0.002, 0.045), 'black', pose(-0.05, y, zc))
-                vis.box((0.045, 0.002, 0.16), 'black', pose(-0.05, y, zc))
+                vis.box((0.16, 0.002, 0.045), 'black', pose(-0.05, y, zc), label='vessel_sign_cross')
+                vis.box((0.045, 0.002, 0.16), 'black', pose(-0.05, y, zc), label='vessel_sign_cross')
         length = VESSEL_BODY + VESSEL_BOW
         col = box_collision((length, VESSEL_BEAM + 0.16, VESSEL_WALL),
                             pose(x=VESSEL_BOW / 2, z=VESSEL_FREEBOARD - VESSEL_WALL / 2))

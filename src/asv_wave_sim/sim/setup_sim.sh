@@ -168,7 +168,7 @@ user_steps() {
   fi
 
   step "Workspace build ($WS)"
-  if [ -f "$WS/install/setup.bash" ] && [ -d "$WS/install/sim_judge" ] && [ -f "$WS/install/gz-waves1/lib/libgz-waves1-hydrodynamics-system.so" ] && [ $REBUILD = 0 ]; then
+  if [ -f "$WS/install/setup.bash" ] && [ -d "$WS/install/sim_judge" ] && [ -d "$WS/install/sim_autolabel" ] && [ -f "$WS/install/gz-waves1/lib/libgz-waves1-hydrodynamics-system.so" ] && [ $REBUILD = 0 ]; then
     ok "colcon workspace (pass --rebuild to rebuild)"
   elif [ $CHECK = 1 ]; then miss "colcon workspace build ($WS/install)"
   else

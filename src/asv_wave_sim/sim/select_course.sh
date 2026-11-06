@@ -9,6 +9,7 @@
 #   select_course.sh --legacy            # the original aquatonomous_world.sdf (no judge)
 #   select_course.sh --camera 1280x800@20   # boat camera resolution and rate (default SIM_CAMERA)
 #   select_course.sh --full-res          # cameras as on the boat, 1920x1200@30 (needs a strong GPU)
+#   select_course.sh --labels            # add the autolabel bounding-box cameras (CV training data)
 #
 # Extra options after the seed are passed to tools/generate_course.py (e.g. --shadows).
 set -e
@@ -16,6 +17,7 @@ set -e
 
 SEED=0
 WORLD=""
+LABELS=0
 GEN_ARGS=()
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -24,7 +26,8 @@ while [ $# -gt 0 ]; do
     --legacy) WORLD="$ASV_DIR/gz-waves-models/worlds/aquatonomous_world.sdf"; shift ;;
     --camera) SIM_CAMERA="$2"; shift 2 ;;
     --full-res) SIM_CAMERA=1920x1200@30; shift ;;
-    -h|--help) sed -n '2,15p' "$0"; exit 0 ;;
+    --labels) LABELS=1; shift ;;
+    -h|--help) sed -n '2,16p' "$0"; exit 0 ;;
     *) GEN_ARGS+=("$1"); shift ;;
   esac
 done
@@ -37,19 +40,30 @@ fi
 mkdir -p "$SIM_STATE_DIR"
 # The boat model with the chosen camera resolution and rate. Gazebo finds this copy first
 # (sim_load_course puts course/generated/models ahead on GZ_SIM_RESOURCE_PATH); meshes are links.
+# With --labels each camera gets a bounding-box camera twin (same pose, lens and resolution) that
+# publishes the image and the labelled boxes of the course elements on /autolabel/<ros camera>.
 BOAT_SRC="$ASV_DIR/gz-waves-models/models/ourboat"
 BOAT_OUT="$SIM_STATE_DIR/models/ourboat"
 rm -rf "$BOAT_OUT" && mkdir -p "$BOAT_OUT"
 for f in "$BOAT_SRC"/*; do [ "$(basename "$f")" = model.sdf ] || ln -s "$f" "$BOAT_OUT/"; done
-python3 - "$BOAT_SRC/model.sdf" "$BOAT_OUT/model.sdf" "$SIM_CAMERA" <<'EOF'
+python3 - "$BOAT_SRC/model.sdf" "$BOAT_OUT/model.sdf" "$SIM_CAMERA" "$LABELS" "$SIM_LABEL_RATE" <<'EOF'
 import re, sys
-src, out, cam = sys.argv[1:]
+src, out, cam, labels, label_rate = sys.argv[1:]
 size, rate = cam.split('@')
 width, height = size.split('x')
+ROS_NAME = {'camera1': 'camera0', 'camera2': 'camera1', 'camera3': 'camera2'}  # as in 2_bridges.sh
+def twin(s):
+    name = re.search(r'<sensor name="([^"]*)"', s).group(1)
+    s = s.replace(f'<sensor name="{name}" type="camera">', f'<sensor name="{name}_labels" type="boundingbox_camera">')
+    s = re.sub(r'<topic>[^<]*</topic>', f'<topic>/autolabel/{ROS_NAME.get(name, name)}</topic>', s)
+    s = re.sub(r'<update_rate>[^<]*</update_rate>', f'<update_rate>{label_rate}</update_rate>', s)
+    s = re.sub(r'\s*<visualize>[^<]*</visualize>', '', s)
+    return s.replace('<camera>', '<camera>\n\t\t<box_type>visible_2d</box_type>', 1)
 def patch(m):
     s = re.sub(r'<width>[^<]*</width>', f'<width>{width}</width>', m.group(0))
     s = re.sub(r'<height>[^<]*</height>', f'<height>{height}</height>', s)
-    return re.sub(r'<update_rate>[^<]*</update_rate>', f'<update_rate>{rate}</update_rate>', s)
+    s = re.sub(r'<update_rate>[^<]*</update_rate>', f'<update_rate>{rate}</update_rate>', s)
+    return s + '\n      ' + twin(s) if labels == '1' else s
 sdf, n = re.subn(r'<sensor [^>]*type="camera".*?</sensor>', patch, open(src).read(), flags=re.S)
 if n == 0:
     sys.exit(f'no camera sensors found in {src}')
@@ -67,6 +81,7 @@ KEY="${WORLD%.sdf}.answer_key.json"
 {
   echo "SIM_WORLD='$WORLD'"
   echo "SIM_CAMERA='$SIM_CAMERA'"
+  echo "SIM_LABELS='$LABELS'"
   echo "SIM_WORLD_NAME='$(sed -n 's/.*<world name="\([^"]*\)".*/\1/p' "$WORLD" | head -n 1)'"
   if [ -f "$KEY" ]; then
     python3 - "$KEY" <<'EOF'
@@ -90,3 +105,4 @@ echo "Course: $SIM_WORLD"
 echo "  answer key: ${SIM_ANSWER_KEY:-none (judge unavailable)}"
 echo "  SITL home:  $SIM_SITL_HOME   water density: $SIM_WATER_DENSITY kg/m^3"
 echo "  cameras:    ${SIM_CAM_WIDTH}x${SIM_CAM_HEIGHT} at ${SIM_CAM_RATE} Hz"
+[ "$LABELS" = 1 ] && echo "  autolabel:  bounding-box cameras at ${SIM_LABEL_RATE} Hz on /autolabel/camera{0,1,2}"

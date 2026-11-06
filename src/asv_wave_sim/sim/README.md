@@ -38,7 +38,8 @@ Install the current NVIDIA Windows driver; do not install a Linux NVIDIA driver 
 One tmux session (`roboboat`) with a window per component: `gazebo`, `bridges`, `sitl`,
 `mavros`, `judge`, `stack`, `shell` (and `rviz` with `--rviz`). `Ctrl+b w` lists them.
 Other options: `--waves`, `--wind`, `--wind-from`, `--light`, `--time` (see Weather and light), `--full-res` or `--camera WxH@HZ`, `--no-cv`, `--no-arm`, `--no-attach`,
-`--world FILE`, `--legacy` (the original world, no judge), `--cmd-mode` (below).
+`--world FILE`, `--legacy` (the original world, no judge), `--cmd-mode` (below), `--labels` (see
+Autolabel).
 
 The numbered scripts start the same pieces one per terminal: `1_gazebo.sh` ... `7_stack.sh`, plus
 `5_view_sensors.sh` for RViz (LiDAR cloud, filtered cloud, buoy markers, three cameras).
@@ -87,6 +88,56 @@ answer key records what was used (`weather`).
 - Writes `runs/<time>_seed<N>.json` and `.md` when stopped.
 
 `ros2 run sim_judge send_test_reports` sends a correct set of reports to check the judge alone.
+
+## Autolabel (CV training data)
+
+The sim knows what every course element is and where it is, so it can label camera frames for
+the CV team without anyone drawing boxes. Package `sim_autolabel`.
+
+```bash
+./run_competition.sh --seed 4 --task 2 --labels    # adds an `autolabel` window that records
+./8_autolabel.sh --max-frames 2000                 # or on its own, with a course selected --labels
+ros2 run sim_autolabel export datasets/ --out ~/datasets/sim_main --preview 30   # every session under it
+export ROBOFLOW_API_KEY=...                        # Roboflow: Settings > API Keys
+ros2 run sim_autolabel upload ~/datasets/sim_main --workspace WS --project PROJECT --limit 20   # trial
+ros2 run sim_autolabel upload ~/datasets/sim_main --workspace WS --project PROJECT
+```
+
+The CV team trains YOLO on Roboflow, exports `.pt` -> ONNX -> TensorRT engine
+(`computer_vision/models/TENSORRT.md`) and runs it with OpenCV preprocessing in `vision_inference`.
+The sim frames go into the same Roboflow project as the real images, as their own upload batch.
+
+- `--labels` (`select_course.sh`, `1_gazebo.sh`, `run_competition.sh`) gives each boat camera a
+  Gazebo bounding-box camera twin with the same pose, lens and resolution. It publishes the
+  image and the boxes of the labelled elements in view on `/autolabel/camera{0,1,2}`, at
+  `SIM_LABEL_RATE` (2 Hz default, `config.env`; nearby frames are near-duplicates anyway). It
+  renders each view a second time, so expect the sim to run slower.
+- Boxes cover only what the camera sees: an element hidden behind another gets no box and a
+  partly hidden one gets a box around its visible part. There is no minimum size at recording;
+  `export --min-box-px` drops the tiny ones (below).
+- Labels: `generate_course.py` adds a gz Label plugin to each element (`tools/sim_labels.py`
+  has the IDs; the answer key carries the table). The stationary vessels label only their sign
+  symbol and the number banners only their numeral, inside the model (`make_course_models.py`),
+  because that is what the CV models box. Boundary markers and the boat are not labelled.
+- `record` writes `sim/datasets/<time>_seed<N>/`: `session.json` (course, weather, labels) and per
+  camera `<stamp>.jpg` + `<stamp>.json` (boxes in pixels under sim label names, boat pose). It
+  keeps 1 in 10 frames with nothing in view as background examples (`--empty-every`).
+- `export` maps sim labels to a CV model's classes using `sim_autolabel/classes.yaml`: `main`
+  (aqua_main, in the alphabetical class order of the model that ran at competition) or `numbers`
+  (docking numbers, digit only). Labels a dataset does not list become background. Recordings keep the sim labels, so
+  after changing the mapping you only export again. Frames are split into train/valid in 30 s
+  blocks so near-duplicate frames don't land on both sides. `export` needs only Python (numpy,
+  opencv, pyyaml): `python3 -m sim_autolabel.export` runs it from `src/sim_autolabel` without ROS.
+- The export is in Roboflow's YOLO layout (`train/`, `valid/`, `data.yaml`): drag the folder into
+  the project in the browser, or use `upload`, which also tags every image `sim` and
+  `sim_seed<N>` so a dataset version can include or leave out the sim images. `upload` stops if
+  the project's class names differ from `classes.yaml` (a different spelling would create new
+  classes). It needs `pip install roboflow`. `yolo train data=.../data.yaml` also works directly.
+- Boxes are kept or dropped by their size in the model input: `imgsz` in `classes.yaml` (640 for
+  the main engine, 960 for the numbers engine, both letterboxed), `--min-box-px` 3 px by default.
+- For variety, record several seeds with different `--waves`, `--light` and `--time`, and drive
+  the boat yourself (`--no-stack` + MAVProxy) as well as with the planner. Sim images do not look
+  like the real cameras: use them alongside the real dataset, not instead of it.
 
 ## Sensors
 

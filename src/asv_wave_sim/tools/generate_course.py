@@ -28,6 +28,8 @@ import sys
 
 import yaml
 
+from sim_labels import LABELS, element_label, label_plugin
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 SIM_ROOT = os.path.normpath(os.path.join(HERE, '..'))
 DEFAULT_CONFIG = os.path.join(SIM_ROOT, 'course', 'roboboat2026.yaml')
@@ -175,6 +177,9 @@ class Course:
             e['footprint'] = self.polygon(VESSEL_OUTLINE, x, y, e['yaw'])
         if number is not None:
             e['number'] = number
+        label = element_label(kind, color)
+        if label:
+            e['sim_label'] = label
         if extra:
             e.update(extra)
         self.elements.append(e)
@@ -397,11 +402,12 @@ class Course:
                         f'</geometry></collision>')
         footprint = [[round(c, 4) for c in self.frame.enu(u, v)] for u, v in cubes]
         self.elements.append({'id': len(self.elements) + 1, 'name': name, 'task': 5, 'kind': 'dock',
-                              'cubes': footprint, 'cube_size': sx})
+                              'cubes': footprint, 'cube_size': sx, 'sim_label': 'dock'})
         body = '\n        '.join(vis + cols)
         return f"""
     <model name="{name}">
       <static>true</static>
+      {label_plugin('dock')}
       <link name="link">
         {body}
       </link>
@@ -675,10 +681,12 @@ def world_sdf(course, args, weather):
     for e in course.elements:
         if 'uri' not in e:
             continue
+        # Label for the autolabel bounding-box cameras (tools/sim_labels.py).
+        label = f"\n      {label_plugin(e['sim_label'])}" if e.get('sim_label') else ''
         includes.append(f"""    <include>
       <name>{e['name']}</name>
       <pose>{e['x']:.4f} {e['y']:.4f} {e['z']:.4f} 0 0 {e['yaw']:.5f}</pose>
-      <uri>{e['uri']}</uri>
+      <uri>{e['uri']}</uri>{label}
     </include>""")
     xs = [p[0] for p in course.boundary_polygon]
     ys = [p[1] for p in course.boundary_polygon]
@@ -769,6 +777,8 @@ def answer_key(course, args, world_path, weather):
         'gates': course.gates,
         'tasks': course.tasks,
         'elements': course.elements,
+        # Gazebo Label IDs seen by the autolabel bounding-box cameras (tools/sim_labels.py).
+        'labels': LABELS,
     }
 
 

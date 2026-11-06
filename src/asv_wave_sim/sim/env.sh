@@ -9,11 +9,12 @@ export AUTONOMY_WS="$WS"
 export COURSE_DIR="$ASV_DIR/course"
 export SIM_STATE_DIR="$COURSE_DIR/generated"
 export SIM_RUNS_DIR="${SIM_RUNS_DIR:-$SIM_DIR/runs}"
+export SIM_DATASETS_DIR="${SIM_DATASETS_DIR:-$SIM_DIR/datasets}"
 
 [ -f "$SIM_DIR/config.local.env" ] && . "$SIM_DIR/config.local.env"
 . "$SIM_DIR/config.env"
 export ARDUPILOT_DIR ARDUPILOT_VENV ARDUPILOT_GAZEBO_DIR SITL_MODELS_DIR ROBOCOMMAND_HOST ROBOCOMMAND_PORT \
-  CV_ENGINE_CACHE MESSAGE_NODE_PYDEPS
+  CV_ENGINE_CACHE MESSAGE_NODE_PYDEPS SIM_LABEL_RATE
 
 # An active Python venv (e.g. ArduPilot's) hides the ROS Python packages.
 deactivate 2>/dev/null || true
@@ -72,7 +73,7 @@ sim_check_gpu() {
 sim_load_course() {
   if [ -f "$SIM_STATE_DIR/current.env" ]; then
     . "$SIM_STATE_DIR/current.env"
-    export SIM_WORLD SIM_WORLD_NAME SIM_ANSWER_KEY SIM_SITL_HOME SIM_WATER_DENSITY SIM_SEED SIM_CAMERA
+    export SIM_WORLD SIM_WORLD_NAME SIM_ANSWER_KEY SIM_SITL_HOME SIM_WATER_DENSITY SIM_SEED SIM_CAMERA SIM_LABELS
     SIM_CAM_WIDTH="${SIM_CAMERA%%x*}"; SIM_CAM_HEIGHT="${SIM_CAMERA#*x}"; SIM_CAM_HEIGHT="${SIM_CAM_HEIGHT%@*}"
     SIM_CAM_RATE="${SIM_CAMERA#*@}"
     export SIM_CAM_WIDTH SIM_CAM_HEIGHT SIM_CAM_RATE

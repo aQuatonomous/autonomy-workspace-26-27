@@ -405,7 +405,8 @@
       "lat": 27.37379079,
       "lon": -82.45275877,
       "uri": "model://RedSurMark",
-      "radius": 0.2286
+      "radius": 0.2286,
+      "sim_label": "sur_mark_red"
     },
     {
       "id": 2,
@@ -421,7 +422,8 @@
       "lat": 27.3738127,
       "lon": -82.45275877,
       "uri": "model://GreenSurMark",
-      "radius": 0.2286
+      "radius": 0.2286,
+      "sim_label": "sur_mark_green"
     },
     {
       "id": 3,
@@ -437,7 +439,8 @@
       "lat": 27.37379079,
       "lon": -82.45284021,
       "uri": "model://RedSurMark",
-      "radius": 0.2286
+      "radius": 0.2286,
+      "sim_label": "sur_mark_red"
     },
     {
       "id": 4,
@@ -453,7 +456,8 @@
       "lat": 27.3738127,
       "lon": -82.45284021,
       "uri": "model://GreenSurMark",
-      "radius": 0.2286
+      "radius": 0.2286,
+      "sim_label": "sur_mark_green"
     },
     {
       "id": 5,
@@ -469,7 +473,8 @@
       "lat": 27.37380988,
       "lon": -82.45294807,
       "uri": "model://RedRopehold",
-      "radius": 0.1016
+      "radius": 0.1016,
+      "sim_label": "a0_red"
     },
     {
       "id": 6,
@@ -485,7 +490,8 @@
       "lat": 27.37383009,
       "lon": -82.45293851,
       "uri": "model://GreenRopehold",
-      "radius": 0.1016
+      "radius": 0.1016,
+      "sim_label": "a0_green"
     },
     {
       "id": 7,
@@ -501,7 +507,8 @@
       "lat": 27.37381894,
       "lon": -82.45299835,
       "uri": "model://RedRopehold",
-      "radius": 0.1016
+      "radius": 0.1016,
+      "sim_label": "a0_red"
     },
     {
       "id": 8,
@@ -517,7 +524,8 @@
       "lat": 27.3738386,
       "lon": -82.4529851,
       "uri": "model://GreenRopehold",
-      "radius": 0.1016
+      "radius": 0.1016,
+      "sim_label": "a0_green"
     },
     {
       "id": 9,
@@ -533,7 +541,8 @@
       "lat": 27.37384894,
       "lon": -82.45303828,
       "uri": "model://RedRopehold",
-      "radius": 0.1016
+      "radius": 0.1016,
+      "sim_label": "a0_red"
     },
     {
       "id": 10,
@@ -549,7 +558,8 @@
       "lat": 27.37386684,
       "lon": -82.45302107,
       "uri": "model://GreenRopehold",
-      "radius": 0.1016
+      "radius": 0.1016,
+      "sim_label": "a0_green"
     },
     {
       "id": 11,
@@ -565,7 +575,8 @@
       "lat": 27.37387458,
       "lon": -82.45307799,
       "uri": "model://RedRopehold",
-      "radius": 0.1016
+      "radius": 0.1016,
+      "sim_label": "a0_red"
     },
     {
       "id": 12,
@@ -581,7 +592,8 @@
       "lat": 27.37388896,
       "lon": -82.45305962,
       "uri": "model://GreenRopehold",
-      "radius": 0.1016
+      "radius": 0.1016,
+      "sim_label": "a0_green"
     },
     {
       "id": 13,
@@ -597,7 +609,8 @@
       "lat": 27.37382554,
       "lon": -82.45299921,
       "uri": "model://BlackRopehold",
-      "radius": 0.1016
+      "radius": 0.1016,
+      "sim_label": "a0_black"
     },
     {
       "id": 14,
@@ -613,7 +626,8 @@
       "lat": 27.37385854,
       "lon": -82.453024,
       "uri": "model://BlackRopehold",
-      "radius": 0.1016
+      "radius": 0.1016,
+      "sim_label": "a0_black"
     },
     {
       "id": 15,
@@ -629,7 +643,8 @@
       "lat": 27.37388038,
       "lon": -82.45307885,
       "uri": "model://BlackRopehold",
-      "radius": 0.1016
+      "radius": 0.1016,
+      "sim_label": "a0_black"
     },
     {
       "id": 16,
@@ -645,7 +660,8 @@
       "lat": 27.3739267,
       "lon": -82.45309503,
       "uri": "model://BlackRopehold",
-      "radius": 0.1016
+      "radius": 0.1016,
+      "sim_label": "a0_black"
     },
     {
       "id": 17,
@@ -661,7 +677,8 @@
       "lat": 27.37395347,
       "lon": -82.45305011,
       "uri": "model://BlackRopehold",
-      "radius": 0.1016
+      "radius": 0.1016,
+      "sim_label": "a0_black"
     },
     {
       "id": 18,
@@ -677,7 +694,8 @@
       "lat": 27.37399192,
       "lon": -82.45314176,
       "uri": "model://BlackRopehold",
-      "radius": 0.1016
+      "radius": 0.1016,
+      "sim_label": "a0_black"
     },
     {
       "id": 19,
@@ -693,7 +711,8 @@
       "lat": 27.37395275,
       "lon": -82.45315512,
       "uri": "model://IndicatorBuoyRed",
-      "radius": 0.305
+      "radius": 0.305,
+      "sim_label": "indicator_buoy_red"
     },
     {
       "id": 20,
@@ -709,7 +728,8 @@
       "lat": 27.37398851,
       "lon": -82.45308916,
       "uri": "model://IndicatorBuoyGreen",
-      "radius": 0.305
+      "radius": 0.305,
+      "sim_label": "indicator_buoy_green"
     },
     {
       "id": 21,
@@ -762,7 +782,8 @@
       "lat": 27.37407124,
       "lon": -82.45301379,
       "uri": "model://PolyformA2Red",
-      "radius": 0.184
+      "radius": 0.184,
+      "sim_label": "a2_red"
     },
     {
       "id": 23,
@@ -778,7 +799,8 @@
       "lat": 27.37407124,
       "lon": -82.45298912,
       "uri": "model://PolyformA2Green",
-      "radius": 0.184
+      "radius": 0.184,
+      "sim_label": "a2_green"
     },
     {
       "id": 24,
@@ -794,7 +816,8 @@
       "lat": 27.3742015,
       "lon": -82.45299731,
       "uri": "model://PolyformA2Yellow",
-      "radius": 0.184
+      "radius": 0.184,
+      "sim_label": "a2_yellow"
     },
     {
       "id": 25,
@@ -810,7 +833,8 @@
       "lat": 27.37412335,
       "lon": -82.45299933,
       "uri": "model://IndicatorBuoyRed",
-      "radius": 0.305
+      "radius": 0.305,
+      "sim_label": "indicator_buoy_red"
     },
     {
       "id": 26,
@@ -826,7 +850,8 @@
       "lat": 27.37419557,
       "lon": -82.45300479,
       "uri": "model://PolyformA2Black",
-      "radius": 0.184
+      "radius": 0.184,
+      "sim_label": "a2_black"
     },
     {
       "id": 27,
@@ -842,7 +867,8 @@
       "lat": 27.37411814,
       "lon": -82.45302685,
       "uri": "model://PolyformA2Black",
-      "radius": 0.184
+      "radius": 0.184,
+      "sim_label": "a2_black"
     },
     {
       "id": 28,
@@ -1088,7 +1114,8 @@
           -0.584
         ]
       ],
-      "cube_size": 0.508
+      "cube_size": 0.508,
+      "sim_label": "dock"
     },
     {
       "id": 30,
@@ -1119,7 +1146,8 @@
       "yaw": 1.5708,
       "lat": 27.37399295,
       "lon": -82.4528034,
-      "uri": "model://DockIndicatorRed"
+      "uri": "model://DockIndicatorRed",
+      "sim_label": "dock_indicator_red"
     },
     {
       "id": 32,
@@ -1187,7 +1215,8 @@
       "yaw": 1.5708,
       "lat": 27.37399295,
       "lon": -82.45278285,
-      "uri": "model://DockIndicatorGreen"
+      "uri": "model://DockIndicatorGreen",
+      "sim_label": "dock_indicator_green"
     },
     {
       "id": 35,
@@ -1218,7 +1247,8 @@
       "yaw": 1.5708,
       "lat": 27.37399295,
       "lon": -82.45276229,
-      "uri": "model://DockIndicatorRed"
+      "uri": "model://DockIndicatorRed",
+      "sim_label": "dock_indicator_red"
     },
     {
       "id": 37,
@@ -1427,7 +1457,8 @@
           3.884
         ]
       ],
-      "cube_size": 0.508
+      "cube_size": 0.508,
+      "sim_label": "dock"
     },
     {
       "id": 38,
@@ -1458,7 +1489,8 @@
       "yaw": 1.5708,
       "lat": 27.37406959,
       "lon": -82.4528034,
-      "uri": "model://DockIndicatorGreen"
+      "uri": "model://DockIndicatorGreen",
+      "sim_label": "dock_indicator_green"
     },
     {
       "id": 40,
@@ -1489,7 +1521,8 @@
       "yaw": 1.5708,
       "lat": 27.37406959,
       "lon": -82.45278285,
-      "uri": "model://DockIndicatorRed"
+      "uri": "model://DockIndicatorRed",
+      "sim_label": "dock_indicator_red"
     },
     {
       "id": 42,
@@ -1520,7 +1553,8 @@
       "yaw": 1.5708,
       "lat": 27.37406959,
       "lon": -82.45276229,
-      "uri": "model://DockIndicatorRed"
+      "uri": "model://DockIndicatorRed",
+      "sim_label": "dock_indicator_red"
     },
     {
       "id": 44,
@@ -1559,5 +1593,27 @@
         ]
       ]
     }
-  ]
+  ],
+  "labels": {
+    "a0_red": 1,
+    "a0_green": 2,
+    "a0_black": 3,
+    "a0_yellow": 4,
+    "a2_red": 5,
+    "a2_green": 6,
+    "a2_black": 7,
+    "a2_yellow": 8,
+    "sur_mark_red": 9,
+    "sur_mark_green": 10,
+    "indicator_buoy_red": 11,
+    "indicator_buoy_green": 12,
+    "dock_indicator_red": 13,
+    "dock_indicator_green": 14,
+    "banner_1": 15,
+    "banner_2": 16,
+    "banner_3": 17,
+    "vessel_sign_triangle": 18,
+    "vessel_sign_cross": 19,
+    "dock": 20
+  }
 }

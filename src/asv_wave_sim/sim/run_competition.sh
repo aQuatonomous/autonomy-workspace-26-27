@@ -8,13 +8,14 @@
 #   run_competition.sh --seed 3 --no-stack        everything but the autonomy stack (drive it yourself)
 #   run_competition.sh ... --no-cv --rviz --no-attach
 #   run_competition.sh ... --full-res           cameras as on the boat (1920x1200@30); --camera WxH@HZ
+#   run_competition.sh ... --labels             also record labelled CV training frames (autolabel window)
 #
-# Windows: Ctrl+b then w lists them (gazebo, bridges, sitl, mavros, judge, stack, rviz, shell).
+# Windows: Ctrl+b then w lists them (gazebo, bridges, sitl, mavros, judge, stack, rviz, autolabel, shell).
 # Stop with stop_competition.sh; it ends the judge first so the run report is written.
 set -e
 SIM_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SESSION=roboboat
-SEED=0 TASK=1 STACK=1 RVIZ=0 ATTACH=1
+SEED=0 TASK=1 STACK=1 RVIZ=0 ATTACH=1 LABELS=0
 COURSE_ARGS=() STACK_ARGS=()
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -25,11 +26,12 @@ while [ $# -gt 0 ]; do
     --waves) COURSE_ARGS+=(--waves "$2"); shift 2 ;;
     --camera) COURSE_ARGS+=(--camera "$2"); shift 2 ;;
     --full-res) COURSE_ARGS+=(--full-res); shift ;;
+    --labels) COURSE_ARGS+=(--labels); LABELS=1; shift ;;
     --no-stack) STACK=0; shift ;;
     --no-cv|--no-arm) STACK_ARGS+=("$1"); shift ;;
     --rviz) RVIZ=1; shift ;;
     --no-attach) ATTACH=0; shift ;;
-    -h|--help) sed -n '2,14p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,15p' "$0"; exit 0 ;;
     *) COURSE_ARGS+=("$1"); shift ;;
   esac
 done
@@ -61,6 +63,7 @@ win mavros  "bash 4_mavros.sh"
 win judge   "$AFTER_GZ bash 6_judge.sh"
 [ $STACK = 1 ] && win stack "$AFTER_GZ bash 7_stack.sh --task $TASK ${STACK_ARGS[*]}"
 [ $RVIZ = 1 ] && win rviz "bash 5_view_sensors.sh"
+[ $LABELS = 1 ] && win autolabel "$AFTER_GZ bash 8_autolabel.sh"
 win shell '. ./env.sh && sim_load_course && echo "ROS shell for course $SIM_WORLD" && exec bash -i'
 
 echo

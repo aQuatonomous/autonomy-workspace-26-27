@@ -7,6 +7,8 @@ if tmux has-session -t "$SESSION" 2>/dev/null; then
     tmux send-keys -t "$SESSION:judge" C-c
     for _ in $(seq 1 10); do pgrep -f 'sim_judge/judge' >/dev/null || break; sleep 0.5; done
   fi
+  # The recorder prints its summary on Ctrl+C; frames already saved are kept either way.
+  tmux list-windows -t "$SESSION" -F '#W' | grep -qx autolabel && tmux send-keys -t "$SESSION:autolabel" C-c && sleep 1
   tmux list-windows -t "$SESSION" -F '#W' | grep -qx stack && tmux send-keys -t "$SESSION:stack" C-c && sleep 3
   tmux kill-session -t "$SESSION"
 fi
@@ -15,7 +17,7 @@ for pat in '[g]z sim' 'sim_vehicle.py -v Rover' '[a]rdurover' 'mavproxy.py' '[r]
            'mavros_node' 'sim_judge/judge' 'message_node/message_node' 'global_planner_node' 'boat_state_node' \
            'detection_to_global_node' 'lidar_range_filter' 'buoy_detector' 'buoy_tracker' 'buoy_visualizer' \
            'vision_preprocessing' 'vision_inference' 'vision_combiner' 'maritime_distance_estimator' \
-           'indicator_buoy_processor' 'vision_lidar_fusion' 'arm_guided.sh'; do
+           'indicator_buoy_processor' 'vision_lidar_fusion' 'arm_guided.sh' 'sim_autolabel/record'; do
   pkill -INT -f "$pat" 2>/dev/null
 done
 sleep 2

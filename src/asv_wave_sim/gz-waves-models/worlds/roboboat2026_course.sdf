@@ -199,6 +199,7 @@
 
     <model name="marina_dock_S">
       <static>true</static>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>20</label></plugin>
       <link name="link">
         <visual name="cube0"><pose>13.2540 -3.1240 0.0968 0 0 1.57080</pose><geometry><box><size>0.4960 0.4960 0.4064</size></box></geometry><material><ambient>0.74 0.66 0.55 1</ambient><diffuse>0.76 0.68 0.56 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
         <visual name="cube1"><pose>13.2540 -2.6160 0.0968 0 0 1.57080</pose><geometry><box><size>0.4960 0.4960 0.4064</size></box></geometry><material><ambient>0.74 0.66 0.55 1</ambient><diffuse>0.76 0.68 0.56 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
@@ -304,6 +305,7 @@
     </model>
     <model name="marina_dock_N">
       <static>true</static>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>20</label></plugin>
       <link name="link">
         <visual name="cube0"><pose>13.2540 5.9160 0.0968 0 0 1.57080</pose><geometry><box><size>0.4960 0.4960 0.4064</size></box></geometry><material><ambient>0.74 0.66 0.55 1</ambient><diffuse>0.76 0.68 0.56 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
         <visual name="cube1"><pose>13.2540 6.4240 0.0968 0 0 1.57080</pose><geometry><box><size>0.4960 0.4960 0.4064</size></box></geometry><material><ambient>0.74 0.66 0.55 1</ambient><diffuse>0.76 0.68 0.56 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
@@ -447,101 +449,121 @@
       <name>t1_gate1_red_1</name>
       <pose>19.1900 -25.1192 0.0000 0 0 1.57080</pose>
       <uri>model://RedSurMark</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>9</label></plugin>
     </include>
     <include>
       <name>t1_gate1_green_2</name>
       <pose>19.1900 -22.6808 0.0000 0 0 1.57080</pose>
       <uri>model://GreenSurMark</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>10</label></plugin>
     </include>
     <include>
       <name>t1_gate2_red_3</name>
       <pose>11.1400 -25.1192 0.0000 0 0 1.57080</pose>
       <uri>model://RedSurMark</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>9</label></plugin>
     </include>
     <include>
       <name>t1_gate2_green_4</name>
       <pose>11.1400 -22.6808 0.0000 0 0 1.57080</pose>
       <uri>model://GreenSurMark</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>10</label></plugin>
     </include>
     <include>
       <name>t2_channel1_red_5</name>
       <pose>0.4772 -22.9947 0.0000 0 0 1.57080</pose>
       <uri>model://RedRopehold</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>1</label></plugin>
     </include>
     <include>
       <name>t2_channel1_green_6</name>
       <pose>1.4228 -20.7453 0.0000 0 0 1.57080</pose>
       <uri>model://GreenRopehold</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>2</label></plugin>
     </include>
     <include>
       <name>t2_channel2_red_7</name>
       <pose>-4.4928 -21.9860 0.0000 0 0 1.57080</pose>
       <uri>model://RedRopehold</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>1</label></plugin>
     </include>
     <include>
       <name>t2_channel2_green_8</name>
       <pose>-3.1832 -19.7980 0.0000 0 0 1.57080</pose>
       <uri>model://GreenRopehold</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>2</label></plugin>
     </include>
     <include>
       <name>t2_channel3_red_9</name>
       <pose>-8.4408 -18.6461 0.0000 0 0 1.57080</pose>
       <uri>model://RedRopehold</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>1</label></plugin>
     </include>
     <include>
       <name>t2_channel3_green_10</name>
       <pose>-6.7392 -16.6539 0.0000 0 0 1.57080</pose>
       <uri>model://GreenRopehold</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>2</label></plugin>
     </include>
     <include>
       <name>t2_channel4_red_11</name>
       <pose>-12.3656 -15.7922 0.0000 0 0 1.57080</pose>
       <uri>model://RedRopehold</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>1</label></plugin>
     </include>
     <include>
       <name>t2_channel4_green_12</name>
       <pose>-10.5504 -14.1918 0.0000 0 0 1.57080</pose>
       <uri>model://GreenRopehold</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>2</label></plugin>
     </include>
     <include>
       <name>t2_channel_obstacle_13</name>
       <pose>-4.5777 -21.2517 0.0000 0 0 1.57080</pose>
       <uri>model://BlackRopehold</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>3</label></plugin>
     </include>
     <include>
       <name>t2_channel_obstacle_14</name>
       <pose>-7.0288 -17.5780 0.0000 0 0 1.57080</pose>
       <uri>model://BlackRopehold</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>3</label></plugin>
     </include>
     <include>
       <name>t2_channel_obstacle_15</name>
       <pose>-12.4505 -15.1471 0.0000 0 0 1.57080</pose>
       <uri>model://BlackRopehold</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>3</label></plugin>
     </include>
     <include>
       <name>t2_debris_16</name>
       <pose>-14.0500 -9.9900 0.0000 0 0 1.57080</pose>
       <uri>model://BlackRopehold</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>3</label></plugin>
     </include>
     <include>
       <name>t2_debris_17</name>
       <pose>-9.6100 -7.0100 0.0000 0 0 1.57080</pose>
       <uri>model://BlackRopehold</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>3</label></plugin>
     </include>
     <include>
       <name>t2_debris_18</name>
       <pose>-18.6700 -2.7300 0.0000 0 0 1.57080</pose>
       <uri>model://BlackRopehold</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>3</label></plugin>
     </include>
     <include>
       <name>t2_debris_indicator_19</name>
       <pose>-19.9900 -7.0900 0.0000 0 0 1.57080</pose>
       <uri>model://IndicatorBuoyRed</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>11</label></plugin>
     </include>
     <include>
       <name>t2_debris_indicator_20</name>
       <pose>-13.4700 -3.1100 0.0000 0 0 1.57080</pose>
       <uri>model://IndicatorBuoyGreen</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>12</label></plugin>
     </include>
     <include>
       <name>t2_debris_vessel_21</name>
@@ -552,31 +574,37 @@
       <name>t3_speed_gate_red_22</name>
       <pose>-6.0192 6.1000 0.0000 0 0 1.57080</pose>
       <uri>model://PolyformA2Red</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>5</label></plugin>
     </include>
     <include>
       <name>t3_speed_gate_green_23</name>
       <pose>-3.5808 6.1000 0.0000 0 0 1.57080</pose>
       <uri>model://PolyformA2Green</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>6</label></plugin>
     </include>
     <include>
       <name>t3_yellow_buoy_24</name>
       <pose>-4.3900 20.6000 0.0000 0 0 1.57080</pose>
       <uri>model://PolyformA2Yellow</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>8</label></plugin>
     </include>
     <include>
       <name>t3_speed_indicator_25</name>
       <pose>-4.5900 11.9000 0.0000 0 0 1.57080</pose>
       <uri>model://IndicatorBuoyRed</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>11</label></plugin>
     </include>
     <include>
       <name>t3_obstacle_26</name>
       <pose>-5.1300 19.9400 0.0000 0 0 1.57080</pose>
       <uri>model://PolyformA2Black</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>7</label></plugin>
     </include>
     <include>
       <name>t3_obstacle_27</name>
       <pose>-7.3100 11.3200 0.0000 0 0 1.57080</pose>
       <uri>model://PolyformA2Black</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>7</label></plugin>
     </include>
     <include>
       <name>t3_obstacle_vessel_28</name>
@@ -592,6 +620,7 @@
       <name>t5_dock_indicator_S1_31</name>
       <pose>14.7780 -2.6160 0.3000 0 0 1.57080</pose>
       <uri>model://DockIndicatorRed</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>13</label></plugin>
     </include>
     <include>
       <name>t5_slip_vessel_S1_32</name>
@@ -607,6 +636,7 @@
       <name>t5_dock_indicator_S2_34</name>
       <pose>16.8100 -2.6160 0.3000 0 0 1.57080</pose>
       <uri>model://DockIndicatorGreen</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>14</label></plugin>
     </include>
     <include>
       <name>t5_banner_S3_35</name>
@@ -617,6 +647,7 @@
       <name>t5_dock_indicator_S3_36</name>
       <pose>18.8420 -2.6160 0.3000 0 0 1.57080</pose>
       <uri>model://DockIndicatorRed</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>13</label></plugin>
     </include>
     <include>
       <name>t5_banner_N1_38</name>
@@ -627,6 +658,7 @@
       <name>t5_dock_indicator_N1_39</name>
       <pose>14.7780 5.9160 0.3000 0 0 1.57080</pose>
       <uri>model://DockIndicatorGreen</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>14</label></plugin>
     </include>
     <include>
       <name>t5_banner_N2_40</name>
@@ -637,6 +669,7 @@
       <name>t5_dock_indicator_N2_41</name>
       <pose>16.8100 5.9160 0.3000 0 0 1.57080</pose>
       <uri>model://DockIndicatorRed</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>13</label></plugin>
     </include>
     <include>
       <name>t5_banner_N3_42</name>
@@ -647,6 +680,7 @@
       <name>t5_dock_indicator_N3_43</name>
       <pose>18.8420 5.9160 0.3000 0 0 1.57080</pose>
       <uri>model://DockIndicatorRed</uri>
+      <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>13</label></plugin>
     </include>
     <include>
       <name>t5_slip_vessel_N3_44</name>
