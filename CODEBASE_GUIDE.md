@@ -548,14 +548,14 @@ See `computer_vision/models/TENSORRT.md` for detailed instructions.
 
 Maps integer class IDs (0–22) to human-readable names used across the entire stack.
 
-**Critical:** This file must stay in sync with `planning/Global/entities.py`. If you add or rename a class in one place, update the other.
+**Critical:** This file must stay in sync with `planning/Global/entities.py`. If you add or rename a class in one place, update the other. IDs 0–8 must also match the main YOLO model's own class order, which is alphabetical (Roboflow sorts classes by name).
 
 ```yaml
 # Example entries
-0: red_buoy
-1: green_buoy
-2: red_pole_buoy
-3: green_pole_buoy
+0: black_buoy
+1: cross
+2: dock
+3: green_buoy
 # ...
 255: unknown  # used by cv_lidar_fusion for unmatched LiDAR tracks
 ```

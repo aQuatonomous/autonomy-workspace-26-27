@@ -28,16 +28,17 @@ GATE_NO_GO_SAMPLE_SPACING = 3.0     # Sample spacing for wall points - sparse sa
 GATE_MIN_CROSS_RATIO = 0.5
 
 # Matches computer_vision/class_mapping.yaml (0-22). class_id 255 = unknown (unmapped).
+# 0-8 are the aqua_main model's ids, in its alphabetical class order.
 CLASS_ID_TO_ENTITY_TYPE = {
     0: "black_buoy",
-    1: "green_buoy",
-    2: "green_pole_buoy",
-    3: "red_buoy",
-    4: "red_pole_buoy",
-    5: "yellow_buoy",
-    6: "cross",
-    7: "dock",
-    8: "triangle",
+    1: "cross",
+    2: "dock",
+    3: "green_buoy",
+    4: "green_pole_buoy",
+    5: "red_buoy",
+    6: "red_pole_buoy",
+    7: "triangle",
+    8: "yellow_buoy",
     9: "red_indicator",
     10: "green_indicator",
     11: "yellow_supply_drop",
