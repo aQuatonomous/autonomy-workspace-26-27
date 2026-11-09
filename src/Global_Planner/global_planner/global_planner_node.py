@@ -437,7 +437,8 @@ class GlobalPlannerNode(Node):
 
             # Task 1 (Evacuation): report entry gates completed then exit gates completed via /messages/gate_pass
             if task_id == 1:
-                mgr = self._task_master.manager
+                # manager is None once Task 1 is done (ALL_DONE), which is the tick the exit report is due.
+                mgr = self._task_master.manager or getattr(self._task_master, "task1_mgr", None)
                 if getattr(mgr, "entry_gates_completed", lambda: False)() and not self._task1_entry_reported:
                     self._gate_pass_pub.publish(StringMsg(data="start"))
                     self._task1_entry_reported = True
