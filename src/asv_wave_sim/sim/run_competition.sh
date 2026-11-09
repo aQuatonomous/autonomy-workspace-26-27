@@ -47,6 +47,12 @@ fi
 bash "$SIM_DIR/select_course.sh" ${SEED:+--seed "$SEED"} "${COURSE_ARGS[@]}"
 ( . "$SIM_DIR/env.sh" >/dev/null && sim_robocommand_address ) || true
 
+# Each window's output also goes to runs/logs/<time>/<window>.log (the last 5 runs are kept).
+LOG_ROOT="${SIM_RUNS_DIR:-$SIM_DIR/runs}/logs"
+LOG_DIR="$LOG_ROOT/$(date +%Y%m%d-%H%M%S)"
+mkdir -p "$LOG_DIR"
+ls -1d "$LOG_ROOT"/*/ 2>/dev/null | head -n -5 | xargs -r rm -rf
+
 win() {  # name "command"
   local cmd
   cmd="$(printf '%q ' bash "$SIM_DIR/_window.sh" "$1" "$2")"
@@ -55,6 +61,7 @@ win() {  # name "command"
   else
     tmux new-session -d -s "$SESSION" -n "$1" -x 220 -y 50 "$cmd"
   fi
+  [ "$1" = shell ] || tmux pipe-pane -t "$SESSION:$1" "cat >> $(printf '%q' "$LOG_DIR/$1.log")"
 }
 AFTER_GZ='. ./env.sh && sim_load_course && sim_wait_for_gazebo &&'
 
@@ -72,6 +79,7 @@ win shell '. ./env.sh && sim_load_course && echo "ROS shell for course $SIM_WORL
 echo
 echo "Started tmux session '$SESSION' (seed $SEED, task $TASK)."
 echo "  attach:  tmux attach -t $SESSION      windows: Ctrl+b w      stop: $SIM_DIR/stop_competition.sh"
+echo "  logs:    $LOG_DIR"
 echo "  watch:   Foxglove -> ws://<this machine>:$( . "$SIM_DIR/env.sh" >/dev/null 2>&1; echo "$FOXGLOVE_PORT")  (README: Watching a run)"
 tmux select-window -t "$SESSION:judge"
 if [ $ATTACH = 1 ] && [ -t 1 ]; then exec tmux attach -t "$SESSION"; fi
