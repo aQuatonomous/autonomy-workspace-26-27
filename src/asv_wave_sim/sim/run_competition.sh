@@ -52,7 +52,7 @@ fi
 # the sketched start on the 2027 course.
 [ -n "$SEED" ] && [ -n "$TASK" ] && COURSE_ARGS+=(--start-task "$TASK")
 bash "$SIM_DIR/select_course.sh" ${SEED:+--seed "$SEED"} "${COURSE_ARGS[@]}"
-( . "$SIM_DIR/env.sh" >/dev/null && sim_robocommand_address ) || true
+( . "$SIM_DIR/env.sh" >/dev/null && sim_robocommand_address --prompt ) || true
 
 # Each window's output also goes to runs/logs/<time>/<window>.log (the last 5 runs are kept).
 LOG_ROOT="${SIM_RUNS_DIR:-$SIM_DIR/runs}/logs"

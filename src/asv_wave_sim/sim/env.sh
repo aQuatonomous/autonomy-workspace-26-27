@@ -100,12 +100,16 @@ sim_load_course() {
 
 # message_node sends to the competition address (10.10.10.1). Adding it to the loopback interface
 # lets the sim judge, listening on all addresses, receive those reports on this machine.
-# Needs root once per boot; prompts for sudo when run from a terminal.
+# Needs root once per boot. `sim_robocommand_address --prompt` may ask for the sudo password (only
+# run_competition.sh does, in the user's own terminal before anything starts); without --prompt it
+# never asks. 7_stack.sh calls it part-way through startup in a tmux window, which has a tty, and a
+# password prompt there blocked every node started after it, unseen (fix from Spencer Osborn,
+# feat/truth-scorer). A run without the alias still works; it just cannot reach the judge.
 sim_robocommand_address() {
   case "$ROBOCOMMAND_HOST" in 127.*|localhost) return 0 ;; esac
   ip -4 addr show dev lo 2>/dev/null | grep -q "inet $ROBOCOMMAND_HOST/" && return 0
   local sudo=sudo; [ "$(id -u)" -eq 0 ] && sudo=""
-  if [ -t 0 ]; then
+  if [ "${1:-}" = --prompt ] && [ -t 0 ]; then
     echo "Adding $ROBOCOMMAND_HOST to the loopback interface so message_node reaches the sim judge (sudo)."
     $sudo ip addr add "$ROBOCOMMAND_HOST/32" dev lo && return 0
   else
