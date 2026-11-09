@@ -26,6 +26,22 @@ Shared machine (several accounts on the sim Jetson): `env.sh` gives each user th
 `GZ_PARTITION` (the user name) and `ROS_DOMAIN_ID` (from the user id), so two people's sims do not
 see each other's topics. In a plain shell, run `. sim/env.sh` before `ros2 topic` or `gz topic`.
 
+The sim Jetson keeps one copy of ArduPilot, its venv, the ArduPilot Gazebo plugin, the TensorRT
+engines and the repo's git history under `/opt/aqua` (group `aqua`); `config.env` uses it whenever
+it exists. A per-user copy of those is about 6 GB, which the Jetson's 54 GB disk cannot spare.
+`setup_shared.sh` made it once from a working `setup_sim.sh` install (`--check` shows the state).
+New account on that machine:
+
+```bash
+git clone --reference /opt/aqua/autonomy-workspace-26-27.git <repo url> ~/autonomy-workspace-26-27
+~/autonomy-workspace-26-27/src/asv_wave_sim/sim/setup_sim.sh   # builds only your workspace
+```
+
+An existing clone switches to the shared history (its `.git` drops from ~510 MB to a few MB;
+local branches and uncommitted work are kept) with
+`setup_shared.sh --link ~/autonomy-workspace-26-27`. Never delete
+`/opt/aqua/autonomy-workspace-26-27.git`: those clones read their history from it.
+
 WSL2: Gazebo renders through the Windows GPU driver (`GALLIUM_DRIVER=d3d12`, set by `env.sh`).
 Install the current NVIDIA Windows driver; do not install a Linux NVIDIA driver inside WSL.
 `setup_sim.sh` warns when rendering falls back to the software renderer (llvmpipe).
