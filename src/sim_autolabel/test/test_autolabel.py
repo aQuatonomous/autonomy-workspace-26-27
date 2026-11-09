@@ -1,3 +1,4 @@
+import collections
 import json
 import os
 import re
@@ -125,10 +126,28 @@ def test_export_yolo_dataset(tmp_path):
 
 
 def test_val_split_is_by_block():
-    vals = {export.is_val('/x/s1', 'camera1', t, 30.0, 0.5) for t in np.arange(0.0, 29.9, 0.5)}
-    assert len(vals) == 1                     # one 30 s block never straddles train and val
-    blocks = [export.is_val('/x/s1', 'camera1', 30.0 * k, 30.0, 0.5) for k in range(200)]
-    assert 60 < sum(blocks) < 140
+    keys = {export.block_key('/x/s1', 'camera1', t, 30.0) for t in np.arange(0.0, 29.9, 0.5)}
+    assert len(keys) == 1                     # one 30 s block never straddles train and val
+    blocks = [export.block_key('/x/s1', 'camera1', 30.0 * k, 30.0) for k in range(200)]
+    assert len(export.choose_val(blocks, 0.5)) == 100
+    assert export.choose_val(blocks, 0.5) == export.choose_val(reversed(blocks), 0.5)   # stable
+    assert len(export.choose_val(blocks[:6], 0.15)) == 1      # short session still gets one
+    assert export.choose_val(blocks[:1], 0.15) == set()       # a single block stays in train
+    assert export.choose_val(blocks, 0.0) == set()
+
+
+def test_full_width_water_boxes_are_dropped():
+    _, mapping, _ = export.load_dataset(export.CLASSES_YAML, 'main')
+    classes = sorted(set(mapping.values()))
+    label = next(k for k in mapping)
+    frame = {'width': 960, 'height': 600, 'boxes': [
+        {'label': label, 'x0': 0.0, 'y0': 280.0, 'x1': 959.0, 'y1': 511.0},     # artefact
+        {'label': label, 'x0': 131.0, 'y0': 0.0, 'x1': 770.0, 'y1': 599.0},     # buoy right in front
+    ]}
+    dropped = collections.Counter()
+    lines, kept = export.yolo_lines(frame, classes, mapping, 640, 3.0, dropped)
+    assert len(lines) == 1 and kept[0][1] == 131.0
+    assert sum(dropped.values()) == 1
 
 
 def test_numbers_dataset_filters_at_its_own_imgsz():

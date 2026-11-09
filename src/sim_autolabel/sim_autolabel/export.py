@@ -68,9 +68,22 @@ def frames(session):
                 yield image, json.load(f)
 
 
-def is_val(session, camera, stamp, block, fraction):
-    key = f'{os.path.basename(session)}/{camera}/{int(stamp // block)}'
-    return zlib.crc32(key.encode()) / 2 ** 32 < fraction
+def block_key(session, camera, stamp, block):
+    return f'{os.path.basename(session)}/{camera}/{int(stamp // block)}'
+
+
+def choose_val(keys, fraction):
+    """The `fraction` of block keys with the lowest hash (at least one when there are two or
+    more), so short sessions still get a validation set and the choice is stable between exports."""
+    keys = sorted(set(keys), key=lambda k: zlib.crc32(k.encode()))
+    n = round(fraction * len(keys))
+    if fraction > 0 and len(keys) >= 2:
+        n = max(n, 1)
+    return set(keys[:n])
+
+
+def val_blocks(session, block, fraction):
+    return choose_val((block_key(session, fr['camera'], fr['stamp'], block) for _, fr in frames(session)), fraction)
 
 
 def yolo_lines(frame, classes, mapping, imgsz, min_px, dropped):
@@ -85,6 +98,13 @@ def yolo_lines(frame, classes, mapping, imgsz, min_px, dropped):
             continue
         x0, y0 = max(0.0, b['x0']), max(0.0, b['y0'])
         x1, y1 = min(float(w), b['x1']), min(float(h), b['y1'])
+        # The wave shader now and then writes a label ID into the bounding-box camera's ID pass
+        # across the water, giving a box from the left edge to the right edge over the whole lake
+        # (about 1 % of frames, any label). No course element fills the full width at a useful
+        # distance, so a box that does is dropped.
+        if x0 <= 1.0 and x1 >= w - 2.0:
+            dropped[f'{b["label"]} (spans the full frame width: water artefact)'] += 1
+            continue
         if min(x1 - x0, y1 - y0) * scale < min_px:
             dropped[f'{b["label"]} (under {min_px} px at {imgsz})'] += 1
             continue
@@ -115,8 +135,9 @@ def export(sessions, out, classes, mapping, imgsz=640, min_px=3, val_fraction=0.
     previews = 0
     for session in sessions:
         sname = os.path.basename(session)
+        val = val_blocks(session, val_block, val_fraction)
         for src, frame in frames(session):
-            split = 'val' if is_val(session, frame['camera'], frame['stamp'], val_block, val_fraction) else 'train'
+            split = 'val' if block_key(session, frame['camera'], frame['stamp'], val_block) in val else 'train'
             lines, kept = yolo_lines(frame, classes, mapping, imgsz, min_px, dropped)
             name = f'{sname}_{frame["camera"]}_{os.path.basename(src)[:-4]}'
             shutil.copyfile(src, os.path.join(out, SPLITS[split], 'images', name + '.jpg'))
