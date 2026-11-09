@@ -51,9 +51,17 @@ Install the current NVIDIA Windows driver; do not install a Linux NVIDIA driver 
 ```bash
 ./run_competition.sh --seed 0 --task 1     # handbook layout, planner Task 1
 ./run_competition.sh --seed 7 --task 3     # randomized layout within the rulebook ranges
+./run_competition.sh --seed 0 --task 2     # boat starts just before Task 2's channel
+./run_competition.sh --seed 0 --task 123   # Task 1 -> 2 -> 3 in sequence, as at competition
 ./run_competition.sh --seed 3 --no-stack   # everything except the autonomy stack
 ./stop_competition.sh                      # ends the judge first so the run report is written
 ```
+
+`--task` is the planner's `task_id`. Task 1 and the sequence (`123`, the planner's
+TaskMaster running 1 -> 2 -> 3) start at the handbook start before Task 1; `--task 2`, `3` and `5`
+put the boat `task_start_standoff` (3 m, `course/roboboat2026.yaml`) before that task's entrance,
+facing in, so each task can be tested on its own. The answer key lists every task's start
+(`starts`) and which one the world uses (`start_task`).
 
 One tmux session (`roboboat`) with a window per component: `gazebo`, `bridges`, `sitl`,
 `mavros`, `judge`, `stack`, `foxglove`, `shell` (and `rviz` with `--rviz`). `Ctrl+b w` lists them.

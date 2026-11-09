@@ -3,6 +3,8 @@
 # Gazebo, bridges, SITL, MAVROS, the judge and the autonomy stack, each in its own window.
 #
 #   run_competition.sh --seed 0 --task 1          handbook layout, planner task 1
+#   run_competition.sh --seed 0 --task 2          boat starts before Task 2's channel (also 3, 5)
+#   run_competition.sh --seed 0 --task 123        Task 1 -> 2 -> 3 in sequence from the Task 1 start
 #   run_competition.sh --seed 7 --task 3 --waves breezy_lake
 #   run_competition.sh --seed 2 --light low_sun --wind-from 270   weather and time of day (see README)
 #   run_competition.sh --seed 3 --no-stack        everything but the autonomy stack (drive it yourself)
@@ -33,7 +35,7 @@ while [ $# -gt 0 ]; do
     --rviz) RVIZ=1; shift ;;
     --headless) HEADLESS=1; shift ;;
     --no-attach) ATTACH=0; shift ;;
-    -h|--help) sed -n '2,16p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,18p' "$0"; exit 0 ;;
     *) COURSE_ARGS+=("$1"); shift ;;
   esac
 done
@@ -44,6 +46,11 @@ if tmux has-session -t "$SESSION" 2>/dev/null; then
   bash "$SIM_DIR/stop_competition.sh"
 fi
 
+# A single task starts just before its own entrance; Task 1 and the sequence (--task 123: Task
+# 1 -> 2 -> 3, as at competition) start at the handbook start before Task 1.
+case "$TASK" in
+  2|3|5) [ -n "$SEED" ] && COURSE_ARGS+=(--start-task "$TASK") ;;
+esac
 bash "$SIM_DIR/select_course.sh" ${SEED:+--seed "$SEED"} "${COURSE_ARGS[@]}"
 ( . "$SIM_DIR/env.sh" >/dev/null && sim_robocommand_address ) || true
 

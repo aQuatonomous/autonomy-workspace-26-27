@@ -153,6 +153,7 @@ class Course:
         self.gates = []
         self.models = []      # extra inline SDF models (docks, boundary markers)
         self.tasks = {}
+        self.entries = {}     # task -> (u, v, yaw) of its entrance in the course frame (per-task starts)
 
     # -- helpers ---------------------------------------------------------
     def pick(self, key, default, lo_hi):
@@ -231,6 +232,7 @@ class Course:
             fx, fy = vec(g['yaw'])
             lx, ly = -fy, fx
             gate_geo.append(((cu + lx * w / 2, cv + ly * w / 2), (cu - lx * w / 2, cv - ly * w / 2), (fx, fy)))
+        self.entries['2'] = (ou, ov, t['gates'][0]['yaw'])
         for o in t['channel_obstacles']:
             (ru, rv), (gu, gv), (fx, fy) = gate_geo[o['gate'] - 1]
             pu = ru + o['t'] * (gu - ru) + fx * o['forward']
@@ -285,6 +287,7 @@ class Course:
         fx, fy = vec(yaw)
         lx, ly = -fy, fx
         gate, _, _ = self.add_gate(3, 'speed_gate', t['gate_model'], cu, cv, yaw, w)
+        self.entries['3'] = (cu, cv, yaw)
 
         def at(spec):
             a = dist * spec['along'] + spec.get('along_offset', 0.0)
@@ -319,6 +322,7 @@ class Course:
         tine_rows = t['tine_rows']
         slip_rows = [(tine_rows[k] + 1, tine_rows[k + 1] - 1) for k in range(len(tine_rows) - 1)]
         numbers = list(t['slip_numbers'])
+        self.entries['5'] = (ou, ov, -90.0)   # entrance end between the docks; the docks extend toward -v
 
         example = t.get('example', {})
         layout = {}
@@ -432,16 +436,34 @@ class Course:
     </model>""")
         self.boundary_polygon = poly
 
-    def build(self):
+    def build(self, start_task='1'):
         self.task1()
         self.task2()
         self.task3()
         self.task5()
         self.boundary()
+        # Task 1 starts where the handbook puts the boat; every other task starts task_start_standoff
+        # metres before its entrance (as generated, so randomized seeds stay consistent), facing in.
         s = self.cfg['start']
-        x, y = self.frame.enu(s['u'], s['v'])
-        yaw = self.frame.yaw(s['yaw'])
-        self.start = {'x': round(x, 4), 'y': round(y, 4), 'yaw': round(yaw, 5)}
+        starts_uv = {'1': (s['u'], s['v'], s['yaw'])}
+        d = float(self.cfg.get('task_start_standoff', 3.0))
+        for task, (u, v, yaw) in self.entries.items():
+            fx, fy = vec(yaw)
+            starts_uv[task] = (u - fx * d, v - fy * d, yaw)
+        self.starts = {}
+        for task, (u, v, yaw) in sorted(starts_uv.items()):
+            x, y = self.frame.enu(u, v)
+            self.starts[task] = {'x': round(x, 4), 'y': round(y, 4), 'yaw': round(self.frame.yaw(yaw), 5)}
+        if start_task not in self.starts:
+            raise ValueError(f'no start for task {start_task}; tasks with a start: {sorted(self.starts)}')
+        self.start_task = start_task
+        self.start = self.starts[start_task]
+
+    def start_clearance(self, task):
+        """Distance (m) from a task's start to the nearest course element, and that element's name."""
+        s = self.starts[task]
+        return min((math.hypot(e['x'] - s['x'], e['y'] - s['y']), e['name'])
+                   for e in self.elements if 'x' in e)
 
 
 # ---------------------------------------------------------------------------
@@ -757,7 +779,7 @@ def answer_key(course, args, world_path, weather):
     fr = course.frame
     s = course.start
     lat, lon = fr.latlon(s['x'], s['y'])
-    heading = (90.0 - math.degrees(s['yaw'])) % 360.0
+    heading = round(90.0 - math.degrees(s['yaw']), 1) % 360.0
     return {
         'generator': 'src/asv_wave_sim/tools/generate_course.py',
         'seed': course.seed,
@@ -769,6 +791,10 @@ def answer_key(course, args, world_path, weather):
         # world origin) to its home location.
         'sitl_home': f'{fr.lat0:.8f},{fr.lon0:.8f},{fr.alt0:.1f},{heading:.0f}',
         'start': {**s, 'lat': round(lat, 8), 'lon': round(lon, 8), 'compass_heading_deg': round(heading, 1)},
+        # Where this world puts the boat (--start-task) and every task's start for reference.
+        'start_task': course.start_task,
+        'starts': {k: {**v, 'compass_heading_deg': round(90.0 - math.degrees(v['yaw']), 1) % 360.0}
+                   for k, v in course.starts.items()},
         'boundary': course.boundary_polygon,
         'waves': args.waves,
         'weather': {k: weather[k] for k in ('wind_speed', 'wind_from_deg', 'gust_fraction', 'light', 'sky',
@@ -798,6 +824,8 @@ def main(argv=None):
     ap.add_argument('--shadows', action='store_true', help='enable sun shadows (costs GPU time)')
     ap.add_argument('--no-shoreline', action='store_true')
     ap.add_argument('--no-boat', action='store_true', help='omit ourboat (course preview)')
+    ap.add_argument('--start-task', default='1', choices=['1', '2', '3', '5'],
+                    help="put the boat before this task's entrance (default 1: the handbook start)")
     args = ap.parse_args(argv)
 
     with open(args.config) as f:
@@ -806,7 +834,7 @@ def main(argv=None):
         args.waves = cfg['venue'].get('waves_preset', 'calm_lake')
 
     course = Course(cfg, args.seed)
-    course.build()
+    course.build(args.start_task)
     weather = resolve_weather(cfg, args, args.seed)
 
     out_dir = os.path.dirname(os.path.abspath(args.out))
@@ -827,6 +855,12 @@ def main(argv=None):
     print(f'seed {args.seed}: task2 indicators {[i["color"] for i in t2]}, task3 {t3["indicator_color"]} '
           f'({t3["required_direction"]}), dock target {t5["correct"]}')
     print(f'SITL home:  {answer_key(course, args, world_path, weather)["sitl_home"]}')
+    s = course.start
+    gap, nearest = course.start_clearance(course.start_task)
+    print(f'boat start: task {course.start_task} at ({s["x"]:.1f}, {s["y"]:.1f}) heading '
+          f'{round(90.0 - math.degrees(s["yaw"])) % 360:.0f} deg, {gap:.1f} m from {nearest}')
+    if gap < 1.5:
+        print(f'WARNING: the boat starts {gap:.1f} m from {nearest}', file=sys.stderr)
     print(f'weather:    wind {weather["wind_speed"]} m/s from {weather["wind_from_deg"]} deg ({args.waves}), '
           f'{weather["light"]} {weather["local_time"]}: sun az {weather["sun_azimuth_deg"]} el {weather["sun_elevation_deg"]}')
     return 0

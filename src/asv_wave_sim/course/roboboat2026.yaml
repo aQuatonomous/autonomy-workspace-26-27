@@ -52,6 +52,10 @@ boundary: {u_min: 0.0, u_max: 66.0, v_min: 0.0, v_max: 50.0}
 
 # Boat start: Task 1 requires starting at least 6 ft (1.83 m) before the first gate.
 start: {u: 9.1, v: 2.8, yaw: 90.0}
+# Starts for testing one task on its own (run_competition.sh --task 2/3/5, or generate_course.py
+# --start-task N): this many metres before that task's entrance (first channel gate, speed gate,
+# marina mouth), facing in. Task 1 and the full sequence use `start` above.
+task_start_standoff: 3.0
 
 # Task element dimensions (rulebook values, inches converted to metres).
 elements:
