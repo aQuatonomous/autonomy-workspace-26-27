@@ -7,7 +7,7 @@
 #   run_competition.sh --seed 0 --task 123        no start of its own: the course start (full run)
 #   run_competition.sh --course 2026 --task 1     the 2026 course; --course readiness: the two gates
 #   run_competition.sh --seed 7 --task 3 --waves breezy_lake
-#   run_competition.sh --seed 2 --light low_sun --wind-from 270   weather and time of day (see README)
+#   run_competition.sh --seed 2 --light low_sun --wind-from 270   weather and time of day (SIMULATION.md)
 #   run_competition.sh --seed 3 --no-stack        everything but the autonomy stack (drive it yourself)
 #   run_competition.sh ... --no-cv --rviz --no-attach
 #   run_competition.sh ... --full-res           cameras as on the boat (1920x1200@30); --camera WxH@HZ
@@ -87,6 +87,6 @@ echo
 echo "Started tmux session '$SESSION' (seed $SEED, task ${TASK:-1})."
 echo "  attach:  tmux attach -t $SESSION      windows: Ctrl+b w      stop: $SIM_DIR/stop_competition.sh"
 echo "  logs:    $LOG_DIR"
-echo "  watch:   Foxglove -> ws://<this machine>:$( . "$SIM_DIR/env.sh" >/dev/null 2>&1; echo "$FOXGLOVE_PORT")  (README: Watching a run)"
+echo "  watch:   Foxglove -> ws://<this machine>:$( . "$SIM_DIR/env.sh" >/dev/null 2>&1; echo "$FOXGLOVE_PORT")  (SIMULATION.md: Watching a run)"
 tmux select-window -t "$SESSION:judge"
 if [ $ATTACH = 1 ] && [ -t 1 ]; then exec tmux attach -t "$SESSION"; fi

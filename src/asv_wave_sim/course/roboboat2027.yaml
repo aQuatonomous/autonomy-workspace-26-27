@@ -87,7 +87,7 @@ tasks:
   # Task 2 - Emergency Response Sprint. Polyform A-2 buoys of six colours and three numbered light
   # beacons. Core: start at the GREEN (lit) beacon, loop around the target buoy, exit the field.
   # Which colour is the target is not stated yet; PLACEHOLDER: the sketch's path loops the blue one,
-  # and the stack is told the colour on the sim's tasking topic (see README).
+  # and the stack is told the colour on the sim's tasking topic (see SIMULATION.md, section 4).
   task2:
     buoys:
       - {color: green,  u: 49.9, v: 46.3}   # (821, 134)

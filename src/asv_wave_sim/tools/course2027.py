@@ -276,7 +276,7 @@ class Course2027(Course):
     # ------------------------------------------------------------------ RoboCommand tasking
     def schedule_tasking(self):
         """Messages the sim's RoboCommand stand-in sends during the run. PLACEHOLDER format: the
-        2027 RoboCommand tasking messages are not published yet (see the README)."""
+        2027 RoboCommand tasking messages are not published yet (SIMULATION.md, section 4)."""
         self.tasking = []
         if '2' in self.tasks and self.start_task in ('course', '2'):
             t2 = self.tasks['2']

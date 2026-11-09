@@ -11,7 +11,7 @@ Multi-camera object detection with TensorRT-optimized YOLO on ROS 2 Jazzy: 3 cam
 | **[COMPETITION.md](COMPETITION.md)** | What to run at competition and when; task-specific launch table; inference/FP16/calibration; iterating at competition. |
 | **[NODES.md](NODES.md)** | Complete node architecture, build, launch, manual commands, topic I/O, message formats, troubleshooting. |
 
-**See also:** [camera_calibration/README.md](camera_calibration/README.md) (distance scale factor), [models/TENSORRT.md](models/TENSORRT.md) (TensorRT and engine build), [FUSION_NODE_GUIDE.md](FUSION_NODE_GUIDE.md) (CV + LiDAR fusion), [DISTANCE_ESTIMATOR_CHANGES.md](DISTANCE_ESTIMATOR_CHANGES.md) (distance estimator), [Simulation guide](../src/asv_wave_sim/SIMULATION.md) (sim + CV).
+**See also:** [camera_calibration/README.md](camera_calibration/README.md) (distance scale factor), [models/TENSORRT.md](models/TENSORRT.md) (TensorRT and engine build), [FUSION_NODE_GUIDE.md](FUSION_NODE_GUIDE.md) (CV + LiDAR fusion), [DISTANCE_ESTIMATOR_CHANGES.md](DISTANCE_ESTIMATOR_CHANGES.md) (distance estimator), [Simulation guide](../SIMULATION.md) (sim + CV).
 
 ---
 

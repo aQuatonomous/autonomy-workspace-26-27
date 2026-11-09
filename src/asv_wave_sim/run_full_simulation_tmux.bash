@@ -2,7 +2,7 @@
 # Run the full boat simulation in tmux: Gazebo + bridges + ArduPilot SITL + MAVROS + sim judge.
 # This now delegates to sim/run_competition.sh, which derives every path from the repo location
 # and config.env, homes SITL at the course origin, uses MAVROS on TCP 5762 and the Airy lidar
-# topic (/rslidar_points). See sim/README.md.
+# topic (/rslidar_points). Superseded by sim/run_competition.sh (SIMULATION.md).
 #
 #   bash run_full_simulation_tmux.bash              RoboBoat 2026 course (seed 0), no autonomy stack
 #   bash run_full_simulation_tmux.bash --seed 7     randomized course
