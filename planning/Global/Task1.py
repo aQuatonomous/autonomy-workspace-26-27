@@ -58,6 +58,13 @@ class GoalPlan:
 
 from Global.types import DetectedEntity, Vec3
 
+# Exit phase: first a point this far past gate 2 on the gate centre line, so the boat turns around in
+# open water and comes back through gate 2 lined up (turning on gate 2 itself struck its buoys).
+TURNAROUND_PAST_GATE_M = 3.0
+TURNAROUND_REACHED_M = 1.5
+# Which locked gate each gate goal crosses: entry gate_1/gate_2 = locked 0/1, exit = reverse order.
+GATE_FOR_GOAL = {"gate_1": 0, "gate_2": 1, "exit_gate_1": 1, "exit_gate_2": 0}
+
 
 class TaskStatus(Enum):
     RUNNING = "RUNNING"
@@ -232,9 +239,14 @@ class Task1Manager:
         if current_goal is None:
             return
 
-        if goal_index < len(self.locked_gates):
-            # Exit phase: goal_plan is [exit_gate_1=gate2, exit_gate_2=gate1] so index 0->locked_gates[1], 1->locked_gates[0]
-            gate_index = (1, 0)[goal_index] if self.phase == "exit" else goal_index
+        if current_goal.goal_id == "turnaround":
+            gx, gy = float(current_goal.position[0]), float(current_goal.position[1])
+            if float(np.hypot(cur[0] - gx, cur[1] - gy)) <= TURNAROUND_REACHED_M:
+                current_goal.completed = True
+            return
+
+        gate_index = GATE_FOR_GOAL.get(current_goal.goal_id)
+        if gate_index is not None and gate_index < len(self.locked_gates):
             red, green = self.locked_gates[gate_index]
             if segments_intersect(self.prev_pos, cur, red, green):
                 current_goal.completed = True
@@ -245,7 +257,11 @@ class Task1Manager:
                     g1, g2 = self.locked_gates[0], self.locked_gates[1]
                     c2 = ((g2[0][0] + g2[1][0]) / 2.0, (g2[0][1] + g2[1][1]) / 2.0, 0.0)
                     c1 = ((g1[0][0] + g1[1][0]) / 2.0, (g1[0][1] + g1[1][1]) / 2.0, 0.0)
+                    out = np.array([c2[0] - c1[0], c2[1] - c1[1]], dtype=float)
+                    out /= (np.linalg.norm(out) + 1e-9)
+                    turn = (c2[0] + out[0] * TURNAROUND_PAST_GATE_M, c2[1] + out[1] * TURNAROUND_PAST_GATE_M, 0.0)
                     self.goal_plan = [
+                        GoalPlan(goal_id="turnaround", position=turn, completed=False),
                         GoalPlan(goal_id="exit_gate_1", position=c2, completed=False),
                         GoalPlan(goal_id="exit_gate_2", position=c1, completed=False),
                     ]
