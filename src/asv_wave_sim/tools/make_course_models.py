@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Generate the RoboBoat 2026 task element models from rulebook dimensions.
+"""Generate the RoboBoat 2026 and 2027 task element models from rulebook dimensions.
 
 Writes model folders into gz-waves-models/models:
   {Red,Green,Black,Yellow}Ropehold     Task 2 channel / obstacle buoy (Polyform A-0)
-  PolyformA2{Red,Green,Black,Yellow}   Task 3 gate / obstacle / yellow buoy (Polyform A-2)
+  PolyformA2{Red,Green,Black,Yellow,Blue,White}   gate / obstacle / target buoy (Polyform A-2)
   IndicatorBuoy{Red,Green}             custom color indicator buoy (white panels, black diamonds)
+  LightBuoy{Red,Green,Blue,Black}[1-3] 2027 light beacon buoy, lit or off, optionally numbered
   DockIndicator{Red,Green}             5.2 in x 5 in cylinder mounted on the dock
   NumberBanner{1,2,3}                  24 x 24 in white banner with a black numeral
-  StationaryVessel{Yellow,Black}       coroplast stationary vessel with its delivery sign
+  StationaryVessel{Yellow,Black}       coroplast stationary vessel with its delivery sign (2026)
+  StationaryVessel{Yellow,Black}{Cross,Circle,Square,Triangle}   2027 Task 4 delivery vessels
   roboboat_common                      shared meshes and textures
 
 Every model is static (anchored) with its origin at the waterline, so the course generator
@@ -260,8 +262,8 @@ def make_polyform_a0():
 
 
 def make_polyform_a2():
-    # A-2: 36.8 cm diameter, 1 ft above the waterline.
-    for color in ('Red', 'Green', 'Black', 'Yellow'):
+    # A-2: 36.8 cm diameter, 1 ft above the waterline. Blue and white are new in 2027 (Task 2 field).
+    for color in ('Red', 'Green', 'Black', 'Yellow', 'Blue', 'White'):
         polyform(f'PolyformA2{color}', f'Polyform A-2 buoy ({color.lower()}), 36.8 cm, 1 ft above waterline.',
                  color.lower(), 0.368, 0.3048)
 
@@ -291,6 +293,50 @@ def make_indicator_buoys():
                     f'RoboBoat 2026 color indicator buoy with a {color} indicator: 17 in white coroplast '
                     f'frustum with black diamonds on an 18 in PVC frame with floats (mech team CAD).',
                     vis, col)
+
+
+def make_light_buoys():
+    """RoboBoat 2027 light beacon buoys: the indicator buoy with its top cylinder lit (emissive) red,
+    green or blue, or dark (black = light off). The numbered ones (Task 2 START/END markers 1-3)
+    carry the number on a white plate on both panel faces. PLACEHOLDER: the primer shows the
+    shape only; light size and the number plate are guesses until the 2027 handbook."""
+    z = -INDICATOR_FLOAT_DIAMETER / 2
+    half = INDICATOR_FRAME_WIDTH / 2
+    top = INDICATOR_HEIGHT + z
+    col = box_collision((2 * half, 2 * half, top + INDICATOR_FLOAT_DIAMETER / 2), pose(z=(top + z) / 2))
+    # Numbered beacons show the number where the others have the black diamond (primer sketches):
+    # a white plate with the numeral over the diamond on all four faces, leaning in with the panel.
+    # Panel faces (measured from the CAD mesh): 0.216 m out at z = 0.034, 0.405 m in per m of height
+    # (22 deg); the diamond spans z 0.093-0.282.
+    plate, plate_z = 0.21, 0.1875
+    lean = math.atan(0.405)
+    plate_y = 0.216 - (plate_z - 0.034) * 0.405 + 0.006
+    for color in ('red', 'green', 'blue', 'black'):
+        for number in (None, 1, 2, 3):
+            vis = Visuals()
+            for piece, c, rough in (('panel', 'white', 0.6), ('diamond', 'black', 0.6), ('pvc', 'pvc', 0.4),
+                                    ('float', 'purple', 0.7)):
+                vis.mesh(f'model://{COMMON}/meshes/indicator_buoy_{piece}.obj', c, pose(z=z), roughness=rough)
+            lit = 0.0 if color == 'black' else 0.9
+            vis.add(f'<mesh><uri>model://{COMMON}/meshes/indicator_buoy_indicator.obj</uri>'
+                    f'<scale>1 1 1</scale></mesh>', color, pose(z=z), emissive=lit, roughness=0.3)
+            vis.cylinder(0.005, 0.06, 'black', pose(0.04, 0, top + 0.03))
+            if number is not None:
+                tex = f'model://{COMMON}/materials/textures/banner_{number}.png'
+                # The quad faces -y; yawing it puts it on each face. A negative roll leans its top inward.
+                for k, (px, py, yaw) in enumerate(((0, -plate_y, 0.0), (0, plate_y, math.pi),
+                                                   (plate_y, 0, math.pi / 2), (-plate_y, 0, -math.pi / 2))):
+                    vis.raw(f'<visual name="number{k}">{pose(px, py, plate_z, -lean, 0, yaw)}'
+                            f'<geometry><mesh><uri>model://{COMMON}/meshes/banner_quad.obj</uri>'
+                            f'<scale>{plate / (24.0 * IN):.4f} 1 {plate / (24.0 * IN):.4f}</scale></mesh></geometry>'
+                            f'<material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse>'
+                            f'<pbr><metal><albedo_map>{tex}</albedo_map><roughness>0.9</roughness>'
+                            f'<metalness>0</metalness></metal></pbr></material></visual>')
+            name = f'LightBuoy{color.capitalize()}' + (str(number) if number else '')
+            state = 'off (dark)' if color == 'black' else f'lit {color}'
+            write_model(name, f'RoboBoat 2027 light beacon buoy, light {state}'
+                        + (f', number {number} on all four panels' if number else '')
+                        + '. Indicator buoy frame from the mech team CAD.', vis, col)
 
 
 def make_dock_indicators():
@@ -343,9 +389,35 @@ def make_banners():
                     f'(faces +/-y). Origin at the bottom centre.', vis, col)
 
 
+def sign_symbol(vis, symbol, y, zc):
+    """Black symbol on the vessel sign at lateral offset y. The symbols carry the autolabel label
+    (the bounding-box camera merges them into one box per vessel); the hull is left unlabelled."""
+    if symbol == 'triangle':
+        vis.mesh(f'model://{COMMON}/meshes/sign_triangle.obj', 'black', pose(-0.05, y, zc),
+                 label='vessel_sign_triangle')
+    elif symbol == 'cross':
+        vis.box((0.16, 0.002, 0.045), 'black', pose(-0.05, y, zc), label='vessel_sign_cross')
+        vis.box((0.045, 0.002, 0.16), 'black', pose(-0.05, y, zc), label='vessel_sign_cross')
+    elif symbol == 'circle':
+        vis.add('<cylinder><radius>0.075</radius><length>0.002</length></cylinder>', 'black',
+                pose(-0.05, y, zc, math.pi / 2, 0, 0), label='vessel_sign_circle')
+    elif symbol == 'square':
+        vis.box((0.14, 0.002, 0.14), 'black', pose(-0.05, y, zc), label='vessel_sign_square')
+    else:
+        raise ValueError(symbol)
+
+
+VESSEL_SHAPES = ('cross', 'circle', 'square', 'triangle')   # RoboBoat 2027 Task 4 sail shapes
+
+
 def make_vessels():
+    """Stationary vessels. 2026: StationaryVesselYellow (triangle), StationaryVesselBlack (cross).
+    2027 (Task 4 delivery): every hull colour with every shape, StationaryVessel<Hull><Shape>."""
+    variants = [('yellow', 'triangle', 'StationaryVesselYellow'), ('black', 'cross', 'StationaryVesselBlack')]
+    variants += [(hull, shape, f'StationaryVessel{hull.capitalize()}{shape.capitalize()}')
+                 for hull in ('yellow', 'black') for shape in VESSEL_SHAPES]
     zt = VESSEL_FREEBOARD
-    for color, symbol in (('yellow', 'triangle'), ('black', 'plus')):
+    for color, symbol, name in variants:
         vis = Visuals()
         vis.mesh(f'model://{COMMON}/meshes/vessel_hull.obj', color, pose())
         # Pool noodles along both sides on a PVC frame.
@@ -359,20 +431,12 @@ def make_vessels():
         vis.box((sw, 0.006, sh), 'white', pose(-0.05, 0, zc))
         for x in (-0.05 - sw / 2 - 0.015, -0.05 + sw / 2 + 0.015):
             vis.cylinder(0.0133, sh + 0.04, 'pvc', pose(x, 0, zc))
-        # The symbols carry the autolabel label (the bounding-box camera merges them into one box
-        # per vessel); the hull is left unlabelled.
         for side in (-1, 1):
-            y = side * 0.0045
-            if symbol == 'triangle':
-                vis.mesh(f'model://{COMMON}/meshes/sign_triangle.obj', 'black', pose(-0.05, y, zc),
-                         label='vessel_sign_triangle')
-            else:
-                vis.box((0.16, 0.002, 0.045), 'black', pose(-0.05, y, zc), label='vessel_sign_cross')
-                vis.box((0.045, 0.002, 0.16), 'black', pose(-0.05, y, zc), label='vessel_sign_cross')
+            sign_symbol(vis, symbol, side * 0.0045, zc)
         length = VESSEL_BODY + VESSEL_BOW
         col = box_collision((length, VESSEL_BEAM + 0.16, VESSEL_WALL),
                             pose(x=VESSEL_BOW / 2, z=VESSEL_FREEBOARD - VESSEL_WALL / 2))
-        write_model(f'StationaryVessel{color.capitalize()}',
+        write_model(name,
                     f'RoboBoat stationary vessel ({color}): coroplast tray 42 in body + pointed bow, 16 in beam, '
                     f'5.5 in walls, white sign with a black {symbol}. Bow points +x.', vis, col)
 
@@ -382,6 +446,7 @@ def main():
     make_polyform_a0()
     make_polyform_a2()
     make_indicator_buoys()
+    make_light_buoys()
     make_dock_indicators()
     make_banners()
     make_vessels()

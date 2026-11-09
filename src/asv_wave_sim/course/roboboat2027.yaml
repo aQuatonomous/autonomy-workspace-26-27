@@ -1,0 +1,156 @@
+# RoboBoat 2027 course description: Core tier of Tasks 1-5, plus the Proof of Readiness gates.
+#
+# Source: "RoboBoat 2027 Primer & Task Ideas" (RoboNation, 2026), the only 2027 document published
+# so far. It gives the task concepts, the capability tiers and a course sketch ("Course Layout",
+# page 14), but no dimensions, scoring or RoboCommand message formats. So:
+#   - element sizes reuse the 2026 handbook values for elements that carry over (Polyform A-2,
+#     the light beacon = 2026 indicator buoy, dock cubes, stationary vessels);
+#   - positions are read off the course sketch at layout_scale metres per pixel;
+#   - everything else is tagged PLACEHOLDER. Replace those when the 2027 team handbook is out.
+#
+# Course frame as in 2026: u = drawing right, v = drawing up, yaw counter-clockwise from +u in
+# degrees; tools/generate_course.py rotates it into Gazebo ENU with venue.course_up_bearing_deg.
+# Sketch pixel (px, py) -> u = (px - 53) * 0.065, v = (846 - py) * 0.065 (bottom-left corner marker).
+
+year: 2027
+units: {length: m, angle: deg}
+layout_scale: 0.065    # PLACEHOLDER m per sketch pixel: gives a 65.6 x 52.7 m course, like 2026
+
+venue:
+  name: Nathan Benderson Park, Sarasota, FL (regatta lake, freshwater, wave attenuator)
+  datum: {lat: 27.37372, lon: -82.45270, alt: 0.0}     # PLACEHOLDER, as 2026
+  course_up_bearing_deg: 270.0                         # PLACEHOLDER, as 2026
+  water_density: 1000.0
+  waves_preset: calm_lake
+  wind_from_deg: 240.0                                 # PLACEHOLDER afternoon sea breeze
+  date: '2027-02-20'                                   # competition 18-23 February 2027
+  utc_offset_h: -5.0                                   # EST (before the March DST change)
+  light_preset: midday
+  water_color: {deep: [0.02, 0.07, 0.06], shallow: [0.05, 0.15, 0.12]}
+
+boat: {wind_cda: 0.35}
+
+# Corner markers of the sketch (white trapezoids at the four corners).
+boundary: {u_min: 0.0, u_max: 65.6, v_min: 0.0, v_max: 52.7}
+
+# The boat as drawn in the sketch, below the Emergency Response Sprint field, pointing up. Full
+# runs (any --task without its own start, e.g. a planner sequence) start here.
+start: {u: 36.1, v: 16.1, yaw: 90.0}
+
+# Single-task starts (run_competition.sh --task N): this far before the task's entrance, facing in.
+task_start_standoff: 3.0
+
+elements:
+  sur_mark: {diameter: 0.4572, above_water: 0.9906, mesh_height: 1.2446}
+  polyform_a2: {diameter: 0.368, above_water: 0.3048}
+  light_buoy:            # light beacon: the 2026 indicator buoy with a light (red/green/blue/off)
+    base_square: 0.4572
+    above_water: 0.3048
+  dock_cube:
+    size: [0.508, 0.508, 0.4064]
+    freeboard: 0.30                                    # PLACEHOLDER, as 2026
+
+randomize:
+  task1_path_jitter: 3.0        # +/- m on the interior points of the Safe Passage path
+  task1_endpoint_jitter: 2.0    # +/- m on the ENTRY / EXIT buoys
+  task1_black_count: [2, 3]
+  task2_jitter: 1.5             # +/- m on the Sprint field buoys
+  task2_target: true            # random target colour
+  task2_green_beacon: true      # random choice of which numbered beacon is lit green (START)
+  dock_indicators: true
+  dock_vessel_probability: 0.6
+  slip_number_order: false
+  vessel_shapes: true           # Task 4 shapes shuffled (each shape at least once)
+  task4_assignment: true        # random assigned vessel
+  readiness_gates: true         # Proof of Readiness width / spacing within the stated ranges
+  min_separation: 1.5
+  wind_direction: true
+
+tasks:
+  # Task 1 - Safe Passage. "A random path is generated": a passage through a field of light buoys
+  # from the ENTRY buoy to the EXIT buoy (both lit BLUE in the primer's Task 1 diagram). GREEN
+  # buoys mark the passage's port side and RED its starboard side; BLACK (off) buoys are debris.
+  # Core: circle ENTRY clockwise, transit passing GREEN to port and RED to starboard, circle EXIT
+  # counter-clockwise. Advanced (EXIT changes) and Disruptive (colours change) are not modelled.
+  task1:
+    entry: {u: 23.6, v: 30.3}            # sketch blue buoy (416, 380)
+    exit: {u: 3.1, v: 38.1}              # sketch blue buoy (101, 260)
+    # PLACEHOLDER path between them (seed 0); markers alternate sides along it.
+    path: [[17.5, 34.5], [10.5, 31.5]]
+    markers: [green, red, green, red, green, red]       # sketch: 3 red, 3 green
+    passage_half_width: 1.5              # PLACEHOLDER: buoy to path centre (3 m passage, ~ 10 ft gate)
+    end_clearance: 4.0                   # PLACEHOLDER: no marker closer than this to ENTRY / EXIT
+    black: [[14.2, 45.9], [10.9, 25.1]]  # sketch black buoys (271, 140), (220, 460)
+    black_path_clearance: 3.0            # random black buoys stay this far from the path
+    region: {u: [1.8, 27.0], v: [24.0, 48.0]}     # sketch field area, for randomized black buoys
+
+  # Task 2 - Emergency Response Sprint. Polyform A-2 buoys of six colours and three numbered light
+  # beacons. Core: start at the GREEN (lit) beacon, loop around the target buoy, exit the field.
+  # Which colour is the target is not stated yet; PLACEHOLDER: the sketch's path loops the blue one,
+  # and the stack is told the colour on the sim's tasking topic (see README).
+  task2:
+    buoys:
+      - {color: green,  u: 49.9, v: 46.3}   # (821, 134)
+      - {color: white,  u: 60.6, v: 43.0}   # (985, 184)
+      - {color: blue,   u: 46.2, v: 33.6}   # (763, 329)
+      - {color: red,    u: 34.5, v: 30.3}   # (583, 380)
+      - {color: yellow, u: 41.5, v: 23.1}   # (691, 490)
+      - {color: black,  u: 51.0, v: 24.8}   # (837, 465)
+    beacons:
+      - {number: 1, light: red,   u: 39.4, v: 43.9}   # (659, 170)
+      - {number: 2, light: red,   u: 63.6, v: 34.8}   # (1031, 310)
+      - {number: 3, light: green, u: 32.8, v: 19.6}   # (558, 545)
+    target: blue
+    target_choices: [red, blue, yellow, black, white]
+    start_radius: 3.0                    # PLACEHOLDER: "at" the green beacon = within this distance
+    exit_margin: 2.0                     # PLACEHOLDER: field = hull of its buoys grown by this
+
+  # Task 3 - Navigate the Marina. One dock (spine at the sketch's right edge, tines to the left),
+  # three slips with colour indicators and number banners. Core: dock in the GREEN slip. The fire
+  # (Advanced) and the light-sequence delivery (Disruptive) are not modelled.
+  task3:
+    origin: {u: 57.5, v: 16.7}           # spine centre at sketch x 1007 (u 62.0); PLACEHOLDER v
+    spine_length_cubes: 17               # 2026 dimensions
+    spine_width_cubes: 2
+    tine_length_cubes: 4
+    tine_rows: [1, 5, 9, 13]
+    spine_centre_offset: 4.52
+    docks:
+      - {name: N, side: 1}               # tines point -u (toward the course)
+    slip_numbers: [1, 2, 3]
+    # Primer Task 3 diagram, top to bottom: green, red, red with a vessel.
+    example:
+      N: [{indicator: green}, {indicator: red}, {indicator: red, vessel: black}]
+    approach: 6.0                        # task start: this far out from the tine tips, mid slip
+
+  # Task 4 - Delivery Run. Stationary vessels with a shape on the sail (cross, circle, square,
+  # triangle). RoboCommand assigns the vessel(s); Core = one vessel. Hulls black / yellow as drawn.
+  task4:
+    vessels:
+      - {hull: black,  shape: cross,    u: 30.0, v: 47.2, yaw: 90.0}    # (515, 120)
+      - {hull: yellow, shape: triangle, u: 54.1, v: 50.0, yaw: -25.0}   # (886, 77)
+      - {hull: black,  shape: square,   u: 5.2,  v: 8.1,  yaw: 30.0}    # (133, 722)
+      - {hull: yellow, shape: circle,   u: 20.7, v: 4.3,  yaw: 30.0}    # (372, 780)
+      - {hull: black,  shape: triangle, u: 33.9, v: 7.9,  yaw: 0.0}     # (574, 725)
+    assigned: circle                     # seed 0 assignment (by shape)
+    delivery_range: 2.5                  # PLACEHOLDER: boat centre within this of the vessel centre
+    delivery_hold: 3.0                   # PLACEHOLDER: seconds held there = delivered
+    tasking_at: {course: 120.0, task: 5.0}   # PLACEHOLDER: sim s after the run starts
+
+  # Task 5 - Dynamic Response. Core: break off and rally at a GPS point sent by RoboCommand.
+  task5:
+    rally: {u: 20.0, v: 17.4}            # centre of the sketch's dashed circle (360, 578)
+    rally_radius: 3.0                    # PLACEHOLDER: reached = boat centre within this
+    tasking_at: {course: 240.0, task: 5.0}   # PLACEHOLDER
+
+  # Proof of Readiness (video before the event): two red/green gates, 6-10 ft wide, 25-100 ft
+  # apart, start more than 6 ft before the first. Built alone with --layout readiness.
+  readiness:
+    gate_model: sur_mark
+    gate1: {u: 36.1, v: 19.0}
+    yaw: 90.0
+    gate_width: 2.4384                   # 8 ft
+    gate_width_range: [1.8288, 3.048]    # 6-10 ft
+    gate_spacing: 10.0
+    gate_spacing_range: [7.62, 30.48]    # 25-100 ft
+    start_before: 2.9                    # > 6 ft (1.83 m)

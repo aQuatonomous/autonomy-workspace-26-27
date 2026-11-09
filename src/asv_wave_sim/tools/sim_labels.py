@@ -30,6 +30,15 @@ LABELS = {
     'vessel_sign_triangle': 18,     # black triangle on the yellow stationary vessel
     'vessel_sign_cross': 19,        # black plus on the black stationary vessel
     'dock': 20,
+    # RoboBoat 2027
+    'light_buoy_red': 21,           # light beacon buoy, lit red / green / blue, or off (black)
+    'light_buoy_green': 22,
+    'light_buoy_blue': 23,
+    'light_buoy_black': 24,
+    'a2_blue': 25,
+    'a2_white': 26,
+    'vessel_sign_circle': 27,
+    'vessel_sign_square': 28,
 }
 
 

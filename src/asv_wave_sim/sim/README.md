@@ -1,6 +1,7 @@
-# RoboBoat 2026 simulator
+# RoboBoat simulator (2027 and 2026 courses)
 
-Gazebo Harmonic course built from the RoboBoat 2026 handbook (Tasks 1, 2, 3 and 5), the boat with
+Gazebo Harmonic courses for RoboBoat 2027 (Core tiers of Tasks 1-5 and the Proof of Readiness
+gates, from the 2027 primer) and RoboBoat 2026 (Tasks 1, 2, 3 and 5, from the handbook), the boat with
 its competition sensors (RoboSense Airy 96 + three cameras), ArduPilot Rover SITL with the real
 boat's tuning, MAVROS, the team's autonomy stack, and a judge that scores runs the way the
 RoboCommand server and the course judges do.
@@ -49,18 +50,20 @@ Install the current NVIDIA Windows driver; do not install a Linux NVIDIA driver 
 ## Run
 
 ```bash
-./run_competition.sh --seed 0 --task 1     # handbook layout, planner Task 1
-./run_competition.sh --seed 7 --task 3     # randomized layout within the rulebook ranges
-./run_competition.sh --seed 0 --task 2     # boat starts just before Task 2's channel
-./run_competition.sh --seed 0 --task 123   # Task 1 -> 2 -> 3 in sequence, as at competition
+./run_competition.sh --seed 0 --task 1     # 2027 course as sketched, boat before Task 1, planner task 1
+./run_competition.sh --seed 7 --task 3     # randomized layout, boat before the marina
+./run_competition.sh --seed 0 --task 123   # no start of its own: the course start (a full run)
+./run_competition.sh --course readiness --task 1   # 2027 Proof of Readiness: the two gates alone
+./run_competition.sh --course 2026 --task 2        # the 2026 course
 ./run_competition.sh --seed 3 --no-stack   # everything except the autonomy stack
 ./stop_competition.sh                      # ends the judge first so the run report is written
 ```
 
-`--task` is the planner's `task_id`. Task 1 and the sequence (`123`, the planner's
-TaskMaster running 1 -> 2 -> 3) start at the handbook start before Task 1; `--task 2`, `3` and `5`
-put the boat `task_start_standoff` (3 m, `course/roboboat2026.yaml`) before that task's entrance,
-facing in, so each task can be tested on its own. The answer key lists every task's start
+`--course` picks the course: `2027` (default), `readiness` or `2026`. `--task` is the planner's
+`task_id`, and the boat starts `task_start_standoff` (3 m, in the course YAML) before that task's
+entrance, facing in, so each task can be tested on its own. A task without its own start (the
+planner's sequence mode `123`, or no `--task`) uses the course's default start: the sketched start
+on the 2027 course, before Task 1 on the 2026 course. The answer key lists every task's start
 (`starts`) and which one the world uses (`start_task`).
 
 One tmux session (`roboboat`) with a window per component: `gazebo`, `bridges`, `sitl`,
@@ -102,12 +105,34 @@ Run `select_course.sh --seed N` first; every script reads the course it writes.
 
 ## Course
 
-`course/roboboat2026.yaml` holds the dimensions taken from the handbook diagrams
-(`course/reference/`). `tools/generate_course.py` turns it into a world plus an answer key
-(`course/generated/seed_N/`): every element's world position, lat/lon, gate lines, slips and the
-correct answers. Seed 0 is the layout as drawn; other seeds move things within the limits listed
-under `randomize:` in the YAML. The SITL home is the world origin, so GPS from MAVROS and the
+`tools/generate_course.py` turns a course YAML into a world plus an answer key
+(`course/generated/<course>_seed_N/`): every element's world position, lat/lon, gate lines, slips
+and the correct answers. Seed 0 is the layout as drawn; other seeds move things within the limits
+listed under `randomize:` in the YAML. The SITL home is the world origin, so GPS from MAVROS and the
 answer key share one datum.
+
+### 2027 (`course/roboboat2027.yaml`, `tools/course2027.py`)
+
+Built from the RoboBoat 2027 Primer & Task Ideas, the only 2027 document so far: positions are read
+off its course sketch, sizes reuse the 2026 handbook for elements that carry over, and every guess
+is tagged `PLACEHOLDER` in the YAML. Update those when the 2027 handbook is out. Core tiers only:
+
+| Task | In the sim |
+|---|---|
+| 1 Safe Passage | Light buoys along a passage from the ENTRY to the EXIT buoy (both lit blue): GREEN on its port side, RED on starboard, BLACK (off) buoys as debris. Seeds > 0 generate a new path. |
+| 2 Emergency Response Sprint | Polyform A-2 buoys in six colours and numbered beacons 1-3; one beacon is lit green (START). The target colour is sent on the tasking topic. |
+| 3 Navigate the Marina | One dock, three slips with green/red indicators, number banners, a vessel in a red slip. |
+| 4 Delivery Run | Five stationary vessels with cross / circle / square / triangle signs; RoboCommand assigns one by shape. |
+| 5 Dynamic Response | A rally point RoboCommand sends during the run. |
+| Proof of Readiness | `--course readiness`: two red/green gates, 6-10 ft wide, 25-100 ft apart, start > 6 ft before. |
+
+Not modelled until the handbook specifies them: Task 1 colour changes (Advanced, Disruptive),
+acoustic pingers (Task 2 Advanced, Disruptive), the fire / water delivery and the window light
+sequence (Task 3 Advanced, Disruptive), multiple deliveries and two-boat tasks (Tasks 4, 5).
+
+### 2026 (`course/roboboat2026.yaml`)
+
+The dimensions are taken from the 2026 handbook diagrams (`course/reference/`).
 
 Element models come from `tools/make_course_models.py` (rulebook dimensions, origin at the
 waterline). The Polyform A-0 / A-2 buoys and the colour indicator buoy use the mechanical team's
@@ -136,13 +161,37 @@ answer key records what was used (`weather`).
 `6_judge.sh` (package `sim_judge`) listens where `message_node` sends RoboCommand frames
 (`$R` + length + protobuf + `!!`, port 50000) and reads the boat's true pose from Gazebo.
 
-- Scores Tasks 1, 2, 3, 5 per the handbook: gate entry/exit, indicator circling, debris reports
-  within 3 m, the Task 3 loop direction and time, slip choice and docking report.
+- 2027: scores the Core tier of each task (`sim_judge/referee2027.py`; the rules it applies are
+  listed in every run report). The primer has no scoring tables, so the points are PLACEHOLDERS that
+  only make runs comparable. Task 1: circle ENTRY clockwise, pass GREEN to port and RED to
+  starboard, circle EXIT counter-clockwise, report ENTRY/EXIT (GatePass) and the buoys; Task 2:
+  start at the green beacon, loop the target, leave the field (timed); Task 3: dock in a green
+  slip; Task 4: hold near the assigned vessel after the DELIVERY message; Task 5: reach the rally
+  point after the RALLY message; readiness: both gates, no strikes.
+- 2026: scores Tasks 1, 2, 3, 5 per the handbook: gate entry/exit, indicator circling, debris
+  reports within 3 m, the Task 3 loop direction and time, slip choice and docking report.
 - Strikes for buoy/vessel contact; leaving the course boundary ends the run.
 - Heartbeat checks (rate, gaps, position error, current task) and report validity.
 - Writes `runs/<time>_seed<N>.json` and `.md` when stopped.
 
 `ros2 run sim_judge send_test_reports` sends a correct set of reports to check the judge alone.
+
+### RoboCommand tasking (2027)
+
+In 2027 RoboCommand also sends messages *to* the boat (Task 4 deliveries, Task 5 rally). The real
+format is not published, so the judge stands in with JSON on `/sim/robocommand/tasking`
+(`std_msgs/String` in ROS, bridged from gz), each message re-sent every 2 s with the same `seq`:
+
+```json
+{"type": "SPRINT_TARGET", "task": 2, "target_color": "blue", "seq": 1, "issued_sim_t": 0.4}
+{"type": "DELIVERY", "task": 4, "targets": [{"shape": "circle"}], "seq": 2, "issued_sim_t": 120.0}
+{"type": "RALLY", "task": 5, "lat": 27.37398, "lon": -82.45285, "seq": 3, "issued_sim_t": 240.0}
+```
+
+When they are sent (sim seconds after the judge starts) is in the answer key (`tasking`), from
+`tasking_at` in the YAML: on a full run (course start) DELIVERY at 120 s and RALLY at 240 s; with
+`--task 4` or `--task 5` the one message at 5 s. `6_judge.sh --no-tasking` sends none. Replace the
+stand-in with the real message handling once RoboNation publishes it.
 
 ## Autolabel (CV training data)
 

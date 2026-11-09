@@ -44,6 +44,7 @@ class Winding:
 
     def reset(self):
         self.prev, self.total, self.best = None, 0.0, 0.0
+        self.ccw, self.cw = 0.0, 0.0      # largest counter-clockwise (+) / clockwise (-) sweep
 
     def update(self, x, y):
         dx, dy = x - self.c[0], y - self.c[1]
@@ -55,7 +56,12 @@ class Winding:
             self.total += geo.wrap(b - self.prev)
             if abs(self.total) > abs(self.best):
                 self.best = self.total
+            self.ccw, self.cw = max(self.ccw, self.total), min(self.cw, self.total)
         self.prev = b
+
+
+def score_item(key, desc, pts, earned, detail=''):
+    return {'key': key, 'desc': desc, 'max': pts, 'points': earned, 'detail': detail}
 
 
 def _dock_letter(text):
@@ -91,21 +97,10 @@ class Referee:
         for e in key['elements']:
             if e['kind'] == 'vessel':
                 self.obstacles.append((e, 'poly', [tuple(p) for p in e['footprint']]))
-            elif e.get('radius') and e['kind'] in ('sur_mark', 'a0', 'a2', 'indicator_buoy'):
+            elif e.get('radius') and e['kind'] in ('sur_mark', 'a0', 'a2', 'indicator_buoy', 'light_buoy'):
                 self.obstacles.append((e, 'circle', ((e['x'], e['y']), e['radius'])))
         self.contact = {}
         self.strikes = []
-
-        self.windings = {}
-        t2 = self.tasks.get('2')
-        if t2:
-            for ind in t2['indicators']:
-                e = self.el[ind['id']]
-                self.windings[ind['id']] = Winding((e['x'], e['y']), circle_radius)
-        t3 = self.tasks.get('3')
-        if t3:
-            y = self.el[t3['yellow_id']]
-            self.t3_winding = Winding((y['x'], y['y']), min(circle_radius, 0.8 * t3['distance']))
 
         self.t = None
         self.pose = None
@@ -114,10 +109,9 @@ class Referee:
         self.terminated = None
         self.events = []
 
-        self.t1 = {'g1': None, 'entry': None, 'g2_rev': None, 'exit': None}
-        self.t2 = {'fwd_idx': 0, 'entered': None, 'rev_idx': 0, 'exited': None}
-        self.t3 = {'start': None, 'end': None, 'winding': 0.0}
+        self.slip_task = '5'                   # the marina task (slips, docking)
         self.t5 = {'inside': {}, 'docked': []}
+        self._init_tasks(circle_radius)
 
         self.reports = []
         self.heartbeats = []
@@ -129,6 +123,26 @@ class Referee:
                          'hb_states': {}, 'peers': set()}
         self._recent = deque()
         self._last_seq = None
+
+    def _init_tasks(self, circle_radius):
+        """2026 task state; a referee for another year overrides this, _track, _on_gate and score."""
+        self.windings = {}
+        t2 = self.tasks.get('2')
+        if t2:
+            for ind in t2['indicators']:
+                e = self.el[ind['id']]
+                self.windings[ind['id']] = Winding((e['x'], e['y']), circle_radius)
+        t3 = self.tasks.get('3')
+        if t3:
+            y = self.el[t3['yellow_id']]
+            self.t3_winding = Winding((y['x'], y['y']), min(circle_radius, 0.8 * t3['distance']))
+        self.t1 = {'g1': None, 'entry': None, 'g2_rev': None, 'exit': None}
+        self.t2 = {'fwd_idx': 0, 'entered': None, 'rev_idx': 0, 'exited': None}
+        self.t3 = {'start': None, 'end': None, 'winding': 0.0}
+
+    def due_tasking(self):
+        """RoboCommand tasking messages to send now (none on the 2026 course)."""
+        return []
 
     # ------------------------------------------------------------------ helpers
     def xy(self, lat, lon):
@@ -161,15 +175,18 @@ class Referee:
 
         self._check_gates((prev[0], prev[1]), (x, y))
         self._check_contacts(x, y, yaw)
-        for w in self.windings.values():
-            w.update(x, y)
-        if self.t3['start'] is not None and self.t3['end'] is None:
-            self.t3_winding.update(x, y)
+        self._track(x, y, yaw)
         self._check_slips(x, y)
 
         if not geo.point_in_poly((x, y), self.boundary):
             self.terminated = t
             self._event('boat left the course boundary: run terminated')
+
+    def _track(self, x, y, yaw):
+        for w in self.windings.values():
+            w.update(x, y)
+        if self.t3['start'] is not None and self.t3['end'] is None:
+            self.t3_winding.update(x, y)
 
     def _check_gates(self, p0, p1):
         for label, g in self.gates.items():
@@ -250,8 +267,8 @@ class Referee:
             st['touching'] = touching
 
     def _check_slips(self, x, y):
-        t5 = self.tasks.get('5')
-        if not t5:
+        t5 = self.tasks.get(self.slip_task)
+        if not t5 or 'slips' not in t5:
             return
         for s in t5['slips']:
             k = (s['dock'], s['slip'])
@@ -259,7 +276,7 @@ class Referee:
                 since = self.t5['inside'].setdefault(k, self.t)
                 if self.t - since >= self.dock_hold and k not in [d['slip'] for d in self.t5['docked']]:
                     self.t5['docked'].append({'t': self.t, 'slip': k, 'info': s})
-                    self._event(f'Task 5: docked in {s["dock"]}{s["slip"]} ({s["indicator"]} indicator'
+                    self._event(f'Task {self.slip_task}: docked in {s["dock"]}{s["slip"]} ({s["indicator"]} indicator'
                                 f'{", occupied" if s["occupied"] else ""})')
             else:
                 self.t5['inside'].pop(k, None)
@@ -351,12 +368,11 @@ class Referee:
         return False
 
     # ------------------------------------------------------------------ scoring
-    def score(self, wall_now=None):
+    def _task_items(self):
+        """Scored items per task (2026 handbook tables)."""
         tasks = {}
         struck = {s['id'] for s in self.strikes}
-
-        def item(key, desc, pts, earned, detail=''):
-            return {'key': key, 'desc': desc, 'max': pts, 'points': earned, 'detail': detail}
+        item = score_item
 
         if '1' in self.tasks:
             s = self.t1
@@ -450,6 +466,10 @@ class Referee:
                      f'{len(self.dockings)} received'),
             ]
 
+        return tasks
+
+    def score(self, wall_now=None):
+        tasks = self._task_items()
         n_strikes = len(self.strikes)
         penalty = -STRIKE_POINTS * min(n_strikes, MAX_STRIKES)
         total = sum(i['points'] for items in tasks.values() for i in items) + penalty
@@ -543,7 +563,8 @@ def render(score, key):
     lines = []
     run = score['run']
     status = 'TERMINATED (boundary)' if run['terminated'] is not None else 'running' if run['started'] is not None else 'waiting for the boat to move'
-    lines.append(f'RoboBoat 2026 sim judge | seed {key.get("seed")} | {status} | '
+    year = key.get('year', 2026)
+    lines.append(f'RoboBoat {year} sim judge | seed {key.get("seed")} | {status} | '
                  f'elapsed {run["elapsed"]:.0f} s (sim)')
     lines.append(f'TOTAL {score["total"]:.0f} / {score["max_total"]}   strikes {score["strikes"]["count"]} '
                  f'({score["strikes"]["penalty"]})')
@@ -560,10 +581,14 @@ def render(score, key):
                  + (f', mean {hb["mean_interval"]:.2f} s, max gap {hb["max_gap"]:.1f} s' if hb['mean_interval'] else '')
                  + (' OK' if hb['ok'] else ' NOT OK'))
     q = score['qualifying']
-    lines.append('Qualifying: core ' + ' '.join(f'T{k}{"+" if v else "-"}' for k, v in q['core'].items())
-                 + ' | advanced ' + ' '.join(f'T{k}{"+" if v else "-"}' for k, v in q['advanced'].items())
-                 + f' | two in sequence {"yes" if q["sequence"] else "no"} | '
-                 + ('QUALIFIED' if q['qualified'] else 'not yet qualified'))
+    if year >= 2027:
+        lines.append('Core tier: ' + ' '.join(f'T{k}{"+" if v else "-"}' for k, v in q['core'].items())
+                     + ' | mission badges: not defined until the 2027 handbook')
+    else:
+        lines.append('Qualifying: core ' + ' '.join(f'T{k}{"+" if v else "-"}' for k, v in q['core'].items())
+                     + ' | advanced ' + ' '.join(f'T{k}{"+" if v else "-"}' for k, v in q['advanced'].items())
+                     + f' | two in sequence {"yes" if q["sequence"] else "no"} | '
+                     + ('QUALIFIED' if q['qualified'] else 'not yet qualified'))
     pr = score['protocol']
     lines.append(f'Reports: {pr["frames"]} frames, {pr["gate_reports"]} gate, {pr["object_reports"]} object, '
                  f'{pr["docking_reports"]} docking, {pr["errors"]} errors')

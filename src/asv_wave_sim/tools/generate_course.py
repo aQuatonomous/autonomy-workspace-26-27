@@ -69,6 +69,7 @@ FOOTPRINT_RADIUS = {
     'a0': 0.1016,
     'a2': 0.184,
     'indicator_buoy': 0.305,
+    'light_buoy': 0.305,
     'boundary_marker': 0.15,
 }
 
@@ -77,8 +78,12 @@ KIND_ALIASES = {'polyform_a0': 'a0', 'polyform_a2': 'a2'}
 VESSEL_OUTLINE = [(-0.5334, -0.2832), (0.5334, -0.2832), (1.0334, 0.0), (0.5334, 0.2832), (-0.5334, 0.2832)]
 
 
-def model_uri(kind, color=None, number=None):
+def model_uri(kind, color=None, number=None, shape=None):
     c = (color or '').capitalize()
+    if kind == 'light_buoy':
+        return f'model://LightBuoy{c}{number or ""}'
+    if kind == 'vessel' and shape:
+        return f'model://StationaryVessel{c}{shape.capitalize()}'
     if kind == 'sur_mark':
         return f'model://{c}SurMark'
     if kind == 'a0':
@@ -161,7 +166,7 @@ class Course:
             return self.rng.uniform(*lo_hi)
         return default
 
-    def add(self, task, kind, color, u, v, yaw=0.0, role=None, z=0.0, number=None, extra=None):
+    def add(self, task, kind, color, u, v, yaw=0.0, role=None, z=0.0, number=None, extra=None, shape=None):
         kind = KIND_ALIASES.get(kind, kind)
         x, y = self.frame.enu(u, v)
         lat, lon = self.frame.latlon(x, y)
@@ -170,8 +175,10 @@ class Course:
         e = {
             'id': eid, 'name': name, 'task': task, 'kind': kind, 'color': color, 'role': role,
             'x': round(x, 4), 'y': round(y, 4), 'z': round(z, 4), 'yaw': round(self.frame.yaw(yaw), 5),
-            'lat': round(lat, 8), 'lon': round(lon, 8), 'uri': model_uri(kind, color, number),
+            'lat': round(lat, 8), 'lon': round(lon, 8), 'uri': model_uri(kind, color, number, shape),
         }
+        if shape:
+            e['shape'] = shape
         if kind in FOOTPRINT_RADIUS:
             e['radius'] = FOOTPRINT_RADIUS[kind]
         if kind == 'vessel':
@@ -311,7 +318,11 @@ class Course:
         }
 
     def task5(self):
-        t = self.cfg['tasks']['task5']
+        self.marina(self.cfg['tasks']['task5'], 5)
+
+    def marina(self, t, task):
+        """Docks with slips (tines off a spine), slip indicators, number banners and optional
+        vessels in red slips; writes self.tasks[str(task)] with the slip polygons and the answer."""
         el = self.cfg['elements']
         cube = el['dock_cube']['size']
         c = cube[0]
@@ -322,7 +333,7 @@ class Course:
         tine_rows = t['tine_rows']
         slip_rows = [(tine_rows[k] + 1, tine_rows[k + 1] - 1) for k in range(len(tine_rows) - 1)]
         numbers = list(t['slip_numbers'])
-        self.entries['5'] = (ou, ov, -90.0)   # entrance end between the docks; the docks extend toward -v
+        self.entries[str(task)] = (ou, ov, -90.0)   # entrance end between the docks; the docks extend toward -v
 
         example = t.get('example', {})
         layout = {}
@@ -357,22 +368,22 @@ class Course:
             for r in tine_rows:
                 for k in range(n_tine):
                     cubes.append((inner_u - side * (k + 0.5) * c, ov - (r + 0.5) * c))
-            self.models.append(self.dock_model(f'marina_dock_{name}', cubes, cube, free))
+            self.models.append(self.dock_model(f'marina_dock_{name}', cubes, cube, free, task))
             for k, (r0, r1) in enumerate(slip_rows):
                 v_top, v_bot = ov - r0 * c, ov - (r1 + 1) * c
                 v_mid = (v_top + v_bot) / 2
                 slot = layout[name][k]
                 number = nums[k]
                 face_yaw = 0.0 if side < 0 else 180.0   # banner faces the slip
-                self.add(5, 'banner', None, spine_u, v_mid, yaw=face_yaw + 90.0, z=free, number=number,
+                self.add(task, 'banner', None, spine_u, v_mid, yaw=face_yaw + 90.0, z=free, number=number,
                          role=f'banner_{name}{number}')
-                ind = self.add(5, 'dock_indicator', slot['indicator'], spine_u - side * c / 2, v_mid, z=free,
+                ind = self.add(task, 'dock_indicator', slot['indicator'], spine_u - side * c / 2, v_mid, z=free,
                                role=f'dock_indicator_{name}{number}')
                 vessel_id = None
                 if slot.get('vessel'):
                     bow_yaw = 180.0 if side < 0 else 0.0   # bow toward the spine
                     vu = inner_u - side * (0.15 + 1.0334)
-                    vessel_id = self.add(5, 'vessel', slot['vessel'], vu, v_mid, yaw=bow_yaw,
+                    vessel_id = self.add(task, 'vessel', slot['vessel'], vu, v_mid, yaw=bow_yaw,
                                          role=f'slip_vessel_{name}{number}')['id']
                 corners = [(inner_u, v_top), (tip_u, v_top), (tip_u, v_bot), (inner_u, v_bot)]
                 poly = [list(map(lambda a: round(a, 4), self.frame.enu(a, b))) for a, b in corners]
@@ -385,13 +396,13 @@ class Course:
                 })
         greens = [s for s in slips_out if s['indicator'] == 'green' and not s['occupied']]
         best = min((s['slip'] for s in greens), default=None)
-        self.tasks['5'] = {
+        self.tasks[str(task)] = {
             'name': 'Navigate the Marina', 'slips': slips_out,
             'correct': [{'dock': s['dock'], 'slip': s['slip']} for s in greens if s['slip'] == best],
             'green': [{'dock': s['dock'], 'slip': s['slip']} for s in greens],
         }
 
-    def dock_model(self, name, cubes, size, freeboard):
+    def dock_model(self, name, cubes, size, freeboard, task=5):
         sx, sy, sz = size
         zc = freeboard - sz / 2
         gap = 0.012
@@ -405,7 +416,7 @@ class Course:
             cols.append(f'<collision name="c{i}">{p}<geometry><box><size>{sx:.4f} {sy:.4f} {sz:.4f}</size></box>'
                         f'</geometry></collision>')
         footprint = [[round(c, 4) for c in self.frame.enu(u, v)] for u, v in cubes]
-        self.elements.append({'id': len(self.elements) + 1, 'name': name, 'task': 5, 'kind': 'dock',
+        self.elements.append({'id': len(self.elements) + 1, 'name': name, 'task': task, 'kind': 'dock',
                               'cubes': footprint, 'cube_size': sx, 'sim_label': 'dock'})
         body = '\n        '.join(vis + cols)
         return f"""
@@ -454,10 +465,29 @@ class Course:
         for task, (u, v, yaw) in sorted(starts_uv.items()):
             x, y = self.frame.enu(u, v)
             self.starts[task] = {'x': round(x, 4), 'y': round(y, 4), 'yaw': round(self.frame.yaw(yaw), 5)}
-        if start_task not in self.starts:
-            raise ValueError(f'no start for task {start_task}; tasks with a start: {sorted(self.starts)}')
+        self.pick_start(start_task)
+
+    DEFAULT_START = '1'
+
+    def pick_start(self, start_task):
+        """Use the start of start_task, or the default start for a task without its own (e.g. the
+        planner's sequence mode, task 123)."""
+        if start_task is None or start_task not in self.starts:
+            if start_task is not None:
+                print(f'note: no start for task {start_task}; using the {self.DEFAULT_START} start '
+                      f'(tasks with a start: {sorted(self.starts)})')
+            start_task = self.DEFAULT_START
         self.start_task = start_task
         self.start = self.starts[start_task]
+
+    def key_extra(self):
+        """Course-specific fields for the answer key."""
+        return {'year': 2026}
+
+    def summary(self):
+        t2, t3, t5 = self.tasks['2']['indicators'], self.tasks['3'], self.tasks['5']
+        return (f'task2 indicators {[i["color"] for i in t2]}, task3 {t3["indicator_color"]} '
+                f'({t3["required_direction"]}), dock target {t5["correct"]}')
 
     def start_clearance(self, task):
         """Distance (m) from a task's start to the nearest course element, and that element's name."""
@@ -795,6 +825,7 @@ def answer_key(course, args, world_path, weather):
         'start_task': course.start_task,
         'starts': {k: {**v, 'compass_heading_deg': round(90.0 - math.degrees(v['yaw']), 1) % 360.0}
                    for k, v in course.starts.items()},
+        **course.key_extra(),
         'boundary': course.boundary_polygon,
         'waves': args.waves,
         'weather': {k: weather[k] for k in ('wind_speed', 'wind_from_deg', 'gust_fraction', 'light', 'sky',
@@ -824,8 +855,11 @@ def main(argv=None):
     ap.add_argument('--shadows', action='store_true', help='enable sun shadows (costs GPU time)')
     ap.add_argument('--no-shoreline', action='store_true')
     ap.add_argument('--no-boat', action='store_true', help='omit ourboat (course preview)')
-    ap.add_argument('--start-task', default='1', choices=['1', '2', '3', '5'],
-                    help="put the boat before this task's entrance (default 1: the handbook start)")
+    ap.add_argument('--start-task', default=None,
+                    help="put the boat before this task's entrance; a task without its own start (or "
+                         "none given) uses the course's default start")
+    ap.add_argument('--layout', default='full', choices=['full', 'readiness'],
+                    help='2027 only: full course, or the Proof of Readiness gates alone')
     args = ap.parse_args(argv)
 
     with open(args.config) as f:
@@ -833,7 +867,13 @@ def main(argv=None):
     if args.waves is None:
         args.waves = cfg['venue'].get('waves_preset', 'calm_lake')
 
-    course = Course(cfg, args.seed)
+    if int(cfg.get('year', 2026)) >= 2027:
+        from course2027 import Course2027
+        course = Course2027(cfg, args.seed, layout=args.layout)
+    else:
+        if args.layout != 'full':
+            sys.exit(f'--layout {args.layout} needs a 2027 course config')
+        course = Course(cfg, args.seed)
     course.build(args.start_task)
     weather = resolve_weather(cfg, args, args.seed)
 
@@ -847,13 +887,9 @@ def main(argv=None):
         json.dump(answer_key(course, args, world_path, weather), f, indent=2)
         f.write('\n')
 
-    t2 = course.tasks['2']['indicators']
-    t3 = course.tasks['3']
-    t5 = course.tasks['5']
     print(f'world:      {world_path}')
     print(f'answer key: {key_path}')
-    print(f'seed {args.seed}: task2 indicators {[i["color"] for i in t2]}, task3 {t3["indicator_color"]} '
-          f'({t3["required_direction"]}), dock target {t5["correct"]}')
+    print(f'seed {args.seed}: {course.summary()}')
     print(f'SITL home:  {answer_key(course, args, world_path, weather)["sitl_home"]}')
     s = course.start
     gap, nearest = course.start_clearance(course.start_task)

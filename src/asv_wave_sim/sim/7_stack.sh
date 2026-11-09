@@ -20,9 +20,15 @@ while [ $# -gt 0 ]; do
     *) echo "unknown option $1" >&2; exit 2 ;;
   esac
 done
-# CV buoy reference sizes: Task 2 uses small (A-0) buoys; the others use the larger ones.
-CV_TASK=3; [ "$TASK" = 2 ] && CV_TASK=2
-NUMBERS=false; [ "$TASK" = 5 ] && NUMBERS=true
+# CV buoy reference sizes: 2026 Task 2 uses small (A-0) buoys; everything else the larger ones.
+# Dock number detection is for the marina: 2026 Task 5, 2027 Task 3 (and full 2027 runs).
+CV_TASK=3; NUMBERS=false
+if [ "${SIM_COURSE_YEAR:-2026}" -ge 2027 ]; then
+  case "$TASK" in 1|2|4|5) ;; *) NUMBERS=true ;; esac
+else
+  [ "$TASK" = 2 ] && CV_TASK=2
+  [ "$TASK" = 5 ] && NUMBERS=true
+fi
 
 set -m
 PIDS=()

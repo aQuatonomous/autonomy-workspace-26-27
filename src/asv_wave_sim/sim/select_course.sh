@@ -1,8 +1,11 @@
 #!/bin/bash
 # Selects the course every other script uses and writes course/generated/current.env.
 #
-#   select_course.sh                     # seed 0: the handbook layout as drawn
+#   select_course.sh                     # seed 0: the 2027 course as sketched in the primer
 #   select_course.sh --seed 7            # randomized layout within the handbook ranges
+#   select_course.sh --course 2026       # the RoboBoat 2026 course (2027 is the default)
+#   select_course.sh --course readiness  # 2027 Proof of Readiness: the two gates alone
+#   select_course.sh --start-task 3      # boat before that task's entrance (run_competition.sh --task does this)
 #   select_course.sh --seed 7 --waves breezy_lake
 #   select_course.sh --seed 7 --wind 5 --wind-from 200 --light low_sun   # wind and time of day
 #   select_course.sh --world path/to/world.sdf   # any world; uses <world>.answer_key.json if present
@@ -18,16 +21,18 @@ set -e
 SEED=0
 WORLD=""
 LABELS=0
+COURSE="${SIM_COURSE:-2027}"
 GEN_ARGS=()
 while [ $# -gt 0 ]; do
   case "$1" in
     --seed) SEED="$2"; shift 2 ;;
+    --course) COURSE="$2"; shift 2 ;;
     --world) WORLD="$(realpath "$2")"; shift 2 ;;
     --legacy) WORLD="$ASV_DIR/gz-waves-models/worlds/aquatonomous_world.sdf"; shift ;;
     --camera) SIM_CAMERA="$2"; shift 2 ;;
     --full-res) SIM_CAMERA=1920x1200@30; shift ;;
     --labels) LABELS=1; shift ;;
-    -h|--help) sed -n '2,16p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,19p' "$0"; exit 0 ;;
     *) GEN_ARGS+=("$1"); shift ;;
   esac
 done
@@ -76,10 +81,16 @@ if n == 0:
     sys.exit(f'no camera sensors found in {src}')
 open(out, 'w').write(sdf)
 EOF
+case "$COURSE" in
+  2026) CONFIG="$COURSE_DIR/roboboat2026.yaml"; LAYOUT=() ;;
+  2027) CONFIG="$COURSE_DIR/roboboat2027.yaml"; LAYOUT=() ;;
+  readiness) CONFIG="$COURSE_DIR/roboboat2027.yaml"; LAYOUT=(--layout readiness) ;;
+  *) echo "Unknown --course '$COURSE' (2027, 2026 or readiness)." >&2; exit 2 ;;
+esac
 if [ -z "$WORLD" ]; then
-  OUT="$SIM_STATE_DIR/seed_$SEED/roboboat2026_course"
+  OUT="$SIM_STATE_DIR/${COURSE}_seed_$SEED/roboboat${COURSE}_course"
   mkdir -p "$(dirname "$OUT")"
-  python3 "$ASV_DIR/tools/generate_course.py" --config "$COURSE_DIR/roboboat2026.yaml" \
+  python3 "$ASV_DIR/tools/generate_course.py" --config "$CONFIG" "${LAYOUT[@]}" \
     --seed "$SEED" --out "$OUT" "${GEN_ARGS[@]}"
   WORLD="$OUT.sdf"
 fi
@@ -98,8 +109,12 @@ print(f"SIM_ANSWER_KEY='{sys.argv[1]}'")
 print(f"SIM_SITL_HOME='{k['sitl_home']}'")
 print(f"SIM_WATER_DENSITY='{k.get('water_density', 1025)}'")
 print(f"SIM_SEED='{k.get('seed', '')}'")
+print(f"SIM_COURSE_YEAR='{k.get('year', 2026)}'")
+print(f"SIM_START_TASK='{k.get('start_task', '')}'")
 EOF
   else
+    echo "SIM_COURSE_YEAR=''"
+    echo "SIM_START_TASK=''"
     echo "SIM_ANSWER_KEY=''"
     echo "SIM_SITL_HOME='51.566151,-4.034345,10.0,-135'"
     echo "SIM_WATER_DENSITY='1025'"

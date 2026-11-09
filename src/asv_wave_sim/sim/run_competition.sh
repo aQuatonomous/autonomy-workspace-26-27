@@ -2,9 +2,10 @@
 # Full competition-style run in one tmux session ("roboboat"): generate the course, then start
 # Gazebo, bridges, SITL, MAVROS, the judge and the autonomy stack, each in its own window.
 #
-#   run_competition.sh --seed 0 --task 1          handbook layout, planner task 1
-#   run_competition.sh --seed 0 --task 2          boat starts before Task 2's channel (also 3, 5)
-#   run_competition.sh --seed 0 --task 123        Task 1 -> 2 -> 3 in sequence from the Task 1 start
+#   run_competition.sh --seed 0 --task 1          2027 course, boat before Task 1, planner task 1
+#   run_competition.sh --seed 0 --task 3          boat before that task's entrance (any task)
+#   run_competition.sh --seed 0 --task 123        no start of its own: the course start (full run)
+#   run_competition.sh --course 2026 --task 1     the 2026 course; --course readiness: the two gates
 #   run_competition.sh --seed 7 --task 3 --waves breezy_lake
 #   run_competition.sh --seed 2 --light low_sun --wind-from 270   weather and time of day (see README)
 #   run_competition.sh --seed 3 --no-stack        everything but the autonomy stack (drive it yourself)
@@ -18,7 +19,7 @@
 set -e
 SIM_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SESSION=roboboat
-SEED=0 TASK=1 STACK=1 RVIZ=0 ATTACH=1 LABELS=0 HEADLESS=0
+SEED=0 TASK="" STACK=1 RVIZ=0 ATTACH=1 LABELS=0 HEADLESS=0
 COURSE_ARGS=() STACK_ARGS=()
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -46,11 +47,10 @@ if tmux has-session -t "$SESSION" 2>/dev/null; then
   bash "$SIM_DIR/stop_competition.sh"
 fi
 
-# A single task starts just before its own entrance; Task 1 and the sequence (--task 123: Task
-# 1 -> 2 -> 3, as at competition) start at the handbook start before Task 1.
-case "$TASK" in
-  2|3|5) [ -n "$SEED" ] && COURSE_ARGS+=(--start-task "$TASK") ;;
-esac
+# A single task starts just before its own entrance. A task without its own start (the planner's
+# sequence mode, --task 123) uses the course's default start: before Task 1 on the 2026 course,
+# the sketched start on the 2027 course.
+[ -n "$SEED" ] && [ -n "$TASK" ] && COURSE_ARGS+=(--start-task "$TASK")
 bash "$SIM_DIR/select_course.sh" ${SEED:+--seed "$SEED"} "${COURSE_ARGS[@]}"
 ( . "$SIM_DIR/env.sh" >/dev/null && sim_robocommand_address ) || true
 
@@ -77,14 +77,14 @@ win bridges "bash 2_bridges.sh"
 win sitl    "$AFTER_GZ bash 3_sitl.sh"
 win mavros  "bash 4_mavros.sh"
 win judge   "$AFTER_GZ bash 6_judge.sh"
-[ $STACK = 1 ] && win stack "$AFTER_GZ bash 7_stack.sh --task $TASK ${STACK_ARGS[*]}"
+[ $STACK = 1 ] && win stack "$AFTER_GZ bash 7_stack.sh --task ${TASK:-1} ${STACK_ARGS[*]}"
 [ $RVIZ = 1 ] && win rviz "bash 5_view_sensors.sh"
 [ $LABELS = 1 ] && win autolabel "$AFTER_GZ bash 8_autolabel.sh"
 win foxglove "$AFTER_GZ bash 9_foxglove.sh"
 win shell '. ./env.sh && sim_load_course && echo "ROS shell for course $SIM_WORLD" && exec bash -i'
 
 echo
-echo "Started tmux session '$SESSION' (seed $SEED, task $TASK)."
+echo "Started tmux session '$SESSION' (seed $SEED, task ${TASK:-1})."
 echo "  attach:  tmux attach -t $SESSION      windows: Ctrl+b w      stop: $SIM_DIR/stop_competition.sh"
 echo "  logs:    $LOG_DIR"
 echo "  watch:   Foxglove -> ws://<this machine>:$( . "$SIM_DIR/env.sh" >/dev/null 2>&1; echo "$FOXGLOVE_PORT")  (README: Watching a run)"

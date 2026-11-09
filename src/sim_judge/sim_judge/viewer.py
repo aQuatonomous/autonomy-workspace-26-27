@@ -22,10 +22,11 @@ import os
 import sys
 import time
 
-KIND_HEIGHT = {'sur_mark': 1.2, 'indicator_buoy': 1.0, 'dock_indicator': 0.4, 'a2': 0.6, 'a0': 0.4}
+KIND_HEIGHT = {'sur_mark': 1.2, 'indicator_buoy': 1.0, 'light_buoy': 1.0, 'dock_indicator': 0.4, 'a2': 0.6,
+               'a0': 0.4}
 COLORS = {
     'red': (0.9, 0.1, 0.1), 'green': (0.1, 0.8, 0.2), 'black': (0.15, 0.15, 0.15),
-    'yellow': (1.0, 0.85, 0.1), None: (0.7, 0.7, 0.7),
+    'yellow': (1.0, 0.85, 0.1), 'blue': (0.1, 0.4, 1.0), 'white': (0.95, 0.95, 0.95), None: (0.7, 0.7, 0.7),
 }
 
 
