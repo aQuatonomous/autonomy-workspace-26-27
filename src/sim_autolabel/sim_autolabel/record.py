@@ -5,7 +5,8 @@
 Needs a course selected with `select_course.sh --labels`: each boat camera then has a
 bounding-box camera twin that publishes its image on /autolabel/<camera>_image and the boxes of
 every labelled course element in view on /autolabel/<camera>, both with the same sim time stamp.
-Boxes cover only the visible part of an element (occluded elements get none).
+Boxes cover only the visible part of an element (occluded elements get none). Boxes with a label
+that is not in the course's table (the gz-waves water surface carries a changing one) are ignored.
 
 Writes one session folder: session.json (course, weather, label names) and per camera
 <camera>/<stamp>.jpg + <stamp>.json (boxes in pixels with sim label names, boat pose). Turn
@@ -71,6 +72,7 @@ class Recorder:
         self.boat = None
         self.saved = 0
         self.empty_seen = 0
+        self.ignored = 0
         self.counts = collections.Counter()
         self.done = threading.Event()
         self._lock = threading.Lock()
@@ -85,8 +87,9 @@ class Recorder:
         import numpy as np
 
         boxes = [(b.label, b.box.min_corner.x, b.box.min_corner.y, b.box.max_corner.x, b.box.max_corner.y)
-                 for b in boxes_msg.annotated_box]
+                 for b in boxes_msg.annotated_box if b.label in self.label_names]
         with self._lock:
+            self.ignored += len(boxes_msg.annotated_box) - len(boxes)
             if self.done.is_set():
                 return
             if not boxes:
@@ -98,7 +101,7 @@ class Recorder:
             if self.max_frames and self.saved >= self.max_frames:
                 self.done.set()
             for b in boxes:
-                self.counts[self.label_names.get(b[0], f'label_{b[0]}')] += 1
+                self.counts[self.label_names[b[0]]] += 1
             boat = self.boat
         w, h = image_msg.width, image_msg.height
         step = image_msg.step or w * 3
@@ -186,6 +189,8 @@ def main(argv=None):
     print(f'Saved {rec.saved} frames to {out}')
     for name, n in sorted(rec.counts.items()):
         print(f'  {name:24s} {n}')
+    if rec.ignored:
+        print(f'  ({rec.ignored} boxes with labels outside the course table ignored, e.g. the water)')
     return 0
 
 

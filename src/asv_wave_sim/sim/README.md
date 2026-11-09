@@ -22,6 +22,10 @@ Leave out `--with-cv` on a machine without an NVIDIA GPU (the stack then runs Li
 Paths (ArduPilot checkout, venv, engine cache, RoboCommand port) are in `config.env`; put
 overrides in `config.local.env` (not committed).
 
+Shared machine (several accounts on the sim Jetson): `env.sh` gives each user their own
+`GZ_PARTITION` (the user name) and `ROS_DOMAIN_ID` (from the user id), so two people's sims do not
+see each other's topics. In a plain shell, run `. sim/env.sh` before `ros2 topic` or `gz topic`.
+
 WSL2: Gazebo renders through the Windows GPU driver (`GALLIUM_DRIVER=d3d12`, set by `env.sh`).
 Install the current NVIDIA Windows driver; do not install a Linux NVIDIA driver inside WSL.
 `setup_sim.sh` warns when rendering falls back to the software renderer (llvmpipe).

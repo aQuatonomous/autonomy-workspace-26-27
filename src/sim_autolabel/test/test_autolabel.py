@@ -72,6 +72,7 @@ def test_recorder_writes_image_and_boxes(tmp_path):
     rec.boat = {'x': 1.0, 'y': 2.0, 'yaw': 0.5}
     rec.on_frame('camera1', 1_500_000_000, img, SimpleNamespace(annotated_box=[_box(5, 1, 1, 3, 3)]))
     rec.on_frame('camera1', 2_000_000_000, img, SimpleNamespace(annotated_box=[]))   # empty: skipped
+    rec.on_frame('camera1', 2_500_000_000, img, SimpleNamespace(annotated_box=[_box(41, 0, 2, 6, 4)]))  # water only
     files = sorted(os.listdir(tmp_path / 'camera1'))
     assert files == ['0000000001500000000.jpg', '0000000001500000000.json']
     frame = json.loads((tmp_path / 'camera1' / files[1]).read_text())
@@ -79,7 +80,7 @@ def test_recorder_writes_image_and_boxes(tmp_path):
     assert frame['boxes'] == [{'label': 'a2_red', 'label_id': 5, 'x0': 1, 'y0': 1, 'x1': 3, 'y1': 3}]
     saved = cv2.imread(str(tmp_path / 'camera1' / files[0]))
     assert saved.shape == (h, w, 3) and saved[0, 0, 2] > 200 and saved[0, 0, 0] < 60   # BGR on disk
-    assert rec.counts['a2_red'] == 1
+    assert rec.counts['a2_red'] == 1 and rec.ignored == 1
 
 
 def _session(root, name, frames):
