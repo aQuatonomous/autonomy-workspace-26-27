@@ -60,8 +60,8 @@ from Global.types import DetectedEntity, Vec3
 
 # Exit phase: first a point this far past gate 2 on the gate centre line, so the boat turns around in
 # open water and comes back through gate 2 lined up (turning on gate 2 itself struck its buoys).
-TURNAROUND_PAST_GATE_M = 3.0
-TURNAROUND_REACHED_M = 1.5
+TURNAROUND_PAST_GATE_M = 6.0  # 3.0 still clipped gate 2 while turning and when coming back unaligned
+TURNAROUND_REACHED_M = 2.0
 # Which locked gate each gate goal crosses: entry gate_1/gate_2 = locked 0/1, exit = reverse order.
 GATE_FOR_GOAL = {"gate_1": 0, "gate_2": 1, "exit_gate_1": 1, "exit_gate_2": 0}
 
