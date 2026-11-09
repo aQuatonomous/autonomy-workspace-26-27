@@ -109,6 +109,17 @@ cv_system_steps() {
     return
   fi
 
+  # Jetson: CUDA and TensorRT come with JetPack (L4T). The pinned desktop packages below are x86
+  # builds for CUDA 12; installing them would replace JetPack's and break the GPU stack.
+  if [ -f /etc/nv_tegra_release ] && [ "$(uname -m)" = aarch64 ]; then
+    step "CUDA + TensorRT (JetPack)"
+    local trt
+    trt="$(python3 -c 'import tensorrt; print(tensorrt.__version__)' 2>/dev/null)"
+    if [ -n "$trt" ] && [ -x /usr/src/tensorrt/bin/trtexec ]; then ok "TensorRT $trt from JetPack (not changed on a Jetson)"
+    else bad "TensorRT from JetPack (python3-libnvinfer, libnvinfer-bin): sudo apt install nvidia-jetpack"; fi
+    return
+  fi
+
   step "CUDA runtime + TensorRT ${TRT_VERSION%%-*}"
   local need=0
   have_pkg "$CUDART_PKG" || need=1
@@ -223,6 +234,11 @@ user_steps() {
 
   step "OpenGL renderer"
   local r
+  if [ $IS_WSL = 0 ] && [ -z "${DISPLAY:-}" ] && [ -z "${WAYLAND_DISPLAY:-}" ]; then
+    # Over SSH there is no display to ask; --headless renders the sensors through EGL on the GPU.
+    REPORT+=("  [info]    no display (SSH): use run_competition.sh --headless")
+    return
+  fi
   r="$(glxinfo -B 2>/dev/null | sed -n 's/^OpenGL renderer string: //p')"
   if [ $IS_WSL = 1 ] && [ -z "$r" ] || [[ "$r" == *llvmpipe* ]]; then
     r="$(GALLIUM_DRIVER=d3d12 glxinfo -B 2>/dev/null | sed -n 's/^OpenGL renderer string: //p')"
