@@ -26,8 +26,8 @@ below is run from there unless it says otherwise.
 
 ### On the shared sim Jetson (most people)
 
-The sim Jetson (`aquatonomous`, AGX Orin) is reached over Tailscale at `100.113.125.27`. Ask
-whoever runs it for an account, then from your laptop: `ssh <you>@100.113.125.27`.
+The sim Jetson (`aquatonomous`, AGX Orin) is reached over Tailscale at `100.113.125.27`. speak to the years autonomy director to get an account,
+then from your laptop: `ssh <your account name>@100.113.125.27`.
 
 **First time only:**
 
@@ -39,7 +39,7 @@ src/asv_wave_sim/sim/setup_sim.sh          # builds your workspace; ArduPilot et
 ```
 
 `--reference` makes your clone borrow the shared git history, so it costs a few MB instead of
-~510 MB. Do not clone without it on the Jetson; its disk is small (see section 8).
+~510 MB. Do not clone without it on the Jetson; the disk is small (see section 8).
 
 **Every run:**
 
@@ -57,7 +57,7 @@ cd ~/autonomy-workspace-26-27/src/asv_wave_sim/sim
 
 ### On your own machine
 
-Ubuntu 24.04, natively or under WSL2 on Windows 11. An NVIDIA GPU is needed for the CV pipeline;
+Ubuntu 24.04, natively or under WSL2 on Windows. An NVIDIA GPU is needed for the CV pipeline;
 without one the stack runs LiDAR-only (`--no-cv`).
 
 ```bash
