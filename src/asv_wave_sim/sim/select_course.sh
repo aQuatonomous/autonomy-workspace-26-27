@@ -112,4 +112,6 @@ echo "Course: $SIM_WORLD"
 echo "  answer key: ${SIM_ANSWER_KEY:-none (judge unavailable)}"
 echo "  SITL home:  $SIM_SITL_HOME   water density: $SIM_WATER_DENSITY kg/m^3"
 echo "  cameras:    ${SIM_CAM_WIDTH}x${SIM_CAM_HEIGHT} at ${SIM_CAM_RATE} Hz"
-[ "$LABELS" = 1 ] && echo "  autolabel:  bounding-box cameras at ${SIM_LABEL_RATE} Hz on /autolabel/camera{0,1,2}"
+if [ "$LABELS" = 1 ]; then
+  echo "  autolabel:  bounding-box cameras at ${SIM_LABEL_RATE} Hz on /autolabel/camera{0,1,2}"
+fi
