@@ -112,10 +112,11 @@ The CV team trains YOLO on Roboflow, exports `.pt` -> ONNX -> TensorRT engine
 The sim frames go into the same Roboflow project as the real images, as their own upload batch.
 
 - `--labels` (`select_course.sh`, `1_gazebo.sh`, `run_competition.sh`) gives each boat camera a
-  Gazebo bounding-box camera twin with the same pose, lens and resolution. It publishes the
-  image and the boxes of the labelled elements in view on `/autolabel/camera{0,1,2}`, at
-  `SIM_LABEL_RATE` (2 Hz default, `config.env`; nearby frames are near-duplicates anyway). It
-  renders each view a second time, so expect the sim to run slower.
+  Gazebo bounding-box camera twin with the same pose, lens and resolution, which publishes the
+  boxes of the labelled elements in view on `/autolabel/camera{0,1,2}`, plus a plain camera twin
+  for the clean image on `/autolabel/camera{0,1,2}_rgb` (the box camera draws its boxes into its
+  own image). Both run at `SIM_LABEL_RATE` (2 Hz default, `config.env`; nearby frames are
+  near-duplicates anyway). Each view renders three times, so expect the sim to run slower.
 - Boxes cover only what the camera sees: an element hidden behind another gets no box and a
   partly hidden one gets a box around its visible part. There is no minimum size at recording;
   `export --min-box-px` drops the tiny ones (below).

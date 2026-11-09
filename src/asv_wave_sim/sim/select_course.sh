@@ -40,8 +40,9 @@ fi
 mkdir -p "$SIM_STATE_DIR"
 # The boat model with the chosen camera resolution and rate. Gazebo finds this copy first
 # (sim_load_course puts course/generated/models ahead on GZ_SIM_RESOURCE_PATH); meshes are links.
-# With --labels each camera gets a bounding-box camera twin (same pose, lens and resolution) that
-# publishes the image and the labelled boxes of the course elements on /autolabel/<ros camera>.
+# With --labels each camera gets two twins (same pose, lens and resolution): a bounding-box camera
+# with the labelled boxes of the course elements on /autolabel/<ros camera>, and a plain camera with
+# the clean image on /autolabel/<ros camera>_rgb (the box camera's own image has the boxes drawn in).
 BOAT_SRC="$ASV_DIR/gz-waves-models/models/ourboat"
 BOAT_OUT="$SIM_STATE_DIR/models/ourboat"
 rm -rf "$BOAT_OUT" && mkdir -p "$BOAT_OUT"
@@ -52,18 +53,24 @@ src, out, cam, labels, label_rate = sys.argv[1:]
 size, rate = cam.split('@')
 width, height = size.split('x')
 ROS_NAME = {'camera1': 'camera0', 'camera2': 'camera1', 'camera3': 'camera2'}  # as in 2_bridges.sh
-def twin(s):
+def twins(s):
+    # The bounding-box camera draws its boxes into the image it publishes, so a plain camera
+    # twin at the same rate supplies the clean training image (same sim time stamps).
     name = re.search(r'<sensor name="([^"]*)"', s).group(1)
-    s = s.replace(f'<sensor name="{name}" type="camera">', f'<sensor name="{name}_labels" type="boundingbox_camera">')
-    s = re.sub(r'<topic>[^<]*</topic>', f'<topic>/autolabel/{ROS_NAME.get(name, name)}</topic>', s)
+    topic = f'/autolabel/{ROS_NAME.get(name, name)}'
     s = re.sub(r'<update_rate>[^<]*</update_rate>', f'<update_rate>{label_rate}</update_rate>', s)
     s = re.sub(r'\s*<visualize>[^<]*</visualize>', '', s)
-    return s.replace('<camera>', '<camera>\n\t\t<box_type>visible_2d</box_type>', 1)
+    boxes = s.replace(f'<sensor name="{name}" type="camera">', f'<sensor name="{name}_labels" type="boundingbox_camera">')
+    boxes = re.sub(r'<topic>[^<]*</topic>', f'<topic>{topic}</topic>', boxes)
+    boxes = boxes.replace('<camera>', '<camera>\n\t\t<box_type>visible_2d</box_type>', 1)
+    rgb = s.replace(f'<sensor name="{name}" type="camera">', f'<sensor name="{name}_labels_rgb" type="camera">')
+    rgb = re.sub(r'<topic>[^<]*</topic>', f'<topic>{topic}_rgb</topic>', rgb)
+    return boxes + '\n      ' + rgb
 def patch(m):
     s = re.sub(r'<width>[^<]*</width>', f'<width>{width}</width>', m.group(0))
     s = re.sub(r'<height>[^<]*</height>', f'<height>{height}</height>', s)
     s = re.sub(r'<update_rate>[^<]*</update_rate>', f'<update_rate>{rate}</update_rate>', s)
-    return s + '\n      ' + twin(s) if labels == '1' else s
+    return s + '\n      ' + twins(s) if labels == '1' else s
 sdf, n = re.subn(r'<sensor [^>]*type="camera".*?</sensor>', patch, open(src).read(), flags=re.S)
 if n == 0:
     sys.exit(f'no camera sensors found in {src}')

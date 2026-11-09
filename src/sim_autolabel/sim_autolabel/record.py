@@ -3,8 +3,9 @@
   ros2 run sim_autolabel record [--answer-key <course>.answer_key.json] [--out DIR]
 
 Needs a course selected with `select_course.sh --labels`: each boat camera then has a
-bounding-box camera twin that publishes its image on /autolabel/<camera>_image and the boxes of
-every labelled course element in view on /autolabel/<camera>, both with the same sim time stamp.
+bounding-box camera twin with the boxes of every labelled course element in view on
+/autolabel/<camera>, and a plain camera twin with the clean image on /autolabel/<camera>_rgb (the
+box camera's own image has the boxes drawn in), both with the same sim time stamp.
 Boxes cover only the visible part of an element (occluded elements get none). Boxes with a label
 that is not in the course's table (the gz-waves water surface carries a changing one) are ignored.
 
@@ -167,7 +168,7 @@ def main(argv=None):
         print(f'could not subscribe to /model/{args.boat}/odometry', file=sys.stderr)
     for cam in args.cameras:
         topic = f'/autolabel/{cam}'
-        ok = node.subscribe(Image, topic + '_image',
+        ok = node.subscribe(Image, topic + '_rgb',
                             lambda m, c=cam: pairer.add(c, stamp_ns(m.header), 'image', m))
         ok &= node.subscribe(AnnotatedAxisAligned2DBox_V, topic,
                              lambda m, c=cam: pairer.add(c, stamp_ns(m.header), 'boxes', m))
