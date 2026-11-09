@@ -43,7 +43,12 @@ start "LiDAR buoy pipeline (team tuning) on the simulated Airy (/rslidar_points)
 
 if [ $CV = 1 ]; then
   ENGINES="$(bash "$SIM_DIR/build_engines.sh" --print-dir 2>/dev/null)"
-  if bash "$SIM_DIR/build_engines.sh" --check 2>/dev/null; then
+  if [ -s "$ENGINES/aqua_main.engine" ]; then
+    # Number detection only matters for Task 5 (docking); run the rest of CV without it.
+    if [ "$NUMBERS" = true ] && [ ! -s "$ENGINES/number_detection.engine" ]; then
+      echo "!!! No number_detection.engine for this GPU; docking numbers are off. Build it with: $SIM_DIR/build_engines.sh" >&2
+      NUMBERS=false
+    fi
     start "CV pipeline (3 cameras, ${SIM_CAM_WIDTH}x${SIM_CAM_HEIGHT}, task:=$CV_TASK, engines $ENGINES)" \
       ros2 launch cv_ros_nodes launch_cv_sim.py resolution:="$SIM_CAM_WIDTH,$SIM_CAM_HEIGHT" task:="$CV_TASK" conf_threshold:=0.25 \
         engine_path:="$ENGINES/aqua_main.engine" number_detection_engine:="$ENGINES/number_detection.engine" \
