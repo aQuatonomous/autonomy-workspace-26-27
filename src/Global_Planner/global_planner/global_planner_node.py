@@ -10,7 +10,7 @@ Subscribes to:
   - /sound_signal_interupt (std_msgs/Int32): 1 = stop boat, 2 = ignore
 
 Maintains a persistent EntityList, runs TaskMaster (Task1/2/3/4) at 10 Hz,
-publishes /planned_path (nav_msgs/Path), /curr_task (std_msgs/Int32), and
+publishes /planned_path (nav_msgs/Path), /cur_task (std_msgs/Int32), and
 /mavros/setpoint_velocity/cmd_vel_unstamped (geometry_msgs/Twist) for MAVROS.
 
 All planning library code (entities, Task1/2/3, TaskMaster, potential_fields_planner)
@@ -193,7 +193,7 @@ class GlobalPlannerNode(Node):
 
         self._path_pub = self.create_publisher(Path, "/planned_path", 10)
         self._cmd_vel_pub = self.create_publisher(Twist, self._cmd_vel_topic, 10)
-        self._curr_task_pub = self.create_publisher(Int32, "/curr_task", 10)
+        self._curr_task_pub = self.create_publisher(Int32, "/cur_task", 10)
         self._gs_message_pub = self.create_publisher(StringMsg, "/gs_message_send", 10)
         # Task 1: gate_pass for entry/exit reporting (message_node sends to competition server)
         self._gate_pass_pub = self.create_publisher(StringMsg, "/messages/gate_pass", 10)

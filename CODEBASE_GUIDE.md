@@ -329,7 +329,7 @@ Then change `lidar_port = '/dev/ttyUSB0'` in `buoy_pipeline.launch.py`.
 
 **Publishes:**
 - `/planned_path` (`nav_msgs/Path`) — for visualization
-- `/curr_task` (`Int32`) — current task number
+- `/cur_task` (`Int32`) — current task number
 - `/mavros/setpoint_velocity/cmd_vel_unstamped` (`Twist`) — motion commands
 - `/gs_message_send` — competition messages (gate pass, object detected)
 - `/messages/gate_pass` — individual message topics
@@ -689,7 +689,7 @@ Scripts for recording and replaying competition bag data (separate from the `src
 
 | Script | Purpose |
 |--------|---------|
-| `record_map_data.sh` | `ros2 bag record` — captures all navigation topics: `/boat_pose`, `/global_detections`, `/fused_buoys`, `/combined/detection_info_with_distance`, `cmd_vel`, `/planned_path`, `/curr_task`, camera images, LiDAR cloud |
+| `record_map_data.sh` | `ros2 bag record` — captures all navigation topics: `/boat_pose`, `/global_detections`, `/fused_buoys`, `/combined/detection_info_with_distance`, `cmd_vel`, `/planned_path`, `/cur_task`, camera images, LiDAR cloud |
 | `replay_map.sh` | Loop-replays a bag file; pair with `ros2 run web_server_map map_visualizer_node` to replay runs visually |
 
 ---
