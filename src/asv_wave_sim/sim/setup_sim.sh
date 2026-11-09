@@ -168,9 +168,15 @@ user_steps() {
   fi
 
   step "Workspace build ($WS)"
-  if [ -f "$WS/install/setup.bash" ] && [ -d "$WS/install/sim_judge" ] && [ -d "$WS/install/sim_autolabel" ] && [ -f "$WS/install/gz-waves1/lib/libgz-waves1-hydrodynamics-system.so" ] && [ $REBUILD = 0 ]; then
+  # The sim's own packages and the stack packages 7_stack.sh starts.
+  local unbuilt=()
+  for p in sim_judge sim_autolabel global_frame pointcloud_filters global_planner message_node cv_ros_nodes cv_lidar_fusion; do
+    [ -d "$WS/install/$p" ] || unbuilt+=("$p")
+  done
+  [ -f "$WS/install/gz-waves1/lib/libgz-waves1-hydrodynamics-system.so" ] || unbuilt+=(gz-waves1)
+  if [ -f "$WS/install/setup.bash" ] && [ ${#unbuilt[@]} -eq 0 ] && [ $REBUILD = 0 ]; then
     ok "colcon workspace (pass --rebuild to rebuild)"
-  elif [ $CHECK = 1 ]; then miss "colcon workspace build ($WS/install)"
+  elif [ $CHECK = 1 ]; then miss "colcon workspace build ($WS/install${unbuilt[*]:+; not built: ${unbuilt[*]}})"
   else
     ( set -e
       deactivate 2>/dev/null || true
