@@ -23,7 +23,9 @@ LINKS=("$WS")
 while [ $# -gt 0 ]; do
   case "$1" in
     --check) CHECK=1 ;;
-    --link) shift; LINKS+=("$(cd "$1" && pwd)") ;;
+    # Other users' homes are usually not readable by this account, so the path is used as given
+    # and only opened (through sudo, as its owner) in the clone step.
+    --link) shift; p="$1"; [ "${p#/}" = "$p" ] && p="$PWD/$p"; LINKS+=("${p%/}") ;;
     -h|--help) sed -n '2,13p' "$0"; exit 0 ;;
     *) echo "unknown option $1" >&2; exit 2 ;;
   esac
@@ -123,19 +125,21 @@ fi
 
 step "Clones borrowing the shared history"
 for repo in "${LINKS[@]}"; do
-  [ -d "$repo/.git/objects" ] || { echo "  [skip]    $repo is not a clone with its own .git"; continue; }
-  alt="$repo/.git/objects/info/alternates"
-  if grep -qxF "$MIRROR/objects" "$alt" 2>/dev/null; then echo "  [ok]      $repo (.git $(size "$repo/.git"))"; continue; fi
-  if [ $CHECK = 1 ]; then echo "  [todo]    $repo (.git $(size "$repo/.git"))"; continue; fi
-  owner="$(stat -c %U "$repo")"
+  # Everything in another user's clone runs as that user (sudo), since their home is private.
+  owner="$(sudo stat -c %U "$repo" 2>/dev/null)" || { echo "  [skip]    $repo does not exist"; continue; }
   as=(); [ "$owner" = "$(id -un)" ] || as=(sudo -u "$owner")
-  before="$(size "$repo/.git")"
+  gsize() { "${as[@]}" du -sh "$repo/.git" 2>/dev/null | cut -f1; }
+  "${as[@]}" test -d "$repo/.git/objects" || { echo "  [skip]    $repo is not a clone with its own .git"; continue; }
+  alt="$repo/.git/objects/info/alternates"
+  if "${as[@]}" grep -qxF "$MIRROR/objects" "$alt" 2>/dev/null; then echo "  [ok]      $repo (.git $(gsize))"; continue; fi
+  if [ $CHECK = 1 ]; then echo "  [todo]    $repo (.git $(gsize), owner $owner)"; continue; fi
+  before="$(gsize)"
   "${as[@]}" sh -c 'mkdir -p "$(dirname "$1")" && echo "$2" >> "$1"' _ "$alt" "$MIRROR/objects"
   # Repack keeping only the objects the shared history does not have (local commits, stashes).
   "${as[@]}" git -C "$repo" repack -a -d -l -q
   "${as[@]}" git -C "$repo" prune-packed
   if "${as[@]}" git -C "$repo" fsck --connectivity-only --no-dangling --no-progress >/dev/null 2>&1; then
-    echo "  [done]    $repo (.git $before -> $(size "$repo/.git"))"
+    echo "  [done]    $repo (.git $before -> $(gsize))"
   else
     echo "  [FAILED]  $repo: git fsck reports missing objects; do not delete anything, ask for help"
   fi
