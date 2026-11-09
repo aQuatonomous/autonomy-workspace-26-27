@@ -654,6 +654,11 @@ class TaskMaster:
         
         return result
     
+    @property
+    def manager(self):
+        """The active task manager (None between tasks); global_planner_node reads its velocities, reports, etc."""
+        return self._get_active_manager()
+
     def _get_active_manager(self):
         """Get the currently active task manager"""
         if self.state == TaskMasterState.RUN_TASK_1:
