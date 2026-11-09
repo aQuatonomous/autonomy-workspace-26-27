@@ -3,19 +3,21 @@
 # Used by vision_combiner to set detections[].class_name in /combined/detection_info.
 # YOLO main model: 0-8. Indicator buoy (task 2/3): 9-10. Supply drop (task 4): 11-12. Docking numbers (task 5): 20-22.
 # Convention: 255 = unknown (unmatched LiDAR tracks, invalid IDs); used by fusion and detection_to_global.
+# 0-8 are the aqua_main model's own ids, which are alphabetical (Roboflow orders classes by name; see the
+# `names` in aqua_main.pt / aqua_main.onnx). Keep planning/Global/entities.py CLASS_ID_TO_ENTITY_TYPE in step.
 
 # Class ID Mapping
 # Format: class_id: class_name
 classes:
   0: black_buoy
-  1: green_buoy
-  2: green_pole_buoy
-  3: red_buoy
-  4: red_pole_buoy
-  5: yellow_buoy
-  6: cross
-  7: dock
-  8: triangle
+  1: cross
+  2: dock
+  3: green_buoy
+  4: green_pole_buoy
+  5: red_buoy
+  6: red_pole_buoy
+  7: triangle
+  8: yellow_buoy
   # Indicator buoy (colour indicator buoy detector); used for class_name in combined output
   9: red_indicator_buoy
   10: green_indicator_buoy
@@ -30,14 +32,14 @@ classes:
 # Reverse mapping (class_name -> class_id) for convenience
 class_name_to_id:
   black_buoy: 0
-  green_buoy: 1
-  green_pole_buoy: 2
-  red_buoy: 3
-  red_pole_buoy: 4
-  yellow_buoy: 5
-  cross: 6
-  dock: 7
-  triangle: 8
+  cross: 1
+  dock: 2
+  green_buoy: 3
+  green_pole_buoy: 4
+  red_buoy: 5
+  red_pole_buoy: 6
+  triangle: 7
+  yellow_buoy: 8
   red_indicator_buoy: 9
   green_indicator_buoy: 10
   yellow_supply_drop: 11

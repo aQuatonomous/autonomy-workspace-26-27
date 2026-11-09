@@ -11,8 +11,6 @@ import json
 import socket
 import time
 
-from google.protobuf.timestamp_pb2 import Timestamp
-
 from . import report_compat as pb
 from .robocommand import encode_frame
 
@@ -31,9 +29,11 @@ def main(argv=None):
 
     def send(**body):
         nonlocal seq
-        ts = Timestamp()
-        ts.GetCurrentTime()
-        r = pb.Report(team_id='TEST', vehicle_id='sim', seq=seq, sent_at=ts, **body)
+        r = pb.Report(team_id='TEST', vehicle_id='sim', seq=seq, **body)
+        # Set in place: on old protobuf runtimes report_compat builds its own Timestamp class, and
+        # a google.protobuf Timestamp passed in is rejected as a different type.
+        now = time.time_ns()
+        r.sent_at.seconds, r.sent_at.nanos = now // 1_000_000_000, now % 1_000_000_000
         seq += 1
         with socket.create_connection((args.host, args.port), timeout=2.0) as s:
             s.sendall(encode_frame(r))

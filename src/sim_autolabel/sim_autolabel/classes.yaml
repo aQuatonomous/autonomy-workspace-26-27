@@ -1,0 +1,56 @@
+# How the sim's labels become the CV team's classes when a recording is exported.
+#
+# Sim labels are the names in src/asv_wave_sim/tools/sim_labels.py (one per course element type).
+# Each dataset below is one model the CV team trains: `classes` is its class list in YOLO order
+# (also the class names in its Roboflow project), `imgsz` the input size its TensorRT engine is
+# built for, `from_sim` which sim label becomes which class. Sim labels a dataset does not list are left
+# out of it, so the model learns them as background.
+#
+# Recordings keep the sim labels, so after changing this file just export again; nothing needs
+# re-recording.
+#
+# Checked against the deployed models and with the CV lead (2026-11-06): "checked" notes say how;
+# "confirm" notes are still open.
+
+datasets:
+  main:
+    # Alphabetical, as the aqua_main model that ran at competition outputs (CV lead: keep it), and
+    # ids 0-8 of computer_vision/class_mapping.yaml. Uploads match classes by name, so the order
+    # matters only for `yolo train` on the export.
+    description: aqua_main YOLO model
+    classes: [black_buoy, cross, dock, green_buoy, green_pole_buoy, red_buoy, red_pole_buoy, triangle, yellow_buoy]
+    imgsz: 640
+    from_sim:
+      # Polyform A-0 (Task 2 channel) and A-2 (Task 3) round buoys: same classes, two sizes.
+      a0_black: black_buoy
+      a0_green: green_buoy
+      a0_red: red_buoy
+      a0_yellow: yellow_buoy
+      a2_black: black_buoy
+      a2_green: green_buoy
+      a2_red: red_buoy
+      a2_yellow: yellow_buoy
+      # Taylor Made Sur-Mark (Task 1 gates). checked: maritime_distance_estimator sizes the pole
+      # buoys from Sur-Mark part numbers 950400/950410.
+      sur_mark_green: green_pole_buoy
+      sur_mark_red: red_pole_buoy
+      # Stationary vessel signs (Task 5 area): the symbol only, not the hull. checked: the distance
+      # estimator sizes cross/triangle as 8 in symbols.
+      vessel_sign_cross: cross
+      vessel_sign_triangle: triangle
+      # Floating dock, whole structure. confirm: the CV lead is sending a sample; the box may need
+      # to cover one slip (number + free space) instead.
+      dock: dock
+      # Not listed, so background for this model (confirm): indicator_buoy_*, dock_indicator_*,
+      # banner_*. The indicator buoys are found by the colour indicator detector instead.
+
+  numbers:
+    description: docking number model (task_specific/Docking/number_detection, classes '1' '2' '3')
+    classes: ['1', '2', '3']
+    imgsz: 960
+    from_sim:
+      # The numeral only, not the 24 in banner. checked: number_detection.onnx boxes the digit on
+      # its test images, and the CV lead wants digits only.
+      banner_1: '1'
+      banner_2: '2'
+      banner_3: '3'

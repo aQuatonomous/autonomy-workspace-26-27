@@ -28,7 +28,20 @@ venue:
   # the left dock "S" and the right dock "N" (so drawing right = north, drawing up = west).
   course_up_bearing_deg: 270.0
   water_density: 1000.0          # freshwater lake
-  waves_preset: calm_lake        # see tools/generate_course.py WAVE_PRESETS
+  waves_preset: calm_lake        # wind + waves, see tools/generate_course.py WAVE_PRESETS
+  # PLACEHOLDER: Sarasota afternoon sea breeze from the west-southwest. Compass bearing the wind
+  # blows FROM; --wind-from overrides it, and randomize.wind_direction varies it per seed.
+  wind_from_deg: 240.0
+  # Sun position: computed for this date at the datum (EDT after the March DST change).
+  date: '2027-03-16'             # PLACEHOLDER: competition week
+  utc_offset_h: -4.0
+  light_preset: midday           # see tools/generate_course.py LIGHT_PRESETS
+  # Lake water tint for the wave shader (tannin-dark green-brown, not open-ocean blue).
+  water_color: {deep: [0.02, 0.07, 0.06], shallow: [0.05, 0.15, 0.12]}
+
+# Windage of the boat above the waterline (drag coefficient x frontal area, m^2), used to size the
+# wind force. PLACEHOLDER estimate for the hulls, deck, mast and sensor tower.
+boat: {wind_cda: 0.35}
 
 # Course boundary (crossing it terminates the run, rule 5.1.12).
 # PLACEHOLDER: the preliminary layout shows four corner markers; its scale is set by the dock
@@ -39,6 +52,10 @@ boundary: {u_min: 0.0, u_max: 66.0, v_min: 0.0, v_max: 50.0}
 
 # Boat start: Task 1 requires starting at least 6 ft (1.83 m) before the first gate.
 start: {u: 9.1, v: 2.8, yaw: 90.0}
+# Starts for testing one task on its own (run_competition.sh --task 2/3/5, or generate_course.py
+# --start-task N): this many metres before that task's entrance (first channel gate, speed gate,
+# marina mouth), facing in. Task 1 and the full sequence use `start` above.
+task_start_standoff: 3.0
 
 # Task element dimensions (rulebook values, inches converted to metres).
 elements:
@@ -49,11 +66,12 @@ elements:
   polyform_a0:         # Task 2 gates and obstacles
     diameter: 0.203
     above_water: 0.1524  # 0.5 ft
-    mesh_top: 0.1778     # existing *Ropehold mesh: sphere centre at origin, rope eye to +0.178
+    height: 0.2921       # 11.5 in to the top of the rope eye (mech team CAD, course/cad/polyform_a0.step)
   polyform_a2:         # Task 3 gates, obstacles, yellow buoy
     diameter: 0.368
     above_water: 0.3048  # 1 ft
   indicator_buoy:      # custom PVC + coroplast buoy with a red/green cylinder on top
+                       # (model from the mech team CAD, course/cad/indicator_buoy.step)
     base_square: 0.4572        # 18 in nominal, excluding the 3 in floats
     float_diameter: 0.0762
     panel_bottom_width: 0.4318 # 17 in
@@ -93,6 +111,7 @@ randomize:
   dock_indicators: true
   dock_vessel_probability: 0.6      # chance that a red slip holds a stationary vessel
   slip_number_order: false          # PLACEHOLDER: shuffle banner numbers along each dock
+  wind_direction: true              # random wind bearing per seed (layout is unaffected)
 
 tasks:
   # Task 1 - Evacuation Route & Return. Two red/green gate pairs, red on the left (port).

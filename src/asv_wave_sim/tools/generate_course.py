@@ -9,12 +9,17 @@ Reads course/roboboat2026.yaml and writes:
   --seed 0  the layout exactly as drawn in the handbook diagrams (default)
   --seed N  randomized within the rulebook limits listed under `randomize:` in the YAML
 
+Weather: --waves picks wind and waves together (WAVE_PRESETS), --wind / --wind-from override the
+wind, --light picks the sun from the time of day at the venue (LIGHT_PRESETS) or --time HH:MM.
+
 Examples:
   python3 tools/generate_course.py                       # worlds/roboboat2026_course.sdf
   python3 tools/generate_course.py --seed 7 --out /tmp/rb7/course
+  python3 tools/generate_course.py --waves breezy_lake --wind-from 200 --light low_sun
 """
 
 import argparse
+import datetime
 import json
 import math
 import os
@@ -22,6 +27,8 @@ import random
 import sys
 
 import yaml
+
+from sim_labels import LABELS, element_label, label_plugin
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SIM_ROOT = os.path.normpath(os.path.join(HERE, '..'))
@@ -33,11 +40,28 @@ DEFAULT_OUT = os.path.join(SIM_ROOT, 'gz-waves-models', 'worlds', 'roboboat2026_
 M_PER_DEG = 111318.84502145034
 
 WAVE_PRESETS = {
-    # name: (wind_speed m/s, steepness)
-    'flat': (0.1, 0.0),
-    'calm_lake': (1.0, 0.1),      # regatta lake behind a wave attenuator
-    'breezy_lake': (3.0, 0.2),
-    'legacy': (0.5, 0.2),         # values from the original aquatonomous_world
+    # name: (air wind m/s, gust fraction, wave-spectrum wind m/s, steepness)
+    # The air wind pushes the boat (WindEffects). The wave-spectrum wind only shapes the FFT waves
+    # and is lower than the air wind: the regatta lake is behind a wave attenuator with a short fetch.
+    'flat': (0.0, 0.0, 0.1, 0.0),
+    'calm_lake': (1.5, 0.3, 1.0, 0.1),
+    'breezy_lake': (4.0, 0.25, 3.0, 0.2),
+    'windy_lake': (7.0, 0.3, 5.0, 0.3),
+    'legacy': (0.0, 0.0, 0.5, 0.2),   # waves from the original aquatonomous_world, no wind force
+}
+
+# gz-sim WindEffects pushes each wind-enabled link with F = k * mass * (wind - link velocity).
+# k is chosen so F matches quadratic air drag 0.5 * rho * CdA * v^2 at the preset's mean wind.
+AIR_DENSITY = 1.2
+BOAT_WIND_LINK_MASS = 30.0   # ourboat base_link, the only link with <enable_wind>
+
+LIGHT_PRESETS = {
+    # name: (local time HH:MM, sky)
+    'morning': ('09:00', 'clear'),
+    'midday': ('12:30', 'clear'),
+    'afternoon': ('15:30', 'clear'),
+    'low_sun': ('17:45', 'clear'),       # sun low in the west: glare and long shadows for CV
+    'overcast': ('12:30', 'overcast'),
 }
 
 FOOTPRINT_RADIUS = {
@@ -45,6 +69,7 @@ FOOTPRINT_RADIUS = {
     'a0': 0.1016,
     'a2': 0.184,
     'indicator_buoy': 0.305,
+    'light_buoy': 0.305,
     'boundary_marker': 0.15,
 }
 
@@ -53,8 +78,12 @@ KIND_ALIASES = {'polyform_a0': 'a0', 'polyform_a2': 'a2'}
 VESSEL_OUTLINE = [(-0.5334, -0.2832), (0.5334, -0.2832), (1.0334, 0.0), (0.5334, 0.2832), (-0.5334, 0.2832)]
 
 
-def model_uri(kind, color=None, number=None):
+def model_uri(kind, color=None, number=None, shape=None):
     c = (color or '').capitalize()
+    if kind == 'light_buoy':
+        return f'model://LightBuoy{c}{number or ""}'
+    if kind == 'vessel' and shape:
+        return f'model://StationaryVessel{c}{shape.capitalize()}'
     if kind == 'sur_mark':
         return f'model://{c}SurMark'
     if kind == 'a0':
@@ -129,6 +158,7 @@ class Course:
         self.gates = []
         self.models = []      # extra inline SDF models (docks, boundary markers)
         self.tasks = {}
+        self.entries = {}     # task -> (u, v, yaw) of its entrance in the course frame (per-task starts)
 
     # -- helpers ---------------------------------------------------------
     def pick(self, key, default, lo_hi):
@@ -136,7 +166,7 @@ class Course:
             return self.rng.uniform(*lo_hi)
         return default
 
-    def add(self, task, kind, color, u, v, yaw=0.0, role=None, z=0.0, number=None, extra=None):
+    def add(self, task, kind, color, u, v, yaw=0.0, role=None, z=0.0, number=None, extra=None, shape=None):
         kind = KIND_ALIASES.get(kind, kind)
         x, y = self.frame.enu(u, v)
         lat, lon = self.frame.latlon(x, y)
@@ -145,14 +175,19 @@ class Course:
         e = {
             'id': eid, 'name': name, 'task': task, 'kind': kind, 'color': color, 'role': role,
             'x': round(x, 4), 'y': round(y, 4), 'z': round(z, 4), 'yaw': round(self.frame.yaw(yaw), 5),
-            'lat': round(lat, 8), 'lon': round(lon, 8), 'uri': model_uri(kind, color, number),
+            'lat': round(lat, 8), 'lon': round(lon, 8), 'uri': model_uri(kind, color, number, shape),
         }
+        if shape:
+            e['shape'] = shape
         if kind in FOOTPRINT_RADIUS:
             e['radius'] = FOOTPRINT_RADIUS[kind]
         if kind == 'vessel':
             e['footprint'] = self.polygon(VESSEL_OUTLINE, x, y, e['yaw'])
         if number is not None:
             e['number'] = number
+        label = element_label(kind, color)
+        if label:
+            e['sim_label'] = label
         if extra:
             e.update(extra)
         self.elements.append(e)
@@ -204,6 +239,7 @@ class Course:
             fx, fy = vec(g['yaw'])
             lx, ly = -fy, fx
             gate_geo.append(((cu + lx * w / 2, cv + ly * w / 2), (cu - lx * w / 2, cv - ly * w / 2), (fx, fy)))
+        self.entries['2'] = (ou, ov, t['gates'][0]['yaw'])
         for o in t['channel_obstacles']:
             (ru, rv), (gu, gv), (fx, fy) = gate_geo[o['gate'] - 1]
             pu = ru + o['t'] * (gu - ru) + fx * o['forward']
@@ -258,6 +294,7 @@ class Course:
         fx, fy = vec(yaw)
         lx, ly = -fy, fx
         gate, _, _ = self.add_gate(3, 'speed_gate', t['gate_model'], cu, cv, yaw, w)
+        self.entries['3'] = (cu, cv, yaw)
 
         def at(spec):
             a = dist * spec['along'] + spec.get('along_offset', 0.0)
@@ -281,7 +318,11 @@ class Course:
         }
 
     def task5(self):
-        t = self.cfg['tasks']['task5']
+        self.marina(self.cfg['tasks']['task5'], 5)
+
+    def marina(self, t, task):
+        """Docks with slips (tines off a spine), slip indicators, number banners and optional
+        vessels in red slips; writes self.tasks[str(task)] with the slip polygons and the answer."""
         el = self.cfg['elements']
         cube = el['dock_cube']['size']
         c = cube[0]
@@ -292,6 +333,7 @@ class Course:
         tine_rows = t['tine_rows']
         slip_rows = [(tine_rows[k] + 1, tine_rows[k + 1] - 1) for k in range(len(tine_rows) - 1)]
         numbers = list(t['slip_numbers'])
+        self.entries[str(task)] = (ou, ov, -90.0)   # entrance end between the docks; the docks extend toward -v
 
         example = t.get('example', {})
         layout = {}
@@ -326,22 +368,22 @@ class Course:
             for r in tine_rows:
                 for k in range(n_tine):
                     cubes.append((inner_u - side * (k + 0.5) * c, ov - (r + 0.5) * c))
-            self.models.append(self.dock_model(f'marina_dock_{name}', cubes, cube, free))
+            self.models.append(self.dock_model(f'marina_dock_{name}', cubes, cube, free, task))
             for k, (r0, r1) in enumerate(slip_rows):
                 v_top, v_bot = ov - r0 * c, ov - (r1 + 1) * c
                 v_mid = (v_top + v_bot) / 2
                 slot = layout[name][k]
                 number = nums[k]
                 face_yaw = 0.0 if side < 0 else 180.0   # banner faces the slip
-                self.add(5, 'banner', None, spine_u, v_mid, yaw=face_yaw + 90.0, z=free, number=number,
+                self.add(task, 'banner', None, spine_u, v_mid, yaw=face_yaw + 90.0, z=free, number=number,
                          role=f'banner_{name}{number}')
-                ind = self.add(5, 'dock_indicator', slot['indicator'], spine_u - side * c / 2, v_mid, z=free,
+                ind = self.add(task, 'dock_indicator', slot['indicator'], spine_u - side * c / 2, v_mid, z=free,
                                role=f'dock_indicator_{name}{number}')
                 vessel_id = None
                 if slot.get('vessel'):
                     bow_yaw = 180.0 if side < 0 else 0.0   # bow toward the spine
                     vu = inner_u - side * (0.15 + 1.0334)
-                    vessel_id = self.add(5, 'vessel', slot['vessel'], vu, v_mid, yaw=bow_yaw,
+                    vessel_id = self.add(task, 'vessel', slot['vessel'], vu, v_mid, yaw=bow_yaw,
                                          role=f'slip_vessel_{name}{number}')['id']
                 corners = [(inner_u, v_top), (tip_u, v_top), (tip_u, v_bot), (inner_u, v_bot)]
                 poly = [list(map(lambda a: round(a, 4), self.frame.enu(a, b))) for a, b in corners]
@@ -354,13 +396,13 @@ class Course:
                 })
         greens = [s for s in slips_out if s['indicator'] == 'green' and not s['occupied']]
         best = min((s['slip'] for s in greens), default=None)
-        self.tasks['5'] = {
+        self.tasks[str(task)] = {
             'name': 'Navigate the Marina', 'slips': slips_out,
             'correct': [{'dock': s['dock'], 'slip': s['slip']} for s in greens if s['slip'] == best],
             'green': [{'dock': s['dock'], 'slip': s['slip']} for s in greens],
         }
 
-    def dock_model(self, name, cubes, size, freeboard):
+    def dock_model(self, name, cubes, size, freeboard, task=5):
         sx, sy, sz = size
         zc = freeboard - sz / 2
         gap = 0.012
@@ -374,12 +416,13 @@ class Course:
             cols.append(f'<collision name="c{i}">{p}<geometry><box><size>{sx:.4f} {sy:.4f} {sz:.4f}</size></box>'
                         f'</geometry></collision>')
         footprint = [[round(c, 4) for c in self.frame.enu(u, v)] for u, v in cubes]
-        self.elements.append({'id': len(self.elements) + 1, 'name': name, 'task': 5, 'kind': 'dock',
-                              'cubes': footprint, 'cube_size': sx})
+        self.elements.append({'id': len(self.elements) + 1, 'name': name, 'task': task, 'kind': 'dock',
+                              'cubes': footprint, 'cube_size': sx, 'sim_label': 'dock'})
         body = '\n        '.join(vis + cols)
         return f"""
     <model name="{name}">
       <static>true</static>
+      {label_plugin('dock')}
       <link name="link">
         {body}
       </link>
@@ -404,31 +447,75 @@ class Course:
     </model>""")
         self.boundary_polygon = poly
 
-    def build(self):
+    def build(self, start_task='1'):
         self.task1()
         self.task2()
         self.task3()
         self.task5()
         self.boundary()
+        # Task 1 starts where the handbook puts the boat; every other task starts task_start_standoff
+        # metres before its entrance (as generated, so randomized seeds stay consistent), facing in.
         s = self.cfg['start']
-        x, y = self.frame.enu(s['u'], s['v'])
-        yaw = self.frame.yaw(s['yaw'])
-        self.start = {'x': round(x, 4), 'y': round(y, 4), 'yaw': round(yaw, 5)}
+        starts_uv = {'1': (s['u'], s['v'], s['yaw'])}
+        d = float(self.cfg.get('task_start_standoff', 3.0))
+        for task, (u, v, yaw) in self.entries.items():
+            fx, fy = vec(yaw)
+            starts_uv[task] = (u - fx * d, v - fy * d, yaw)
+        self.starts = {}
+        for task, (u, v, yaw) in sorted(starts_uv.items()):
+            x, y = self.frame.enu(u, v)
+            self.starts[task] = {'x': round(x, 4), 'y': round(y, 4), 'yaw': round(self.frame.yaw(yaw), 5)}
+        self.pick_start(start_task)
+
+    DEFAULT_START = '1'
+
+    def pick_start(self, start_task):
+        """Use the start of start_task, or the default start for a task without its own (e.g. the
+        planner's sequence mode, task 123)."""
+        if start_task is None or start_task not in self.starts:
+            if start_task is not None:
+                print(f'note: no start for task {start_task}; using the {self.DEFAULT_START} start '
+                      f'(tasks with a start: {sorted(self.starts)})')
+            start_task = self.DEFAULT_START
+        self.start_task = start_task
+        self.start = self.starts[start_task]
+
+    def key_extra(self):
+        """Course-specific fields for the answer key."""
+        return {'year': 2026}
+
+    def summary(self):
+        t2, t3, t5 = self.tasks['2']['indicators'], self.tasks['3'], self.tasks['5']
+        return (f'task2 indicators {[i["color"] for i in t2]}, task3 {t3["indicator_color"]} '
+                f'({t3["required_direction"]}), dock target {t5["correct"]}')
+
+    def start_clearance(self, task):
+        """Distance (m) from a task's start to the nearest course element, and that element's name."""
+        s = self.starts[task]
+        return min((math.hypot(e['x'] - s['x'], e['y'] - s['y']), e['name'])
+                   for e in self.elements if 'x' in e)
 
 
 # ---------------------------------------------------------------------------
 # World SDF
 # ---------------------------------------------------------------------------
 
-def waves_model(preset):
-    wind, steep = WAVE_PRESETS[preset]
+def enu_toward_deg(compass_from_deg):
+    """ENU angle (counter-clockwise from east) the wind blows toward, from the compass bearing it
+    blows from."""
+    return (90.0 - (compass_from_deg + 180.0)) % 360.0
+
+
+def waves_model(weather, water):
+    deep = ' '.join(f'{c:.3f}' for c in water['deep'])
+    shallow = ' '.join(f'{c:.3f}' for c in water['shallow'])
     wave = f"""<wave>
             <algorithm>fft</algorithm>
             <tile_size>64</tile_size>
             <cell_count>64</cell_count>
-            <wind_speed>{wind}</wind_speed>
-            <wind_angle_deg>135</wind_angle_deg>
-            <steepness>{steep}</steepness>
+            <wind_speed>{weather['wave_wind']}</wind_speed>
+            <wind_angle_deg>{enu_toward_deg(weather['wind_from_deg']):.0f}</wind_angle_deg>
+            <steepness>{weather['steepness']}</steepness>
           </wave>"""
     return f"""
     <model name="waves">
@@ -471,10 +558,10 @@ def waves_model(preset):
             <param><shader>vertex</shader><name>bumpScale</name><value>128 128</value><type>float_array</type></param>
             <param><shader>vertex</shader><name>bumpSpeed</name><value>0.01 0.01</value><type>float_array</type></param>
             <param><shader>vertex</shader><name>t</name><value>TIME</value></param>
-            <param><shader>fragment</shader><name>deepColor</name><value>0.0 0.05 0.2 1.0</value><type>float_array</type></param>
-            <param><shader>fragment</shader><name>shallowColor</name><value>0.0 0.1 0.3 1.0</value><type>float_array</type></param>
+            <param><shader>fragment</shader><name>deepColor</name><value>{deep} 1.0</value><type>float_array</type></param>
+            <param><shader>fragment</shader><name>shallowColor</name><value>{shallow} 1.0</value><type>float_array</type></param>
             <param><shader>fragment</shader><name>fresnelPower</name><value>5.0</value><type>float</type></param>
-            <param><shader>fragment</shader><name>hdrMultiplier</name><value>0.4</value><type>float</type></param>
+            <param><shader>fragment</shader><name>hdrMultiplier</name><value>{weather['water_hdr']:.2f}</value><type>float</type></param>
             <param><shader>fragment</shader><name>bumpMap</name><value>model://waves/materials/wave_normals.dds</value><type>texture</type><arg>0</arg></param>
             <param><shader>fragment</shader><name>cubeMap</name><value>model://waves/materials/skybox_lowres.dds</value><type>texture_cube</type><arg>1</arg></param>
           </plugin>
@@ -526,19 +613,132 @@ def sun_direction(azimuth_deg, elevation_deg):
     return tuple(-c for c in to_sun)
 
 
-def world_sdf(course, args):
+def solar_position(lat_deg, lon_deg, day_of_year, utc_hour):
+    """Sun compass azimuth and elevation in degrees (NOAA low-precision formulas, ~0.2 deg)."""
+    g = 2.0 * math.pi / 365.0 * (day_of_year - 1 + (utc_hour - 12.0) / 24.0)
+    eqtime = 229.18 * (0.000075 + 0.001868 * math.cos(g) - 0.032077 * math.sin(g)
+                       - 0.014615 * math.cos(2 * g) - 0.040849 * math.sin(2 * g))
+    decl = (0.006918 - 0.399912 * math.cos(g) + 0.070257 * math.sin(g) - 0.006758 * math.cos(2 * g)
+            + 0.000907 * math.sin(2 * g) - 0.002697 * math.cos(3 * g) + 0.00148 * math.sin(3 * g))
+    true_solar_min = utc_hour * 60.0 + eqtime + 4.0 * lon_deg
+    ha = math.radians(true_solar_min / 4.0 - 180.0)
+    lat = math.radians(lat_deg)
+    cos_zen = math.sin(lat) * math.sin(decl) + math.cos(lat) * math.cos(decl) * math.cos(ha)
+    elevation = 90.0 - math.degrees(math.acos(max(-1.0, min(1.0, cos_zen))))
+    azimuth = math.degrees(math.atan2(math.sin(ha), math.cos(ha) * math.sin(lat) - math.tan(decl) * math.cos(lat)))
+    return (azimuth + 180.0) % 360.0, elevation
+
+
+def mix(a, b, t):
+    return tuple(x + (y - x) * t for x, y in zip(a, b))
+
+
+def rgb(c):
+    return ' '.join(f'{x:.3f}' for x in c)
+
+
+def resolve_weather(cfg, args, seed):
+    """Wind, waves and sun for this run, from the presets, the venue in the YAML and the options."""
+    venue = cfg['venue']
+    air, gust, wave_wind, steep = WAVE_PRESETS[args.waves]
+    if args.wind is not None:
+        air = args.wind
+    wind_from = float(venue.get('wind_from_deg', 240.0))
+    if args.wind_from is not None:
+        wind_from = args.wind_from
+    elif seed != 0 and cfg.get('randomize', {}).get('wind_direction'):
+        # Own generator so the course layout of a seed does not change with the weather options.
+        wind_from = random.Random(f'wind{seed}').uniform(0.0, 360.0)
+
+    light = args.light or venue.get('light_preset', 'midday')
+    local_time, sky = LIGHT_PRESETS[light]
+    if args.time:
+        local_time = args.time
+    hh, mm = (int(p) for p in local_time.split(':'))
+    date = str(venue.get('date', '2027-03-15'))
+    day_of_year = datetime.date.fromisoformat(date).timetuple().tm_yday
+    utc_hour = hh + mm / 60.0 - float(venue.get('utc_offset_h', -4.0))
+    az, el = solar_position(float(venue['datum']['lat']), float(venue['datum']['lon']), day_of_year, utc_hour)
+    if args.sun_azimuth is not None:
+        az = args.sun_azimuth
+    if args.sun_elevation is not None:
+        el = args.sun_elevation
+    if el < 5.0:
+        sys.exit(f'The sun is {el:.1f} deg above the horizon at {local_time}; pick a daytime --time.')
+
+    # Clear sky: low sun is dimmer and warmer, the sky fill (ambient) weaker. Overcast: no
+    # directional sun to speak of, bright flat ambient, grey sky.
+    day = min(1.0, math.sin(math.radians(el)) / math.sin(math.radians(50.0)))
+    warm = min(1.0, el / 30.0)
+    if sky == 'overcast':
+        sun_color, sun_intensity = (0.85, 0.87, 0.90), 0.35
+        ambient, background, humidity = (0.72, 0.73, 0.75), (0.70, 0.72, 0.75), 0.9
+        water_hdr = 0.25
+    else:
+        sun_color = mix((1.0, 0.70, 0.42), (1.0, 0.97, 0.90), warm)
+        sun_intensity = 0.5 + 0.7 * day
+        ambient = mix((0.32, 0.30, 0.30), (0.50, 0.52, 0.56), day)
+        background = mix((0.86, 0.72, 0.58), (0.62, 0.76, 0.92), warm)
+        humidity, water_hdr = 0.35, 0.4
+
+    cda = float(cfg.get('boat', {}).get('wind_cda', 0.35))
+    k = 0.5 * AIR_DENSITY * cda * air / BOAT_WIND_LINK_MASS if air > 0 else 0.0
+    return {
+        'preset': args.waves, 'wind_speed': air, 'wind_from_deg': round(wind_from % 360.0, 1),
+        'gust_fraction': gust, 'wind_force_scale': k, 'wave_wind': wave_wind, 'steepness': steep,
+        'light': light, 'sky': sky, 'local_time': local_time, 'date': date,
+        'sun_azimuth_deg': round(az, 1), 'sun_elevation_deg': round(el, 1),
+        'sun_color': sun_color, 'sun_intensity': sun_intensity, 'ambient': ambient,
+        'background': background, 'cloud_humidity': humidity, 'water_hdr': water_hdr,
+    }
+
+
+def wind_sdf(w):
+    """World wind plus the WindEffects system that pushes links with <enable_wind> (the boat hull)."""
+    if w['wind_speed'] <= 0:
+        return ''
+    a = math.radians(enu_toward_deg(w['wind_from_deg']))
+    vx, vy = w['wind_speed'] * math.cos(a), w['wind_speed'] * math.sin(a)
+    return f"""
+    <!-- Wind {w['wind_speed']} m/s from compass {w['wind_from_deg']} deg, gusts +/-{w['gust_fraction'] * 100:.0f} %.
+         Force on the hull: k * mass * (wind - hull velocity), k from air drag at the mean wind. -->
+    <wind><linear_velocity>{vx:.3f} {vy:.3f} 0</linear_velocity></wind>
+    <plugin filename="gz-sim-wind-effects-system" name="gz::sim::systems::WindEffects">
+      <force_approximation_scaling_factor>{w['wind_force_scale']:.4f}</force_approximation_scaling_factor>
+      <horizontal>
+        <magnitude>
+          <time_for_rise>10</time_for_rise>
+          <sin><amplitude_percent>{w['gust_fraction']}</amplitude_percent><period>40</period></sin>
+          <noise type="gaussian"><mean>0</mean><stddev>{0.05 * w['wind_speed']:.3f}</stddev></noise>
+        </magnitude>
+        <direction>
+          <time_for_rise>30</time_for_rise>
+          <sin><amplitude>10</amplitude><period>90</period></sin>
+          <noise type="gaussian"><mean>0</mean><stddev>0.03</stddev></noise>
+        </direction>
+      </horizontal>
+    </plugin>
+"""
+
+
+def world_sdf(course, args, weather):
     cfg = course.cfg
     fr = course.frame
     s = course.start
-    dx, dy, dz = sun_direction(args.sun_azimuth, args.sun_elevation)
+    w = weather
+    dx, dy, dz = sun_direction(w['sun_azimuth_deg'], w['sun_elevation_deg'])
+    water = cfg['venue'].get('water_color', {})
+    water = {'deep': water.get('deep', (0.0, 0.05, 0.2)), 'shallow': water.get('shallow', (0.0, 0.1, 0.3))}
     includes = []
     for e in course.elements:
         if 'uri' not in e:
             continue
+        # Label for the autolabel bounding-box cameras (tools/sim_labels.py).
+        label = f"\n      {label_plugin(e['sim_label'])}" if e.get('sim_label') else ''
         includes.append(f"""    <include>
       <name>{e['name']}</name>
       <pose>{e['x']:.4f} {e['y']:.4f} {e['z']:.4f} 0 0 {e['yaw']:.5f}</pose>
-      <uri>{e['uri']}</uri>
+      <uri>{e['uri']}</uri>{label}
     </include>""")
     xs = [p[0] for p in course.boundary_polygon]
     ys = [p[1] for p in course.boundary_polygon]
@@ -578,23 +778,24 @@ def world_sdf(course, args):
     </spherical_coordinates>
 
     <scene>
-      <ambient>0.55 0.55 0.58 1</ambient>
-      <background>0.62 0.76 0.92 1</background>
-      <sky><clouds><speed>2</speed><humidity>0.35</humidity></clouds></sky>
+      <ambient>{rgb(w['ambient'])} 1</ambient>
+      <background>{rgb(w['background'])} 1</background>
+      <sky><clouds><speed>2</speed><humidity>{w['cloud_humidity']}</humidity></clouds></sky>
       <shadows>{'true' if args.shadows else 'false'}</shadows>
       <grid>false</grid>
     </scene>
 
-    <!-- Florida sun: azimuth {args.sun_azimuth} deg, elevation {args.sun_elevation} deg -->
+    <!-- Sun ({w['light']}, {w['sky']}): {w['date']} {w['local_time']} local, azimuth {w['sun_azimuth_deg']} deg,
+         elevation {w['sun_elevation_deg']} deg -->
     <light type="directional" name="sun">
       <cast_shadows>{'true' if args.shadows else 'false'}</cast_shadows>
       <pose>0 0 50 0 0 0</pose>
-      <diffuse>1.0 0.97 0.90 1</diffuse>
-      <specular>0.6 0.6 0.6 1</specular>
-      <intensity>1.2</intensity>
+      <diffuse>{rgb(w['sun_color'])} 1</diffuse>
+      <specular>{rgb(mix((0, 0, 0), w['sun_color'], 0.6))} 1</specular>
+      <intensity>{w['sun_intensity']:.2f}</intensity>
       <direction>{dx:.4f} {dy:.4f} {dz:.4f}</direction>
     </light>
-{waves_model(args.waves)}
+{wind_sdf(w)}{waves_model(w, water)}
 {shore}
 {''.join(course.models)}
 {chr(10).join(includes)}
@@ -604,11 +805,11 @@ def world_sdf(course, args):
 """
 
 
-def answer_key(course, args, world_path):
+def answer_key(course, args, world_path, weather):
     fr = course.frame
     s = course.start
     lat, lon = fr.latlon(s['x'], s['y'])
-    heading = (90.0 - math.degrees(s['yaw'])) % 360.0
+    heading = round(90.0 - math.degrees(s['yaw']), 1) % 360.0
     return {
         'generator': 'src/asv_wave_sim/tools/generate_course.py',
         'seed': course.seed,
@@ -620,12 +821,21 @@ def answer_key(course, args, world_path):
         # world origin) to its home location.
         'sitl_home': f'{fr.lat0:.8f},{fr.lon0:.8f},{fr.alt0:.1f},{heading:.0f}',
         'start': {**s, 'lat': round(lat, 8), 'lon': round(lon, 8), 'compass_heading_deg': round(heading, 1)},
+        # Where this world puts the boat (--start-task) and every task's start for reference.
+        'start_task': course.start_task,
+        'starts': {k: {**v, 'compass_heading_deg': round(90.0 - math.degrees(v['yaw']), 1) % 360.0}
+                   for k, v in course.starts.items()},
+        **course.key_extra(),
         'boundary': course.boundary_polygon,
         'waves': args.waves,
+        'weather': {k: weather[k] for k in ('wind_speed', 'wind_from_deg', 'gust_fraction', 'light', 'sky',
+                                            'date', 'local_time', 'sun_azimuth_deg', 'sun_elevation_deg')},
         'water_density': course.cfg['venue'].get('water_density', 1000.0),
         'gates': course.gates,
         'tasks': course.tasks,
         'elements': course.elements,
+        # Gazebo Label IDs seen by the autolabel bounding-box cameras (tools/sim_labels.py).
+        'labels': LABELS,
     }
 
 
@@ -635,11 +845,21 @@ def main(argv=None):
     ap.add_argument('--seed', type=int, default=0, help='0 = layout as drawn; N > 0 = randomized')
     ap.add_argument('--out', default=DEFAULT_OUT, help='output path without extension')
     ap.add_argument('--waves', default=None, choices=sorted(WAVE_PRESETS), help='wave preset (default from YAML)')
-    ap.add_argument('--sun-azimuth', type=float, default=120.0, help='compass degrees')
-    ap.add_argument('--sun-elevation', type=float, default=50.0)
+    ap.add_argument('--wind', type=float, default=None, help='mean wind m/s (default from --waves)')
+    ap.add_argument('--wind-from', type=float, default=None,
+                    help='compass degrees the wind blows from (default from YAML; random per seed if enabled)')
+    ap.add_argument('--light', default=None, choices=sorted(LIGHT_PRESETS), help='time of day and sky (default from YAML)')
+    ap.add_argument('--time', default=None, help='local time HH:MM, overrides the --light time')
+    ap.add_argument('--sun-azimuth', type=float, default=None, help='compass degrees, overrides the time of day')
+    ap.add_argument('--sun-elevation', type=float, default=None)
     ap.add_argument('--shadows', action='store_true', help='enable sun shadows (costs GPU time)')
     ap.add_argument('--no-shoreline', action='store_true')
     ap.add_argument('--no-boat', action='store_true', help='omit ourboat (course preview)')
+    ap.add_argument('--start-task', default=None,
+                    help="put the boat before this task's entrance; a task without its own start (or "
+                         "none given) uses the course's default start")
+    ap.add_argument('--layout', default='full', choices=['full', 'readiness'],
+                    help='2027 only: full course, or the Proof of Readiness gates alone')
     args = ap.parse_args(argv)
 
     with open(args.config) as f:
@@ -647,27 +867,38 @@ def main(argv=None):
     if args.waves is None:
         args.waves = cfg['venue'].get('waves_preset', 'calm_lake')
 
-    course = Course(cfg, args.seed)
-    course.build()
+    if int(cfg.get('year', 2026)) >= 2027:
+        from course2027 import Course2027
+        course = Course2027(cfg, args.seed, layout=args.layout)
+    else:
+        if args.layout != 'full':
+            sys.exit(f'--layout {args.layout} needs a 2027 course config')
+        course = Course(cfg, args.seed)
+    course.build(args.start_task)
+    weather = resolve_weather(cfg, args, args.seed)
 
     out_dir = os.path.dirname(os.path.abspath(args.out))
     os.makedirs(out_dir, exist_ok=True)
     world_path = args.out + '.sdf'
     key_path = args.out + '.answer_key.json'
     with open(world_path, 'w', newline='\n') as f:
-        f.write(world_sdf(course, args))
+        f.write(world_sdf(course, args, weather))
     with open(key_path, 'w', newline='\n') as f:
-        json.dump(answer_key(course, args, world_path), f, indent=2)
+        json.dump(answer_key(course, args, world_path, weather), f, indent=2)
         f.write('\n')
 
-    t2 = course.tasks['2']['indicators']
-    t3 = course.tasks['3']
-    t5 = course.tasks['5']
     print(f'world:      {world_path}')
     print(f'answer key: {key_path}')
-    print(f'seed {args.seed}: task2 indicators {[i["color"] for i in t2]}, task3 {t3["indicator_color"]} '
-          f'({t3["required_direction"]}), dock target {t5["correct"]}')
-    print(f'SITL home:  {answer_key(course, args, world_path)["sitl_home"]}')
+    print(f'seed {args.seed}: {course.summary()}')
+    print(f'SITL home:  {answer_key(course, args, world_path, weather)["sitl_home"]}')
+    s = course.start
+    gap, nearest = course.start_clearance(course.start_task)
+    print(f'boat start: task {course.start_task} at ({s["x"]:.1f}, {s["y"]:.1f}) heading '
+          f'{round(90.0 - math.degrees(s["yaw"])) % 360:.0f} deg, {gap:.1f} m from {nearest}')
+    if gap < 1.5:
+        print(f'WARNING: the boat starts {gap:.1f} m from {nearest}', file=sys.stderr)
+    print(f'weather:    wind {weather["wind_speed"]} m/s from {weather["wind_from_deg"]} deg ({args.waves}), '
+          f'{weather["light"]} {weather["local_time"]}: sun az {weather["sun_azimuth_deg"]} el {weather["sun_elevation_deg"]}')
     return 0
 
 

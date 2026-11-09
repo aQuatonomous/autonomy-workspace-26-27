@@ -67,7 +67,7 @@ The pipeline multiplies distance estimates by a **distance scale factor**. Use o
 - **Override engine path:** `engine_path:=/path/to/model.engine`
 - **Override resolution:** `resolution:=1920,1200`
 - **Override cameras:** `camera_devices:=/path1,/path2,/path3` (exactly 3)
-- **Simulation:** Use **`launch_cv_sim.py`** or **`launch_cv.py use_sim:=true`** when Gazebo bridges publish `/camera0/image_raw` etc. See [../src/asv_wave_sim/SIMULATION.md](../src/asv_wave_sim/SIMULATION.md).
+- **Simulation:** Use **`launch_cv_sim.py`** or **`launch_cv.py use_sim:=true`** when Gazebo bridges publish `/camera0/image_raw` etc. See [../SIMULATION.md](../SIMULATION.md).
 
 For manual node commands and topic I/O, see [NODES.md](NODES.md).
 

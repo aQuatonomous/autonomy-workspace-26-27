@@ -11,7 +11,7 @@ BAG_NAME="map_data_$(date +%Y%m%d_%H%M%S)"
 echo "=== Recording Map Data ==="
 echo "📦 Bag name: ${BAG_NAME}"
 echo "🎯 Topics:"
-echo "   Mapping/planning: /boat_pose, /global_detections, /combined/detection_info_with_distance, /tracked_buoys, /mavros/setpoint_velocity/cmd_vel_unstamped, /planned_path, /curr_task"
+echo "   Mapping/planning: /boat_pose, /global_detections, /combined/detection_info_with_distance, /tracked_buoys, /mavros/setpoint_velocity/cmd_vel_unstamped, /planned_path, /cur_task"
 echo "   Camera raw: /camera0/image_raw, /camera1/image_raw, /camera2/image_raw"
 echo "   LiDAR raw: /unilidar/cloud"
 echo "   Per-camera detections: /camera0/detection_info, /camera1/detection_info, /camera2/detection_info"
@@ -59,7 +59,7 @@ ros2 bag record \
   /fused_buoys \
   /mavros/setpoint_velocity/cmd_vel_unstamped \
   /planned_path \
-  /curr_task \
+  /cur_task \
   /camera0/image_raw \
   /camera1/image_raw \
   /camera2/image_raw \

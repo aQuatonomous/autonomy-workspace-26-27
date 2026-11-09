@@ -329,7 +329,7 @@ Then change `lidar_port = '/dev/ttyUSB0'` in `buoy_pipeline.launch.py`.
 
 **Publishes:**
 - `/planned_path` (`nav_msgs/Path`) — for visualization
-- `/curr_task` (`Int32`) — current task number
+- `/cur_task` (`Int32`) — current task number
 - `/mavros/setpoint_velocity/cmd_vel_unstamped` (`Twist`) — motion commands
 - `/gs_message_send` — competition messages (gate pass, object detected)
 - `/messages/gate_pass` — individual message topics
@@ -449,47 +449,25 @@ Convenience launch that starts all three nodes (capturer + detector + message_no
 
 ### `asv_wave_sim`
 
-**What it is:** Gazebo Harmonic simulation of the competition environment, including wave physics, boat model, buoys, gates, and ArduPilot SITL integration.
+**What it is:** The team simulator: the competition course in Gazebo Harmonic (wave physics,
+our boat with its LiDAR and cameras), ArduPilot Rover SITL, MAVROS, the autonomy stack unmodified,
+and a judge (`src/sim_judge`) that scores runs. Full guide: [SIMULATION.md](SIMULATION.md).
 
 **Key components:**
 
 | Component | Purpose |
 |-----------|---------|
-| `gz-waves/` | C++ wave physics plugin (`gz-waves1`) — computes realistic water surface |
-| `gz-waves-models/worlds/aquatonomous_world.sdf` | Competition world with buoys, gates, rope holds, wave model |
-| `gz-waves-models/models/` | Individual model SDFs (boat, buoys, rope holds, etc.) |
-| `run_full_simulation_tmux.bash` | One-command full sim: Gazebo + SITL + MAVROS in a tmux session |
-| `test_gazebo_gui.sh` | Gazebo only (no SITL) — fastest way to check the world |
-| `test_sitl.sh` | ArduPilot SITL only |
-| `test_mavros.sh` | MAVROS bridge to SITL |
-| `test_bridges.sh` | ROS 2 ↔ Gazebo bridges (lidar + 3 cameras) |
-| `run_gazebo_standalone.sh` | Gazebo without SITL; works even without `ourboat` model |
+| `sim/setup_sim.sh` | Installs and builds everything the sim needs (`--check` changes nothing) |
+| `sim/run_competition.sh` / `stop_competition.sh` | Start / stop a full run in tmux |
+| `course/roboboat2027.yaml`, `roboboat2026.yaml` | Course descriptions; `tools/generate_course.py` turns them into worlds + answer keys |
+| `gz-waves-models/models/` | Boat (`ourboat`) and course element models |
+| `gz-waves/` | Upstream wave and hydrodynamics plugins (`gz-waves1`) |
 
-**ROS topics (via `ros_gz_bridge`):** `/camera0/image_raw`, `/camera1/image_raw`, `/camera2/image_raw`, `/laser_points`
+**ROS topics:** the real sensor names: `/rslidar_points`, `/camera0/image_raw` ... `/camera2/image_raw`;
+`/sim/...` topics are ground truth for watching only.
 
-**External dependencies (not in this repo):**
-
-| Dependency | Purpose | Default location |
-|-----------|---------|-----------------|
-| `SITL_Models/` | `ourboat` model SDF | `~/Repos/School/SITL_Models/Gazebo` |
-| `ardupilot_gazebo/` | ArduPilotPlugin.so | `~/Repos/School/ardupilot_gazebo` |
-| `ardupilot/` | `sim_vehicle.py` (SITL) | `~/Repos/School/ardupilot` |
-| `bridge_ws/` | `ros_gz_bridge` | `~/bridge_ws` |
-
-Scripts probe both `~/Repos/School/<dep>` and `~/<dep>` automatically.
-
-**Key environment variables:**
-```bash
-export GZ_CONFIG_PATH="/usr/share/gz:${GZ_CONFIG_PATH:-}"   # Required — fixes gz CLI routing
-export GZ_VERSION=harmonic
-export LD_LIBRARY_PATH="<install>/gz-waves1/lib:$LD_LIBRARY_PATH"
-```
-
-**Hardcoded network:**
-- SITL ↔ Gazebo: UDP `127.0.0.1:9002`
-- MAVROS ↔ SITL: TCP `localhost:5760`
-
-**Reusability:** Fully reusable on Jazzy + Harmonic + ArduPilot. The world file (`aquatonomous_world.sdf`) should be updated each year to match the new competition course layout. Wave parameters are in the SDF under `<plugin name="gz::sim::systems::WavesModel">`.
+**Reusability:** Each year, add or update the course YAML from the new handbook (the 2027 one is
+built from the primer and marked PLACEHOLDER where the handbook is still needed).
 
 ---
 
@@ -548,14 +526,14 @@ See `computer_vision/models/TENSORRT.md` for detailed instructions.
 
 Maps integer class IDs (0–22) to human-readable names used across the entire stack.
 
-**Critical:** This file must stay in sync with `planning/Global/entities.py`. If you add or rename a class in one place, update the other.
+**Critical:** This file must stay in sync with `planning/Global/entities.py`. If you add or rename a class in one place, update the other. IDs 0–8 must also match the main YOLO model's own class order, which is alphabetical (Roboflow sorts classes by name).
 
 ```yaml
 # Example entries
-0: red_buoy
-1: green_buoy
-2: red_pole_buoy
-3: green_pole_buoy
+0: black_buoy
+1: cross
+2: dock
+3: green_buoy
 # ...
 255: unknown  # used by cv_lidar_fusion for unmatched LiDAR tracks
 ```
@@ -689,7 +667,7 @@ Scripts for recording and replaying competition bag data (separate from the `src
 
 | Script | Purpose |
 |--------|---------|
-| `record_map_data.sh` | `ros2 bag record` — captures all navigation topics: `/boat_pose`, `/global_detections`, `/fused_buoys`, `/combined/detection_info_with_distance`, `cmd_vel`, `/planned_path`, `/curr_task`, camera images, LiDAR cloud |
+| `record_map_data.sh` | `ros2 bag record` — captures all navigation topics: `/boat_pose`, `/global_detections`, `/fused_buoys`, `/combined/detection_info_with_distance`, `cmd_vel`, `/planned_path`, `/cur_task`, camera images, LiDAR cloud |
 | `replay_map.sh` | Loop-replays a bag file; pair with `ros2 run web_server_map map_visualizer_node` to replay runs visually |
 
 ---
@@ -777,7 +755,7 @@ Everything that needs to change when deploying on new hardware or at a new venue
 | `message_node` | Update team/GS details | Protocol reusable; credentials must change |
 | Sound stack | Tune frequency/sensitivity | Algorithm reusable; parameters are venue-specific |
 | `web_server_map` | Reuse as-is | No venue-specific values |
-| `asv_wave_sim` simulation | Reuse as-is | Update world SDF for new course layout |
+| `asv_wave_sim` simulation | Reuse as-is | Add/update the course YAML for the new handbook |
 | Logging infrastructure | Reuse as-is | No venue-specific values |
 | Bag recording scripts | Reuse as-is | No venue-specific values |
 
@@ -790,7 +768,7 @@ Everything that needs to change when deploying on new hardware or at a new venue
 3. `computer_vision/NODES.md` — full CV topic reference with message formats
 4. `planning/TASKMASTER_STATE_MACHINE.md` — what the planner actually does per task
 5. `computer_vision/COMPETITION.md` — which script to run for which competition task
-6. `src/asv_wave_sim/SIMULATION.md` — how to bring up the full simulation stack
+6. `SIMULATION.md` — how to set up and run the simulator
 7. `planning/POTENTIAL_FIELDS_GAIN_FIX.md` + other `*_FIX.md` files — lessons from competition
 
 ---

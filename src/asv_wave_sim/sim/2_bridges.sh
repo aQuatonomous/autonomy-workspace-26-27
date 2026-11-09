@@ -3,6 +3,7 @@
 #   RoboSense Airy 96:  /rslidar_points (frame rslidar), /rslidar_imu_data
 #   3 cameras:          /camera0/image_raw (right), /camera1/image_raw (centre), /camera2/image_raw (left)
 #   ground truth:       /sim/ground_truth/odom (debugging only; the stack must not use it)
+#   RoboCommand tasking (2027 sim stand-in, JSON in std_msgs/String): /sim/robocommand/tasking
 . "$(dirname "${BASH_SOURCE[0]}")/env.sh"
 sim_load_course || true
 sim_wait_for_gazebo
@@ -14,6 +15,7 @@ exec ros2 run ros_gz_bridge parameter_bridge \
   '/camera3_topic@sensor_msgs/msg/Image[gz.msgs.Image' \
   '/model/ourboat/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry' \
   '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock' \
+  '/sim/robocommand/tasking@std_msgs/msg/String[gz.msgs.StringMsg' \
   --ros-args \
   -r /lidar_topic/points:=/rslidar_points \
   -r /rslidar_imu:=/rslidar_imu_data \

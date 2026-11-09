@@ -8,6 +8,7 @@
 #   7_stack.sh --task 2 --no-cv  skip the TensorRT CV pipeline (LiDAR-only detections)
 #   7_stack.sh --no-arm          leave mode/arming to you (MAVProxy: mode GUIDED, arm throttle)
 . "$(dirname "${BASH_SOURCE[0]}")/env.sh"
+sim_load_course || { echo "No course selected; run select_course.sh or 1_gazebo.sh first." >&2; exit 1; }
 
 TASK=1 CV=1 ARM=1
 while [ $# -gt 0 ]; do
@@ -19,9 +20,15 @@ while [ $# -gt 0 ]; do
     *) echo "unknown option $1" >&2; exit 2 ;;
   esac
 done
-# CV buoy reference sizes: Task 2 uses small (A-0) buoys; the others use the larger ones.
-CV_TASK=3; [ "$TASK" = 2 ] && CV_TASK=2
-NUMBERS=false; [ "$TASK" = 5 ] && NUMBERS=true
+# CV buoy reference sizes: 2026 Task 2 uses small (A-0) buoys; everything else the larger ones.
+# Dock number detection is for the marina: 2026 Task 5, 2027 Task 3 (and full 2027 runs).
+CV_TASK=3; NUMBERS=false
+if [ "${SIM_COURSE_YEAR:-2026}" -ge 2027 ]; then
+  case "$TASK" in 1|2|4|5) ;; *) NUMBERS=true ;; esac
+else
+  [ "$TASK" = 2 ] && CV_TASK=2
+  [ "$TASK" = 5 ] && NUMBERS=true
+fi
 
 set -m
 PIDS=()
@@ -42,9 +49,14 @@ start "LiDAR buoy pipeline (team tuning) on the simulated Airy (/rslidar_points)
 
 if [ $CV = 1 ]; then
   ENGINES="$(bash "$SIM_DIR/build_engines.sh" --print-dir 2>/dev/null)"
-  if bash "$SIM_DIR/build_engines.sh" --check 2>/dev/null; then
-    start "CV pipeline (3 cameras, 960x600, task:=$CV_TASK, engines $ENGINES)" \
-      ros2 launch cv_ros_nodes launch_cv_sim.py resolution:=960,600 task:="$CV_TASK" conf_threshold:=0.25 \
+  if [ -s "$ENGINES/aqua_main.engine" ]; then
+    # Number detection only matters for Task 5 (docking); run the rest of CV without it.
+    if [ "$NUMBERS" = true ] && [ ! -s "$ENGINES/number_detection.engine" ]; then
+      echo "!!! No number_detection.engine for this GPU; docking numbers are off. Build it with: $SIM_DIR/build_engines.sh" >&2
+      NUMBERS=false
+    fi
+    start "CV pipeline (3 cameras, ${SIM_CAM_WIDTH}x${SIM_CAM_HEIGHT}, task:=$CV_TASK, engines $ENGINES)" \
+      ros2 launch cv_ros_nodes launch_cv_sim.py resolution:="$SIM_CAM_WIDTH,$SIM_CAM_HEIGHT" task:="$CV_TASK" conf_threshold:=0.25 \
         engine_path:="$ENGINES/aqua_main.engine" number_detection_engine:="$ENGINES/number_detection.engine" \
         enable_indicator_buoy:=true enable_number_detection:=$NUMBERS
     start "CV-LiDAR fusion" ros2 run cv_lidar_fusion vision_lidar_fusion

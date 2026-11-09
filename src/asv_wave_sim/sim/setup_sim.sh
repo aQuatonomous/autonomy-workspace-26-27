@@ -36,10 +36,20 @@ APT_PKGS=(ros-jazzy-desktop ros-jazzy-ros-gz ros-jazzy-mavros ros-jazzy-mavros-e
           ros-jazzy-ament-cmake-clang-format python3-colcon-common-extensions python3-rosdep
           build-essential cmake git curl tmux mesa-utils python3-yaml python3-pil python3-numpy python3-pytest
           python3-protobuf python3-sklearn python3-scipy rapidjson-dev libopencv-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
-          gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl portaudio19-dev)
+          gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl portaudio19-dev ros-jazzy-foxglove-bridge python3-opencv)
 
 IS_WSL=0; grep -qi microsoft /proc/version 2>/dev/null && IS_WSL=1
 SUDO="sudo"; [ "$(id -u)" -eq 0 ] && SUDO=""
+# Leave an inherited Python venv (as env.sh does): a script does not get the deactivate function,
+# and a venv python3 on PATH would end up in the workspace's Python entry points.
+deactivate() {
+  [ -n "${VIRTUAL_ENV:-}" ] || return 0
+  PATH="$(printf '%s' "$PATH" | tr ':' '\n' | grep -vxF "$VIRTUAL_ENV/bin" | paste -sd: -)"
+  export PATH
+  unset VIRTUAL_ENV VIRTUAL_ENV_PROMPT PYTHONHOME
+  hash -r
+}
+deactivate
 declare -a REPORT=()
 FAILED=0
 
@@ -96,6 +106,17 @@ cv_system_steps() {
   else
     if [ $IS_WSL = 1 ]; then bad "nvidia-smi: install/update the NVIDIA driver on Windows (WSL uses it; never install a Linux driver inside WSL)"
     else bad "nvidia-smi: install the NVIDIA driver (sudo ubuntu-drivers install) and reboot"; fi
+    return
+  fi
+
+  # Jetson: CUDA and TensorRT come with JetPack (L4T). The pinned desktop packages below are x86
+  # builds for CUDA 12; installing them would replace JetPack's and break the GPU stack.
+  if [ -f /etc/nv_tegra_release ] && [ "$(uname -m)" = aarch64 ]; then
+    step "CUDA + TensorRT (JetPack)"
+    local trt
+    trt="$(python3 -c 'import tensorrt; print(tensorrt.__version__)' 2>/dev/null)"
+    if [ -n "$trt" ] && [ -x /usr/src/tensorrt/bin/trtexec ]; then ok "TensorRT $trt from JetPack (not changed on a Jetson)"
+    else bad "TensorRT from JetPack (python3-libnvinfer, libnvinfer-bin): sudo apt install nvidia-jetpack"; fi
     return
   fi
 
@@ -168,9 +189,15 @@ user_steps() {
   fi
 
   step "Workspace build ($WS)"
-  if [ -f "$WS/install/setup.bash" ] && [ -d "$WS/install/sim_judge" ] && [ -f "$WS/install/gz-waves1/lib/libgz-waves1-hydrodynamics-system.so" ] && [ $REBUILD = 0 ]; then
+  # The sim's own packages and the stack packages 7_stack.sh starts.
+  local unbuilt=()
+  for p in sim_judge sim_autolabel global_frame pointcloud_filters global_planner message_node cv_ros_nodes cv_lidar_fusion; do
+    [ -d "$WS/install/$p" ] || unbuilt+=("$p")
+  done
+  [ -f "$WS/install/gz-waves1/lib/libgz-waves1-hydrodynamics-system.so" ] || unbuilt+=(gz-waves1)
+  if [ -f "$WS/install/setup.bash" ] && [ ${#unbuilt[@]} -eq 0 ] && [ $REBUILD = 0 ]; then
     ok "colcon workspace (pass --rebuild to rebuild)"
-  elif [ $CHECK = 1 ]; then miss "colcon workspace build ($WS/install)"
+  elif [ $CHECK = 1 ]; then miss "colcon workspace build ($WS/install${unbuilt[*]:+; not built: ${unbuilt[*]}})"
   else
     ( set -e
       deactivate 2>/dev/null || true
@@ -207,6 +234,11 @@ user_steps() {
 
   step "OpenGL renderer"
   local r
+  if [ $IS_WSL = 0 ] && [ -z "${DISPLAY:-}" ] && [ -z "${WAYLAND_DISPLAY:-}" ]; then
+    # Over SSH there is no display to ask; --headless renders the sensors through EGL on the GPU.
+    REPORT+=("  [info]    no display (SSH): use run_competition.sh --headless")
+    return
+  fi
   r="$(glxinfo -B 2>/dev/null | sed -n 's/^OpenGL renderer string: //p')"
   if [ $IS_WSL = 1 ] && [ -z "$r" ] || [[ "$r" == *llvmpipe* ]]; then
     r="$(GALLIUM_DRIVER=d3d12 glxinfo -B 2>/dev/null | sed -n 's/^OpenGL renderer string: //p')"

@@ -47,7 +47,7 @@ Full setup, layout options, and component-level logic/run/debug: **[planning REA
 | `/sound_signal_interupt` | std_msgs/Int32 | in | 1 = stop boat, 2 = ignore. |
 | `/mavros/state` | mavros_msgs/State | in | Pixhawk state; `mode == "GUIDED"` required to run planning. |
 | `/planned_path` | nav_msgs/Path | out | Current goal waypoint (one pose, frame_id=map). |
-| `/curr_task` | std_msgs/Int32 | out | Current task_id (1, 2, or 3). |
+| `/cur_task` | std_msgs/Int32 | out | Current task_id (1, 2, or 3). |
 | `/mavros/setpoint_velocity/cmd_vel_unstamped` | geometry_msgs/Twist | out | Velocity command (body frame, m/s and rad/s). |
 | `/gs_message_send` | std_msgs/String | out | Task 2 only: debris report string `DEBRIS_LATLON|id,lat,lon|...`. |
 

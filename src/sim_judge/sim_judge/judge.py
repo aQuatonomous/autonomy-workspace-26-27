@@ -1,10 +1,15 @@
-"""RoboBoat 2026 sim judge: RoboCommand stand-in + referee + live scoreboard.
+"""RoboBoat sim judge (2026 and 2027 courses): RoboCommand stand-in + referee + live scoreboard.
 
   ros2 run sim_judge judge --answer-key <course>.answer_key.json [--port 50000]
 
 Ground truth comes straight from Gazebo (gz-transport, /model/<boat>/odometry), so no ROS bridge
 is needed. Point message_node at this server with robocommand_host:=127.0.0.1. Ctrl+C ends the
 run and writes <report-dir>/<timestamp>_seed<N>.json and .md.
+
+2027 courses: RoboCommand tasking (Task 4 DELIVERY, Task 5 RALLY, the Task 2 target) goes out as
+JSON on the gz topic /sim/robocommand/tasking (bridged to the ROS topic of the same name), each
+message re-sent every 2 s with the same seq. PLACEHOLDER: the real 2027 tasking format is not
+published yet.
 """
 
 import argparse
@@ -18,7 +23,11 @@ import threading
 import time
 
 from .referee import INTERPRETATIONS, Referee, render
+from .referee2027 import INTERPRETATIONS_2027, Referee2027
 from .robocommand import RoboCommandServer, to_dict
+
+TASKING_TOPIC = '/sim/robocommand/tasking'
+TASKING_RESEND_S = 2.0
 
 
 def _default_answer_key():
@@ -42,7 +51,29 @@ def _parse_args(argv):
     ap.add_argument('--report-dir', default=os.environ.get('SIM_RUNS_DIR', os.path.expanduser('~/.aquatonomous_sim/runs')))
     ap.add_argument('--refresh', type=float, default=1.0, help='scoreboard refresh period (s)')
     ap.add_argument('--plain', action='store_true', help='append scoreboards instead of redrawing the screen')
+    ap.add_argument('--no-tasking', action='store_true', help='2027: do not send RoboCommand tasking messages')
     return ap.parse_args(argv)
+
+
+class TaskingPublisher:
+    """Sends RoboCommand tasking JSON on a gz topic and repeats every message until the run ends."""
+
+    def __init__(self, topic=TASKING_TOPIC):
+        from gz.msgs10.stringmsg_pb2 import StringMsg
+        from gz.transport13 import Node
+        self._StringMsg = StringMsg
+        self._node = Node()
+        self._pub = self._node.advertise(topic, StringMsg)
+        self._last = 0.0
+        self.topic = topic
+
+    def send(self, messages, force=False):
+        now = time.monotonic()
+        if not messages or (not force and now - self._last < TASKING_RESEND_S):
+            return
+        self._last = now
+        for m in messages:
+            self._pub.publish(self._StringMsg(data=json.dumps(m)))
 
 
 class GroundTruth:
@@ -65,8 +96,8 @@ class GroundTruth:
         self._cb(st.sec + st.nsec * 1e-9, msg.pose.position.x, msg.pose.position.y, yaw)
 
 
-def _markdown(score, key, args, started_wall):
-    lines = [f'# RoboBoat 2026 sim run: seed {key.get("seed")}', '',
+def _markdown(score, key, args, started_wall, interpretations=INTERPRETATIONS, tasking=()):
+    lines = [f'# RoboBoat {key.get("year", 2026)} sim run: seed {key.get("seed")}', '',
              f'- World: `{key.get("world")}`; started {started_wall}',
              f'- Total: **{score["total"]:.0f} / {score["max_total"]}** '
              f'(strikes {score["strikes"]["count"]}, {score["strikes"]["penalty"]} points)',
@@ -87,9 +118,12 @@ def _markdown(score, key, args, started_wall):
                                                 if hb['mean_interval'] else '') + (' (OK)' if hb['ok'] else ' (NOT OK)'),
               f'- Frames: {score["protocol"]["frames"]}, errors: {score["protocol"]["errors"]}, '
               f'rate violations: {score["protocol"]["rate_violations"]}', '']
+    if tasking:
+        lines += ['## RoboCommand tasking sent', ''] + [
+            f'- {m["issued_sim_t"]:.1f} s: `{json.dumps(m)}`' for m in tasking] + ['']
     if score['warnings']:
         lines += ['## Warnings', ''] + [f'- {w}' for w in score['warnings']] + ['']
-    lines += ['## Judging interpretations', ''] + [f'- {t}' for t in INTERPRETATIONS] + ['']
+    lines += ['## Judging interpretations', ''] + [f'- {t}' for t in interpretations] + ['']
     return '\n'.join(lines)
 
 
@@ -100,8 +134,15 @@ def main(argv=None):
     with open(args.answer_key, encoding='utf-8') as f:
         key = json.load(f)
 
-    ref = Referee(key, boat_length=args.boat_length, boat_width=args.boat_width, report_tol=args.report_tol,
+    common = dict(boat_length=args.boat_length, boat_width=args.boat_width, report_tol=args.report_tol,
                   gate_report_tol=args.gate_report_tol, dock_hold=args.dock_hold)
+    if int(key.get('year', 2026)) >= 2027:
+        ref = Referee2027(key, tasking=not args.no_tasking, **common)
+        interpretations = INTERPRETATIONS_2027
+    else:
+        ref = Referee(key, **common)
+        interpretations = INTERPRETATIONS
+    tasker = TaskingPublisher() if key.get('tasking') and not args.no_tasking else None
     lock = threading.Lock()
     log = []
 
@@ -133,10 +174,17 @@ def main(argv=None):
     while not stop.is_set():
         stop.wait(args.refresh)
         with lock:
+            new = ref.due_tasking()
+            sent = ref.issued_messages() if tasker else []
             score = ref.score(time.time())
             text = render(score, key)
             done = ref.terminated is not None or (
                 args.duration > 0 and ref.run_start is not None and ref.t - ref.run_start >= args.duration)
+        if tasker:
+            tasker.send(sent, force=bool(new))
+            if sent:
+                text += f'\nRoboCommand tasking on {tasker.topic}: ' + ', '.join(
+                    f'{m["type"]} (seq {m["seq"]})' for m in sent)
         if truth.count == 0:
             text += f'\n(no odometry yet on {topic}; is Gazebo running with the course world?)'
         if tty:
@@ -152,14 +200,16 @@ def main(argv=None):
     with lock:
         score = ref.score(time.time())
         events = list(ref.events)
+        tasking = ref.issued_messages() if hasattr(ref, 'issued_messages') else []
     os.makedirs(args.report_dir, exist_ok=True)
     stem = os.path.join(args.report_dir, datetime.datetime.now().strftime('%Y%m%d-%H%M%S') + f'_seed{key.get("seed")}')
     with open(stem + '.json', 'w', encoding='utf-8') as f:
-        json.dump({'answer_key': os.path.abspath(args.answer_key), 'seed': key.get('seed'), 'score': score,
-                   'events': [{'t': t, 'event': e} for t, e in events], 'reports': log,
-                   'interpretations': INTERPRETATIONS}, f, indent=1, default=str)
+        json.dump({'answer_key': os.path.abspath(args.answer_key), 'seed': key.get('seed'),
+                   'year': key.get('year', 2026), 'score': score,
+                   'events': [{'t': t, 'event': e} for t, e in events], 'reports': log, 'tasking': tasking,
+                   'interpretations': interpretations}, f, indent=1, default=str)
     with open(stem + '.md', 'w', encoding='utf-8') as f:
-        f.write(_markdown(score, key, args, started_wall))
+        f.write(_markdown(score, key, args, started_wall, interpretations, tasking))
     print(render(score, key))
     print(f'\nRun report: {stem}.md (details in {stem}.json)')
 

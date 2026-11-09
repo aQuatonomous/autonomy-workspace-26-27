@@ -8,8 +8,11 @@ import numpy as np
 
 from Global.types import Vec2, Vec3, _to_vec3
 
-# Default clearance from obstacles (m) so goals are not placed on/near black buoys
-DEFAULT_GOAL_CLEARANCE = 5.0
+# Default clearance from obstacles (m) so goals are not placed on/near black buoys.
+# Must stay under half the narrowest gate (2.4 m entry and channel gates, centre ~1.2 m from each
+# buoy, ~1.0 m after Task1._snap_gate rounds to whole metres): the no-go walls run through the gate
+# buoys, and at 5.0 m every gate-centre goal was nudged ~6-7 m sideways out of its gate.
+DEFAULT_GOAL_CLEARANCE = 0.9
 
 
 def segments_intersect(p1: Vec2, p2: Vec2, q1: Vec2, q2: Vec2) -> bool:

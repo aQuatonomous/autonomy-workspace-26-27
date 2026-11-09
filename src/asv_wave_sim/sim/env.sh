@@ -9,14 +9,26 @@ export AUTONOMY_WS="$WS"
 export COURSE_DIR="$ASV_DIR/course"
 export SIM_STATE_DIR="$COURSE_DIR/generated"
 export SIM_RUNS_DIR="${SIM_RUNS_DIR:-$SIM_DIR/runs}"
+export SIM_DATASETS_DIR="${SIM_DATASETS_DIR:-$SIM_DIR/datasets}"
 
 [ -f "$SIM_DIR/config.local.env" ] && . "$SIM_DIR/config.local.env"
 . "$SIM_DIR/config.env"
 export ARDUPILOT_DIR ARDUPILOT_VENV ARDUPILOT_GAZEBO_DIR SITL_MODELS_DIR ROBOCOMMAND_HOST ROBOCOMMAND_PORT \
-  CV_ENGINE_CACHE MESSAGE_NODE_PYDEPS
+  CV_ENGINE_CACHE MESSAGE_NODE_PYDEPS SIM_LABEL_RATE
 
-# An active Python venv (e.g. ArduPilot's) hides the ROS Python packages.
-deactivate 2>/dev/null || true
+# An active Python venv (ArduPilot's installer activates one from ~/.bashrc) puts its python3 first
+# on PATH; ROS nodes start with "#!/usr/bin/env python3" and would load the venv's numpy/scipy
+# instead of the system ones (buoy_detector then dies with "numpy.dtype size changed"). Child
+# shells inherit PATH and VIRTUAL_ENV but not the deactivate function, so undo it by hand.
+# 3_sitl.sh activates the venv again for MAVProxy.
+sim_leave_venv() {
+  [ -n "${VIRTUAL_ENV:-}" ] || return 0
+  PATH="$(printf '%s' "$PATH" | tr ':' '\n' | grep -vxF "$VIRTUAL_ENV/bin" | paste -sd: -)"
+  export PATH
+  unset VIRTUAL_ENV VIRTUAL_ENV_PROMPT PYTHONHOME
+  hash -r
+}
+sim_leave_venv
 if [ ! -f "$ROS_SETUP" ]; then
   echo "ROS 2 Jazzy not found at $ROS_SETUP. Run $SIM_DIR/setup_sim.sh first." >&2
   return 1 2>/dev/null || exit 1
@@ -28,7 +40,7 @@ else
   echo "warning: $WS/install/setup.bash is missing; build the workspace (./build.sh or setup_sim.sh)." >&2
 fi
 
-export GZ_VERSION=harmonic
+export GZ_VERSION=harmonic GZ_PARTITION ROS_DOMAIN_ID FOXGLOVE_PORT
 export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 case ":${GZ_CONFIG_PATH:-}:" in *:/usr/share/gz:*) ;; *) export GZ_CONFIG_PATH="/usr/share/gz${GZ_CONFIG_PATH:+:$GZ_CONFIG_PATH}" ;; esac
 
@@ -72,7 +84,15 @@ sim_check_gpu() {
 sim_load_course() {
   if [ -f "$SIM_STATE_DIR/current.env" ]; then
     . "$SIM_STATE_DIR/current.env"
-    export SIM_WORLD SIM_WORLD_NAME SIM_ANSWER_KEY SIM_SITL_HOME SIM_WATER_DENSITY SIM_SEED
+    export SIM_WORLD SIM_WORLD_NAME SIM_ANSWER_KEY SIM_SITL_HOME SIM_WATER_DENSITY SIM_SEED SIM_CAMERA SIM_LABELS \
+      SIM_COURSE_YEAR SIM_START_TASK
+    SIM_CAM_WIDTH="${SIM_CAMERA%%x*}"; SIM_CAM_HEIGHT="${SIM_CAMERA#*x}"; SIM_CAM_HEIGHT="${SIM_CAM_HEIGHT%@*}"
+    SIM_CAM_RATE="${SIM_CAMERA#*@}"
+    export SIM_CAM_WIDTH SIM_CAM_HEIGHT SIM_CAM_RATE
+    case ":$GZ_SIM_RESOURCE_PATH:" in
+      *":$SIM_STATE_DIR/models:"*) ;;
+      *) [ -d "$SIM_STATE_DIR/models" ] && export GZ_SIM_RESOURCE_PATH="$SIM_STATE_DIR/models:$GZ_SIM_RESOURCE_PATH" ;;
+    esac
     return 0
   fi
   return 1
@@ -80,12 +100,16 @@ sim_load_course() {
 
 # message_node sends to the competition address (10.10.10.1). Adding it to the loopback interface
 # lets the sim judge, listening on all addresses, receive those reports on this machine.
-# Needs root once per boot; prompts for sudo when run from a terminal.
+# Needs root once per boot. `sim_robocommand_address --prompt` may ask for the sudo password (only
+# run_competition.sh does, in the user's own terminal before anything starts); without --prompt it
+# never asks. 7_stack.sh calls it part-way through startup in a tmux window, which has a tty, and a
+# password prompt there blocked every node started after it, unseen (fix from Spencer Osborn,
+# feat/truth-scorer). A run without the alias still works; it just cannot reach the judge.
 sim_robocommand_address() {
   case "$ROBOCOMMAND_HOST" in 127.*|localhost) return 0 ;; esac
   ip -4 addr show dev lo 2>/dev/null | grep -q "inet $ROBOCOMMAND_HOST/" && return 0
   local sudo=sudo; [ "$(id -u)" -eq 0 ] && sudo=""
-  if [ -t 0 ]; then
+  if [ "${1:-}" = --prompt ] && [ -t 0 ]; then
     echo "Adding $ROBOCOMMAND_HOST to the loopback interface so message_node reaches the sim judge (sudo)."
     $sudo ip addr add "$ROBOCOMMAND_HOST/32" dev lo && return 0
   else

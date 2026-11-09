@@ -11,7 +11,7 @@ Multi-camera object detection with TensorRT-optimized YOLO on ROS 2 Jazzy: 3 cam
 | **[COMPETITION.md](COMPETITION.md)** | What to run at competition and when; task-specific launch table; inference/FP16/calibration; iterating at competition. |
 | **[NODES.md](NODES.md)** | Complete node architecture, build, launch, manual commands, topic I/O, message formats, troubleshooting. |
 
-**See also:** [camera_calibration/README.md](camera_calibration/README.md) (distance scale factor), [models/TENSORRT.md](models/TENSORRT.md) (TensorRT and engine build), [FUSION_NODE_GUIDE.md](FUSION_NODE_GUIDE.md) (CV + LiDAR fusion), [DISTANCE_ESTIMATOR_CHANGES.md](DISTANCE_ESTIMATOR_CHANGES.md) (distance estimator), [Simulation guide](../src/asv_wave_sim/SIMULATION.md) (sim + CV).
+**See also:** [camera_calibration/README.md](camera_calibration/README.md) (distance scale factor), [models/TENSORRT.md](models/TENSORRT.md) (TensorRT and engine build), [FUSION_NODE_GUIDE.md](FUSION_NODE_GUIDE.md) (CV + LiDAR fusion), [DISTANCE_ESTIMATOR_CHANGES.md](DISTANCE_ESTIMATOR_CHANGES.md) (distance estimator), [Simulation guide](../SIMULATION.md) (sim + CV).
 
 ---
 
@@ -286,14 +286,14 @@ For machine-specific trtexec path, PATH, conversion commands (FP32/FP16/INT8), a
 | Class ID | Class Name | Category | Dataset Count |
 |----------|------------|----------|---------------|
 | 0 | black_buoy | Buoy | 4,931 |
-| 1 | green_buoy | Buoy | 9,007 |
-| 2 | green_pole_buoy | Buoy | 7,533 |
-| 3 | red_buoy | Buoy | 8,760 |
-| 4 | red_pole_buoy | Buoy | 6,767 |
-| 5 | yellow_buoy | Buoy | 4,938 |
-| 6 | cross | Navigation Marker | 3,311 |
-| 7 | dock | Infrastructure | 4,991 |
-| 8 | triangle | Navigation Marker | 3,345 |
+| 1 | cross | Navigation Marker | 3,311 |
+| 2 | dock | Infrastructure | 4,991 |
+| 3 | green_buoy | Buoy | 9,007 |
+| 4 | green_pole_buoy | Buoy | 7,533 |
+| 5 | red_buoy | Buoy | 8,760 |
+| 6 | red_pole_buoy | Buoy | 6,767 |
+| 7 | triangle | Navigation Marker | 3,345 |
+| 8 | yellow_buoy | Buoy | 4,938 |
 | 9 | red_indicator_buoy | Indicator Buoy | - |
 | 10 | green_indicator_buoy | Indicator Buoy | - |
 | 11 | yellow_supply_drop | Supply Drop | - |
@@ -305,7 +305,7 @@ For machine-specific trtexec path, PATH, conversion commands (FP32/FP16/INT8), a
 **Total Classes**: 23 (as defined in `class_mapping.yaml`)
 
 **Note**: 
-- Class IDs 0-8: Main YOLO model detections
+- Class IDs 0-8: Main YOLO model detections, in the model's own alphabetical order (Roboflow sorts classes by name; keep it when retraining)
 - Class IDs 9-10: **Indicator buoy processor** (CV-only, diamond-based detection with multi-diamond grouping)
 - Class IDs 11-12: Task 4 supply processor
 - Class IDs 20-22: Number detection model (remapped from model's 0,1,2)

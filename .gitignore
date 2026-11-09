@@ -83,4 +83,5 @@ SITL_Models/
 # Per-GPU TensorRT engines are cached outside the repo (~/.cache/aquatonomous/engines).
 src/asv_wave_sim/course/generated/
 src/asv_wave_sim/sim/runs/
+src/asv_wave_sim/sim/datasets/
 src/asv_wave_sim/sim/config.local.env

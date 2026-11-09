@@ -13,6 +13,14 @@
             <scale>0.001 0.001 0.001</scale>
           </mesh>
         </geometry>
+        <!-- Overrides the mesh's dark Collada colour; same colours as the other course models,
+             semi-gloss polyethylene. -->
+        <material>
+          <ambient>0.050 0.550 0.150 1</ambient>
+          <diffuse>0.050 0.550 0.150 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+          <pbr><metal><metalness>0</metalness><roughness>0.5</roughness></metal></pbr>
+        </material>
       </visual>
       <collision name="collision">
         <pose>0 0 0.3683 0 0 0</pose>
