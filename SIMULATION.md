@@ -34,9 +34,12 @@ then from your laptop: `ssh <your account name>@100.113.125.27`.
 ```bash
 git clone --reference /opt/aqua/autonomy-workspace-26-27.git \
   https://github.com/aQuatonomous/autonomy-workspace-26-27.git ~/autonomy-workspace-26-27
-cd ~/autonomy-workspace-26-27 && git checkout sim/main
-src/asv_wave_sim/sim/setup_sim.sh          # builds your workspace; ArduPilot etc. are shared
+~/autonomy-workspace-26-27/src/asv_wave_sim/sim/setup_sim.sh   # builds your workspace; ArduPilot etc. are shared
 ```
+
+Everyone works on `main`: run `git pull` before you start and before you push. Use a branch and a
+pull request for big changes, and for anything that changes how the boat drives (planner, CV,
+`message_node`).
 
 `--reference` makes your clone borrow the shared git history, so it costs a few MB instead of
 ~510 MB. Do not clone without it on the Jetson; the disk is small (see section 8).
@@ -62,8 +65,7 @@ without one the stack runs LiDAR-only (`--no-cv`).
 
 ```bash
 git clone https://github.com/aQuatonomous/autonomy-workspace-26-27.git ~/autonomy-workspace-26-27
-cd ~/autonomy-workspace-26-27 && git checkout sim/main
-cd src/asv_wave_sim/sim
+cd ~/autonomy-workspace-26-27/src/asv_wave_sim/sim
 ./setup_sim.sh --with-cv      # ROS 2 Jazzy, Gazebo, ArduPilot, workspace build, TensorRT engines
 ./setup_sim.sh --check        # what is installed; changes nothing
 ./run_competition.sh --seed 0 --task 1
