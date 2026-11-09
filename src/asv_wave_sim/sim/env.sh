@@ -16,8 +16,19 @@ export SIM_DATASETS_DIR="${SIM_DATASETS_DIR:-$SIM_DIR/datasets}"
 export ARDUPILOT_DIR ARDUPILOT_VENV ARDUPILOT_GAZEBO_DIR SITL_MODELS_DIR ROBOCOMMAND_HOST ROBOCOMMAND_PORT \
   CV_ENGINE_CACHE MESSAGE_NODE_PYDEPS SIM_LABEL_RATE
 
-# An active Python venv (e.g. ArduPilot's) hides the ROS Python packages.
-deactivate 2>/dev/null || true
+# An active Python venv (ArduPilot's installer activates one from ~/.bashrc) puts its python3 first
+# on PATH; ROS nodes start with "#!/usr/bin/env python3" and would load the venv's numpy/scipy
+# instead of the system ones (buoy_detector then dies with "numpy.dtype size changed"). Child
+# shells inherit PATH and VIRTUAL_ENV but not the deactivate function, so undo it by hand.
+# 3_sitl.sh activates the venv again for MAVProxy.
+sim_leave_venv() {
+  [ -n "${VIRTUAL_ENV:-}" ] || return 0
+  PATH="$(printf '%s' "$PATH" | tr ':' '\n' | grep -vxF "$VIRTUAL_ENV/bin" | paste -sd: -)"
+  export PATH
+  unset VIRTUAL_ENV VIRTUAL_ENV_PROMPT PYTHONHOME
+  hash -r
+}
+sim_leave_venv
 if [ ! -f "$ROS_SETUP" ]; then
   echo "ROS 2 Jazzy not found at $ROS_SETUP. Run $SIM_DIR/setup_sim.sh first." >&2
   return 1 2>/dev/null || exit 1

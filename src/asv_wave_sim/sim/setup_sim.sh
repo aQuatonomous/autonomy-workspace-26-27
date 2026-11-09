@@ -40,6 +40,16 @@ APT_PKGS=(ros-jazzy-desktop ros-jazzy-ros-gz ros-jazzy-mavros ros-jazzy-mavros-e
 
 IS_WSL=0; grep -qi microsoft /proc/version 2>/dev/null && IS_WSL=1
 SUDO="sudo"; [ "$(id -u)" -eq 0 ] && SUDO=""
+# Leave an inherited Python venv (as env.sh does): a script does not get the deactivate function,
+# and a venv python3 on PATH would end up in the workspace's Python entry points.
+deactivate() {
+  [ -n "${VIRTUAL_ENV:-}" ] || return 0
+  PATH="$(printf '%s' "$PATH" | tr ':' '\n' | grep -vxF "$VIRTUAL_ENV/bin" | paste -sd: -)"
+  export PATH
+  unset VIRTUAL_ENV VIRTUAL_ENV_PROMPT PYTHONHOME
+  hash -r
+}
+deactivate
 declare -a REPORT=()
 FAILED=0
 
