@@ -262,3 +262,14 @@ On an RTX 5060 Ti 8 GB with 12 cores the full stack runs at about 0.45 x real ti
 SITL run lock-step; the judge scores in sim time). The autonomy nodes run on wall-clock time, so
 to them the boat moves at about half speed. Close other GPU-heavy programs; `--no-cv` frees the
 most.
+
+On the sim Jetson (AGX Orin, MAXN power mode), measured 2026-11-09:
+
+| Run | Real-time factor |
+|---|---|
+| `--no-stack` | ~0.37 |
+| full stack with CV, default cameras (960x600@15) | ~0.3 (also with `--labels`) |
+| full stack, `--full-res` (1920x1200@30) | ~0.18; the cameras then deliver ~1.3 frames per sim second, too few for CV |
+
+Use the default camera setting on the Jetson; test detection range with `--full-res` on a desktop
+GPU.
