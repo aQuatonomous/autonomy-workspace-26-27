@@ -36,7 +36,7 @@ APT_PKGS=(ros-jazzy-desktop ros-jazzy-ros-gz ros-jazzy-mavros ros-jazzy-mavros-e
           ros-jazzy-ament-cmake-clang-format python3-colcon-common-extensions python3-rosdep
           build-essential cmake git curl tmux mesa-utils python3-yaml python3-pil python3-numpy python3-pytest
           python3-protobuf python3-sklearn python3-scipy rapidjson-dev libopencv-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
-          gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl portaudio19-dev)
+          gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl portaudio19-dev ros-jazzy-foxglove-bridge python3-opencv)
 
 IS_WSL=0; grep -qi microsoft /proc/version 2>/dev/null && IS_WSL=1
 SUDO="sudo"; [ "$(id -u)" -eq 0 ] && SUDO=""

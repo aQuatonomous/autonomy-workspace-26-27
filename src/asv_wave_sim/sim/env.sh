@@ -29,7 +29,7 @@ else
   echo "warning: $WS/install/setup.bash is missing; build the workspace (./build.sh or setup_sim.sh)." >&2
 fi
 
-export GZ_VERSION=harmonic GZ_PARTITION ROS_DOMAIN_ID
+export GZ_VERSION=harmonic GZ_PARTITION ROS_DOMAIN_ID FOXGLOVE_PORT
 export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 case ":${GZ_CONFIG_PATH:-}:" in *:/usr/share/gz:*) ;; *) export GZ_CONFIG_PATH="/usr/share/gz${GZ_CONFIG_PATH:+:$GZ_CONFIG_PATH}" ;; esac
 

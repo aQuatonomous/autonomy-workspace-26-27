@@ -40,16 +40,37 @@ Install the current NVIDIA Windows driver; do not install a Linux NVIDIA driver 
 ```
 
 One tmux session (`roboboat`) with a window per component: `gazebo`, `bridges`, `sitl`,
-`mavros`, `judge`, `stack`, `shell` (and `rviz` with `--rviz`). `Ctrl+b w` lists them.
+`mavros`, `judge`, `stack`, `foxglove`, `shell` (and `rviz` with `--rviz`). `Ctrl+b w` lists them.
 Other options: `--waves`, `--wind`, `--wind-from`, `--light`, `--time` (see Weather and light), `--full-res` or `--camera WxH@HZ`, `--no-cv`, `--no-arm`, `--no-attach`,
 `--world FILE`, `--legacy` (the original world, no judge), `--cmd-mode` (below), `--labels` (see
 Autolabel), `--headless` (below).
 
 Over SSH (e.g. the sim Jetson from a laptop), pass `--headless`: the Gazebo server then renders
-the sensors on the machine's GPU with no window, and you open only the GUI, forwarded to your
-screen (`ssh -Y`, an X server such as VcXsrv on Windows), in another terminal:
-`. sim/env.sh && sim_load_course && gz sim -g`. Close and reopen the GUI as you like; the run
-keeps going.
+the sensors on the machine's GPU with no window. Watch the run in Foxglove (below). The Gazebo
+GUI needs OpenGL 3.3, which `ssh -Y` to an X server on Windows (VcXsrv) does not provide; on a
+Linux laptop or in a VNC desktop on the sim machine, `. sim/env.sh && sim_load_course && gz sim -g`
+opens it next to a running server.
+
+### Watching a run (Foxglove)
+
+The `foxglove` window runs `foxglove_bridge` and the sim viewer (`9_foxglove.sh`). Each user on
+a shared machine gets their own port, `FOXGLOVE_PORT` (8700 + user id % 100; `run_competition.sh`
+prints it). On your laptop install [Lichtblick](https://github.com/lichtblick-suite/lichtblick/releases)
+(free, open source) or [Foxglove](https://foxglove.dev/download), then "Open connection" ->
+Foxglove WebSocket -> `ws://<sim machine>:<port>`, or `ws://localhost:<port>` after
+`ssh -L <port>:localhost:<port> <user>@<sim machine>` when the port is not reachable directly.
+
+Useful panels:
+- 3D, display frame `map`: `/sim/course` (true course: buoys, gate lines, docks, boundary),
+  `/sim/boat_truth` (true pose), `/boat_pose_stamped` (where the stack thinks it is),
+  `/planned_path`, `/points_filtered` and `/buoy_markers` (LiDAR), the TF tree.
+- Image: `/sim/view/camera0/compressed` (and camera1, camera2): JPEG at 5 Hz. Avoid the raw
+  `/cameraN/image_raw` topics over Wi-Fi; each is about 25 MB/s.
+- Log (`/rosout`) and Raw Messages (`/cur_task`, `/messages/gate_pass`) for the reports.
+
+Save the layout from the app (Layouts -> Export) as `sim/foxglove_layout.json` and commit it so
+everyone starts from the same one. The ground truth topics are for watching only; the stack never
+subscribes to them.
 
 The numbered scripts start the same pieces one per terminal: `1_gazebo.sh` ... `7_stack.sh`, plus
 `5_view_sensors.sh` for RViz (LiDAR cloud, filtered cloud, buoy markers, three cameras).

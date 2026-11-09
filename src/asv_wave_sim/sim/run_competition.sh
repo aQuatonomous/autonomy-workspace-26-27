@@ -11,7 +11,7 @@
 #   run_competition.sh ... --labels             also record labelled CV training frames (autolabel window)
 #   run_competition.sh ... --headless           Gazebo server only (over SSH); GUI: . env.sh && sim_load_course && gz sim -g
 #
-# Windows: Ctrl+b then w lists them (gazebo, bridges, sitl, mavros, judge, stack, rviz, autolabel, shell).
+# Windows: Ctrl+b then w lists them (gazebo, bridges, sitl, mavros, judge, stack, rviz, autolabel, foxglove, shell).
 # Stop with stop_competition.sh; it ends the judge first so the run report is written.
 set -e
 SIM_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -66,10 +66,12 @@ win judge   "$AFTER_GZ bash 6_judge.sh"
 [ $STACK = 1 ] && win stack "$AFTER_GZ bash 7_stack.sh --task $TASK ${STACK_ARGS[*]}"
 [ $RVIZ = 1 ] && win rviz "bash 5_view_sensors.sh"
 [ $LABELS = 1 ] && win autolabel "$AFTER_GZ bash 8_autolabel.sh"
+win foxglove "$AFTER_GZ bash 9_foxglove.sh"
 win shell '. ./env.sh && sim_load_course && echo "ROS shell for course $SIM_WORLD" && exec bash -i'
 
 echo
 echo "Started tmux session '$SESSION' (seed $SEED, task $TASK)."
 echo "  attach:  tmux attach -t $SESSION      windows: Ctrl+b w      stop: $SIM_DIR/stop_competition.sh"
+echo "  watch:   Foxglove -> ws://<this machine>:$( . "$SIM_DIR/env.sh" >/dev/null 2>&1; echo "$FOXGLOVE_PORT")  (README: Watching a run)"
 tmux select-window -t "$SESSION:judge"
 if [ $ATTACH = 1 ] && [ -t 1 ]; then exec tmux attach -t "$SESSION"; fi

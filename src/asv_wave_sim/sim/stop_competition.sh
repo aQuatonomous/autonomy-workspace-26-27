@@ -17,7 +17,7 @@ for pat in '[g]z sim' 'sim_vehicle.py -v Rover' '[a]rdurover' 'mavproxy.py' '[r]
            'mavros_node' 'sim_judge/judge' 'message_node/message_node' 'global_planner_node' 'boat_state_node' \
            'detection_to_global_node' 'lidar_range_filter' 'buoy_detector' 'buoy_tracker' 'buoy_visualizer' \
            'vision_preprocessing' 'vision_inference' 'vision_combiner' 'maritime_distance_estimator' \
-           'indicator_buoy_processor' 'vision_lidar_fusion' 'arm_guided.sh' 'sim_autolabel/record'; do
+           'indicator_buoy_processor' 'vision_lidar_fusion' 'arm_guided.sh' 'sim_autolabel/record' 'sim_judge/viewer' 'foxglove_bridge'; do
   pkill -INT -f "$pat" 2>/dev/null
 done
 sleep 2

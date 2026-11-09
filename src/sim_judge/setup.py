@@ -21,6 +21,7 @@ setup(
         'console_scripts': [
             'judge = sim_judge.judge:main',
             'send_test_reports = sim_judge.send_test_reports:main',
+            'viewer = sim_judge.viewer:main',
         ],
     },
 )
