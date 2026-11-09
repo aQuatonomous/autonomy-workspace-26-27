@@ -71,6 +71,10 @@ except ImportError:
     _MAVROS_STATE_AVAILABLE = False
     MavrosState = None
     SetMavFrame = None
+try:
+    from mavros_msgs.msg import PositionTarget
+except ImportError:
+    PositionTarget = None
 
 # Planning library (no ROS)
 from Global.entities import EntityList, apply_tracked_buoys
@@ -94,6 +98,16 @@ class GlobalPlannerNode(Node):
         self.declare_parameter("task_id", 1)
         self.declare_parameter("planning_hz", 10.0)
         self.declare_parameter("cmd_vel_topic", "/mavros/setpoint_velocity/cmd_vel_unstamped")
+        # How velocity goes to ArduPilot Rover (GUIDED):
+        #   "raw"   (default) mavros_msgs/PositionTarget on setpoint_raw/local with only the velocity
+        #           set (ENU; MAVROS converts to NED). Rover steers to the velocity direction.
+        #   "twist" geometry_msgs/Twist on cmd_vel_topic (the old output). MAVROS adds a yaw rate
+        #           (angular.z, always 0 here), so Rover holds its heading and only uses the speed,
+        #           signed by linear.x: the boat cannot turn toward a goal.
+        self.declare_parameter("cmd_mode", "raw")
+        # Empty: cmd_vel_topic with setpoint_velocity/cmd_vel_unstamped -> setpoint_raw/local
+        # (keeps a namespace such as /uas1/mavros).
+        self.declare_parameter("setpoint_raw_topic", "")
         self.declare_parameter("heading_topic", "/mavros/global_position/compass_hdg")
         self.declare_parameter("gp_vel_topic", "/mavros/global_position/gp_vel")
         self.declare_parameter("sound_signal_topic", "/sound_signal_interupt")
@@ -105,6 +119,15 @@ class GlobalPlannerNode(Node):
         self._task_id = task_id
         self._planning_hz = float(self.get_parameter("planning_hz").value)
         self._cmd_vel_topic = self.get_parameter("cmd_vel_topic").value
+        self._cmd_mode = str(self.get_parameter("cmd_mode").value).strip().lower()
+        if self._cmd_mode == "raw" and PositionTarget is None:
+            self.get_logger().warn("mavros_msgs PositionTarget not available; using cmd_mode=twist")
+            self._cmd_mode = "twist"
+        self._setpoint_raw_topic = (self.get_parameter("setpoint_raw_topic").value or "").strip() or (
+            self._cmd_vel_topic.replace("setpoint_velocity/cmd_vel_unstamped", "setpoint_raw/local")
+            if "setpoint_velocity/cmd_vel_unstamped" in self._cmd_vel_topic
+            else "/mavros/setpoint_raw/local"
+        )
         self._heading_topic = self.get_parameter("heading_topic").value
         self._gp_vel_topic = self.get_parameter("gp_vel_topic").value
         self._sound_signal_topic = self.get_parameter("sound_signal_topic").value
@@ -192,7 +215,10 @@ class GlobalPlannerNode(Node):
         )
 
         self._path_pub = self.create_publisher(Path, "/planned_path", 10)
-        self._cmd_vel_pub = self.create_publisher(Twist, self._cmd_vel_topic, 10)
+        if self._cmd_mode == "raw":
+            self._cmd_vel_pub = self.create_publisher(PositionTarget, self._setpoint_raw_topic, 10)
+        else:
+            self._cmd_vel_pub = self.create_publisher(Twist, self._cmd_vel_topic, 10)
         self._curr_task_pub = self.create_publisher(Int32, "/cur_task", 10)
         self._gs_message_pub = self.create_publisher(StringMsg, "/gs_message_send", 10)
         # Task 1: gate_pass for entry/exit reporting (message_node sends to competition server)
@@ -213,8 +239,32 @@ class GlobalPlannerNode(Node):
 
         self.get_logger().info(
             f"global_planner_node started: task_id={task_id}, hz={self._planning_hz}, "
-            f"cmd_vel={self._cmd_vel_topic}"
+            f"cmd_mode={self._cmd_mode}, "
+            f"cmd={self._setpoint_raw_topic if self._cmd_mode == 'raw' else self._cmd_vel_topic}"
         )
+
+    def _send_velocity(self, east: float, north: float) -> None:
+        """Command a world-frame (ENU) velocity in m/s to ArduPilot over MAVROS (see cmd_mode)."""
+        if self._cmd_mode == "raw":
+            msg = PositionTarget()
+            msg.header.stamp = self.get_clock().now().to_msg()
+            msg.coordinate_frame = PositionTarget.FRAME_LOCAL_NED
+            msg.type_mask = (
+                PositionTarget.IGNORE_PX | PositionTarget.IGNORE_PY | PositionTarget.IGNORE_PZ
+                | PositionTarget.IGNORE_AFX | PositionTarget.IGNORE_AFY | PositionTarget.IGNORE_AFZ
+                | PositionTarget.IGNORE_YAW | PositionTarget.IGNORE_YAW_RATE
+            )
+            # MAVROS takes ENU here and converts it to NED for ArduPilot.
+            msg.velocity.x = float(east)
+            msg.velocity.y = float(north)
+            msg.velocity.z = 0.0
+            self._cmd_vel_pub.publish(msg)
+            return
+        # Old Twist output, unchanged: north in linear.x, east in linear.y.
+        twist = Twist()
+        twist.linear.x = float(north)
+        twist.linear.y = float(east)
+        self._cmd_vel_pub.publish(twist)
 
     def _set_mav_frame_once(self) -> None:
         """Set MAVROS setpoint_velocity frame to LOCAL_NED (frame=1) once the service is available."""
@@ -344,37 +394,16 @@ class GlobalPlannerNode(Node):
 
         # Sound interrupt: 1 = stop boat
         if self._sound_stop:
-            twist = Twist()
-            twist.linear.x = 0.0
-            twist.linear.y = 0.0
-            twist.linear.z = 0.0
-            twist.angular.x = 0.0
-            twist.angular.y = 0.0
-            twist.angular.z = 0.0
-            self._cmd_vel_pub.publish(twist)
+            self._send_velocity(0.0, 0.0)
             return
 
         if not self._guided_mode_active:
-            twist = Twist()
-            twist.linear.x = 0.0
-            twist.linear.y = 0.0
-            twist.linear.z = 0.0
-            twist.angular.x = 0.0
-            twist.angular.y = 0.0
-            twist.angular.z = 0.0
-            self._cmd_vel_pub.publish(twist)
+            self._send_velocity(0.0, 0.0)
             return
 
         # (4) Skip planning until we have received at least one GPS fix.
         if not self._start_set:
-            twist = Twist()
-            twist.linear.x = 0.0
-            twist.linear.y = 0.0
-            twist.linear.z = 0.0
-            twist.angular.x = 0.0
-            twist.angular.y = 0.0
-            twist.angular.z = 0.0
-            self._cmd_vel_pub.publish(twist)
+            self._send_velocity(0.0, 0.0)
             return
 
         try:
@@ -591,27 +620,11 @@ class GlobalPlannerNode(Node):
                 path_msg.poses.append(ps)
                 self._path_pub.publish(path_msg)
 
-            twist = Twist()
             if has_vel:
-                # Planner gives world-frame velocity (ENU: x=East, y=North).
-                # MAVROS setpoint_velocity expects LOCAL_NED: x=North, y=East, z=Down.
-                vx_w = float(velocities[0][0])  # East
-                vy_w = float(velocities[0][1])  # North
-                twist.linear.x = vy_w   # North (NED x)
-                twist.linear.y = vx_w   # East (NED y)
-                twist.linear.z = 0.0
-                twist.angular.x = 0.0
-                twist.angular.y = 0.0
-                twist.angular.z = 0.0
-                self._cmd_vel_pub.publish(twist)
+                # Planner velocity is world-frame ENU (x = east, y = north).
+                self._send_velocity(float(velocities[0][0]), float(velocities[0][1]))
             else:
-                twist.linear.x = 0.0
-                twist.linear.y = 0.0
-                twist.linear.z = 0.0
-                twist.angular.x = 0.0
-                twist.angular.y = 0.0
-                twist.angular.z = 0.0
-                self._cmd_vel_pub.publish(twist)
+                self._send_velocity(0.0, 0.0)
 
             if result.get("status") == "SUCCESS":
                 self.get_logger().info(f"{prefix}Task completed successfully")
@@ -619,14 +632,7 @@ class GlobalPlannerNode(Node):
 
         except Exception as e:
             self.get_logger().error(f"Planning tick error: {e}\n{traceback.format_exc()}")
-            twist = Twist()
-            twist.linear.x = 0.0
-            twist.linear.y = 0.0
-            twist.linear.z = 0.0
-            twist.angular.x = 0.0
-            twist.angular.y = 0.0
-            twist.angular.z = 0.0
-            self._cmd_vel_pub.publish(twist)
+            self._send_velocity(0.0, 0.0)
 
     def destroy_node(self) -> None:
         self._timer.cancel()

@@ -42,7 +42,7 @@ Install the current NVIDIA Windows driver; do not install a Linux NVIDIA driver 
 One tmux session (`roboboat`) with a window per component: `gazebo`, `bridges`, `sitl`,
 `mavros`, `judge`, `stack`, `foxglove`, `shell` (and `rviz` with `--rviz`). `Ctrl+b w` lists them.
 Other options: `--waves`, `--wind`, `--wind-from`, `--light`, `--time` (see Weather and light), `--full-res` or `--camera WxH@HZ`, `--no-cv`, `--no-arm`, `--no-attach`,
-`--world FILE`, `--legacy` (the original world, no judge), `--cmd-mode` (below), `--labels` (see
+`--world FILE`, `--legacy` (the original world, no judge), `--labels` (see
 Autolabel), `--headless` (below).
 
 Over SSH (e.g. the sim Jetson from a laptop), pass `--headless`: the Gazebo server then renders
@@ -218,6 +218,10 @@ The boat is ArduPilot Rover in GUIDED mode behind MAVROS, as on the real boat.
 - `/mavros/setpoint_velocity/cmd_vel_unstamped` (`Twist`): MAVROS adds a yaw rate, and Rover then
   uses only the speed (sign from `linear.x`) and turns at `angular.z`; the velocity direction is
   ignored. With `angular.z = 0` the boat holds its heading.
+
+The global planner uses `setpoint_raw/local` (its `cmd_mode` parameter, default `raw`).
+`cmd_mode:=twist` restores its old `Twist` output on `cmd_vel_topic`, with which the boat cannot
+turn toward a goal (it drove backwards in the sim when the goal was off to the side).
 - `/mavros/setpoint_position/global` or MAVProxy (`mode GUIDED`, `arm throttle`, map clicks) in
   the `sitl` window also work.
 
