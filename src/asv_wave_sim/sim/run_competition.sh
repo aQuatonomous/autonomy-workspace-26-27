@@ -9,13 +9,14 @@
 #   run_competition.sh ... --no-cv --rviz --no-attach
 #   run_competition.sh ... --full-res           cameras as on the boat (1920x1200@30); --camera WxH@HZ
 #   run_competition.sh ... --labels             also record labelled CV training frames (autolabel window)
+#   run_competition.sh ... --headless           Gazebo server only (over SSH); GUI: . env.sh && sim_load_course && gz sim -g
 #
 # Windows: Ctrl+b then w lists them (gazebo, bridges, sitl, mavros, judge, stack, rviz, autolabel, shell).
 # Stop with stop_competition.sh; it ends the judge first so the run report is written.
 set -e
 SIM_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SESSION=roboboat
-SEED=0 TASK=1 STACK=1 RVIZ=0 ATTACH=1 LABELS=0
+SEED=0 TASK=1 STACK=1 RVIZ=0 ATTACH=1 LABELS=0 HEADLESS=0
 COURSE_ARGS=() STACK_ARGS=()
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -30,8 +31,9 @@ while [ $# -gt 0 ]; do
     --no-stack) STACK=0; shift ;;
     --no-cv|--no-arm) STACK_ARGS+=("$1"); shift ;;
     --rviz) RVIZ=1; shift ;;
+    --headless) HEADLESS=1; shift ;;
     --no-attach) ATTACH=0; shift ;;
-    -h|--help) sed -n '2,15p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,16p' "$0"; exit 0 ;;
     *) COURSE_ARGS+=("$1"); shift ;;
   esac
 done
@@ -56,7 +58,7 @@ win() {  # name "command"
 }
 AFTER_GZ='. ./env.sh && sim_load_course && sim_wait_for_gazebo &&'
 
-win gazebo  "bash 1_gazebo.sh"
+win gazebo  "SIM_HEADLESS=$HEADLESS bash 1_gazebo.sh"
 win bridges "bash 2_bridges.sh"
 win sitl    "$AFTER_GZ bash 3_sitl.sh"
 win mavros  "bash 4_mavros.sh"

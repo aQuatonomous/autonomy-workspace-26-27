@@ -43,7 +43,13 @@ One tmux session (`roboboat`) with a window per component: `gazebo`, `bridges`, 
 `mavros`, `judge`, `stack`, `shell` (and `rviz` with `--rviz`). `Ctrl+b w` lists them.
 Other options: `--waves`, `--wind`, `--wind-from`, `--light`, `--time` (see Weather and light), `--full-res` or `--camera WxH@HZ`, `--no-cv`, `--no-arm`, `--no-attach`,
 `--world FILE`, `--legacy` (the original world, no judge), `--cmd-mode` (below), `--labels` (see
-Autolabel).
+Autolabel), `--headless` (below).
+
+Over SSH (e.g. the sim Jetson from a laptop), pass `--headless`: the Gazebo server then renders
+the sensors on the machine's GPU with no window, and you open only the GUI, forwarded to your
+screen (`ssh -Y`, an X server such as VcXsrv on Windows), in another terminal:
+`. sim/env.sh && sim_load_course && gz sim -g`. Close and reopen the GUI as you like; the run
+keeps going.
 
 The numbered scripts start the same pieces one per terminal: `1_gazebo.sh` ... `7_stack.sh`, plus
 `5_view_sensors.sh` for RViz (LiDAR cloud, filtered cloud, buoy markers, three cameras).
